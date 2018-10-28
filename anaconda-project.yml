@@ -15,56 +15,54 @@ commands:
     unix: cd constructor && python build.py
     env_spec: _build
 
+  lab:setup:
+    env_spec: robotlab-dev
+    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
+
+  lab:build:
+    env_spec: robotlab-dev
+    unix: robotlab build --dev
+
   lab:
-    unix: jupyter lab --no-browser --debug
-    env_spec: default
+    env_spec: robotlab-dev
+    unix: robotlab --no-browser --debug
 
   lab:extensions:
-    unix: jupyter labextension install ${LAB_EXTENSIONS}
-    env_spec: default
+    env_spec: robotlab-dev
+    unix: robot-labextension install ${LAB_EXTENSIONS}
 
 env_specs:
-  _python:
-    packages:
-      - python >=3.6,<3.7
-
   default:
-    inherit_from:
-      - _python
+    description:
     channels:
       - ./build_artifacts/conda-bld
-      - conda-forge
       - defaults
+      - conda-forge
     packages:
+      - conda
       - geckodriver
       - jupyterlab >=0.35,<0.36
       - nodejs >=8,<9
+      - python >=3.6,<3.7
       - python-chromedriver-binary
       - robotkernel
       - robotlab
-      # need that sweet, sweet no-no arch
-      - backcall=0.1.0=py36_0
-      - bleach=3.0.2=py36_0
-      - decorator=4.3.0=py36_0
-      - ipython_genutils=0.2.0=py36_0
-      - jinja2=2.10=py36_0
-      - jupyter_client=5.2.3=py36_0
-      - jupyter_core=4.4.0=py36_0
-      - jupyterlab_server=0.2.0=py36_0
-      - nbconvert=5.3.1=py36_0
-      - nbformat=4.4.0=py36_0
-      - olefile=0.46=py36_0
-      - pandocfilters=1.4.2=py36_0
-      - parso=0.3.1=py36_0
-      - prometheus_client=0.4.2=py36_0
-      - prompt_toolkit=2.0.6=py36_0
-      - pygments=2.2.0=py36_0
-      - python-dateutil=2.7.3=py36_0
-      - robotframework=3.0.3=py36_0
-      - simplegeneric=0.8.1=py36h2cb9092_0
-      - send2trash=1.5.0=py36_0
-      - wcwidth=0.1.7=py36_0
-      - webencodings=0.5.1=py36_1
+
+  robotlab-dev:
+    channels:
+      - ./build_artifacts/conda-bld
+      - defaults
+      - conda-forge
+    inherit_from:
+      - _python
+    packages:
+      - jupyterlab >=0.35,<0.36
+      - nodejs >=8,<9
+      - robotkernel
+
+  _python:
+    packages:
+      - python >=3.6,<3.7
 
   _build:
     inherit_from:

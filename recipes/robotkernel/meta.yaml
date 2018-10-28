@@ -12,7 +12,9 @@ source:
 build:
   number: 0
   skip: true  # [py<36]
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  script:
+    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+    - "{{ PYTHON }} -m robotkernel.install"
 
 requirements:
   host:
@@ -30,6 +32,8 @@ requirements:
 test:
   imports:
     - robotkernel
+  commands:
+    - jupyter kernelspec list
 
 about:
   home: https://github.com/datakurre/robotkernel

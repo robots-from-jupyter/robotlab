@@ -1,5 +1,5 @@
 {% set name = "robotlab" %}
-{% set version = "0.1.0" %}
+{% set version = "0.6.3" %}
 
 {% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1" %}
 {% set lab_min = "0.35" %}
@@ -9,23 +9,51 @@ package:
   name: {{ name|lower }}
   version: {{ version }}
 
+source:
+  - path: ../../robotlab
+    folder: robotlab
+  - url: https://github.com/datakurre/{{ name }}/archive/{{ version }}.tar.gz
+    sha256: 808e11cea6d0c5219d643b5468d784d368e8baa82df313072c503aa0f6bac620
+    folder: robotkernel
+
 build:
   number: 0
   noarch: generic
   script:
-    - jupyter labextension install {{ extensions }} --no-build
-    - jupyter lab build
-    - jupyter lab clean
+    - cd robotlab
+    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+    - robotlab-extension install {{ extensions }} --no-build
+    - robotlab-extension list
+    - cd {{ SRC_DIR }}
+    - cd robotkernel
+    - cd src
+    - cd jupyterlab_robotmode
+    - npm pack .
+    - mv *.tgz {{ PREFIX }}/jupyter/robotlab/extensions/  # [unix]
+    - move *.tgz {{ PREFIX }}\jupyter\robotlab\extensions\  # [win]
+    - robotlab-extension list
+    - robotlab build
+    - robotlab-extension list
 
 requirements:
   host:
-    - python
-    - nodejs >=8,<9
     - jupyterlab >={{ lab_min }},<{{ lab_max }}
+    - nodejs >=8,<9
+    - pip
+    - python
   run:
+    - ipywidgets
     - jupyterlab
+    - python
+    - robotkernel
+
+test:
+  commands:
+    - robotlab-extension list
 
 about:
-  home: https://github.com/bollwyvl/robocon-2019-workshop
+  home: https://github.com/datakurre/robotkernel
   license: BSD-3-Clause
-  summary: A JupyterLab built for a RoboCon 2019 workshop
+  license_family: BSD
+  license_file: robotlab/LICENSE
+  summary: A JupyterLab built for a robotkernel
