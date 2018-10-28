@@ -43,8 +43,11 @@ env_specs:
       - geckodriver
       - jupyterlab >=0.35,<0.36
       - nodejs >=8,<9
+      - opencv
       - python >=3.6,<3.7
       - python-chromedriver-binary
+      - robotframework-lint
+      - robotframework-seleniumlibrary
       - robotkernel
       - robotlab
 

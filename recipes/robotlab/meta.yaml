@@ -18,22 +18,26 @@ source:
 
 build:
   number: 0
-  noarch: generic
+  entry_points:
+    - robotlab = robotlab.labapp:main
+    - robotlab-extension = robotlab.labextensionapp:main
   script:
-    - cd robotlab
+    - "cd robotlab"
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-    - robotlab-extension install {{ extensions }} --no-build
-    - robotlab-extension list
-    - cd {{ SRC_DIR }}
-    - cd robotkernel
-    - cd src
-    - cd jupyterlab_robotmode
-    - npm pack .
-    - mv *.tgz {{ PREFIX }}/jupyter/robotlab/extensions/  # [unix]
-    - move *.tgz {{ PREFIX }}\jupyter\robotlab\extensions\  # [win]
-    - robotlab-extension list
-    - robotlab build
-    - robotlab-extension list
+    - "{{ PYTHON }} -m robotlab.labextensionapp install {{ extensions }} --no-build"
+    - "{{ PYTHON }} -m robotlab.labextensionapp list"
+    - "cd {{ SRC_DIR }}"
+    - "cd robotkernel"
+    - "cd src"
+    - "cd jupyterlab_robotmode"
+    - "npm pack ."
+    - "mv *.tgz {{ PREFIX }}/share/jupyter/robotlab/extensions/"  # [unix]
+    - "move *.tgz {{ PREFIX }}\\share\\jupyter\\robotlab\\extensions\\"  # [win]
+    - "{{ PYTHON }} -m robotlab.labextensionapp list"
+    - "{{ PYTHON }} -m robotlab.labapp build"
+    - "rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging"  # [unix]
+    - "rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging"  # [win]
+    - "{{ PYTHON }} -m robotlab.labextensionapp list"
 
 requirements:
   host:
@@ -49,6 +53,7 @@ requirements:
 
 test:
   commands:
+    - robotlab --version
     - robotlab-extension list
 
 about:

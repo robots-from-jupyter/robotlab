@@ -18,8 +18,10 @@ build:
 
 requirements:
   host:
-    - python
+    - ipython
+    - jupyter_client
     - pip
+    - python
   run:
     - docutils
     - ipykernel
