@@ -1,0 +1,50 @@
+{% set name = "robotframework" %}
+{% set version = "3.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a5ffe9283c9247c3a1e81228fcc009819d8f94b48768170268a3e6274a998bca
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - robot
+    - robot.api
+    - robot.conf
+    - robot.htmldata
+    - robot.libdocpkg
+    - robot.libraries
+    - robot.model
+    - robot.output
+    - robot.output.console
+    - robot.parsing
+    - robot.reporting
+    - robot.result
+    - robot.running
+    - robot.running.arguments
+    - robot.running.timeouts
+    - robot.utils
+    - robot.variables
+    - robot.writer
+
+about:
+  home: http://robotframework.org
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: 'A generic test automation framework'
+  doc_url: http://robotframework.org/robotframework/{{ version }}/RobotFrameworkUserGuide.html
+  dev_url: https://github.com/robotframework/robotframework

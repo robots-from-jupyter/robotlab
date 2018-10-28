@@ -1,0 +1,39 @@
+{% set name = "robotkernel" %}
+{% set version = "0.6.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 98289a72b5bd075428b2535b094b30a5c294c790ec36452870d7711ea01bbab2
+
+build:
+  number: 0
+  skip: true  # [py<36]
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - docutils
+    - ipykernel
+    - lunr
+    - pillow
+    - pygments
+    - python
+    - robotframework
+
+test:
+  imports:
+    - robotkernel
+
+about:
+  home: https://github.com/datakurre/robotkernel
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Robot Framework IPython kernel for Jupyter Notebook and JupyterLab

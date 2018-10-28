@@ -1,0 +1,84 @@
+name: robocon-2019-workshop
+
+variables:
+  LAB_EXTENSIONS:
+    default: >
+      @jupyterlab/toc@0.6.0
+
+commands:
+  build:conda:
+    unix: cd recipes && conda-build --output-folder ../build_artifacts/conda-bld
+    windows: cd recipes && conda-build --output-folder ..\build_artifacts\conda-bld
+    env_spec: _build
+
+  build:constructor:
+    unix: cd constructor && python build.py
+    env_spec: _build
+
+  lab:
+    unix: jupyter lab --no-browser --debug
+    env_spec: default
+
+  lab:extensions:
+    unix: jupyter labextension install ${LAB_EXTENSIONS}
+    env_spec: default
+
+env_specs:
+  _python:
+    packages:
+      - python >=3.6,<3.7
+
+  default:
+    inherit_from:
+      - _python
+    channels:
+      - ./build_artifacts/conda-bld
+      - conda-forge
+      - defaults
+    packages:
+      - geckodriver
+      - jupyterlab >=0.35,<0.36
+      - nodejs >=8,<9
+      - python-chromedriver-binary
+      - robotkernel
+      - robotlab
+      # need that sweet, sweet no-no arch
+      - backcall=0.1.0=py36_0
+      - bleach=3.0.2=py36_0
+      - decorator=4.3.0=py36_0
+      - ipython_genutils=0.2.0=py36_0
+      - jinja2=2.10=py36_0
+      - jupyter_client=5.2.3=py36_0
+      - jupyter_core=4.4.0=py36_0
+      - jupyterlab_server=0.2.0=py36_0
+      - nbconvert=5.3.1=py36_0
+      - nbformat=4.4.0=py36_0
+      - olefile=0.46=py36_0
+      - pandocfilters=1.4.2=py36_0
+      - parso=0.3.1=py36_0
+      - prometheus_client=0.4.2=py36_0
+      - prompt_toolkit=2.0.6=py36_0
+      - pygments=2.2.0=py36_0
+      - python-dateutil=2.7.3=py36_0
+      - robotframework=3.0.3=py36_0
+      - simplegeneric=0.8.1=py36h2cb9092_0
+      - send2trash=1.5.0=py36_0
+      - wcwidth=0.1.7=py36_0
+      - webencodings=0.5.1=py36_1
+
+  _build:
+    inherit_from:
+      - _python
+    packages:
+      - conda
+      - constructor
+      - conda-build
+      - conda-verify
+      - python >=3.6,<3.7
+
+channels:
+  - defaults
+  - conda-forge
+
+platforms:
+  - linux-64

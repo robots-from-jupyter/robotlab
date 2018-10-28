@@ -1,0 +1,31 @@
+{% set name = "robotlab" %}
+{% set version = "0.1.0" %}
+
+{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1" %}
+{% set lab_min = "0.35" %}
+{% set lab_max = "0.36" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - jupyter labextension install {{ extensions }} --no-build
+    - jupyter lab build
+    - jupyter lab clean
+
+requirements:
+  host:
+    - python
+    - nodejs >=8,<9
+    - jupyterlab >={{ lab_min }},<{{ lab_max }}
+  run:
+    - jupyterlab
+
+about:
+  home: https://github.com/bollwyvl/robocon-2019-workshop
+  license: BSD-3-Clause
+  summary: A JupyterLab built for a RoboCon 2019 workshop

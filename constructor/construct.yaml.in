@@ -1,0 +1,25 @@
+name: RobotLab
+version: 0.1.0
+
+channels:
+  - {{ build_channel }}
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/free
+  - https://conda.anaconda.org/conda-forge
+
+specs:
+  {% for spec in specs.get("all", []) %}
+  - {{ spec }}
+  {%- endfor %}
+  {% for spec in specs.get("linux-64", []) %}
+  - {{ spec }}  [linux]
+  {%- endfor %}
+  {% for spec in specs.get("win-64", []) %}
+  - {{ spec }}  [win]
+  {%- endfor %}
+  {% for spec in specs.get("osx-64", []) %}
+  - {{ spec }}  [osx]
+  {%- endfor %}
+
+
+install_in_dependency_order: True
