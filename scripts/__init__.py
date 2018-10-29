@@ -8,16 +8,18 @@ from jinja2 import Template
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 
+ARTIFACTS = ROOT / "_artifacts"
+CACHE = ROOT / "_cache"
+
 CONSTRUCT_DIR = ROOT / "constructor"
 RECIPE_DIR = ROOT / "recipes"
 
 CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
-CONSTRUCT_CACHE = ROOT / "cache" / "constructor"
+CONSTRUCT_CACHE = CACHE / "constructor"
 CONSTRUCT = CONSTRUCT_DIR / "construct.yaml"
 
 TEST_DIR = ROOT / "tests"
 
-ARTIFACTS = ROOT / "build_artifacts"
 CONDA_OUT = ARTIFACTS / "conda-bld"
 CONSTRUCT_OUT = ARTIFACTS / "constructor"
 TEST_OUT = ARTIFACTS / "tests"
