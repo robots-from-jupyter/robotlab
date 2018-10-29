@@ -1,0 +1,15 @@
+name: _robots_from_jupyter
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - conda
+  - conda-build
+  - conda-verify
+  - constructor
+  - geckodriver
+  - python >=3.6,<3.7
+  - robotframework
+  - robotframework-seleniumlibrary

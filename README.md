@@ -6,8 +6,10 @@
 
 ## Build It
 ```bash
-python3 build.py
+python3 -m scripts.build
 # Tea, earl grey. Hot.
+python3 -m scripts.test
+# 1. 2. 3...
 ```
 
 ## Motivation

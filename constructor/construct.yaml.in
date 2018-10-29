@@ -8,9 +8,16 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 specs:
-  {% for spec in specs %}
-  - {{ spec }}
-  {%- endfor %}
+  - conda
+  - geckodriver
+  - nodejs >={{ node_min }},<{{ node_max }}
+  - opencv
+  - python >={{ py_min }},<{{ py_max }}
+  - python-chromedriver-binary
+  - robotframework-lint
+  - robotframework-seleniumlibrary
+  - robotkernel
+  - robotlab
 
 
 install_in_dependency_order: True

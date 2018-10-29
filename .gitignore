@@ -1,7 +1,9 @@
 __pycache__/
+.projectignore
 *.egg-info/
 *.ipynb_checkpoints/
 *.pyc
+anaconda-project.yml
 build_artifacts/
 build/
 cache/
