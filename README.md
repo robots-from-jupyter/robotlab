@@ -1,13 +1,13 @@
 # RobotLab: Building the _Robots from Jupyter_ Workshop Installer
 
-> If you just want to _download_ the installer, go to
-> https://robots-from-jupyter.github.com and download the version
-> appropriate to your operating system
-
 ## Build It
+Get [Miniconda][].
+
 ```bash
+conda env update
+source activate _robots_from_jupyter  # omit `source` on windows
 python3 -m scripts.build
-# Tea, earl grey. Hot.
+# Tea, Earl Grey. Hot.
 python3 -m scripts.test
 # 1. 2. 3...
 ```
@@ -68,3 +68,4 @@ to build a `construct.yml`.
 [constructor]: https://github.com/conda/constructor
 [robotkernel]: https://github.com/datakurre/robotkernel
 [labextensions]: https://www.npmjs.com/search?q=keywords:jupyterlab-extension
+[Miniconda]: https://conda.io/miniconda.html
