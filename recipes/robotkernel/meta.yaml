@@ -19,6 +19,8 @@ build:
     - "{{ PYTHON }} -m robotkernel.install"
 
 requirements:
+  build:
+    - patch
   host:
     - ipython
     - jupyter_client
