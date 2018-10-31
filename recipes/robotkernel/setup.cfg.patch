@@ -1,0 +1,13 @@
+--- setup.cfg.old	2018-10-31 00:25:48.483013196 -0400
++++ setup.cfg	2018-10-31 00:25:58.742091164 -0400
+@@ -44,8 +44,8 @@
+ 
+ [options.package_data]
+ * =
+-  resources/
+-  static/
++  resources
++  static
+ 
+ [options.packages.find]
+ where =
