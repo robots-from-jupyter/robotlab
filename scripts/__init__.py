@@ -34,7 +34,7 @@ NODE_MAX = os.environ.get("NODE_MAX", "9")
 def run(args, **kwargs):
     """ Probably unneccessary "convenience" wrapper
     """
-    p = subprocess.Popen(args, **kwargs)
+    p = subprocess.Popen(list(map(str, args)), **kwargs)
 
     try:
         p.wait()
