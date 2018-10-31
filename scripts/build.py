@@ -13,6 +13,7 @@ def build_conda():
     return run([
         "conda-build", ".",
         "--output-folder", CONDA_OUT,
+        "--skip-existing",
         "--python", PY_MIN
     ], cwd=str(RECIPE_DIR))
 
