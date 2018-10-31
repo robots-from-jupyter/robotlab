@@ -30,7 +30,7 @@ build:
     - cd robotkernel
     - cd src
     - cd jupyterlab_robotmode
-    - npm pack .
+    - npm pack . || echo whatever
     - mv *.tgz {{ PREFIX }}/share/jupyter/robotlab/extensions/  # [unix]
     - move *.tgz {{ PREFIX }}\\share\\jupyter\\robotlab\\extensions\\  # [win]
     - {{ PYTHON }} -m robotlab.labextensionapp list
