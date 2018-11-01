@@ -1,8 +1,9 @@
 name: _robots_from_jupyter
 
 channels:
-  - defaults
-  - conda-forge
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/free
+  - https://conda.anaconda.org/conda-forge
 
 dependencies:
   - conda
@@ -10,6 +11,6 @@ dependencies:
   - conda-verify
   - constructor
   - geckodriver
-  - python >=3.6,<3.7
+  - python >=3.7,<3.8
   - robotframework
   - robotframework-seleniumlibrary
