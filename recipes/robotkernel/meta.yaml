@@ -1,5 +1,5 @@
 {% set name = "robotkernel" %}
-{% set version = "0.6.3" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -16,7 +16,7 @@ build:
   skip: true  # [py<36]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-    - "{{ PYTHON }} -m robotkernel.install"
+    - "{{ PYTHON }} -m ipython -m robotkernel.install"
 
 requirements:
   build:

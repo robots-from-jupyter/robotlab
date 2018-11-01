@@ -1,5 +1,5 @@
 {% set name = "robotlab" %}
-{% set version = "0.6.3" %}
+{% set version = "0.7.0" %}
 
 {% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1" %}
 {% set lab_min = "0.35" %}
