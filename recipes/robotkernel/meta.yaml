@@ -16,7 +16,7 @@ build:
   skip: true  # [py<36]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-    - "{{ PYTHON }} -m ipython -m robotkernel.install"
+    - "{{ PYTHON }} -m robotkernel.install"
 
 requirements:
   build:

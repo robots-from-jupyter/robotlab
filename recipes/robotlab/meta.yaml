@@ -49,7 +49,7 @@ requirements:
     - ipywidgets
     - jupyterlab
     - python
-    - robotkernel
+    - robotkernel >={{ version }}
 
 test:
   commands:
