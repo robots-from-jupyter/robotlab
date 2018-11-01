@@ -13,6 +13,9 @@ def build_conda():
     return run([
         "conda-build", ".",
         "--output-folder", CONDA_OUT,
+        "-c", "https://repo.anaconda.com/pkgs/main",
+        "-c", "https://repo.anaconda.com/pkgs/free",
+        "-c", "https://conda.anaconda.org/conda-forge",
         "--skip-existing",
         "--python", PY_MIN
     ], cwd=str(RECIPE_DIR))
