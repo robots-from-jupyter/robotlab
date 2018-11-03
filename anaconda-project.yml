@@ -41,6 +41,12 @@ env_specs:
     - robotkernel
     - python >=3.6,<3.7
 
+  robotlab-test:
+    inherit_from:
+      - robotlab-dev
+    packages:
+      - robotlab
+
   _robots_from_jupyter:
     packages:
     - conda
