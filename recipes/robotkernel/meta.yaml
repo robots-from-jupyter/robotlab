@@ -16,14 +16,12 @@ build:
   skip: true  # [py<36]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-    - "{{ PYTHON }} -m robotkernel.install"
+    - "cd {{ RECIPE_DIR }} && {{ PYTHON }} install.py"
 
 requirements:
   build:
     - patch
   host:
-    - ipython
-    - jupyter_client
     - pip
     - python
   run:
