@@ -31,7 +31,7 @@ commands:
 env_specs:
   robotlab-dev:
     channels:
-    - ./build_artifacts/conda-bld
+    - ./_artifacts/conda-bld
     - https://repo.anaconda.com/pkgs/main
     - https://repo.anaconda.com/pkgs/free
     - https://conda.anaconda.org/conda-forge
