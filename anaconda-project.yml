@@ -39,7 +39,7 @@ env_specs:
     - jupyterlab >=0.35,<0.36
     - nodejs >=8,<9
     - robotkernel
-    - python >=3.7,<3.8
+    - python >=3.6,<3.7
 
   robotlab-test:
     inherit_from:
@@ -54,7 +54,7 @@ env_specs:
     - conda-verify
     - constructor
     - geckodriver
-    - python >=3.7,<3.8
+    - python >=3.6,<3.7
     - robotframework
     - robotframework-seleniumlibrary
     channels:

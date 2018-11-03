@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -eux
+PROJECT_ENVS_PATH=/tmp/robotlab-envs
+anaconda-project run "$@"

@@ -16,6 +16,8 @@ specs:
   - robotframework-lint
   - robotframework-seleniumlibrary
   - robotlab =={{ version }}
+  - jupyterlab
+  - robotkernel =={{ version }}
 
 
 install_in_dependency_order: True

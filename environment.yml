@@ -11,6 +11,6 @@ dependencies:
   - conda-verify
   - constructor
   - geckodriver
-  - python >=3.7,<3.8
+  - python >=3.6,<3.7
   - robotframework
   - robotframework-seleniumlibrary

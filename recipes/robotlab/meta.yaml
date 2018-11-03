@@ -48,6 +48,7 @@ requirements:
   run:
     - ipywidgets
     - jupyterlab >={{ lab_min }},<{{ lab_max }}
+    - nodejs >=8,<9
     - python
     - robotkernel >={{ version }}
 
