@@ -11,12 +11,10 @@ specs:
   - conda
   - geckodriver
   - nodejs >={{ node_min }},<{{ node_max }}
-  - opencv
   - python >={{ py_min }},<{{ py_max }}
   - python-chromedriver-binary
   - robotframework-lint
   - robotframework-seleniumlibrary
-  - robotkernel =={{ version }}
   - robotlab =={{ version }}
 
 
