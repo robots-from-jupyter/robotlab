@@ -7,7 +7,7 @@ channels:
 
 dependencies:
   - conda
-  - conda-build
+  - conda-build >=3.15,<3.16
   - conda-verify
   - constructor
   - geckodriver
