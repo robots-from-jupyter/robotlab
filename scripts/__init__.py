@@ -29,6 +29,7 @@ PY_MIN = os.environ.get("PY_MIN", "3.7")
 PY_MAX = os.environ.get("PY_MAX", "3.8")
 NODE_MIN = os.environ.get("NODE_MIN", "8")
 NODE_MAX = os.environ.get("NODE_MAX", "9")
+VERSION = os.environ.get("ROBOTLAB_VERSION", "0.7.0")
 
 
 def run(args, **kwargs):

@@ -1,5 +1,5 @@
 name: RobotLab
-version: 0.1.0
+version: {{ version }}
 
 channels:
   - {{ build_channel }}
@@ -16,8 +16,8 @@ specs:
   - python-chromedriver-binary
   - robotframework-lint
   - robotframework-seleniumlibrary
-  - robotkernel
-  - robotlab
+  - robotkernel =={{ version }}
+  - robotlab =={{ version }}
 
 
 install_in_dependency_order: True
