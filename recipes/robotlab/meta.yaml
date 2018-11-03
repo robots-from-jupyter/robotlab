@@ -47,7 +47,7 @@ requirements:
     - python
   run:
     - ipywidgets
-    - jupyterlab
+    - jupyterlab >={{ lab_min }},<{{ lab_max }}
     - python
     - robotkernel >={{ version }}
 
