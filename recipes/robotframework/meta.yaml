@@ -46,7 +46,7 @@ test:
 about:
   home: http://robotframework.org
   license: Apache-2.0
-  license_file: dist/LICENSE.txt
+  license_file: LICENSE.txt
   summary: 'A generic test automation framework'
   doc_url: http://robotframework.org/robotframework/{{ version }}/RobotFrameworkUserGuide.html
   dev_url: https://github.com/robotframework/robotframework
