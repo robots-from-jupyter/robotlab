@@ -17,7 +17,7 @@ specs:
   - python-chromedriver-binary
   - robotframework-lint
   - robotframework-seleniumlibrary
-  - robotframework =={{ rv_version }}
+  - robotframework =={{ rf_version }}
   - robotkernel =={{ version }}
   - robotlab =={{ version }}
 
