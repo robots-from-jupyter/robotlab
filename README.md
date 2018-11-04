@@ -1,16 +1,26 @@
 # RobotLab: Building the _Robots from Jupyter_ Workshop Installer
 
 ## Build It
-Get [Miniconda][].
+Get [Miniconda][]. Install [anaconda-project][].
 
+On Linux, run:
 ```bash
-conda env update
-source activate _robots_from_jupyter  # omit `source` on windows
-python3 -m scripts.build
-# Tea, Earl Grey. Hot.
-python3 -m scripts.test
-# 1. 2. 3...
+anaconda-project run build
+anaconda-project run test
 ```
+
+On Windows, run:
+```bash
+anaconda-project run winbuild
+anaconda-project run wintest
+```
+
+> TODO: On OSX, run:
+```bash
+anaconda-project run macbuild
+anaconda-project run mactest
+```
+
 
 ## Motivation
 
@@ -27,8 +37,6 @@ To make a three-hour workshop reasonable, this repo uses [conda][] and
 the per-participant install time to a minimum, and make sneaker-net distribution
 possible in the event that network problems arise.
 
-## Get started
-Install [Miniconda][] for your platform.
 
 ## conda
 Once it has matured, `robotkernel` and its dependencies will be available from
@@ -63,9 +71,10 @@ Once we have all our dependencies captured in `environment.yml`, we use this
 to build a `construct.yml`.
 
 
+[anaconda-project]: https://github.com/anaconda-platform/anaconda-project
 [conda-forge]: https://github.com/conda-forge
 [conda]: https://github.com/conda/conda
 [constructor]: https://github.com/conda/constructor
-[robotkernel]: https://github.com/datakurre/robotkernel
 [labextensions]: https://www.npmjs.com/search?q=keywords:jupyterlab-extension
 [Miniconda]: https://conda.io/miniconda.html
+[robotkernel]: https://github.com/datakurre/robotkernel

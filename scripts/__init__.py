@@ -22,7 +22,7 @@ TEST_DIR = ROOT / "tests"
 
 CONDA_OUT = ARTIFACTS / "conda-bld"
 CONSTRUCT_OUT = ARTIFACTS / "constructor"
-TEST_OUT = ARTIFACTS / "tests"
+TEST_OUT = ARTIFACTS / "test_output"
 
 # for easy overriding in CI
 PY_MIN = os.environ.get("PY_MIN", "3.6")
