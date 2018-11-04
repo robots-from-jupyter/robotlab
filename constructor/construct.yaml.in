@@ -10,14 +10,16 @@ channels:
 specs:
   - conda
   - geckodriver
+  - jupyterlab
   - nodejs >={{ node_min }},<{{ node_max }}
+  - opencv
   - python >={{ py_min }},<{{ py_max }}
   - python-chromedriver-binary
   - robotframework-lint
   - robotframework-seleniumlibrary
-  - robotlab =={{ version }}
-  - jupyterlab
+  - robotframework =={{ rv_version }}
   - robotkernel =={{ version }}
+  - robotlab =={{ version }}
 
 
 install_in_dependency_order: True

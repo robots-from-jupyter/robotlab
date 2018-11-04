@@ -1,17 +1,23 @@
 {% set name = "robotframework" %}
-{% set version = "3.0.3" %}
+{% set version = "3.1b1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a5ffe9283c9247c3a1e81228fcc009819d8f94b48768170268a3e6274a998bca
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.zip
+    sha256: 294f108e4f5df1d710c5ae4a0a0b76341391823a1947889f62ce28fa9bb9c7bd
+    folder: dist
+  - url: https://github.com/robotframework/robotframework/archive/v3.1b1.tar.gz
+    sha256: badbeef
+    folder: src
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  script:
+    - cd dist
+    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
 
 requirements:
   host:
@@ -21,6 +27,8 @@ requirements:
     - python
 
 test:
+  source_files:
+    - src/utest
   imports:
     - robot
     - robot.api
@@ -40,11 +48,15 @@ test:
     - robot.utils
     - robot.variables
     - robot.writer
+  commands:
+    - cd src
+    - cd utest
+    - python run.py
 
 about:
   home: http://robotframework.org
   license: Apache-2.0
-  license_file: LICENSE.txt
+  license_file: dist/LICENSE.txt
   summary: 'A generic test automation framework'
   doc_url: http://robotframework.org/robotframework/{{ version }}/RobotFrameworkUserGuide.html
   dev_url: https://github.com/robotframework/robotframework

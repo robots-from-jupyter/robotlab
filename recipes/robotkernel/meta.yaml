@@ -15,7 +15,7 @@ build:
   number: 0
   skip: true  # [py<36]
   script:
-    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+    - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
     - cd {{ RECIPE_DIR }} && {{ PYTHON }} install.py
 
 requirements:
@@ -31,7 +31,7 @@ requirements:
     - pillow
     - pygments
     - python
-    - robotframework
+    - robotframework >=3.1b1
 
 test:
   imports:

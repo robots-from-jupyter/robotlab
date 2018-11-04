@@ -4,12 +4,23 @@ commands:
   build:
     unix: python -m scripts.build
     windows: python -m scripts.build
-    env_spec: _robots_from_jupyter
+    env_spec: _build
 
   test:
     unix: python -m scripts.test
     windows: python -m scripts.test
-    env_spec: _robots_from_jupyter
+    env_spec: _build
+
+  winbuild:
+    description: until 2.3.0 comes out, use master
+    windows: >
+      pip install git+https://github.com/conda/constructor --ignore-installed --no-deps 
+      && python -m scripts.build
+    env_spec: _build_win
+
+  wintest:
+    windows: python -m scripts.test
+    env_spec: _build_win
 
   lab:setup:
     env_spec: robotlab-dev
@@ -29,6 +40,19 @@ commands:
     windows: robotlab
 
 env_specs:
+  _build:
+    platforms:
+    - linux-64
+    - osx-64
+    inherit_from:
+    - _robots_from_jupyter
+
+  _build_win:
+    platforms:
+    - win-64
+    inherit_from:
+    - _robots_from_jupyter
+
   robotlab-dev:
     channels:
     - ./_artifacts/conda-bld

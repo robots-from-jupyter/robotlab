@@ -23,7 +23,7 @@ build:
     - robotlab-extension = robotlab.labextensionapp:main
   script:
     - cd robotlab
-    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+    - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
     - {{ PYTHON }} -m robotlab.labextensionapp install {{ extensions }} --no-build
     - {{ PYTHON }} -m robotlab.labextensionapp list
     - cd {{ SRC_DIR }}

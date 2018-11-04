@@ -3,7 +3,7 @@ import sys
 from . import (
     CONDA_OUT, RECIPE_DIR, CONSTRUCT_IN, CONSTRUCT, CONSTRUCT_OUT,
     CONSTRUCT_CACHE, CONSTRUCT_DIR, PY_MIN, PY_MAX, NODE_MIN, NODE_MAX,
-    VERSION, run
+    RF_VERSION, VERSION, run
 )
 
 
@@ -32,6 +32,7 @@ def build_constructor():
         py_max=PY_MAX,
         node_min=NODE_MIN,
         node_max=NODE_MAX,
+        rf_version=RF_VERSION,
         version=VERSION,
     )
 
