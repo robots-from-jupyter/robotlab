@@ -18,8 +18,10 @@ Launch RobotLab Server
   ...  ELSE       Launch RobotLab Server on Unix
 
 Launch RobotLab Server on Windows
+  ${cmd} =   "${ROBOTLAB DIR}${/}Scripts${/}activate.bat" "${ROBOTLAB DIR}" && ${LAB COMMAND}
+  Log  ${cmd}
   Start Process
-  ...  ${ROBOTLAB DIR}${/}Scripts${/}activate ${ROBOTLAB DIR} && ${LAB COMMAND}
+  ...  ECHO ON && ${cmd}
   ...  stdout=${LAB LOG}  stderr=STDOUT  shell=True
 
 Launch RobotLab Server on Unix
@@ -33,4 +35,4 @@ Initialize RobotLab Settings
   Set Global Variable  ${LAB URL}  ${LAB HOST}:${LAB PORT}/lab?token=${token}
   Set Global Variable  ${LAB HOME}  ${OUTPUT_DIR}${/}notebooks
   Set Global Variable  ${LAB COMMAND}
-  ...   robotlab --no-browser --NotebookApp.token=${token} --port=${LAB PORT} --notebook-dir=${LAB HOME}
+  ...   robotlab --no-browser --debug --NotebookApp.token=${token} --port=${LAB PORT} --notebook-dir="${LAB HOME}"

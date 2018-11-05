@@ -1,15 +1,10 @@
 *** Settings ***
 Library  SeleniumLibrary
-Library  Process
-Resource  ../../resources/Launch.robot
 Resource  ../../resources/Shell.robot
-Suite Setup  Launch RobotLab Server
-Test Teardown  Close All Browsers
-Suite Teardown  Terminate All Processes
 Test Template   Does RobotLab Load?
 
 *** Test Cases ***
-# Chrome   headlesschrome
+Chrome   headlesschrome
 Firefox  headlessfirefox
 
 *** Keywords ***
