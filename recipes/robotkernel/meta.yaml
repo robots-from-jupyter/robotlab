@@ -17,6 +17,9 @@ build:
   script:
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
     - cd {{ RECIPE_DIR }} && {{ PYTHON }} install.py
+  entry_points:
+    - nbrobot = robotkernel.nbreader:robot
+    - nblibdoc = robotkernel.nbreader:libdoc
 
 requirements:
   build:

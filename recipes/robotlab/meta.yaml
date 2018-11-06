@@ -38,6 +38,13 @@ build:
     - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
     - rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging  # [win]
     - {{ PYTHON }} -m robotlab.labextensionapp list
+    - cd {{ SRC_DIR }}
+    - cd robotkernel
+    - cd examples
+    - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
+    - cp *.ipynb robotkernel-examples  # [unix]
+    - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
+    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
 
 requirements:
   host:
