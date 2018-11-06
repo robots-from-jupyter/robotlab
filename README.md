@@ -3,7 +3,7 @@
 ## Build It
 Get [Miniconda][]. Install [anaconda-project][].
 
-On Linux, run:
+On OSX/Linux, run:
 ```bash
 anaconda-project run build
 anaconda-project run test
@@ -11,16 +11,9 @@ anaconda-project run test
 
 On Windows, run:
 ```bash
-anaconda-project run winbuild
-anaconda-project run wintest
+anaconda-project run build:win
+anaconda-project run test:win
 ```
-
-> TODO: On OSX, run:
-```bash
-anaconda-project run macbuild
-anaconda-project run mactest
-```
-
 
 ## Motivation
 
@@ -38,13 +31,16 @@ the per-participant install time to a minimum, and make sneaker-net distribution
 possible in the event that network problems arise.
 
 
-## conda
+## conda packaging
 Once it has matured, `robotkernel` and its dependencies will be available from
 [conda-forge][], the community-driven upstream of the Anaconda Distribution.
 However, in the name of efficiency, `conda-forge` builds `noarch: python`
 packages, which are not compatible with `constructor`'s multiplatform magic.
 
-So for these installers, we build (or rebuild) a number of dependencies.
+So for these installers, we build (or rebuild) a number of dependencies, such
+as the [robotframework][] 3.1 beta, which brings a number of exciting features.
+
+> TODO: automated detection and re-arching of packages from conda-forge feedstocks
 
 ### robotlab
 While still pre-`1.0`, JupyterLab's build chain has some negative externalities
@@ -58,23 +54,33 @@ debugging `nodejs` and `webpack`, we've added a few choice JupyterLab extensions
 - `@jupyterlab/toc`: a table of contents pane for Markdown headers
 - `@jupyter-widgets/jupyterlab-manager`: because widgets are always good
 
-and wrapped them into a new command, which can do most of the things
-`jupyter lab` can do.
+...and wrapped them into a conda package which exposes some command, which can
+do most of the things `jupyter lab` can do.
 
 `robotlab` works like `jupyter lab`, while `robotlab-extension` works like
-`jupyter labextension`. This isn't a toy installation: with `nodejs`, you can
-still install any of the [labextensions][] that are compatible with the
-version `robotlab` was built with: as of writing, `0.35.x`.
+`jupyter labextension`. This isn't a toy installation: with the bundled `nodejs`,
+an intrepid user can still install any of the [labextensions][] that are
+compatible with the version `robotlab` was built with: as of writing, `0.35.x`.
 
 ## [constructor][]
-Once we have all our dependencies captured in `environment.yml`, we use this
-to build a `construct.yml`.
+All of the dependencies are captured in [construct.yaml.in][]. In addition to
+everything mentioned above, you'll also find:
+
+In addition, to support the workshop, a number of libraries are included:
+- `SeleniumLibrary` for controlling browsers
+  - `geckodriver` for interacting with Firefox
+  - `python-chromedriver-binary` for interacting with Chrome & Chromium
+  - > Note: it's pretty easy to get `webdriver` for Edge, but can't be redistributed
+- `opencv` for doing image-driven testing
+- `robotframework-lint` for normalizing your robot syntax
 
 
 [anaconda-project]: https://github.com/anaconda-platform/anaconda-project
 [conda-forge]: https://github.com/conda-forge
+[robotframework]: https://github.com/robotframework/robotframework
 [conda]: https://github.com/conda/conda
 [constructor]: https://github.com/conda/constructor
+[construct.yaml.in]: ./constructor/construct.yaml.in
 [labextensions]: https://www.npmjs.com/search?q=keywords:jupyterlab-extension
 [Miniconda]: https://conda.io/miniconda.html
 [robotkernel]: https://github.com/datakurre/robotkernel
