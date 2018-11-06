@@ -5,7 +5,7 @@ Force Tags  app:nbrobot
 
 *** Test Cases ***
 Can I get help on nbrobot?
-  ${log} = Set Variable  ${OUTPUT DIR}${/}nbrobot.log
+  ${log} =  Set Variable  ${OUTPUT DIR}${/}nbrobot.log
   ${proc} =  Run Keyword If    "${PLATFORM}" == "win32"
   ...   Run Process
   ...   ${ACTIVATE} "${ROBOTLAB DIR}" && nbrobot --help
