@@ -11,6 +11,5 @@ Firefox  headlessfirefox
 Does RobotLab Load?
   [arguments]  ${browser}
   Open RobotLab  ${browser}
+  Page Should Contain   Robot Framework
   Capture Page Screenshot  00_smoke_test.png
-  # Page Should Contain Element   css:.jp-LauncherCard
-  # Page Should Contain   Robot Framework

@@ -5,3 +5,4 @@ Resource  ../../resources/Launch.robot
 Suite Setup  Launch RobotLab Server
 Test Teardown  Reset Application State and Close
 Suite Teardown  Terminate All Processes
+Force Tags  ui:lab

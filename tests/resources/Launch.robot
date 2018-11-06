@@ -12,21 +12,21 @@ ${LAB PORT}    18888
 Launch RobotLab Server
   Should Not Be Empty    ${PLATFORM}    msg=Needs a detected platform/OS
   Should Not Be Empty    ${ROBOTLAB DIR}    msg=Needs a RobotLab installation
+  Should Not Be Empty    ${ACTIVATE}    msg=Needs an activate-able environment
   Initialize RobotLab Settings
   Create Directory    ${LAB HOME}
   Run Keyword If  "${platform}" == "win32"   Launch RobotLab Server on Windows
   ...  ELSE       Launch RobotLab Server on Unix
 
 Launch RobotLab Server on Windows
-  ${cmd} =   "${ROBOTLAB DIR}${/}Scripts${/}activate.bat" "${ROBOTLAB DIR}" && ${LAB COMMAND}
+  ${cmd} =   Set Variable
+  ...  "${ACTIVATE}" "${ROBOTLAB DIR}" && ${LAB COMMAND}
   Log  ${cmd}
-  Start Process
-  ...  ECHO ON && ${cmd}
+  Start Process  @ECHO ON && ${cmd}
   ...  stdout=${LAB LOG}  stderr=STDOUT  shell=True
 
 Launch RobotLab Server on Unix
-  Start Process
-  ...  source ${ROBOTLAB DIR}${/}bin${/}activate ${ROBOTLAB DIR} && ${LAB COMMAND}
+  Start Process  source ${ACTIVATE} ${ROBOTLAB DIR} && ${LAB COMMAND}
   ...  stdout=${LAB LOG}  stderr=STDOUT  shell=True
 
 Initialize RobotLab Settings
@@ -36,3 +36,8 @@ Initialize RobotLab Settings
   Set Global Variable  ${LAB HOME}  ${OUTPUT_DIR}${/}notebooks
   Set Global Variable  ${LAB COMMAND}
   ...   robotlab --no-browser --debug --NotebookApp.token=${token} --port=${LAB PORT} --notebook-dir="${LAB HOME}"
+
+Clean the RobotLab notebook folder
+  Remove Directory    ${LAB HOME}  recursive=True
+  Wait Until Removed    ${LAB HOME}
+  Create Directory    ${LAB HOME}
