@@ -1,20 +1,19 @@
 *** Settings ***
 Library  Process
+Library  OperatingSystem
 Force Tags  app:nbrobot
 
 *** Test Cases ***
 Can I get help on nbrobot?
+  ${log} = Set Variable  ${OUTPUT DIR}${/}nbrobot.log
   ${proc} =  Run Keyword If    "${PLATFORM}" == "win32"
-  ...   Start Process
+  ...   Run Process
   ...   ${ACTIVATE} "${ROBOTLAB DIR}" && nbrobot --help
-  ...   shell=True
+  ...   shell=True  stdout=${log}  stderr=STDOUT  timeout=3s
   ...   ELSE
-  ...   Start Process
+  ...   Run Process
   ...   source ${ACTIVATE} "${ROBOTLAB DIR}" && nbrobot --help
-  ...   shell=True
-  Sleep  3s
-  Process Should Be Stopped  ${proc}
-  ...   msg=${\n}${proc.stdout}${\n}===${\n}${proc.stderr}
+  ...   shell=True  stdout=${log}  stderr=STDOUT  timeout=3s
   Should Be Equal As Numbers    ${proc.rc}  251
-  ...   msg=${\n}${proc.stdout}${\n}===${\n}${proc.stderr}
-  Should Contain    ${proc.stdout}    Robot Framework
+  ${log text} =  Get File  ${log}
+  Should Contain    ${log text}    Robot Framework
