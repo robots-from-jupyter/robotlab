@@ -4,14 +4,17 @@ Force Tags  app:nbrobot
 
 *** Test Cases ***
 Can I get help on nbrobot?
-  ${result} =  Run Keyword If    "${PLATFORM}" == "win32"
-  ...   Run Process
+  ${proc} =  Run Keyword If    "${PLATFORM}" == "win32"
+  ...   Start Process
   ...   ${ACTIVATE} "${ROBOTLAB DIR}" && nbrobot --help
   ...   shell=True
   ...   ELSE
-  ...   Run Process
+  ...   Start Process
   ...   source ${ACTIVATE} "${ROBOTLAB DIR}" && nbrobot --help
   ...   shell=True
-  Should Be Equal As Numbers    ${result.rc}  251
-  ...   msg=Couldn't get help on nbrobot${\n}===${\n}${result.stdout}${\n}===${\n}${result.stderr}
-  Should Contain    ${result.stdout}    Robot Framework
+  Sleep  3s
+  Process Should Be Stopped  ${proc}
+  ...   msg=${\n}${proc.stdout}${\n}===${\n}${proc.stderr}
+  Should Be Equal As Numbers    ${proc.rc}  251
+  ...   msg=${\n}${proc.stdout}${\n}===${\n}${proc.stderr}
+  Should Contain    ${proc.stdout}    Robot Framework

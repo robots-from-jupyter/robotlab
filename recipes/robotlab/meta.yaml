@@ -42,7 +42,7 @@ build:
     - cd robotkernel
     - cd examples
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
-    - cp *.ipynb robotkernel-examples  # [unix]
+    - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
     - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
     - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
 
