@@ -37,7 +37,7 @@ Run the RobotLab Linux installer
     ${result} =    Run Process    bash    ${INSTALLER DIR}${/}RobotLab-${INSTALLER VERSION}-Linux-x86_64.sh    -fbp    ${ROBOTLAB DIR}    stdout=${INSTALL LOG}
     ...    stderr=STDOUT
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
-    Set Global Variable    ${ACTIVATE}    source ${ACTIVATE SCRIPT} "${ROBOTLAB DIR}"
+    Set Global Variable    ${ACTIVATE}    set -eux && source "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
     [Return]    ${result}
 
 Run the RobotLab OSX installer
@@ -45,15 +45,14 @@ Run the RobotLab OSX installer
     ${result} =    Run Process    bash    ${INSTALLER DIR}${/}RobotLab-${INSTALLER VERSION}-OSX-x86_64.sh    -fbp    ${ROBOTLAB DIR}    stdout=${INSTALL LOG}
     ...    stderr=STDOUT
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
-    Set Global Variable    ${ACTIVATE}    source ${ACTIVATE SCRIPT} "${ROBOTLAB DIR}"
+    Set Global Variable    ${ACTIVATE}    set -eux && source "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
     [Return]    ${result}
 
 Run the RobotLab Windows installer
     [Documentation]    Install RobotLab on Windows
     ${installer} =    Set Variable    ${INSTALLER DIR}${/}RobotLab-${INSTALLER VERSION}-Windows-x86_64.exe
     ${args} =    Set Variable    /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=${ROBOTLAB DIR}
-    Log To Console    ${ROBOTLAB DIR}
     ${result} =    Run Process    ${installer} ${args}    stdout=${INSTALL LOG}    stderr=STDOUT    shell=True
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}Scripts${/}activate.bat
-    Set Global Variable    ${ACTIVATE}    ${ACTIVATE}    "${ROBOTLAB DIR}"
+    Set Global Variable    ${ACTIVATE}    @ECHO ON && "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
     [Return]    ${result}

@@ -8,7 +8,7 @@ Library           OperatingSystem
 Can I get help on nbrobot?
     [Documentation]    Verify the nbrobot command returns help
     ${log} =    Set Variable    ${OUTPUT DIR}${/}nbrobot_help.log
-    Run nbrobot    --help    ${log}
+    ${proc} =    Run nbrobot    --help    ${log}
     Should Be Equal As Numbers    ${proc.rc}    251
     ${log text} =    Get File    ${log}
     Should Contain    ${log text}    Robot Framework
