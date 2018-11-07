@@ -24,20 +24,25 @@ steps:
   displayName: Lint
 
 - script: |-
-    source $HOME/miniconda3/bin/activate && \
-    python -m scripts.build conda \
+    source $HOME/miniconda3/bin/activate \
+    && python -m scripts.build conda \
       lunr \
       robotframework \
       robotframework-lint \
       robotframework-seleniumlibrary \
       robotkernel \
-      robotlab
+      robotlab \
+    && cp -r _artifacts/conda-bld $BUILD_ARTIFACTSTAGINGDIRECTORY/
   displayName: Build Conda Packages
 
 - script: |-
-    source $HOME/miniconda3/bin/activate && \
-    python -m scripts.build constructor
+    source $HOME/miniconda3/bin/activate \
+    && python -m scripts.build constructor \
+    && cp -r _artifacts/constructor $BUILD_ARTIFACTSTAGINGDIRECTORY/
   displayName: Build Constructor
 
 - script: source $HOME/miniconda3/bin/activate && python -m scripts.test
   displayName: Test
+
+- script: cp _artifacts/test_output $BUILD_ARTIFACTSTAGINGDIRECTORY/
+  condition: always()
