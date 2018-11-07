@@ -18,27 +18,36 @@ from . import (
 )
 
 
-def build_conda():
+def build_conda(packages=None):
     """ Build some packages (mostly re-arching conda-forge `noarch: python`)
     """
-    return run(
-        [
-            "conda-build",
-            ".",
-            "--output-folder",
-            CONDA_OUT,
-            "-c",
-            "https://repo.anaconda.com/pkgs/main",
-            "-c",
-            "https://repo.anaconda.com/pkgs/free",
-            "-c",
-            "https://conda.anaconda.org/conda-forge",
-            "--skip-existing",
-            "--python",
-            PY_MIN,
-        ],
-        cwd=str(RECIPE_DIR),
-    )
+
+    if not packages:
+        packages = ["."]
+
+    for package in packages:
+        rc = run(
+            [
+                "conda-build",
+                package,
+                "--output-folder",
+                CONDA_OUT,
+                "-c",
+                "https://repo.anaconda.com/pkgs/main",
+                "-c",
+                "https://repo.anaconda.com/pkgs/free",
+                "-c",
+                "https://conda.anaconda.org/conda-forge",
+                "--skip-existing",
+                "--python",
+                PY_MIN,
+            ],
+            cwd=str(RECIPE_DIR),
+        )
+        if rc:
+            return rc
+
+    return 0
 
 
 def build_constructor():
@@ -75,7 +84,12 @@ def build_constructor():
 
 
 if __name__ == "__main__":
+    if len(sys.argv):
+        if sys.argv[1] == "conda":
+            sys.exit(build_conda(sys.argv[2:]))
+        elif sys.argv[1] == "constructor":
+            sys.exit(build_constructor())
+
     if build_conda() == 0:
-        if build_constructor() == 0:
-            sys.exit(0)
+        sys.exit(build_constructor())
     sys.exit(1)

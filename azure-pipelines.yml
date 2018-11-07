@@ -14,14 +14,30 @@ steps:
     && $HOME/miniconda3/bin/conda install -yn base conda==$CONDA_VERSION
   displayName: Install Miniconda
 
-- script: $HOME/miniconda3/bin/conda env update -n base --file environment.yml
+- script: |-
+    $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
+    && conda info --json \
+    && conda list
   displayName: Update Environment
 
 - script: source $HOME/miniconda3/bin/activate && python -m scripts.lint
   displayName: Lint
 
-- script: source $HOME/miniconda3/bin/activate && python -m scripts.build
-  displayName: Build
+- script: |-
+    source $HOME/miniconda3/bin/activate && \
+    python -m scripts.build conda \
+      lunr \
+      robotframework \
+      robotframework-lint \
+      robotframework-seleniumlibrary \
+      robotkernel \
+      robotlab
+  displayName: Build Conda Packages
+
+- script: |-
+    source $HOME/miniconda3/bin/activate && \
+    python -m scripts.build constructor
+  displayName: Build Constructor
 
 - script: source $HOME/miniconda3/bin/activate && python -m scripts.test
   displayName: Test
