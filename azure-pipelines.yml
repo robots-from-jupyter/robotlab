@@ -41,7 +41,9 @@ steps:
     && cp -r _artifacts/constructor $BUILD_ARTIFACTSTAGINGDIRECTORY/
   displayName: Build Constructor
 
-- script: source $HOME/miniconda3/bin/activate && python -m scripts.test
+- script: |-
+    source $HOME/miniconda3/bin/activate \
+    && python -m scripts.test
   displayName: Test
 
 - script: cp _artifacts/test_output $BUILD_ARTIFACTSTAGINGDIRECTORY/
