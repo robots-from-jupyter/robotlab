@@ -1,4 +1,5 @@
 *** Settings ***
+Documentation     Try out some browsers with RobotLab Notebooks
 Test Template     Can I make a Robot Notebook?
 Library           SeleniumLibrary
 Resource          ../../resources/Launch.robot
@@ -15,6 +16,7 @@ Firefox
 *** Keywords ***
 Can I make a Robot Notebook?
     [Arguments]    ${browser}
+    [Documentation]    Try the basic Robot Notebook REPL
     Set Tags    browser:${browser}
     Open RobotLab    ${browser}
     Launch a new    Robot Framework    Notebook
@@ -30,6 +32,7 @@ Can I make a Robot Notebook?
 
 The Robot Popup Should Contain
     [Arguments]    ${document}    ${msg}
+    [Documentation]    With an open Robot Notebook, take a look at the log or report
     Click Link    ${document}
     Sleep    0.5s
     Select Window    Jupyter ${document}

@@ -1,4 +1,5 @@
 *** Settings ***
+Documentation     Interact with the RobotLab ne JupyterLab application shell
 Library           BuiltIn
 Library           SeleniumLibrary
 Library           OperatingSystem
@@ -19,6 +20,7 @@ ${DOCK}           //div[@id='jp-main-dock-panel']
 *** Keywords ***
 Open RobotLab
     [Arguments]    ${browser}
+    [Documentation]    Start RobotLab in a browser
     Should Not Be Empty    ${LAB URL}    msg=Needs a configured RobotLab server
     Set Screenshot Directory    ${OUTPUT DIR}${/}${browser}
     Open Browser    ${LAB URL}    ${browser}
