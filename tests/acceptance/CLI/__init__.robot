@@ -1,4 +1,4 @@
 *** Settings ***
-Library  Process
-Suite Teardown  Terminate All Processes
-Force Tags  ui:cli
+Suite Teardown    Terminate All Processes
+Force Tags        ui:cli
+Library           Process

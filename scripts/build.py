@@ -1,24 +1,44 @@
 import sys
 
 from . import (
-    CONDA_OUT, RECIPE_DIR, CONSTRUCT_IN, CONSTRUCT, CONSTRUCT_OUT,
-    CONSTRUCT_CACHE, CONSTRUCT_DIR, PY_MIN, PY_MAX, NODE_MIN, NODE_MAX,
-    RF_VERSION, VERSION, run
+    CONDA_OUT,
+    RECIPE_DIR,
+    CONSTRUCT_IN,
+    CONSTRUCT,
+    CONSTRUCT_OUT,
+    CONSTRUCT_CACHE,
+    CONSTRUCT_DIR,
+    PY_MIN,
+    PY_MAX,
+    NODE_MIN,
+    NODE_MAX,
+    RF_VERSION,
+    VERSION,
+    run,
 )
 
 
 def build_conda():
     """ Build some packages (mostly re-arching conda-forge `noarch: python`)
     """
-    return run([
-        "conda-build", ".",
-        "--output-folder", CONDA_OUT,
-        "-c", "https://repo.anaconda.com/pkgs/main",
-        "-c", "https://repo.anaconda.com/pkgs/free",
-        "-c", "https://conda.anaconda.org/conda-forge",
-        "--skip-existing",
-        "--python", PY_MIN
-    ], cwd=str(RECIPE_DIR))
+    return run(
+        [
+            "conda-build",
+            ".",
+            "--output-folder",
+            CONDA_OUT,
+            "-c",
+            "https://repo.anaconda.com/pkgs/main",
+            "-c",
+            "https://repo.anaconda.com/pkgs/free",
+            "-c",
+            "https://conda.anaconda.org/conda-forge",
+            "--skip-existing",
+            "--python",
+            PY_MIN,
+        ],
+        cwd=str(RECIPE_DIR),
+    )
 
 
 def build_constructor():
@@ -40,12 +60,18 @@ def build_constructor():
 
     CONSTRUCT_OUT.mkdir(exist_ok=True)
 
-    return run([
-        "constructor", ".",
-        "--output-dir", str(CONSTRUCT_OUT),
-        "--cache-dir", str(CONSTRUCT_CACHE),
-        "--verbose"
-    ], cwd=str(CONSTRUCT_DIR))
+    return run(
+        [
+            "constructor",
+            ".",
+            "--output-dir",
+            str(CONSTRUCT_OUT),
+            "--cache-dir",
+            str(CONSTRUCT_CACHE),
+            "--verbose",
+        ],
+        cwd=str(CONSTRUCT_DIR),
+    )
 
 
 if __name__ == "__main__":

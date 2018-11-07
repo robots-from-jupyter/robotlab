@@ -5,11 +5,16 @@ commands:
     unix: python -m scripts.build
     env_spec: _build
 
+  lint:
+    unix: python -m scripts.lint
+    env_spec: _build
+
   build:win:
     description: until 2.3.0 comes out, use constructor@master for size_in_bytes fix
-    windows: >
-      pip install git+https://github.com/conda/constructor --ignore-installed --no-deps
-      && python -m scripts.build
+    windows: 'pip install git+https://github.com/conda/constructor --ignore-installed
+      --no-deps && python -m scripts.build
+
+      '
     env_spec: _build_win
 
   test:
@@ -71,7 +76,8 @@ env_specs:
 
   _robots_from_jupyter:
     packages:
-    - conda
+    - black
+    - conda >=4.5.11,<4.6
     - conda-build >=3.15,<3.16
     - conda-verify
     - constructor
@@ -79,6 +85,7 @@ env_specs:
     - python >=3.6,<3.7
     - python-chromedriver-binary
     - robotframework
+    - robotframework-lint
     - robotframework-seleniumlibrary
     channels:
     - https://repo.anaconda.com/pkgs/main

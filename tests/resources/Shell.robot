@@ -3,7 +3,6 @@ Library           BuiltIn
 Library           SeleniumLibrary
 Library           OperatingSystem
 
-
 *** Variables ***
 ${CELL_CSS}       .jp-Notebook .jp-Cell:last-of-type .jp-InputArea-editor .CodeMirror
 ${TOKEN}          hopelesslyinsecure
@@ -17,13 +16,12 @@ ${BAR_ITEM}       //div[@class='p-MenuBar-itemLabel']
 ${CARD}           //div[@class='jp-LauncherCard']
 ${DOCK}           //div[@id='jp-main-dock-panel']
 
-
 *** Keywords ***
 Open RobotLab
-    [Arguments]  ${browser}
+    [Arguments]    ${browser}
     Should Not Be Empty    ${LAB URL}    msg=Needs a configured RobotLab server
-    Set Screenshot Directory  ${OUTPUT DIR}${/}${browser}
-    Open Browser    ${LAB URL}  ${browser}
+    Set Screenshot Directory    ${OUTPUT DIR}${/}${browser}
+    Open Browser    ${LAB URL}    ${browser}
     Wait for Splash Screen
 
 Wait for Splash Screen
@@ -38,6 +36,7 @@ Launch a new
     Click Element    ${CARD}[@title='${kernel}'][@data-category='${category}']
     Wait Until Page Does Not Contain Element    ${SPINNER}
     Wait Until Page Contains Element    css:${CELL_CSS}
+    Sleep    0.1s
 
 Click JupyterLab Menu
     [Arguments]    ${menu_label}
@@ -57,7 +56,7 @@ Click JupyterLab Menu Item
 Execute JupyterLab Command
     [Arguments]    ${command}
     [Documentation]    Use the JupyterLab Command Palette to run a command
-    Run Keyword And Ignore Error    Click Element   css:.jp-mod-accept
+    Run Keyword And Ignore Error    Click Element    css:.jp-mod-accept
     Click Element    ${CMD_PAL_XPATH}
     Input Text    ${CMD_PAL_INPUT}    ${command}
     Wait Until Page Contains Element    ${CMD_PAL_ITEM}
