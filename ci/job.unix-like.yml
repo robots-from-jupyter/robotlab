@@ -2,9 +2,6 @@ parameters:
   name: Linux
   vmImage: ubuntu-16.04
   MINICONDA_OS: Linux
-  MINICONDA_VERSION: 4.5.4
-  MINICONDA_MD5: a946ea1d0c4a642ddf0c3a26a18bb16d
-  CONDA_VERSION: 4.5.11
 
 jobs:
 - job: ${{ parameters.name }}
@@ -14,6 +11,7 @@ jobs:
   steps:
   - script: |-
       set -eux \
+      && env \
       && export MC_FILE=Miniconda3-${MINICONDA_VERSION}-${MINICONDA_OS}-x86_64.sh \
       && wget --quiet https://repo.anaconda.com/miniconda/${MC_FILE} \
       && echo "${MINICONDA_MD5} *${MC_FILE}" | md5sum -c - \
