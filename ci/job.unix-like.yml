@@ -13,7 +13,7 @@ jobs:
   steps:
   - script: |-
       set -eux \
-      && MC_FILE=Miniconda3-${MINICONDA_VERSION}-${MINICONDA_OS}-x86_64.sh && \
+      && export MC_FILE=Miniconda3-${MINICONDA_VERSION}-${MINICONDA_OS}-x86_64.sh \
       && wget --quiet https://repo.anaconda.com/miniconda/${MC_FILE} \
       && echo "${MINICONDA_MD5} *${MC_FILE}" | md5sum -c - \
       && bash ${MC_FILE} -fbp ${HOME}/miniconda3 \

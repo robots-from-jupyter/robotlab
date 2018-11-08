@@ -10,8 +10,8 @@ jobs:
     vmImage: ${{ parameters.vmImage }}
   steps:
   - script: >
-      powershell -command "& {Invoke-WebRequest https://repo.anaconda.com/miniconda/Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe}"
-      && Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=c:\mc3
+      powershell -command "& {Invoke-WebRequest -OutFile mc.exe https://repo.anaconda.com/miniconda/Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe}"
+      && mc.exe /InstallationType=JustMe /RegisterPython=0 /S /D=c:\mc3
       && c:\mc3\Scripts\conda install -yn base conda==%CONDA_VERSION%
     displayName: Install Miniconda
 
