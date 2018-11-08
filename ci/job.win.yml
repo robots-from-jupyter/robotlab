@@ -23,12 +23,6 @@ jobs:
 
   - script: >
       python -m scripts.build conda
-        lunr
-        robotframework
-        robotframework-lint
-        robotframework-seleniumlibrary
-        robotkernel
-        robotlab
       && xcopy -r _artifacts\conda-bld %BUILD_ARTIFACTSTAGINGDIRECTORY%\conda-bld /E
     displayName: Build Conda Packages
 
