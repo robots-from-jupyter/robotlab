@@ -1,8 +1,8 @@
 parameters:
-  name: Linux
-  vmImage: ubuntu-16.04
+  name: Windows
+  vmImage: vs2017-win2016
   MINICONDA_VERSION: 4.5.4
-  MINICONDA_MD5: a946ea1d0c4a642ddf0c3a26a18bb16d
+  MINICONDA_MD5: 1c73051ccd997770288275ee6474b423
   CONDA_VERSION: 4.5.11
 
 jobs:
@@ -10,45 +10,46 @@ jobs:
   pool:
     vmImage: ${{ parameters.vmImage }}
   steps:
-  - script: |-
-        wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh \
-        && echo "${MINICONDA_MD5} *Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh" | md5sum -c - \
-        && bash Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh -fbp ${HOME}/miniconda3 \
-        && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
+  - script: >
+      powershell -command "& {Invoke-WebRequest https://repo.anaconda.com/miniconda/Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe}"
+      && start /wait "" Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=c:\mc3
+      && c:\mc3\Scripts\conda install -yn base conda==%CONDA_VERSION%
     displayName: Install Miniconda
 
-  - script: |-
-      $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
-      && conda info --json \
+  - script: >
+      c:\mc3\Scripts\conda env update -n base --file environment.yml
+      && conda info --json
       && conda list
     displayName: Update Environment
 
-  - script: source ${HOME}/miniconda3/bin/activate && python -m scripts.lint
+  - script: >
+      c:\mc3\Scripts\activate
+      && python -m scripts.lint
     displayName: Lint
 
-  - script: |-
-      source $HOME/miniconda3/bin/activate \
-      && python -m scripts.build conda \
-        lunr \
-        robotframework \
-        robotframework-lint \
-        robotframework-seleniumlibrary \
-        robotkernel \
-        robotlab \
-      && cp -r _artifacts/conda-bld $BUILD_ARTIFACTSTAGINGDIRECTORY/
+  - script: >
+      c:\mc3\Scripts\activate
+      && python -m scripts.build conda
+        lunr
+        robotframework
+        robotframework-lint
+        robotframework-seleniumlibrary
+        robotkernel
+        robotlab
+      && xcopy -r _artifacts\conda-bld %BUILD_ARTIFACTSTAGINGDIRECTORY%\conda-bld /E
     displayName: Build Conda Packages
 
-
-  - script: |-
-      source $HOME/miniconda3/bin/activate \
-      && python -m scripts.build constructor \
-      && cp -r _artifacts/constructor $BUILD_ARTIFACTSTAGINGDIRECTORY/
+  - script: >
+      c:\mc3\Scripts\activate
+      && python -m scripts.build constructor
+      && xcopy _artifacts\constructor %BUILD_ARTIFACTSTAGINGDIRECTORY%\constructor /E
     displayName: Build Constructor
 
-  - script: |-
-      source $HOME/miniconda3/bin/activate \
-      && python -m scripts.test
+  - script: >
+      c:\mc3\Scripts\activate
+      && xpython -m scripts.test
     displayName: Test
 
-  - script: cp _artifacts/test_output $BUILD_ARTIFACTSTAGINGDIRECTORY/
+  - script: >
+      xcopy _artifacts\test_output %BUILD_ARTIFACTSTAGINGDIRECTORY%\test_output /E
     condition: always()
