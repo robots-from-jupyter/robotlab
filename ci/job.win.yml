@@ -11,7 +11,7 @@ jobs:
   steps:
   - script: >
       powershell -command "& {Invoke-WebRequest https://repo.anaconda.com/miniconda/Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe}"
-      && start /wait "" Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=c:\mc3
+      && Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=c:\mc3
       && c:\mc3\Scripts\conda install -yn base conda==%CONDA_VERSION%
     displayName: Install Miniconda
 
