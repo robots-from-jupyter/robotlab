@@ -11,10 +11,10 @@ jobs:
     vmImage: ${{ parameters.vmImage }}
   steps:
   - script: |-
-        wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh \
-        && echo "${MINICONDA_MD5} *Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh" | md5sum -c - \
-        && bash Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh -fbp ${HOME}/miniconda3 \
-        && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
+      wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh \
+      && echo "${MINICONDA_MD5} *Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh" | md5sum -c - \
+      && bash Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh -fbp ${HOME}/miniconda3 \
+      && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
     displayName: Install Miniconda
 
   - script: |-
