@@ -21,18 +21,25 @@ jobs:
         robotframework
         robotframework-seleniumlibrary
 
-  - script: >
-      python -m scripts.build conda
-      && xcopy -r _artifacts\conda-bld %BUILD_ARTIFACTSTAGINGDIRECTORY%\conda-bld /E
+  - script: python -m scripts.build conda
     displayName: Build Conda Packages
 
-  - script: >
-      python -m scripts.build constructor
-      && xcopy _artifacts\constructor %BUILD_ARTIFACTSTAGINGDIRECTORY%\constructor /E
+  - script: python -m scripts.build constructor
     displayName: Build Constructor
 
   - script: python -m scripts.test
     displayName: Test
 
-  - script: xcopy _artifacts\test_output %BUILD_ARTIFACTSTAGINGDIRECTORY%\test_output /E
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Robot Logs
+    inputs:
+      PathtoPublish: _artifacts/test_output
+      ArtifactName: ${{ parameters.name }} tests
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Installer
+    inputs:
+      PathtoPublish: _artifacts/constructor
+      ArtifactName: ${{ parameters.name }} installer
     condition: always()
