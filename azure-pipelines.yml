@@ -1,29 +1,25 @@
-variables:
-  MINICONDA_VERSION: 4.5.4
-  CONDA_VERSION: 4.5.11
-
 jobs:
 - template: ci/job.unix-like.yml
   parameters:
     name: Linux
     vmImage: ubuntu-16.04
-    MINICONDA_VERSION: $(MINICONDA_VERSION)
+    MINICONDA_VERSION: 4.5.4
     MINICONDA_MD5: a946ea1d0c4a642ddf0c3a26a18bb16d
     MINICONDA_OS: Linux
-    CONDA_VERSION: $(CONDA_VERSION)
+    CONDA_VERSION: 4.5.11
 
 - template: ci/job.unix-like.yml
   parameters:
     name: Mac
     vmImage: macos-10.13
-    MINICONDA_VERSION: $(MINICONDA_VERSION)
+    MINICONDA_VERSION: 4.5.4
     MINICONDA_MD5: 164ec263c4070db642ce31bb45d68813
     MINICONDA_OS: MacOSX
-    CONDA_VERSION: $(CONDA_VERSION)
+    CONDA_VERSION: 4.5.11
 
 - template: ci/job.win.yml
   parameters:
     name: Windows
     vmImage: vs2017-win2016
-    MINICONDA_VERSION: $(MINICONDA_VERSION)
-    CONDA_VERSION: $(CONDA_VERSION)
+    MINICONDA_VERSION: 4.5.4
+    CONDA_VERSION: 4.5.11
