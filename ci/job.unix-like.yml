@@ -18,16 +18,16 @@ jobs:
 
   - script: |-
       $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
-      && source $HOME/miniconda3/bin/activate \
+      && . $HOME/miniconda3/bin/activate \
       && conda info --json \
       && conda list
     displayName: Update Environment
 
-  - script: source ${HOME}/miniconda3/bin/activate && python -m scripts.lint
+  - script: . ${HOME}/miniconda3/bin/activate && python -m scripts.lint
     displayName: Lint
 
   - script: |-
-      source $HOME/miniconda3/bin/activate \
+      . $HOME/miniconda3/bin/activate \
       && python -m scripts.build conda \
         lunr \
         robotframework \
@@ -38,12 +38,12 @@ jobs:
     displayName: Build Conda Packages
 
   - script: |-
-      source $HOME/miniconda3/bin/activate \
+      . $HOME/miniconda3/bin/activate \
       && python -m scripts.build constructor \
     displayName: Build Constructor
 
   - script: |-
-      source $HOME/miniconda3/bin/activate \
+      . $HOME/miniconda3/bin/activate \
       && python -m scripts.test
     displayName: Test
 
