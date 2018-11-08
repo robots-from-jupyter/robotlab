@@ -10,24 +10,23 @@ jobs:
   pool:
     vmImage: ${{ parameters.vmImage }}
   steps:
-  - displayName: Install Miniconda
-    script: |-
-      wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh \
-      && echo "${MINICONDA_MD5} *Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh" | md5sum -c - \
-      && bash Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh -fbp ${HOME}/miniconda3 \
-      && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
+  - script: |-
+        wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh \
+        && echo "${MINICONDA_MD5} *Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh" | md5sum -c - \
+        && bash Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh -fbp ${HOME}/miniconda3 \
+        && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
+    displayName: Install Miniconda
 
-  - displayName: Update Environment
-    script: |-
+  - script: |-
       $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
       && conda info --json \
       && conda list
+    displayName: Update Environment
 
-  - displayName: Lint
-    script: source ${HOME}/miniconda3/bin/activate && python -m scripts.lint
+  - script: source ${HOME}/miniconda3/bin/activate && python -m scripts.lint
+    displayName: Lint
 
-  - displayName: Build Conda Packages
-    script: |-
+  - script: |-
       source $HOME/miniconda3/bin/activate \
       && python -m scripts.build conda \
         lunr \
@@ -37,17 +36,19 @@ jobs:
         robotkernel \
         robotlab \
       && cp -r _artifacts/conda-bld $BUILD_ARTIFACTSTAGINGDIRECTORY/
+    displayName: Build Conda Packages
 
-  - displayName: Build Constructor
-    script: |-
+
+  - script: |-
       source $HOME/miniconda3/bin/activate \
       && python -m scripts.build constructor \
       && cp -r _artifacts/constructor $BUILD_ARTIFACTSTAGINGDIRECTORY/
+    displayName: Build Constructor
 
-  - displayName: Test
-    script: |-
+  - script: |-
       source $HOME/miniconda3/bin/activate \
       && python -m scripts.test
+    displayName: Test
 
-  - condition: always()
-    script: cp _artifacts/test_output $BUILD_ARTIFACTSTAGINGDIRECTORY/
+  - script: cp _artifacts/test_output $BUILD_ARTIFACTSTAGINGDIRECTORY/
+    condition: always()
