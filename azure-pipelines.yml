@@ -4,19 +4,20 @@ variables:
 
 jobs:
 - template: ci/job.unix-like.yml
+  variables:
+    MINICONDA_OS: Linux
   parameters:
     name: Linux
     vmImage: ubuntu-16.04
-    MINICONDA_OS: Linux
 
 - template: ci/job.unix-like.yml
-  parameters:
-    name: Mac
-    vmImage: macos-10.13
+  variables:
     MINICONDA_OS: MacOSX
+  parameters:
+    name: MacOSX
+    vmImage: macos-10.13
 
 - template: ci/job.win.yml
   parameters:
     name: Windows
     vmImage: vs2017-win2016
-  

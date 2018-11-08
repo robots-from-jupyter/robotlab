@@ -1,7 +1,6 @@
 parameters:
   name: Linux
   vmImage: ubuntu-16.04
-  MINICONDA_OS: Linux
 
 jobs:
 - job: ${{ parameters.name }}

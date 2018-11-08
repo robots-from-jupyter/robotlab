@@ -1,7 +1,6 @@
 parameters:
   name: Windows
   vmImage: vs2017-win2016
-  CONDA_VERSION: 4.5.11
 
 jobs:
 - job: ${{ parameters.name }}
