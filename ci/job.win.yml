@@ -1,7 +1,6 @@
 parameters:
   name: Windows
   vmImage: vs2017-win2016
-  MINICONDA_VERSION: 4.5.4
   CONDA_VERSION: 4.5.11
 
 jobs:
@@ -9,26 +8,19 @@ jobs:
   pool:
     vmImage: ${{ parameters.vmImage }}
   steps:
-  - script: >
-      powershell -command "& {Invoke-WebRequest -OutFile mc.exe https://repo.anaconda.com/miniconda/Miniconda3-%MINICONDA_VERSION%-Windows-x86_64.exe}"
-      && mc.exe /InstallationType=JustMe /RegisterPython=0 /S /D=c:\mc3
-      && c:\mc3\Scripts\conda install -yn base conda==%CONDA_VERSION%
-    displayName: Install Miniconda
+  - task: CondaEnvironment@1
 
   - script: >
-      c:\mc3\Scripts\conda env update -n base --file environment.yml
+      conda env update -n base --file environment.yml
       && conda info --json
       && conda list
     displayName: Update Environment
 
-  - script: >
-      c:\mc3\Scripts\activate
-      && python -m scripts.lint
+  - script: python -m scripts.lint
     displayName: Lint
 
   - script: >
-      c:\mc3\Scripts\activate
-      && python -m scripts.build conda
+      python -m scripts.build conda
         lunr
         robotframework
         robotframework-lint
@@ -39,16 +31,12 @@ jobs:
     displayName: Build Conda Packages
 
   - script: >
-      c:\mc3\Scripts\activate
-      && python -m scripts.build constructor
+      python -m scripts.build constructor
       && xcopy _artifacts\constructor %BUILD_ARTIFACTSTAGINGDIRECTORY%\constructor /E
     displayName: Build Constructor
 
-  - script: >
-      c:\mc3\Scripts\activate
-      && xpython -m scripts.test
+  - script: python -m scripts.test
     displayName: Test
 
-  - script: >
-      xcopy _artifacts\test_output %BUILD_ARTIFACTSTAGINGDIRECTORY%\test_output /E
+  - script: xcopy _artifacts\test_output %BUILD_ARTIFACTSTAGINGDIRECTORY%\test_output /E
     condition: always()
