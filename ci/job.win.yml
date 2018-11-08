@@ -1,0 +1,53 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+  MINICONDA_VERSION: 4.5.4
+  MINICONDA_MD5: a946ea1d0c4a642ddf0c3a26a18bb16d
+  CONDA_VERSION: 4.5.11
+
+jobs:
+- job: ${{ parameters.name }}
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  steps:
+  - displayName: Install Miniconda
+    script: |-
+      wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh \
+      && echo "${MINICONDA_MD5} *Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh" | md5sum -c - \
+      && bash Miniconda3-${MINICONDA_VERSION}-${NAME}-x86_64.sh -fbp ${HOME}/miniconda3 \
+      && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
+
+  - displayName: Update Environment
+    script: |-
+      $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
+      && conda info --json \
+      && conda list
+
+  - displayName: Lint
+    script: source ${HOME}/miniconda3/bin/activate && python -m scripts.lint
+
+  - displayName: Build Conda Packages
+    script: |-
+      source $HOME/miniconda3/bin/activate \
+      && python -m scripts.build conda \
+        lunr \
+        robotframework \
+        robotframework-lint \
+        robotframework-seleniumlibrary \
+        robotkernel \
+        robotlab \
+      && cp -r _artifacts/conda-bld $BUILD_ARTIFACTSTAGINGDIRECTORY/
+
+  - displayName: Build Constructor
+    script: |-
+      source $HOME/miniconda3/bin/activate \
+      && python -m scripts.build constructor \
+      && cp -r _artifacts/constructor $BUILD_ARTIFACTSTAGINGDIRECTORY/
+
+  - displayName: Test
+    script: |-
+      source $HOME/miniconda3/bin/activate \
+      && python -m scripts.test
+
+  - condition: always()
+    script: cp _artifacts/test_output $BUILD_ARTIFACTSTAGINGDIRECTORY/
