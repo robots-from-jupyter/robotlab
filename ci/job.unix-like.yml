@@ -10,7 +10,6 @@ jobs:
   steps:
   - script: |-
       set -eux \
-      && env \
       && export MC_FILE=Miniconda3-${MINICONDA_VERSION}-${SYSTEM_PHASEDISPLAYNAME}-x86_64.sh \
       && wget --quiet https://repo.anaconda.com/miniconda/${MC_FILE} \
       && bash ${MC_FILE} -fbp ${HOME}/miniconda3 \
@@ -19,6 +18,7 @@ jobs:
 
   - script: |-
       $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
+      && source $HOME/miniconda3/bin/activate \
       && conda info --json \
       && conda list
     displayName: Update Environment
