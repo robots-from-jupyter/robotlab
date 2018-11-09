@@ -40,13 +40,7 @@ jobs:
   - script: |-
       . $HOME/miniconda3/bin/activate \
       && python -m scripts.build constructor \
-    displayName: Build Constructor
-
-  - ${{ if eq(parameters.name, 'MacOSX') }}:
-      script: |-
-        brew install brew-cask \
-        && brew cask install google-chrome
-      displayName: Install Chrome
+    displayName: Build Constructor    
 
   - script: |-
       . $HOME/miniconda3/bin/activate \
