@@ -28,15 +28,15 @@ Can I make a Robot Notebook?
     The Robot Popup Should Contain    Log    1 passed, 0 failed
     The Robot Popup Should Contain    Report    All tests passed
     Execute JupyterLab Command    Save Notebook
-    Capture Page Screenshot    05_save.png
+    Capture Page Screenshot    09_save.png
 
 The Robot Popup Should Contain
     [Arguments]    ${document}    ${msg}
     [Documentation]    With an open Robot Notebook, take a look at the log or report
     Click Link    ${document}
-    Sleep    0.5s
+    Sleep    1s
     Select Window    Jupyter ${document}
     Page Should Contain    ${msg}
-    Capture Page Screenshot    04_${document.lower()}.png
+    Capture Page Screenshot    10_${document.lower()}.png
     Close Window
     Select Window    JupyterLab

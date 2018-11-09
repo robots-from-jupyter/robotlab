@@ -43,6 +43,12 @@ jobs:
     displayName: Build Constructor
 
   - script: |-
+      brew install brew-cask \
+      && brew cask install google-chrome
+    condition: eq(paramters.name, 'MacOSX')
+    displayName: Install Chrome
+
+  - script: |-
       . $HOME/miniconda3/bin/activate \
       && python -m scripts.test
     displayName: Test
