@@ -16,9 +16,9 @@ build:
   skip: true  # [py<36]
   script:
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
-    - cp {{ RECIPE_DIR }}/install_spec.py .  # [unix]
-    - copy {{ RECIPE_DIR }}\install_spec.py .  # [win]
-    - {{ PYTHON }} install.py
+    - cp {{ RECIPE_DIR }}/install_spec.py {{ SRC_DIR }}  # [unix]
+    - copy {{ RECIPE_DIR }}\install_spec.py {{ SRC_DIR }}  # [win]
+    - {{ PYTHON }} install_spec.py
   entry_points:
     - nbrobot = robotkernel.nbreader:robot
     - nblibdoc = robotkernel.nbreader:libdoc
