@@ -1,7 +1,3 @@
-variables:
-  MINICONDA_VERSION: 4.5.4
-  CONDA_VERSION: 4.5.11
-
 jobs:
 - template: ci/job.unix-like.yml
   parameters:
@@ -17,3 +13,11 @@ jobs:
   parameters:
     name: Windows
     vmImage: vs2017-win2016
+
+variables:
+  MINICONDA_VERSION: 4.5.4
+  CONDA_VERSION: 4.5.11
+
+trigger: [master]
+
+pr: [master]
