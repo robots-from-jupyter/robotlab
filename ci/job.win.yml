@@ -24,6 +24,9 @@ jobs:
   - script: python -m scripts.build conda
     displayName: Build Conda Packages
 
+  - script: pip install git+https://github.com/conda/constructor --ignore-installed --no-deps
+    displayName: Until 2.3.0 comes out, use constructor@master for size_in_bytes fix
+
   - script: python -m scripts.build constructor
     displayName: Build Constructor
 
