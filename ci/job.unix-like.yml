@@ -45,7 +45,7 @@ jobs:
   - script: |-
       brew install brew-cask \
       && brew cask install google-chrome
-    condition: eq(parameters.name, 'MacOSX')
+    condition: eq(pipeline().parameters.name, 'MacOSX')
     displayName: Install Chrome
 
   - script: |-
