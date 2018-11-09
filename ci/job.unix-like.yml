@@ -8,11 +8,11 @@ jobs:
     vmImage: ${{ parameters.vmImage }}
 
   steps:
-  - script: |-
-      if [[ ${SYSTEM_PHASEDISPLAYNAME} = MacOSX ]]; then \
-        brew install brew-cask \
-        && brew cask install google-chrome; fi
-    displayName: Install Chrome
+  - ${{ if eq(parameters.name, 'MacOSX') }}:
+    - script: |
+        brew install brew-cask
+        brew cask install google-chrome
+      displayName: Install Google Chrome
 
   - script: |-
       set -eux \
