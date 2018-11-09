@@ -10,8 +10,8 @@ jobs:
   steps:
   - ${{ if eq(parameters.name, 'MacOSX') }}:
     - script: |
-        brew install brew-cask
-        brew cask install google-chrome
+        HOMEBREW_NO_AUTO_UPDATE=1 brew tap caskroom/cask \
+        && brew cask install google-chrome
       displayName: Install Google Chrome
 
   - script: |-
