@@ -9,9 +9,9 @@ jobs:
 
   steps:
   - script: |-
-      [ ${SYSTEM_PHASEDISPLAYNAME} = MacOSX ] && \
-      brew install brew-cask \
-      && brew cask install google-chrome
+      if [[ ${SYSTEM_PHASEDISPLAYNAME} = MacOSX ]]; then \
+        brew install brew-cask \
+        && brew cask install google-chrome; fi
     displayName: Install Chrome
 
   - script: |-
