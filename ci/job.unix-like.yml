@@ -45,7 +45,7 @@ jobs:
   - script: |-
       brew install brew-cask \
       && brew cask install google-chrome
-    condition: eq(paramters.name, 'MacOSX')
+    condition: eq(parameters.name, 'MacOSX')
     displayName: Install Chrome
 
   - script: |-
@@ -65,4 +65,4 @@ jobs:
     inputs:
       PathtoPublish: _artifacts/constructor
       ArtifactName: ${{ parameters.name }} installer
-    condition: always()
+    condition: succeeded()

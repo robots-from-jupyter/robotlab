@@ -45,4 +45,4 @@ jobs:
     inputs:
       PathtoPublish: _artifacts/constructor
       ArtifactName: ${{ parameters.name }} installer
-    condition: always()
+    condition: succeeded()
