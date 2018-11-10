@@ -14,7 +14,8 @@ def test():
             "robot",
             "--outputdir",
             str(TEST_OUT / platform.system()),
-            "--xunit", "robot.xunit.xml",
+            "--xunit",
+            "robot.xunit.xml",
             str(TEST_DIR),
         ]
     )
