@@ -1,0 +1,14 @@
+steps:
+  - task: CondaEnvironment@1
+    inputs:
+      installOptions: -c conda-forge -c defaults
+      packageSpecs: >
+        conda>=4.5.11,<4.6
+        conda-build>=3.15,<3.16
+        conda-verify
+        constructor
+        geckodriver
+        python>=3.6,<3.7
+        python-chromedriver-binary
+        robotframework
+        robotframework-seleniumlibrary

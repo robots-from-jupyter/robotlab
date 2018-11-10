@@ -3,46 +3,17 @@ parameters:
   vmImage: vs2017-win2016
 
 jobs:
-- job: ${{ parameters.name }}
-  pool:
-    vmImage: ${{ parameters.vmImage }}
-  steps:
-  - task: CondaEnvironment@1
-    inputs:
-      installOptions: -c conda-forge
-      packageSpecs: >
-        conda>=4.5.11,<4.6
-        conda-build>=3.15,<3.16
-        conda-verify
-        constructor
-        geckodriver
-        python>=3.6,<3.7
-        python-chromedriver-binary
-        robotframework
-        robotframework-seleniumlibrary
+  - job: ${{ parameters.name }}
+    pool:
+      vmImage: ${{ parameters.vmImage }}
 
-  - script: python -m scripts.build conda
-    displayName: Build Conda Packages
+    steps:
+      - template: steps.conda.yml
 
-  - script: pip install git+https://github.com/conda/constructor --ignore-installed --no-deps
-    displayName: Until 2.3.0 comes out, use constructor@master for size_in_bytes fix
+      - script: >
+          pip install git+https://github.com/conda/constructor --ignore-installed --no-deps
+        displayName: Until 2.3.0 comes out, use constructor@master for size_in_bytes fix
 
-  - script: python -m scripts.build constructor
-    displayName: Build Constructor
-
-  - script: python -m scripts.test
-    displayName: Test
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Robot Logs
-    inputs:
-      PathtoPublish: _artifacts/test_output
-      ArtifactName: ${{ parameters.name }} tests
-    condition: always()
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Installer
-    inputs:
-      PathtoPublish: _artifacts/constructor
-      ArtifactName: ${{ parameters.name }} installer
-    condition: succeeded()
+      - template: steps.common.yml
+        parameters:
+          name: ${{ parameters.name }}

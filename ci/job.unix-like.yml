@@ -3,68 +3,21 @@ parameters:
   vmImage: ubuntu-16.04
 
 jobs:
-- job: ${{ parameters.name }}
-  pool:
-    vmImage: ${{ parameters.vmImage }}
+  - job: ${{ parameters.name }}
+    pool:
+      vmImage: ${{ parameters.vmImage }}
 
-  steps:
-  - script: |-
-      set -eux \
-      && export MC_FILE=Miniconda3-${MINICONDA_VERSION}-${SYSTEM_PHASEDISPLAYNAME}-x86_64.sh \
-      && wget --quiet https://repo.anaconda.com/miniconda/${MC_FILE} \
-      && bash ${MC_FILE} -fbp ${HOME}/miniconda3 \
-      && $HOME/miniconda3/bin/conda install -yn base conda==${CONDA_VERSION}
-    displayName: Install Miniconda
+    steps:
+      - ${{ if eq(parameters.name, 'MacOSX') }}:
+        - script: |
+            HOMEBREW_NO_AUTO_UPDATE=1 \
+            brew tap caskroom/cask \
+            && brew cask install google-chrome \
+            && brew cask install firefox
+          displayName: Install Browsers
 
-  - script: |-
-      $HOME/miniconda3/bin/conda env update -n base --file environment.yml \
-      && . $HOME/miniconda3/bin/activate \
-      && conda info --json \
-      && conda list
-    displayName: Update Environment
+      - template: steps.conda.yml
 
-  - script: . ${HOME}/miniconda3/bin/activate && python -m scripts.lint
-    displayName: Lint
-
-  - script: |-
-      . $HOME/miniconda3/bin/activate \
-      && python -m scripts.build conda \
-        lunr \
-        robotframework \
-        robotframework-lint \
-        robotframework-seleniumlibrary \
-        robotkernel \
-        robotlab \
-    displayName: Build Conda Packages
-
-  - script: |-
-      . $HOME/miniconda3/bin/activate \
-      && python -m scripts.build constructor \
-    displayName: Build Constructor
-
-  - ${{ if eq(parameters.name, 'MacOSX') }}:
-    - script: |
-        HOMEBREW_NO_AUTO_UPDATE=1 \
-        brew tap caskroom/cask \
-        && brew cask install google-chrome \
-        && brew cask install firefox
-      displayName: Install Browsers
-
-  - script: |-
-      . $HOME/miniconda3/bin/activate \
-      && python -m scripts.test
-    displayName: Test
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Robot Logs
-    inputs:
-      PathtoPublish: _artifacts/test_output
-      ArtifactName: ${{ parameters.name }} tests
-    condition: always()
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Installer
-    inputs:
-      PathtoPublish: _artifacts/constructor
-      ArtifactName: ${{ parameters.name }} installer
-    condition: succeeded()
+      - template: steps.common.yml
+        parameters:
+          name: ${{ parameters.name }}
