@@ -11,6 +11,7 @@ specs:
   - conda
   - geckodriver
   - jupyterlab
+  - ipykernel<5.1.0
   - nodejs >={{ node_min }},<{{ node_max }}
   - opencv
   - python >={{ py_min }},<{{ py_max }}

@@ -18,4 +18,4 @@ Does RobotLab Load?
     Set Tags    browser:${browser}
     Open RobotLab    ${browser}
     Page Should Contain    Robot Framework
-    Capture Page Screenshot    00_smoke_test.png
+    Capture Page Screenshot    ${browser}_smoke__00_smoke_test.png
