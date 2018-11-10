@@ -18,7 +18,7 @@ Can RobotLab make an IPython Notebook?
     [Arguments]    ${browser}
     [Documentation]    Try a basic IPython Notebook
     Set Tags    browser:${browser}
-    ${prefix} =  Set Variable  ipython_${browser}_
+    ${prefix} =    Set Variable    ipython_${browser}_
     Open RobotLab    ${browser}
     Launch a new    Python 3    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
@@ -26,6 +26,6 @@ Can RobotLab make an IPython Notebook?
     Capture Page Screenshot    ${prefix}_02_execute.png
     Wait Until Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
-    Page Should Contain   Hello World
+    Page Should Contain    Hello World
     Execute JupyterLab Command    Save Notebook
     Capture Page Screenshot    ${prefix}_09_save.png

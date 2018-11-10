@@ -18,7 +18,7 @@ Can RobotLab make a Robot Notebook?
     [Arguments]    ${browser}
     [Documentation]    Try a basic Robot Notebook
     Set Tags    browser:${browser}
-    ${prefix} =  Set Variable  robot_${browser}_
+    ${prefix} =    Set Variable    robot_${browser}_
     Open RobotLab    ${browser}
     Launch a new    Robot Framework    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
@@ -26,13 +26,13 @@ Can RobotLab make a Robot Notebook?
     Capture Page Screenshot    ${prefix}_02_execute.png
     Wait Until Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
-    The Robot Popup Should Contain    ${prefix}  Log    1 passed, 0 failed
-    The Robot Popup Should Contain    ${prefix}  Report    All tests passed
+    The Robot Popup Should Contain    ${prefix}    Log    1 passed, 0 failed
+    The Robot Popup Should Contain    ${prefix}    Report    All tests passed
     Execute JupyterLab Command    Save Notebook
     Capture Page Screenshot    ${prefix}_09_save.png
 
 The Robot Popup Should Contain
-    [Arguments]    ${prefix}  ${document}    ${msg}
+    [Arguments]    ${prefix}    ${document}    ${msg}
     [Documentation]    With an open Robot Notebook, take a look at the log or report
     Click Link    ${document}
     Sleep    1s
