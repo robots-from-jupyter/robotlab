@@ -45,6 +45,9 @@ test:
     - robot.utils
     - robot.variables
     - robot.writer
+  commands:
+    - robot --version
+    - rebot --version
 
 about:
   home: http://robotframework.org
