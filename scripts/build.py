@@ -84,7 +84,7 @@ def build_constructor():
 
 
 if __name__ == "__main__":
-    if len(sys.argv):
+    if len(sys.argv) > 1:
         if sys.argv[1] == "conda":
             sys.exit(build_conda(sys.argv[2:]))
         elif sys.argv[1] == "constructor":
