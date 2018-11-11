@@ -46,8 +46,10 @@ test:
     - robot.variables
     - robot.writer
   commands:
-    - robot --version
-    - rebot --version
+    - robot --version || [[ $? == 251 ]]  # [unix]
+    - rebot --version || [[ $? == 251 ]]  # [unix]
+    - robot --version || IF %ERRORLEVEL% NEQ 251 EXIT 1  # [win]
+    - rebot --version || IF %ERRORLEVEL% NEQ 251 EXIT 1  # [win]
 
 about:
   home: http://robotframework.org
