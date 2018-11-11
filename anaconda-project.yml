@@ -11,10 +11,7 @@ commands:
 
   build:win:
     description: until 2.3.0 comes out, use constructor@master for size_in_bytes fix
-    windows: 'pip install git+https://github.com/conda/constructor --ignore-installed
-      --no-deps && python -m scripts.build
-
-      '
+    windows: python -m scripts.build
     env_spec: _build_win
 
   test:

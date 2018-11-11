@@ -48,8 +48,6 @@ test:
   commands:
     - robot --version || [[ $? == 251 ]]  # [unix]
     - rebot --version || [[ $? == 251 ]]  # [unix]
-    - robot --version  # [win]
-    - rebot --version  # [win]
 
 about:
   home: http://robotframework.org

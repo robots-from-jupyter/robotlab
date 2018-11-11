@@ -12,7 +12,9 @@ ARTIFACTS = ROOT / "_artifacts"
 CACHE = ROOT / "_cache"
 
 CONSTRUCT_DIR = ROOT / "constructor"
+
 RECIPE_DIR = ROOT / "recipes"
+CONDA_CACHE = CACHE / "conda-bld"
 
 CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 CONSTRUCT_CACHE = CACHE / "constructor"

@@ -1,0 +1,5 @@
+@ECHO ON
+robot --version
+IF %ERRORLEVEL% NEQ 251 EXIT 1
+rebot --version
+IF %ERRORLEVEL% NEQ 251 EXIT 1
