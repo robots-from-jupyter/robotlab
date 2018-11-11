@@ -48,8 +48,8 @@ test:
   commands:
     - robot --version || [[ $? == 251 ]]  # [unix]
     - rebot --version || [[ $? == 251 ]]  # [unix]
-    - robot --version || IF %ERRORLEVEL% NEQ 251 EXIT 1  # [win]
-    - rebot --version || IF %ERRORLEVEL% NEQ 251 EXIT 1  # [win]
+    - robot --version  # [win]
+    - rebot --version  # [win]
 
 about:
   home: http://robotframework.org
