@@ -1,0 +1,39 @@
+parameters:
+  name: Windows
+
+steps:
+  - script: >
+      python -m scripts.build conda
+      lunr
+      robotframework
+      robotframework-lint
+      robotframework-seleniumlibrary
+      robotkernel
+      robotlab
+    displayName: Build Conda Packages
+
+  - script: python -m scripts.build constructor
+    displayName: Build Constructor
+
+  - script: python -m scripts.test
+    displayName: Test
+
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    inputs:
+      testResultsFiles: _artifacts/test_output/**/*.xunit.xml
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Robot Logs
+    inputs:
+      PathtoPublish: _artifacts/test_output
+      ArtifactName: ${{ parameters.name }} tests
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Installer
+    inputs:
+      PathtoPublish: _artifacts/constructor
+      ArtifactName: ${{ parameters.name }} installer
+    condition: succeeded()
