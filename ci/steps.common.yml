@@ -16,13 +16,13 @@ steps:
   - script: python -m scripts.build constructor
     displayName: Build Constructor
 
-  - script: >
-      cd _artifacts
-      && cd conda-bld
-      && cd {{ condaSubdir }}
-      && conda install -v chromedriver*
-      && chromedriver --version
-    displayName: Install ChromeDriver
+  - ${{ if eq(parameters.name, 'Windows') }}:
+      script: conda install -v _artifacts\conda-bld\win-64\chromedriver*
+      displayName: Install ChromeDriver
+
+  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+      script: conda install -v _artifacts/conda-bld/$CONDASUBDIR/chromedriver*
+      displayName: Install ChromeDriver
 
   - script: python -m scripts.test
     displayName: Test

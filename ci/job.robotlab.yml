@@ -22,3 +22,4 @@ jobs:
       - template: steps.common.yml
         parameters:
           name: ${{ parameters.name }}
+          condaSubdir: ${{ condaSubdir }}
