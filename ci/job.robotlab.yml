@@ -17,6 +17,8 @@ jobs:
           displayName: Install Browsers
 
       - template: steps.conda.yml
+        parameters:
+          name: ${{ parameters.name }}
 
       - template: steps.common.yml
         parameters:
