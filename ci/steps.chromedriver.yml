@@ -12,15 +12,15 @@ steps:
           cd _artifacts
           && cd conda-bld
           && cd win-64
-          && conda install -v chromedriver*
+          && conda install -fv chromedriver-2.44-0.tar.bz2
         displayName: Install ChromeDriver on Windows
 
   - ${{ if eq(parameters.name, 'MacOSX') }}:
-      - script: conda install -v _artifacts/conda-bld/osx-64/chromedriver*
+      - script: conda install -fv _artifacts/conda-bld/osx-64/chromedriver-*.tar.bz2
         displayName: Install ChromeDriver on OSX
 
   - ${{ if eq(parameters.name, 'Linux') }}:
-      - script: conda install -v _artifacts/conda-bld/linux-64/chromedriver*
+      - script: conda install -v _artifacts/conda-bld/linux-64/chromedriver-*.tar.bz2
         displayName: Install ChromeDriver on Linux
 
   - script: chromedriver --version

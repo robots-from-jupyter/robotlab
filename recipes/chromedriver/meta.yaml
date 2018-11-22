@@ -16,7 +16,7 @@ build:
   number: 0
   script:
     - mv {{ name }} $PREFIX/bin/  # [unix]
-    - move {{ name }}.exe %SCRIPTS%\  # [win]
+    - move {{ name }}.exe %LIBRARY_BIN%\  # [win]
 
 requirements:
   host:

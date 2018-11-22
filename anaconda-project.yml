@@ -6,8 +6,20 @@ commands:
     env_spec: _build
 
   chromedriver:
-    unix: conda install -v ${PROJECT_DIR}/_artifacts/conda-bld/linux-64/chromedriver*
+    unix: >
+      conda install -fv ${PROJECT_DIR}/_artifacts/conda-bld/linux-64/chromedriver-*.tar.bz2
+      && chromedriver --version
     env_spec: _build
+
+  chromedriver:win:
+    windows: >
+      @ECHO ON
+      && cd _artifacts
+      && cd conda-bld
+      && cd win-64
+      && set PKG=chromedriver-*
+      && %PKG%
+    env_spec: _build_win
 
   lint:
     unix: python -m scripts.lint
