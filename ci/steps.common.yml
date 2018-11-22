@@ -4,13 +4,8 @@ parameters:
 steps:
   - script: >
       python -m scripts.build conda
-      lunr
-      robotframework
-      robotframework-lint
-      robotframework-seleniumlibrary
-      robotkernel
-      robotlab
-    displayName: Build Conda Packages
+      chromedriver
+    displayName: Build ChromeDriver
 
   - ${{ if eq(parameters.name, 'Windows') }}:
       - script: conda install -v _artifacts\conda-bld\win-64\chromedriver*
@@ -26,6 +21,16 @@ steps:
 
   - script: chromedriver --version
     displayName: Verify ChromeDriver
+
+  - script: >
+      python -m scripts.build conda
+      lunr
+      robotframework
+      robotframework-lint
+      robotframework-seleniumlibrary
+      robotkernel
+      robotlab
+    displayName: Build Conda Packages
 
   - script: python -m scripts.build constructor
     displayName: Build Constructor
