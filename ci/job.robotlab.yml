@@ -14,11 +14,11 @@ jobs:
             brew tap caskroom/cask \
             && brew cask install google-chrome \
             && brew cask install firefox
-          displayName: Install Browsers
+          displayName: Install Browsers on MacOSX
 
       - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: choco install googlechrome -y
-          displayName: Install Browsers
+        - script: choco install googlechrome --yes --verbose --force
+          displayName: Install Browsers on Windows
 
       - template: steps.conda.yml
         parameters:
