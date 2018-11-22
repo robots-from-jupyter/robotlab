@@ -1,6 +1,5 @@
 parameters:
   name: Linux
-  condaSubdir: linux-64
 
 steps:
   - script: >
@@ -18,11 +17,15 @@ steps:
 
   - ${{ if eq(parameters.name, 'Windows') }}:
       script: conda install -v _artifacts\conda-bld\win-64\chromedriver*
-      displayName: Install ChromeDriver
+      displayName: Install ChromeDriver on Windows
 
-  - ${{ if not(eq(parameters.name, 'Windows')) }}:
-      script: conda install -v _artifacts/conda-bld/$CONDASUBDIR/chromedriver*
-      displayName: Install ChromeDriver
+  - ${{ if eq(parameters.name, 'MacOSX') }}:
+      script: conda install -v _artifacts/conda-bld/osx-64/chromedriver*
+      displayName: Install ChromeDriver on OSX
+
+  - ${{ if eq(parameters.name, 'Linux') }}:
+      script: conda install -v _artifacts/conda-bld/linux-64/chromedriver*
+      displayName: Install ChromeDriver on Linux
 
   - script: python -m scripts.test
     displayName: Test

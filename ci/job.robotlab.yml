@@ -1,7 +1,6 @@
 parameters:
   name: Linux
   vmImage: ubuntu-16.04
-  condaSubdir: linux-64
 
 jobs:
   - job: ${{ parameters.name }}
@@ -22,4 +21,3 @@ jobs:
       - template: steps.common.yml
         parameters:
           name: ${{ parameters.name }}
-          condaSubdir: ${{ condaSubdir }}
