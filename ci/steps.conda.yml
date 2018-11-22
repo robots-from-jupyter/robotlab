@@ -9,6 +9,5 @@ steps:
         constructor
         geckodriver
         python>=3.6,<3.7
-        python-chromedriver-binary
         robotframework
         robotframework-seleniumlibrary

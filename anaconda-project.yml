@@ -5,6 +5,10 @@ commands:
     unix: python -m scripts.build
     env_spec: _build
 
+  chromedriver:
+    unix: conda install -v ${PROJECT_DIR}/_artifacts/conda-bld/linux-64/chromedriver*
+    env_spec: _build
+
   lint:
     unix: python -m scripts.lint
     env_spec: _build
@@ -81,7 +85,6 @@ env_specs:
     - flake8
     - geckodriver
     - python >=3.6,<3.7
-    - python-chromedriver-binary
     - robotframework
     - robotframework-lint
     - robotframework-seleniumlibrary

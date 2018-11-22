@@ -1,5 +1,6 @@
 parameters:
-  name: Windows
+  name: Linux
+  condaSubdir: linux-64
 
 steps:
   - script: >
@@ -14,6 +15,14 @@ steps:
 
   - script: python -m scripts.build constructor
     displayName: Build Constructor
+
+  - script: >
+      cd _artifacts
+      && cd conda-bld
+      && cd {{ condaSubdir }}
+      && conda install -v chromedriver*
+      && chromedriver --version
+    displayName: Install ChromeDriver
 
   - script: python -m scripts.test
     displayName: Test

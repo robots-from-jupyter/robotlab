@@ -19,11 +19,13 @@ from . import (
 )
 
 
-def build_conda(packages=None):
+def build_conda(packages=None, force=False):
     """ Build some packages (mostly re-arching conda-forge `noarch: python`)
     """
 
-    if not packages:
+    if packages:
+        force = True
+    else:
         packages = ["."]
 
     for package in packages:
@@ -41,10 +43,9 @@ def build_conda(packages=None):
                 "https://repo.anaconda.com/pkgs/free",
                 "-c",
                 "https://conda.anaconda.org/conda-forge",
-                "--skip-existing",
                 "--python",
                 PY_MIN,
-            ],
+            ] + ([] if force else ["--skip-existing"]),
             cwd=str(RECIPE_DIR),
         )
         if rc:

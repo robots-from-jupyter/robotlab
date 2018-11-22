@@ -3,16 +3,19 @@ jobs:
   parameters:
     name: Linux
     vmImage: ubuntu-16.04
+    condaPlatform: linux-64
 
 - template: ci/job.robotlab.yml
   parameters:
     name: MacOSX
     vmImage: macos-10.13
+    condaPlatform: osx-64
 
 - template: ci/job.robotlab.yml
   parameters:
     name: Windows
     vmImage: vs2017-win2016
+    condaPlatform: win-64
 
 variables:
   MINICONDA_VERSION: 4.5.4

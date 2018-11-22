@@ -2,9 +2,6 @@ from . import run, TEST_DIR, TEST_OUT
 import sys
 import platform
 
-# XXX: This adds the bundled chromdriver to the path as a side-effect
-import chromedriver_binary  # noqa
-
 
 def test():
     return run(

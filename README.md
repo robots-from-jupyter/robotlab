@@ -66,13 +66,15 @@ compatible with the version `robotlab` was built with: as of writing, `0.35.x`.
 All of the dependencies are captured in [construct.yaml.in][]. In addition to
 everything mentioned above, you'll also find:
 
-In addition, to support the workshop, a number of libraries are included:
+In addition to required dependencies a number of extra libraries are included to
+showcase some of the features of using Robot Framework interactively.
 - `SeleniumLibrary` for controlling browsers
-  - `geckodriver` for interacting with Firefox
-  - `python-chromedriver-binary` for interacting with Chrome & Chromium
-  - > Note: it's pretty easy to get `webdriver` for Edge, but can't be redistributed
-- `opencv` for doing image-driven testing
-- `robotframework-lint` for normalizing your robot syntax
+  - `geckodriver` for interacting with Mozilla Firefox
+  - `chromedriver` for interacting with Chromium and Google Chrome
+  - > it's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but
+      can't be redistributed
+- `opencv` for image-driven testing
+- `robotframework-lint` for helping you write clean robot syntax
 
 
 [anaconda-project]: https://github.com/anaconda-platform/anaconda-project
@@ -84,3 +86,4 @@ In addition, to support the workshop, a number of libraries are included:
 [labextensions]: https://www.npmjs.com/search?q=keywords:jupyterlab-extension
 [Miniconda]: https://conda.io/miniconda.html
 [robotkernel]: https://github.com/datakurre/robotkernel
+[webdriver]: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads
