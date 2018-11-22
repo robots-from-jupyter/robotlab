@@ -1,0 +1,32 @@
+parameters:
+  name: Linux
+
+steps:
+  - script: >
+      python -m scripts.build conda
+      chromedriver
+    displayName: Build ChromeDriver
+
+  - ${{ if eq(parameters.name, 'Windows') }}:
+      - task: CondaEnvironment@1
+        inputs:
+          installOptions: -fv
+          packageSpecs: _artifacts\conda-bld\win-64\chromedriver*
+        displayName: Install ChromeDriver on Windows
+
+  - ${{ if eq(parameters.name, 'MacOSX') }}:
+      - task: CondaEnvironment@1
+        inputs:
+          installOptions: -fv
+          packageSpecs:  _artifacts/conda-bld/osx-64/chromedriver*
+        displayName: Install ChromeDriver on OSX
+
+  - ${{ if eq(parameters.name, 'Linux') }}:
+      - task: CondaEnvironment@1
+        inputs:
+          installOptions: -fv
+          packageSpecs:  _artifacts/conda-bld/linux-64/chromedriver*
+        displayName: Install ChromeDriver on Linux
+
+  - script: chromedriver --version
+    displayName: Verify ChromeDriver
