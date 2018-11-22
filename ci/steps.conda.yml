@@ -14,3 +14,6 @@ steps:
         python>=3.6,<3.7
         robotframework
         robotframework-seleniumlibrary
+  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+    - script: sudo chown -R 1001:999 /usr/envs/_robots_from_jupyter
+      displayName: Fix Conda env permissions
