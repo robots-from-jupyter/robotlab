@@ -8,7 +8,11 @@ steps:
     displayName: Build ChromeDriver
 
   - ${{ if eq(parameters.name, 'Windows') }}:
-      - script: "conda install -v _artifacts\\conda-bld\\win-64\\chromedriver*"
+      - script: >
+          cd _artifacts
+          && cd conda-bld
+          && cd win-64
+          && conda install -v chromedriver*
         displayName: Install ChromeDriver on Windows
 
   - ${{ if eq(parameters.name, 'MacOSX') }}:
