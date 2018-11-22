@@ -16,6 +16,10 @@ jobs:
             && brew cask install firefox
           displayName: Install Browsers
 
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        - script: choco install googlechrome -y
+          displayName: Install Browsers
+
       - template: steps.conda.yml
         parameters:
           name: ${{ parameters.name }}

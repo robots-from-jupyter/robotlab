@@ -13,7 +13,6 @@ steps:
           && cd conda-bld
           && cd win-64
           && conda install -fv chromedriver-2.44-0.tar.bz2
-          && echo %PATH%
           && chromedriver.exe --version
         displayName: Install ChromeDriver on Windows
 
