@@ -17,7 +17,8 @@ jobs:
           displayName: Install Browsers on MacOSX
 
       - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: choco install googlechrome --yes --install-arguments '"/l*v msi_install.log"' || more msi_install.log
+        - script: >
+            choco install googlechrome --yes --install-arguments '"/l*v c:\googlechrome.log"' || more c:\googlechrome.log
           displayName: Install Browsers on Windows
 
       - template: steps.conda.yml
