@@ -2,6 +2,7 @@ steps:
   - task: CondaEnvironment@1
     inputs:
       installOptions: -c defaults -c conda-forge
+      createCustomEnvironment: true
       packageSpecs: >
         conda>=4.5.11,<4.6
         conda-build>=3.15,<3.16
