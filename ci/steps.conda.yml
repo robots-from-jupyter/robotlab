@@ -1,8 +1,9 @@
 steps:
   - task: CondaEnvironment@1
     inputs:
-      installOptions: -c defaults -c conda-forge
+      createOptions: -c defaults -c conda-forge
       createCustomEnvironment: true
+      updateConda: false
       environmentName: _robots_from_jupyter
       packageSpecs: >
         conda>=4.5.11,<4.6
