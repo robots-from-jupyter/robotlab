@@ -1,19 +1,16 @@
-{% set name = "robotlab" %}
-{% set version = "0.7.0" %}
-
 {% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1" %}
 {% set lab_min = "0.35" %}
 {% set lab_max = "0.36" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: {% set name = "robotlab" %}{{ name }}
+  version: {% set version = "0.7.1" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/datakurre/robotkernel/archive/{{ version }}.tar.gz
-    sha256: e3aa943e83ad4b6b21228c96e2178457eb799e8a2f8e91b78462211c08ead085
+    sha256: 9911d9cd03f3deccf4eb88911d6d746a1a11e7c94a238615287e8489340c2060
     folder: robotkernel
 
 build:
@@ -21,6 +18,7 @@ build:
   entry_points:
     - robotlab = robotlab.labapp:main
     - robotlab-extension = robotlab.labextensionapp:main
+    - robotlab-examples = robotlab.examples:copy_robotkernel_examples
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
@@ -63,6 +61,7 @@ test:
   commands:
     - robotlab --version
     - robotlab-extension list
+    - robotlab-examples
 
 about:
   home: https://github.com/datakurre/robotkernel

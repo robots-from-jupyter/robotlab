@@ -23,12 +23,21 @@ def build_conda(packages=None, force=False):
     """ Build some packages (mostly re-arching conda-forge `noarch: python`)
     """
 
+    [
+        p.unlink()
+        for p in (
+            list(CONDA_OUT.rglob("*.json")) +
+            list(CONDA_OUT.rglob("*.json.bz2"))
+        )
+    ]
+
     if packages:
         force = True
     else:
         packages = ["."]
 
     for package in packages:
+
         rc = run(
             [
                 "conda-build",

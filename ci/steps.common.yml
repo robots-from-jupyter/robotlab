@@ -2,6 +2,9 @@ parameters:
   name: Linux
 
 steps:
+  - script: python -m scripts.integrity
+    displayName: Integrity
+
   - template: steps.chromedriver.yml
     parameters:
       name: ${{ parameters.name }}
