@@ -5,7 +5,7 @@ Library           Process
 Library           SeleniumLibrary
 
 *** Variables ***
-${INSTALLER VERSION}    0.7.0
+${INSTALLER VERSION}    0.7.1
 ${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}..${/}constructor
 ${INSTALL LOG}    ${OUTPUT DIR}${/}00_installer.log
 

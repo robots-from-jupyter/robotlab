@@ -1,0 +1,33 @@
+import re
+
+from . import ROOT, RECIPE_DIR, ROBOTLAB_DIR, SCRIPTS_DIR, TEST_DIR
+
+
+META_PATTERN = r""" set version = "([\d\.]+)" """
+
+VERSIONS = {
+    RECIPE_DIR / "robotkernel" / "meta.yaml": META_PATTERN,
+    RECIPE_DIR / "robotlab" / "meta.yaml": META_PATTERN,
+    ROBOTLAB_DIR / "setup.cfg": r"version = ([\d\.]+)",
+    ROBOTLAB_DIR
+    / "src"
+    / "robotlab"
+    / "_version.py": r"""__version__ = "([\d\.]+)""",
+    SCRIPTS_DIR / "__init__.py": r"""ROBOTLAB_VERSION", "([\d\.]+)""",
+    TEST_DIR
+    / "resources"
+    / "Install.robot": r"\$\{INSTALLER VERSION\}\s+([\d\.]+)",
+}
+
+
+def ensure_integrity():
+    versions = {}
+    for path, pattern in VERSIONS.items():
+        print(path.relative_to(ROOT))
+        versions[path] = re.findall(pattern, path.read_text())[0]
+
+    assert len(set(versions.values())) == 1, versions
+
+
+if __name__ == "__main__":
+    ensure_integrity()
