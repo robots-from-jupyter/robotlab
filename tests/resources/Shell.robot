@@ -3,6 +3,7 @@ Documentation     Interact with the RobotLab ne JupyterLab application shell
 Library           BuiltIn
 Library           SeleniumLibrary
 Library           OperatingSystem
+Resource          Skip.robot
 
 *** Variables ***
 ${CELL_CSS}       .jp-Notebook .jp-Cell:last-of-type .jp-InputArea-editor .CodeMirror
@@ -21,6 +22,8 @@ ${DOCK}           //div[@id='jp-main-dock-panel']
 Open RobotLab
     [Arguments]    ${browser}
     [Documentation]    Start RobotLab in a browser
+    Set Test Variable    ${BROWSER}    ${browser}
+    Maybe Skip
     Should Not Be Empty    ${LAB URL}    msg=Needs a configured RobotLab server
     Open Browser    ${LAB URL}    ${browser}
     Wait for Splash Screen
@@ -66,5 +69,6 @@ Execute JupyterLab Command
 
 Reset Application State and Close
     [Documentation]    Try to clean up after doing some things to the JupyterLab state
+    Maybe Skip
     Execute JupyterLab Command    Reset Application State
     Close Browser
