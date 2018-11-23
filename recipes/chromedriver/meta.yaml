@@ -1,0 +1,36 @@
+package:
+  name: {% set name = "chromedriver" %}{{ name }}
+  version: {% set version = "2.44" %}{{ version }}
+
+source:
+  url: https://{{ name }}.storage.googleapis.com/{{ version }}/{{ name }}_linux64.zip  # [linux]
+  sha256: 687d2e15c42908e2911344c08a949461b3f20a83017a7a682ef4d002e05b5d46  # [linux]
+
+  url: https://{{ name }}.storage.googleapis.com/{{ version }}/{{ name }}_mac64.zip  # [osx]
+  sha256: 3fd49c2782a5f93cb48ff2dee021004d9a7fb393798e4c4807b391cedcd30ed9  # [osx]
+
+  url: https://{{ name }}.storage.googleapis.com/{{ version }}/{{ name }}_win32.zip  # [win]
+  sha256: 5d2d2ddb2ed3730672484160c822b75b41c4e77f9cadb5111530699d561c548c  # [win]
+
+build:
+  number: 0
+  script:
+    - mv {{ name }} $PREFIX/bin/  # [unix]
+    - move {{ name }}.exe %SCRIPTS%\  # [win]
+
+requirements:
+  host:
+  run:
+test:
+  commands:
+    - chromedriver --version
+    - chromedriver --help
+
+about:
+  home: http://chromedriver.chromium.org
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: {{ environ['RECIPE_DIR'] }}/BSD-3-Clause.txt
+  summary: >
+    ChromeDriver is a standalone server which implements WebDriver's wire
+    protocol for Chromium.

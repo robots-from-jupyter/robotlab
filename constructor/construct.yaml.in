@@ -14,8 +14,7 @@ specs:
   - nodejs >={{ node_min }},<{{ node_max }}
   - opencv
   - python >={{ py_min }},<{{ py_max }}
-  - python-chromedriver-binary
-  - python-chromedriver-binary
+  - chromedriver
   - robotframework =={{ rf_version }}
   - robotframework-lint
   - robotframework-seleniumlibrary

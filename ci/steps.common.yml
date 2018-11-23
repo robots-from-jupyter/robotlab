@@ -1,7 +1,11 @@
 parameters:
-  name: Windows
+  name: Linux
 
 steps:
+  - template: steps.chromedriver.yml
+    parameters:
+      name: ${{ parameters.name }}
+
   - script: >
       python -m scripts.build conda
       lunr

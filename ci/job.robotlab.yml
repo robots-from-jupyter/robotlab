@@ -14,9 +14,11 @@ jobs:
             brew tap caskroom/cask \
             && brew cask install google-chrome \
             && brew cask install firefox
-          displayName: Install Browsers
+          displayName: Install Browsers on MacOSX
 
       - template: steps.conda.yml
+        parameters:
+          name: ${{ parameters.name }}
 
       - template: steps.common.yml
         parameters:
