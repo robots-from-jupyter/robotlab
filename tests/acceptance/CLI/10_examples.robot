@@ -7,5 +7,5 @@ Library           OperatingSystem
 *** Test Cases ***
 Can I install the examples?
     [Documentation]    Verify the robotlab-examples command works
-    Run Process    ${ACTIVATE} && robotlab-examples    shell=True  cwd=${OUTPUT DIR}
+    Run Process    ${ACTIVATE} && robotlab-examples    shell=True    cwd=${OUTPUT DIR}
     Directory Should Not Be Empty    ${OUTPUT DIR}${/}robotkernel-examples

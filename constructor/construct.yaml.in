@@ -8,7 +8,7 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 specs:
-  - python-chromedriver-binary
+  - python-chromedriver-binary =={{ cd_version }}
   - conda
   - geckodriver
   - jupyterlab

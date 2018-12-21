@@ -14,7 +14,7 @@ dependencies:
   - flake8
   - geckodriver
   - python >=3.6,<3.7
-  - python-chromedriver-binary
+  - python-chromedriver-binary >=2.45
   - robotframework
   - robotframework-lint
   - robotframework-seleniumlibrary
