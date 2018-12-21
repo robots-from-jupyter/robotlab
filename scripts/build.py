@@ -8,6 +8,7 @@ from . import (
     CONSTRUCT_IN,
     CONSTRUCT_OUT,
     CONSTRUCT,
+    CHROMEDRIVER_VERSION,
     NODE_MAX,
     NODE_MIN,
     PY_MAX,
@@ -77,6 +78,7 @@ def build_constructor():
         node_max=NODE_MAX,
         rf_version=RF_VERSION,
         version=VERSION,
+        cd_version=CHROMEDRIVER_VERSION,
     )
 
     CONSTRUCT.write_text(construct)
