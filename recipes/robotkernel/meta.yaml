@@ -1,10 +1,10 @@
 package:
   name: {% set name = "robotkernel" %}{{ name }}
-  version: {% set version = "0.7.1" %}{{ version }}
+  version: {% set version = "0.8.0" %}{{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 70cd71dbf7e28d054a9b95b9c916ee821a91da0da4fbddce1a823ca79c5371e3
+  sha256: 5ace4cd3ba6032c542e2bcca3fef0035f958733e82777f34299d4cc465776fdf
   patches:
     - setup.cfg.patch
 
@@ -33,7 +33,7 @@ requirements:
     - pillow
     - pygments
     - python
-    - robotframework >=3.1b1
+    - robotframework >=3.1
 
 test:
   imports:

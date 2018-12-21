@@ -2,6 +2,8 @@ from . import run, TEST_DIR, TEST_OUT
 import sys
 import platform
 
+import chromedriver_binary  # noqa
+
 
 def test():
     return run(

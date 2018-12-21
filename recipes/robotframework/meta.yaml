@@ -1,24 +1,30 @@
 {% set name = "robotframework" %}
-{% set version = "3.1b1" %}
+{% set version = "3.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.zip
-  sha256: 294f108e4f5df1d710c5ae4a0a0b76341391823a1947889f62ce28fa9bb9c7bd
-
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.zip
+    sha256: b28ba5c1f14402ff53a99ecaf74ff782a9ed5a68892eab2b76ecd98b9ecd2127
+    folder: dist
+  - url: https://github.com/robotframework/robotframework/archive/v{{ version }}.tar.gz
+    sha256: 468d4364293f35a42ec98561823c26063535b024055e207218bdf3f1970b94dd
+    folder: src
 
 build:
   number: 0
   script:
-    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+    - cd dist
+    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
   entry_points:
     - robot = robot.run:run_cli
     - rebot = robot.rebot:rebot_cli
 
 requirements:
+  build:
+    - patch
   host:
     - pip
     - python
@@ -26,6 +32,17 @@ requirements:
     - python
 
 test:
+  requires:
+    - docutils
+    - enum34  # [py<35]
+    - lxml
+    - pillow
+    - pygments
+    - pyyaml
+  source_files:
+    - src/utest
+    - src/atest
+    - src/README.rst
   imports:
     - robot
     - robot.api
@@ -46,13 +63,25 @@ test:
     - robot.variables
     - robot.writer
   commands:
-    - robot --version || [[ $? == 251 ]]  # [unix]
-    - rebot --version || [[ $? == 251 ]]  # [unix]
+    - robot --version
+    - rebot --version
 
 about:
   home: http://robotframework.org
   license: Apache-2.0
-  license_file: LICENSE.txt
-  summary: 'A generic test automation framework'
+  license_file: dist/LICENSE.txt
+  summary: Generic automation framework for acceptance testing and RPA
   doc_url: http://robotframework.org/robotframework/{{ version }}/RobotFrameworkUserGuide.html
   dev_url: https://github.com/robotframework/robotframework
+  description: >
+    Robot Framework is a generic open source automation framework for acceptance
+    testing, acceptance test driven development (ATDD), and robotic process
+    automation (RPA). It has simple plain text syntax and it can be extended
+    easily with libraries implemented using Python or Java.
+
+extra:
+  recipe-maintainers:
+    - windelbouwman
+    - abloemert
+    - alexvds
+    - bollwyvl
