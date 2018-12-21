@@ -10,7 +10,7 @@ source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/datakurre/robotkernel/archive/{{ version }}.tar.gz
-    sha256: 5ace4cd3ba6032c542e2bcca3fef0035f958733e82777f34299d4cc465776fdf
+    sha256: 7e6cabcd7d6ab0760244b5b70093d40e721b7ff9fcddbbdf24dc9ec0ccfb8823
     folder: robotkernel
 
 build:
