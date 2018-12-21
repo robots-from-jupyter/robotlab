@@ -63,8 +63,10 @@ test:
     - robot.variables
     - robot.writer
   commands:
-    - robot --version
-    - rebot --version
+    - robot --version || [[ $? == 251 ]]  # [unix]
+    - rebot --version || [[ $? == 251 ]]  # [unix]
+    - robot --version  # [win]
+    - rebot --version  # [win]
 
 about:
   home: http://robotframework.org
