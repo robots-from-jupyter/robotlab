@@ -20,7 +20,7 @@ commands:
 
   test:
     unix: python -m scripts.test
-    env_spec: _build
+    env_spec: _test
 
   test:win:
     windows: python -m scripts.test
@@ -56,6 +56,34 @@ env_specs:
     - win-64
     inherit_from:
     - _robots_from_jupyter
+
+  _test:
+    platforms:
+    - linux-64
+    - osx-64
+    inherit_from:
+    - _robots_from_jupyter
+    channels:
+    - ./_artifacts/conda-bld
+    - https://repo.anaconda.com/pkgs/main
+    - https://repo.anaconda.com/pkgs/free
+    - https://conda.anaconda.org/conda-forge
+    packages:
+    - robotframework-jupyterlibrary
+
+  _test_win:
+    platforms:
+    - win-64
+    inherit_from:
+    - _robots_from_jupyter
+    channels:
+    - ./_artifacts/conda-bld
+    - https://repo.anaconda.com/pkgs/main
+    - https://repo.anaconda.com/pkgs/free
+    - https://conda.anaconda.org/conda-forge
+    packages:
+    - robotframework-jupyterlibrary
+
 
   robotlab-dev:
     channels:

@@ -2,12 +2,12 @@
 Documentation     Install RobotLab
 Library           OperatingSystem
 Library           Process
-Library           SeleniumLibrary
+Library           JupyterLibrary
 
 *** Variables ***
 ${INSTALLER VERSION}    0.8.0
-${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}..${/}constructor
-${INSTALL LOG}    ${OUTPUT DIR}${/}00_installer.log
+${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}constructor
+${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
 
 *** Keywords ***
 Clean up the RobotLab installation
@@ -21,14 +21,12 @@ Clean up the RobotLab installation
 Run the RobotLab installer
     [Documentation]    Detect and tag the platform, then run the appropriate installer
     ${path} =    Evaluate    __import__("tempfile").mkdtemp("RobotLab")
-    ${platform} =    Evaluate    __import__("sys").platform
-    Set Tags    os:${platform}
-    Set Global Variable    ${PLATFORM}    ${platform}
+    Create Directory    ${OUTPUT DIR}${/}${OS}
     Set Global Variable    ${ROBOTLAB DIR}    ${path}
-    ${result} =    Run Keyword If    "${platform}" == "linux"    Run the RobotLab Linux installer
-    ...    ELSE IF    "${platform}" == "win32"    Run the RobotLab Windows Installer
-    ...    ELSE IF    "${platform}" == "darwin"    Run the RobotLab OSX Installer
-    ...    ELSE    Fatal Error    Can't install on platform ${platform}!
+    ${result} =    Run Keyword If    "${OS}" == "linux"    Run the RobotLab Linux installer
+    ...    ELSE IF    "${OS}" == "windows"    Run the RobotLab Windows Installer
+    ...    ELSE IF    "${OS}" == "darwin"    Run the RobotLab OSX Installer
+    ...    ELSE    Fatal Error    Can't install on platform ${OS}!
     Should Be Equal as Integers    ${result.rc}    0    msg=Couldn't complete installer, see ${INSTALL LOG}
     File Should Exist    ${ACTIVATE SCRIPT}    msg=Activation script ${ACTIVATE SCRIPT} was not created
 
@@ -38,6 +36,7 @@ Run the RobotLab Linux installer
     ...    stderr=STDOUT
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
     Set Global Variable    ${ACTIVATE}    set -eux && . "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
+    Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR}${/}bin:%{PATH}
     [Return]    ${result}
 
 Run the RobotLab OSX installer
@@ -46,6 +45,7 @@ Run the RobotLab OSX installer
     ...    stderr=STDOUT
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
     Set Global Variable    ${ACTIVATE}    set -eux && . "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
+    Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR}${/}bin:%{PATH}
     [Return]    ${result}
 
 Run the RobotLab Windows installer
@@ -55,4 +55,5 @@ Run the RobotLab Windows installer
     ${result} =    Run Process    ${installer} ${args}    stdout=${INSTALL LOG}    stderr=STDOUT    shell=True
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}Scripts${/}activate.bat
     Set Global Variable    ${ACTIVATE}    "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
+    Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR};${ROBOTLAB DIR}${/}Scripts;${ROBOTLAB DIR}${/}Library${/}bin;%{PATH}
     [Return]    ${result}

@@ -1,9 +1,12 @@
 import os
 import subprocess
 from pathlib import Path
+import platform
 
 from jinja2 import Template
 
+
+PLATFORM = platform.system().lower()
 
 SCRIPTS_DIR = Path(__file__).parent
 ROOT = SCRIPTS_DIR.parent
