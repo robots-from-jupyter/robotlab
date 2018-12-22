@@ -26,6 +26,10 @@ commands:
     windows: python -m scripts.test
     env_spec: _build_win
 
+  combine:
+    unix: python -m scripts.combine
+    env_spec: _build
+
   lab:setup:
     env_spec: robotlab-dev
     unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir
