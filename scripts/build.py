@@ -1,11 +1,12 @@
 import sys
 
+from jinja2 import Template
+
 from . import (
     CONDA_CACHE,
     CONDA_OUT,
     CONSTRUCT_CACHE,
     CONSTRUCT_DIR,
-    CONSTRUCT_IN,
     CONSTRUCT_OUT,
     CONSTRUCT,
     CHROMEDRIVER_VERSION,
@@ -18,6 +19,9 @@ from . import (
     VERSION,
     run,
 )
+
+
+CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 
 
 def build_conda(packages=None, force=False):

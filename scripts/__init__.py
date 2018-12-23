@@ -3,8 +3,6 @@ import subprocess
 from pathlib import Path
 import platform
 
-from jinja2 import Template
-
 
 PLATFORM = platform.system().lower()
 
@@ -19,7 +17,6 @@ CONSTRUCT_DIR = ROOT / "constructor"
 RECIPE_DIR = ROOT / "recipes"
 CONDA_CACHE = CACHE / "conda-bld"
 
-CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 CONSTRUCT_CACHE = CACHE / "constructor"
 CONSTRUCT = CONSTRUCT_DIR / "construct.yaml"
 
