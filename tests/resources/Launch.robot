@@ -16,4 +16,4 @@ Start New RobotLab Server
     ${base_url} =   Set Variable  /@rlab/
     ${token} =  Generate Random String   64
     @{args} =  Build Jupyter Server Arguments  port=${port}  base_url=${base_url}  token=${token}
-    ${proc} =  Start New Jupyter Server   robotlab  ${port}  ${base_url}  ${None}  ${token}  @{args[1:]}  env:PATH=${ROBOTLAB PATH ENV}
+    ${proc} =  Start New Jupyter Server   ${ROBOTLAB CMD}  ${port}  ${base_url}  ${None}  ${token}  @{args[1:]}  env:PATH=${ROBOTLAB PATH ENV}
