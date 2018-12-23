@@ -17,6 +17,7 @@ steps:
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.2.0
           robotframework>=3.1
+          six
   - ${{ if not(eq(parameters.name, 'Windows')) }}:
     - task: CondaEnvironment@1
       inputs:
@@ -35,3 +36,4 @@ steps:
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.2.0
           robotframework>=3.1
+          six
