@@ -13,6 +13,7 @@ ${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
 Clean up the RobotLab installation
     [Documentation]    Clean out the installed RobotLab
     Close All Browsers
+    Terminate All Jupyter Servers
     Remove Directory    ${ROBOTLAB DIR}    recursive=True
     Terminate All Processes
     Sleep    5s
@@ -46,6 +47,7 @@ Run the RobotLab OSX installer
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
     Set Global Variable    ${ACTIVATE}    set -eux && . "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
     Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR}${/}bin:%{PATH}
+    Log  ${ROBOTLAB PATH ENV}
     [Return]    ${result}
 
 Run the RobotLab Windows installer
