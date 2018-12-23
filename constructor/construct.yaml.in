@@ -10,6 +10,7 @@ channels:
 specs:
   - conda
   - geckodriver
+  - ipywidgets =={{ ipyw_version }}
   - jupyterlab
   - nodejs >={{ node_min }},<{{ node_max }}
   - opencv

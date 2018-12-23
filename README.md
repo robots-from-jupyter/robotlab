@@ -32,20 +32,20 @@ possible in the event that network problems arise.
 
 
 ## conda packaging
-Once it has matured, `robotkernel` and its dependencies will be available from
-[conda-forge][], the community-driven upstream of the Anaconda Distribution.
+Once it has matured, `robotkernel` will be available from [conda-forge][], the
+community-driven upstream of the Anaconda Distribution.
 However, in the name of efficiency, `conda-forge` builds `noarch: python`
 packages, which are not compatible with `constructor`'s multiplatform magic.
 
 So for these installers, we build (or rebuild) a number of dependencies, such
-as the [robotframework][] 3.1 beta, which brings a number of exciting features.
+as [robotframework][] 3.1 and SeleniumLibrary 3.2.0.
 
 > TODO: automated detection and re-arching of packages from conda-forge feedstocks
 
 ### robotlab
 While still pre-`1.0`, JupyterLab's build chain has some negative externalities
 for end users, namely an install- or run-time dependency on NodeJS and npmjs.org
-when using any labextensions other than the built in set (e.g. Notebook, Terminal,
+when using any labextensions other than the built-in set (e.g. Notebook, Terminal,
 Console, Editor, etc.). Because, for the purposes of the workshop, we want to
 get to the Good Stuff of running Robot notebooks and not spend a bunch of time
 debugging `nodejs` and `webpack`, we've added a few choice JupyterLab extensions:
@@ -68,11 +68,12 @@ everything mentioned above, you'll also find:
 
 In addition to required dependencies a number of extra libraries are included to
 showcase some of the features of using Robot Framework interactively.
-- `SeleniumLibrary` for controlling browsers
-  - `geckodriver` for interacting with Mozilla Firefox
-  - `python-chromedriver-binary` for interacting with Chromium and Google Chrome
-  - > it's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but
-      can't be redistributed
+- `JupyterLibrary` for testing Jupyter clients with robotframework
+  - `SeleniumLibrary` for controlling browsers
+    - `geckodriver` for interacting with Mozilla Firefox
+    - `python-chromedriver-binary` for interacting with Chromium and Google Chrome
+    - > it's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but
+        can't be redistributed
 - `opencv` for image-driven testing
 - `robotframework-lint` for helping you write clean robot syntax
 

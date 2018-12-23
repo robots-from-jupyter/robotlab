@@ -3,13 +3,14 @@ import sys
 from jinja2 import Template
 
 from . import (
+    CHROMEDRIVER_VERSION,
     CONDA_CACHE,
     CONDA_OUT,
     CONSTRUCT_CACHE,
     CONSTRUCT_DIR,
     CONSTRUCT_OUT,
     CONSTRUCT,
-    CHROMEDRIVER_VERSION,
+    IPYWIDGETS_VERSION,
     NODE_MAX,
     NODE_MIN,
     PY_MAX,
@@ -83,6 +84,7 @@ def build_constructor():
         rf_version=RF_VERSION,
         version=VERSION,
         cd_version=CHROMEDRIVER_VERSION,
+        ipyw_version=IPYWIDGETS_VERSION,
     )
 
     CONSTRUCT.write_text(construct)

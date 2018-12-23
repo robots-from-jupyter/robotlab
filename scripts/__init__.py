@@ -38,6 +38,7 @@ NODE_MAX = os.environ.get("NODE_MAX", "9")
 RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1")
 VERSION = os.environ.get("ROBOTLAB_VERSION", "0.8.0")
 CHROMEDRIVER_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "2.45")
+IPYWIDGETS_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "7.4.2")
 
 
 def run(args, **kwargs):
