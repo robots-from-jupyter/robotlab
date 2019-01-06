@@ -37,8 +37,8 @@ Run the RobotLab Linux installer
     ...    stderr=STDOUT
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
     Set Global Variable    ${ACTIVATE}    set -eux && . "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
-    Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR}${/}bin:%{PATH}
-    Set Global Variable    ${ROBOTLAB CMD}  ${ROBOTLAB DIR}${/}bin${/}robotlab
+    Set Global Variable    ${ROBOTLAB PATH ENV}    ${ROBOTLAB DIR}${/}bin:%{PATH}
+    Set Global Variable    ${ROBOTLAB CMD}    ${ROBOTLAB DIR}${/}bin${/}robotlab
     [Return]    ${result}
 
 Run the RobotLab OSX installer
@@ -47,8 +47,8 @@ Run the RobotLab OSX installer
     ...    stderr=STDOUT
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
     Set Global Variable    ${ACTIVATE}    set -eux && . "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
-    Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR}${/}bin${:}%{PATH}
-    Set Global Variable    ${ROBOTLAB CMD}  ${ROBOTLAB DIR}${/}bin${/}robotlab
+    Set Global Variable    ${ROBOTLAB PATH ENV}    ${ROBOTLAB DIR}${/}bin${:}%{PATH}
+    Set Global Variable    ${ROBOTLAB CMD}    ${ROBOTLAB DIR}${/}bin${/}robotlab
     [Return]    ${result}
 
 Run the RobotLab Windows installer
@@ -58,6 +58,6 @@ Run the RobotLab Windows installer
     ${result} =    Run Process    ${installer} ${args}    stdout=${INSTALL LOG}    stderr=STDOUT    shell=True
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}Scripts${/}activate.bat
     Set Global Variable    ${ACTIVATE}    "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
-    Set Global Variable    ${ROBOTLAB PATH ENV}  ${ROBOTLAB DIR}${:}${ROBOTLAB DIR}${/}Scripts${:}${ROBOTLAB DIR}${/}Library${/}bin${:}%{PATH}
-    Set Global Variable    ${ROBOTLAB CMD}  ${ROBOTLAB DIR}${/}Scripts${/}robotlab.exe
+    Set Global Variable    ${ROBOTLAB PATH ENV}    ${ROBOTLAB DIR}${:}${ROBOTLAB DIR}${/}Scripts${:}${ROBOTLAB DIR}${/}Library${/}bin${:}%{PATH}
+    Set Global Variable    ${ROBOTLAB CMD}    ${ROBOTLAB DIR}${/}Scripts${/}robotlab.exe
     [Return]    ${result}
