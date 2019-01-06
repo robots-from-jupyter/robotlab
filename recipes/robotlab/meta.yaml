@@ -1,16 +1,16 @@
 {% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1" %}
-{% set lab_min = "0.35" %}
+{% set lab_min = "0.35.4" %}
 {% set lab_max = "0.36" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "0.7.1" %}{{ version }}
+  version: {% set version = "0.9.0" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/datakurre/robotkernel/archive/{{ version }}.tar.gz
-    sha256: 9911d9cd03f3deccf4eb88911d6d746a1a11e7c94a238615287e8489340c2060
+    sha256: b43821ddc780a6434f83a0de9733a469f911348aa2ff3e32596bef6abdf76464
     folder: robotkernel
 
 build:

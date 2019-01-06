@@ -1,10 +1,7 @@
 *** Settings ***
 Documentation     Try out some browsers with RobotLab Notebooks
 Test Template     Can RobotLab make a Robot Notebook?
-Library           SeleniumLibrary
-Resource          ../../resources/Launch.robot
-Resource          ../../resources/Shell.robot
-Resource          ../../resources/Notebook.robot
+Library           JupyterLibrary
 
 *** Test Cases ***
 Chrome
@@ -19,12 +16,12 @@ Can RobotLab make a Robot Notebook?
     [Documentation]    Try a basic Robot Notebook
     Set Tags    browser:${browser}
     ${prefix} =    Set Variable    robot_${browser}_
-    Open RobotLab    ${browser}
-    Launch a new    Robot Framework    Notebook
+    Open JupyterLab    browser=${browser}
+    Launch a new JupyterLab Document    Robot Framework    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
-    Add and Run Cell    | *Test Case* |${\n}| Hello |${\n}| | Log | Hello World
+    Add and Run JupyterLab Code Cell    | *Test Case* |${\n}| Hello |${\n}| | Log | Hello World
     Capture Page Screenshot    ${prefix}_02_execute.png
-    Wait Until Kernel Is Idle
+    Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
     The Robot Popup Should Contain    ${prefix}    Log    1 passed, 0 failed
     The Robot Popup Should Contain    ${prefix}    Report    All tests passed

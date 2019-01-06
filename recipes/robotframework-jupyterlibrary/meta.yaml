@@ -1,0 +1,37 @@
+{% set name = "robotframework-jupyterlibrary" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 63bb7bd94bb21fbd6f88a640b605d51728bc48a1a9aebbe27ee033c218a5aa03
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+
+requirements:
+  build:
+    - pip
+    - python
+  run:
+    - pillow
+    - python
+    - robotframework >=3.1
+    - robotframework-seleniumlibrary >=3.3.0
+    - six
+
+test:
+  imports:
+    - JupyterLibrary
+
+about:
+  home: https://robotframework-jupyterlibrary.rtfd.io
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: A Robot Framework library for automating (testing of) Jupyter end-user applications and extensions
+  dev_url: https://github.com/bollwyvl/robotframework-jupyterlibrary

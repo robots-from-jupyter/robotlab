@@ -8,14 +8,16 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 specs:
-  - chromedriver
   - conda
   - geckodriver
+  - ipywidgets =={{ ipyw_version }}
   - jupyterlab
   - nodejs >={{ node_min }},<{{ node_max }}
   - opencv
   - python >={{ py_min }},<{{ py_max }}
+  - python-chromedriver-binary =={{ cd_version }}
   - robotframework =={{ rf_version }}
+  - robotframework-jupyterlibrary
   - robotframework-lint
   - robotframework-seleniumlibrary
   - robotkernel =={{ version }}

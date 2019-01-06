@@ -1,13 +1,16 @@
 import sys
 
+from jinja2 import Template
+
 from . import (
+    CHROMEDRIVER_VERSION,
     CONDA_CACHE,
     CONDA_OUT,
     CONSTRUCT_CACHE,
     CONSTRUCT_DIR,
-    CONSTRUCT_IN,
     CONSTRUCT_OUT,
     CONSTRUCT,
+    IPYWIDGETS_VERSION,
     NODE_MAX,
     NODE_MIN,
     PY_MAX,
@@ -17,6 +20,9 @@ from . import (
     VERSION,
     run,
 )
+
+
+CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 
 
 def build_conda(packages=None, force=False):
@@ -77,6 +83,8 @@ def build_constructor():
         node_max=NODE_MAX,
         rf_version=RF_VERSION,
         version=VERSION,
+        cd_version=CHROMEDRIVER_VERSION,
+        ipyw_version=IPYWIDGETS_VERSION,
     )
 
     CONSTRUCT.write_text(construct)
