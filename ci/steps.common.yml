@@ -10,6 +10,7 @@ steps:
       robotframework
       robotframework-lint
       robotframework-seleniumlibrary
+      robotframework-seleniumscreenshots
       robotframework-jupyterlibrary
       robotkernel
       robotlab

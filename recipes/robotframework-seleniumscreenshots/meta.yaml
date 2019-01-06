@@ -1,0 +1,35 @@
+{% set name = "robotframework-seleniumscreenshots" %}
+{% set version = "0.9.3" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 2312d1fa883022f5f0c90d21c785583d8fdd21b7ebf8f60bebd48006471448d2
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+
+requirements:
+  build:
+    - pip
+    - python
+  run:
+    - python
+    - robotframework >=3.0.2
+    - robotframework-SeleniumLibrary>=3.2.0
+
+test:
+  imports:
+    - SeleniumScreenshots
+
+about:
+  home: https://github.com/datakurre/robotframework-seleniumscreenshots
+  license: Apache-2.0
+  license_family: Apache
+  license_file: {{ environ["RECIPE_DIR"] }}/gpl-2.0.txt
+  summary: Robot Framework keyword library for capturing annotated screenshots with SeleniumLibrary
+  doc_url: https://datakurre.github.io/robotframework-seleniumscreenshots

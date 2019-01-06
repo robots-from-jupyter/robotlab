@@ -1,4 +1,4 @@
-{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1" %}
+{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@1.1.0" %}
 {% set lab_min = "0.35.4" %}
 {% set lab_max = "0.36" %}
 
@@ -14,7 +14,7 @@ source:
     folder: robotkernel
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - robotlab = robotlab.labapp:main
     - robotlab-extension = robotlab.labextensionapp:main
@@ -23,14 +23,6 @@ build:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
     - {{ PYTHON }} -m robotlab.labextensionapp install {{ extensions }} --no-build
-    - {{ PYTHON }} -m robotlab.labextensionapp list
-    - cd {{ SRC_DIR }}
-    - cd robotkernel
-    - cd src
-    - cd jupyterlab_robotmode
-    - jlpm pack .
-    - mv *.tgz {{ PREFIX }}/share/jupyter/robotlab/extensions/  # [unix]
-    - move *.tgz {{ PREFIX }}\\share\\jupyter\\robotlab\\extensions\\  # [win]
     - {{ PYTHON }} -m robotlab.labextensionapp list
     - {{ PYTHON }} -m robotlab.labapp build
     - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
@@ -64,7 +56,7 @@ test:
     - robotlab-examples
 
 about:
-  home: https://github.com/datakurre/robotkernel
+  home: https://github.com/bollwyvl/robotlab
   license: BSD-3-Clause
   license_family: BSD
   license_file: robotlab/LICENSE
