@@ -1,12 +1,10 @@
 package:
   name: {% set name = "robotkernel" %}{{ name }}
-  version: {% set version = "0.8.0" %}{{ version }}
+  version: {% set version = "0.9.0" %}{{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 5ace4cd3ba6032c542e2bcca3fef0035f958733e82777f34299d4cc465776fdf
-  patches:
-    - setup.cfg.patch
 
 build:
   number: 0
