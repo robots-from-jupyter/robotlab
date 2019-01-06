@@ -1,5 +1,5 @@
 {% set name = "robotframework-jupyterlibrary" %}
-{% set version = "0.1.0" %}
+{% set version = "0.2.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e36bc75b538d4ccb1fd9a1227e242cf4f49d30df863df4b7e9afc3efaf3e9d76
+  sha256: 63bb7bd94bb21fbd6f88a640b605d51728bc48a1a9aebbe27ee033c218a5aa03
 
 build:
   number: 0
@@ -21,7 +21,7 @@ requirements:
     - pillow
     - python
     - robotframework >=3.1
-    - robotframework-seleniumlibrary >=3.2.0
+    - robotframework-seleniumlibrary >=3.3.0
     - six
 
 test:
