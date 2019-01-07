@@ -20,6 +20,7 @@ specs:
   - robotframework-jupyterlibrary
   - robotframework-lint
   - robotframework-seleniumlibrary
+  - robotframework-seleniumscreenshots
   - robotkernel =={{ version }}
   - robotlab =={{ version }}
 

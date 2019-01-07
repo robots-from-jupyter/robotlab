@@ -1,4 +1,7 @@
-# RobotLab: Building the _Robots from Jupyter_ Workshop Installer
+# RobotLab
+
+> Building the _Robots from Jupyter_ Workshop Installer
+
 
 ## Build It
 Get [Miniconda][]. Install [anaconda-project][].
