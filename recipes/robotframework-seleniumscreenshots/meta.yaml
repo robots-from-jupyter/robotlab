@@ -1,5 +1,5 @@
 {% set name = "robotframework-seleniumscreenshots" %}
-{% set version = "0.9.3" %}
+{% set version = "0.9.4" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2312d1fa883022f5f0c90d21c785583d8fdd21b7ebf8f60bebd48006471448d2
+  sha256: 1d71d5fdea0d6e7c729517ba06607217a8c371f05a953693014455dcbaf8d754
 
 build:
   number: 0
