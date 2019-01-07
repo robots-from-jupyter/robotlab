@@ -56,7 +56,7 @@ test:
     - robotlab-examples
 
 about:
-  home: https://github.com/bollwyvl/robotlab
+  home: https://github.com/robots-from-jupyter/robotlab
   license: BSD-3-Clause
   license_family: BSD
   license_file: robotlab/LICENSE

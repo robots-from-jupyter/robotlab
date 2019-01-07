@@ -34,4 +34,4 @@ about:
   license_family: BSD
   license_file: LICENSE
   summary: A Robot Framework library for automating (testing of) Jupyter end-user applications and extensions
-  dev_url: https://github.com/bollwyvl/robotframework-jupyterlibrary
+  dev_url: https://github.com/robots-from-jupyter/robotframework-jupyterlibrary
