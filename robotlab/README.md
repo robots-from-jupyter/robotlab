@@ -7,4 +7,4 @@ robotkernel.
 - Borrows heavily from [jupyterlab_delux][].
 
 [jupyterlab_delux]: https://github.com/jonmmease/jupyterlab_delux
-[robotkernel]: https://github.com/datakurre/robotkernel
+[robotkernel]: https://github.com/robots-from-jupyter/robotkernel

@@ -4,13 +4,13 @@
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "0.9.0" %}{{ version }}
+  version: {% set version = "0.10.0" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
-  - url: https://github.com/datakurre/robotkernel/archive/{{ version }}.tar.gz
-    sha256: b43821ddc780a6434f83a0de9733a469f911348aa2ff3e32596bef6abdf76464
+  - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ version }}.tar.gz
+    sha256: 0b62946fcc291ccc0c37ccd27dbc361ea0b09d0abe8c3c46eea358c1487ea5ed
     folder: robotkernel
 
 build:

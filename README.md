@@ -89,5 +89,5 @@ showcase some of the features of using Robot Framework interactively.
 [construct.yaml.in]: ./constructor/construct.yaml.in
 [labextensions]: https://www.npmjs.com/search?q=keywords:jupyterlab-extension
 [Miniconda]: https://conda.io/miniconda.html
-[robotkernel]: https://github.com/datakurre/robotkernel
+[robotkernel]: https://github.com/robots-from-jupyter/robotkernel
 [webdriver]: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads

@@ -14,7 +14,6 @@ commands:
     env_spec: _build
 
   build:win:
-    description: until 2.3.0 comes out, use constructor@master for size_in_bytes fix
     windows: python -m scripts.build
     env_spec: _build_win
 
@@ -32,10 +31,8 @@ commands:
 
   lab:setup:
     env_spec: robotlab-dev
-    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir
-      -vv
-    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps
-      --no-cache-dir -vv
+    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
+    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
 
   robotlab:build:
     env_spec: robotlab-dev
