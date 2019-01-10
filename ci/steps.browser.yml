@@ -4,7 +4,8 @@ parameters:
 steps:
   - ${{ if eq(parameters.name, 'MacOSX') }}:
     - script: |
-        brew doctor \
+        brew doctor || echo "proceeding anyway " \
+        && brew prune \
         && brew tap caskroom/cask \
         && brew cask install google-chrome \
         && brew cask install firefox
