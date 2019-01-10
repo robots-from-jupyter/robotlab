@@ -7,6 +7,7 @@ import platform
 PLATFORM = platform.system().lower()
 
 SCRIPTS_DIR = Path(__file__).parent
+SCRIPT_EXT = "bat" if platform == "windows" else "sh"
 ROOT = SCRIPTS_DIR.parent
 
 ARTIFACTS = ROOT / "_artifacts"
