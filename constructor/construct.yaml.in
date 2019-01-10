@@ -1,5 +1,6 @@
 name: RobotLab
 version: {{ version }}
+company: Robots from Jupyter
 
 channels:
   - {{ build_channel }}
@@ -14,6 +15,7 @@ specs:
   - jupyterlab
   - nodejs >={{ node_min }},<{{ node_max }}
   - opencv
+  - pyshortcuts
   - python >={{ py_min }},<{{ py_max }}
   - python-chromedriver-binary =={{ cd_version }}
   - robotframework =={{ rf_version }}
@@ -25,3 +27,5 @@ specs:
   - robotlab =={{ version }}
 
 install_in_dependency_order: True
+
+post_install: post_install.{{ script_ext }}
