@@ -52,6 +52,13 @@ requirements:
     - robotkernel >={{ version }}
 
 test:
+  imports:
+    - robotlab
+    - robotlab.examples
+    - robotlab.icons
+    - robotlab.labextensionapp
+    - robotlab.scripts
+    - robotlab.shortcuts
   commands:
     - robotlab --version
     - robotlab-extension list
