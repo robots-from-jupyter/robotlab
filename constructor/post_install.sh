@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python -m robotlab.icons
+python -m robotlab.shortcuts

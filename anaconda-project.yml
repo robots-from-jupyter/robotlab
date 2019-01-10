@@ -97,6 +97,7 @@ env_specs:
     - nodejs >=8,<9
     - robotkernel
     - python >=3.6,<3.7
+    - pyshortcuts
 
   robotlab-test:
     inherit_from:

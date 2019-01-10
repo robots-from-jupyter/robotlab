@@ -1,1 +1,1 @@
-python -m robotlab.icons
+python -m robotlab.shortcuts

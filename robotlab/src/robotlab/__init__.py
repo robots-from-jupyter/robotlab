@@ -15,9 +15,7 @@ SCRIPT_EXT = "bat" if WIN else "sh"
 ICON_EXT = "icns" if OSX else "ico"
 HERE = Path(__file__).parent
 SCRIPTS = ["shell", "lab"]
-BIN_DIR = str(
-    Path(sys.prefix, *(["Scripts"] if WIN else ["bin"]))
-)
+BIN_DIR = Path(sys.prefix, *(["Scripts"] if WIN else ["bin"]))
 
 
 def patch_app_dir(app_klass):

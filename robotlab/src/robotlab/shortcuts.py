@@ -1,4 +1,6 @@
 import pyshortcuts
+from pyshortcuts.shortcut import Shortcut
+
 from . import HERE, SCRIPTS, SCRIPT_EXT, ICON_EXT, BIN_DIR
 
 
