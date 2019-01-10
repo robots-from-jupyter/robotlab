@@ -43,11 +43,11 @@ requirements:
     - nodejs >=8,<9
     - pip
     - python
-    - pyshortcuts
   run:
     - ipywidgets
     - jupyterlab >={{ lab_min }},<{{ lab_max }}
     - nodejs >=8,<9
+    - pyshortcuts
     - python
     - robotkernel >={{ version }}
 
