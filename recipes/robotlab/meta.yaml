@@ -35,6 +35,13 @@ build:
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
     - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
     - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
+    - cd ..
+    - cd docs
+    - cd tutorial
+    - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
+    - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
+    - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
+    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
 
 requirements:
   host:
@@ -54,6 +61,7 @@ test:
     - robotlab --version
     - robotlab-extension list
     - robotlab-examples
+    - robotlab-tutorial
 
 about:
   home: https://github.com/robots-from-jupyter/robotlab
