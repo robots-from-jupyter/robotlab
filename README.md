@@ -79,6 +79,7 @@ showcase some of the features of using Robot Framework interactively.
         can't be redistributed
 - `opencv` for image-driven testing
 - `robotframework-lint` for helping you write clean robot syntax
+- `RESTInstance` for testing REST APIs, including swagger
 
 
 [anaconda-project]: https://github.com/anaconda-platform/anaconda-project
