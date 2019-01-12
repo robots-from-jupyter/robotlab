@@ -1,20 +1,20 @@
-{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@1.1.0" %}
+{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@1.1.1" %}
 {% set lab_min = "0.35.4" %}
 {% set lab_max = "0.36" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "0.10.0" %}{{ version }}
+  version: {% set version = "0.10.2" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ version }}.tar.gz
-    sha256: 0b62946fcc291ccc0c37ccd27dbc361ea0b09d0abe8c3c46eea358c1487ea5ed
+    sha256: e30b75e043f8fcb8a2072d6b1a506a1de7d69f7f8136886f222ba56e618d0da0
     folder: robotkernel
 
 build:
-  number: 2
+  number: 0
   entry_points:
     - robotlab = robotlab.labapp:main
     - robotlab-extension = robotlab.labextensionapp:main
@@ -36,6 +36,13 @@ build:
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
     - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
     - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
+    - cd ..
+    - cd docs
+    - cd tutorial
+    - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
+    - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
+    - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
+    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
 
 requirements:
   host:
@@ -63,6 +70,7 @@ test:
     - robotlab --version
     - robotlab-extension list
     - robotlab-examples
+    - robotlab-tutorial
 
 about:
   home: https://github.com/robots-from-jupyter/robotlab
