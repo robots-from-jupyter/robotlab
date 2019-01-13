@@ -47,7 +47,7 @@ Run the RobotLab Linux installer
 Run the RobotLab OSX installer
     [Documentation]    Install RobotLab on OSX
     ${result} =    Run Process    bash    ${INSTALLER DIR}${/}RobotLab-${INSTALLER VERSION}-MacOSX-x86_64.sh    -fbp    ${ROBOTLAB DIR}    stdout=${INSTALL LOG}
-    ...    stderr=STDOUT   ${FAKE HOME}
+    ...    stderr=STDOUT   env:HOME=${FAKE HOME}
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}bin${/}activate
     Set Global Variable    ${ACTIVATE}    set -eux && . "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
     Set Global Variable    ${ROBOTLAB PATH ENV}    ${ROBOTLAB DIR}${/}bin${:}%{PATH}
