@@ -1,1 +1,1 @@
-python -m robotlab.shortcuts
+${PREFIX}/bin/python -m robotlab.shortcuts
