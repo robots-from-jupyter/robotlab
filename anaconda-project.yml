@@ -23,7 +23,7 @@ commands:
 
   test:win:
     windows: python -m scripts.test
-    env_spec: _build_win
+    env_spec: _test_win
 
   combine:
     unix: python -m scripts.combine
