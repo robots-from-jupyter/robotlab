@@ -29,19 +29,41 @@ commands:
     unix: python -m scripts.combine
     env_spec: _build
 
-  lab:setup:
+  robotlab:setup:
     env_spec: robotlab-dev
     unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
     windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
 
+  robotlab:setup:win:
+    env_spec: robotlab-dev-win
+    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
+
+  robotlab:shortcuts:
+    env_spec: robotlab-dev
+    unix: robotlab-shortcuts
+
+  robotlab:launch:
+    env_spec: robotlab-dev
+    unix: python -m robotlab.launch
+
+  robotlab:launch:win:
+    env_spec: robotlab-dev-win
+    windows: python -m robotlab.launch
+
   robotlab:build:
     env_spec: robotlab-dev
     unix: robotlab build
+
+  robotlab:build:win:
+    env_spec: robotlab-dev-win
     windows: robotlab build
 
   robotlab:
     env_spec: robotlab-dev
     unix: robotlab
+
+  robotlab:win:
+    env_spec: robotlab-dev-win
     windows: robotlab
 
 env_specs:
@@ -95,9 +117,16 @@ env_specs:
     packages:
     - jupyterlab >=0.35,<0.36
     - nodejs >=8,<9
-    - robotkernel
-    - python >=3.6,<3.7
     - pyshortcuts
+    - python >=3.6,<3.7
+    - restinstance
+    - robotframework-seleniumscreenshots
+    - robotkernel
+
+  robotlab-dev-win:
+    inherit_from:
+    - robotlab-dev
+
 
   robotlab-test:
     inherit_from:

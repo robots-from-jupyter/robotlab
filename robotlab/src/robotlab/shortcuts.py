@@ -1,18 +1,18 @@
 import pyshortcuts
-from pyshortcuts.shortcut import Shortcut
 
-from . import HERE, SCRIPTS, SCRIPT_EXT, ICON_EXT, BIN_DIR
+from . import HERE, ICON_EXT
 
 
 def make_shortcuts():
-    for script in SCRIPTS:
-        pyshortcuts.make_shortcut(
-            # scripts created during build process
-            script=str(BIN_DIR / f"launch_robotlab_{script}.{SCRIPT_EXT}"),
-            name=script.title(),
-            folder="RobotLab",
-            icon=str(HERE / "icons" / f"{script}.{ICON_EXT}")
-        )
+    script = str(HERE / "launch.py")
+    print("Making shortcut to", script)
+    pyshortcuts.make_shortcut(
+        script=script,
+        name="RobotLab",
+        terminal=True,
+        description="Launch RobotLab in your $HOME",
+        icon=str(HERE / "icons" / f"lab.{ICON_EXT}")
+    )
 
 
 if __name__ == "__main__":
