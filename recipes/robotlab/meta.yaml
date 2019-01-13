@@ -22,7 +22,6 @@ build:
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
-    - {{ PYTHON }} -m robotlab.scripts
     - {{ PYTHON }} -m robotlab.labextensionapp install {{ extensions }} --no-build
     - {{ PYTHON }} -m robotlab.labextensionapp list
     - {{ PYTHON }} -m robotlab.labapp build
@@ -61,16 +60,18 @@ requirements:
 test:
   imports:
     - robotlab
+    - robotlab.launch
     - robotlab.examples
-    - robotlab.icons
     - robotlab.labextensionapp
-    - robotlab.scripts
     - robotlab.shortcuts
+    - robotlab.tutorial
   commands:
     - robotlab --version
     - robotlab-extension list
     - robotlab-examples
     - robotlab-tutorial
+    - mkdir Desktop  # [unix]
+    - HOME=$(pwd) robotlab-shortcuts  # [unix]
 
 about:
   home: https://github.com/robots-from-jupyter/robotlab
