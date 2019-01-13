@@ -8,6 +8,7 @@ steps:
   - script: >
       python -m scripts.build conda
       pyshortcuts
+      chromedriver
       jsonpointer
       rfc3987
       jsonpath-ng

@@ -76,7 +76,7 @@ showcase some of the features of using Robot Framework interactively.
 - `JupyterLibrary` for testing Jupyter clients with robotframework
   - `SeleniumLibrary` for controlling browsers
     - `geckodriver` for interacting with Mozilla Firefox
-    - `python-chromedriver-binary` for interacting with Chromium and Google Chrome
+    - `chromedriver` for interacting with Chromium and Google Chrome
     - > it's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but
         can't be redistributed
 - `opencv` for image-driven testing

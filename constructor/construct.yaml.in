@@ -17,7 +17,7 @@ specs:
   - opencv
   - pyshortcuts
   - python >={{ py_min }},<{{ py_max }}
-  - python-chromedriver-binary =={{ cd_version }}
+  - chromedriver =={{ cd_version }}
   - restinstance
   - robotframework =={{ rf_version }}
   - robotframework-jupyterlibrary
