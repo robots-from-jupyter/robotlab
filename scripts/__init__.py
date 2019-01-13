@@ -41,12 +41,6 @@ VERSION = os.environ.get("ROBOTLAB_VERSION", "0.10.2")
 CHROMEDRIVER_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "2.45")
 IPYWIDGETS_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "7.4.2")
 
-POST_INSTALL = dict(
-    linux="post_install.linux.sh",
-    darwin="post_install.darwin.sh",
-    windows="post_install.windows.bat",
-)
-
 
 def run(args, **kwargs):
     """ Probably unneccessary "convenience" wrapper
