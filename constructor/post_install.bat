@@ -1,1 +1,1 @@
-${PREFIX}/bin/python -m robotlab.shortcuts
+${PREFIX}\python.exe -m robotlab.shortcuts
