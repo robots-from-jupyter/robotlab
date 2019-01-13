@@ -8,7 +8,6 @@ def make_shortcuts():
     pyshortcuts.make_shortcut(
         script=script,
         name="RobotLab",
-        folder="RobotLab",
         terminal=True,
         description="Launch RobotLab in your $HOME",
         icon=str(HERE / "icons" / f"lab.{ICON_EXT}")
