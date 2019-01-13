@@ -53,15 +53,25 @@ requirements:
     - ipywidgets
     - jupyterlab >={{ lab_min }},<{{ lab_max }}
     - nodejs >=8,<9
+    - pyshortcuts
     - python
     - robotkernel >={{ version }}
 
 test:
+  imports:
+    - robotlab
+    - robotlab.launch
+    - robotlab.examples
+    - robotlab.labextensionapp
+    - robotlab.shortcuts
+    - robotlab.tutorial
   commands:
     - robotlab --version
     - robotlab-extension list
     - robotlab-examples
     - robotlab-tutorial
+    - mkdir Desktop  # [unix]
+    - HOME=$(pwd) robotlab-shortcuts  # [unix]
 
 about:
   home: https://github.com/robots-from-jupyter/robotlab

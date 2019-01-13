@@ -13,10 +13,12 @@ from . import (
     IPYWIDGETS_VERSION,
     NODE_MAX,
     NODE_MIN,
+    PLATFORM,
     PY_MAX,
     PY_MIN,
     RECIPE_DIR,
     RF_VERSION,
+    SCRIPT_EXT,
     VERSION,
     run,
 )
@@ -85,6 +87,7 @@ def build_constructor():
         version=VERSION,
         cd_version=CHROMEDRIVER_VERSION,
         ipyw_version=IPYWIDGETS_VERSION,
+        script_ext=SCRIPT_EXT,
     )
 
     CONSTRUCT.write_text(construct)

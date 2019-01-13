@@ -8,3 +8,4 @@ build/
 constructor/construct.yaml
 dist/
 envs/
+**/icons/*.png

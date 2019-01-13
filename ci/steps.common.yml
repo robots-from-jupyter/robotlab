@@ -7,6 +7,7 @@ steps:
 
   - script: >
       python -m scripts.build conda
+      pyshortcuts
       jsonpointer
       rfc3987
       jsonpath-ng
@@ -30,6 +31,10 @@ steps:
 
   - script: python -m scripts.test
     displayName: Test
+
+  - ${{ if eq(parameters.name, 'MacOSX') }}:
+    - script: chmod -R 777 _artifacts
+      displayName: Fix artifact permissions
 
   - task: PublishTestResults@2
     displayName: Publish Test Results
