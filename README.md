@@ -1,5 +1,7 @@
 # RobotLab
 
+[![Build Status](https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_apis/build/status/robots-from-jupyter.robotlab?branchName=master)](https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_build/latest?definitionId=3?branchName=master)
+
 > Building the _Robots from Jupyter_ Workshop Installer
 
 
