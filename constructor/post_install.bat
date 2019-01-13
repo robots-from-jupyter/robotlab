@@ -1,1 +1,2 @@
-${PREFIX}\python.exe -m robotlab.shortcuts
+"%PREFIX%\Scripts\activate.bat" "%PREFIX%"
+robotlab-shortcuts
