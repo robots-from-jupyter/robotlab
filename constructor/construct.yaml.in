@@ -24,8 +24,10 @@ specs:
   - robotframework-lint
   - robotframework-seleniumlibrary
   - robotframework-seleniumscreenshots
+  - robotframeworklexer
   - robotkernel =={{ version }}
   - robotlab =={{ version }}
+  {% if platform == "darwin" %}- python.app{% endif %}
 
 install_in_dependency_order: True
 

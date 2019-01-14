@@ -88,6 +88,7 @@ def build_constructor():
         cd_version=CHROMEDRIVER_VERSION,
         ipyw_version=IPYWIDGETS_VERSION,
         script_ext=SCRIPT_EXT,
+        platform=PLATFORM,
     )
 
     CONSTRUCT.write_text(construct)
