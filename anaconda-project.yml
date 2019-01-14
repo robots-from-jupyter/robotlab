@@ -44,7 +44,7 @@ commands:
 
   robotlab:launch:
     env_spec: robotlab-dev
-    unix: python -m robotlab.launch
+    unix: python ./robotlab/src/robotlab/launch.py
 
   robotlab:launch:win:
     env_spec: robotlab-dev-win

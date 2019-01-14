@@ -26,6 +26,7 @@ specs:
   - robotframework-seleniumscreenshots
   - robotkernel =={{ version }}
   - robotlab =={{ version }}
+  {% if platform == "darwin" %}- python.app{% endif %}
 
 install_in_dependency_order: True
 
