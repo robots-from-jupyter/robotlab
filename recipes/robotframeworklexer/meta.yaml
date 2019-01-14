@@ -6,12 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ddd3ea50b54b47aee86a83c400534a61e2588dec875a3c10f04822280e834b8f
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: ddd3ea50b54b47aee86a83c400534a61e2588dec875a3c10f04822280e834b8f
+    folder: dist
+  - url: https://github.com/robotframework/pygmentslexer/archive/v{{ version }}.tar.gz
+    sha256: 1ee4542b5d37e2de882fd9195a2548303ce395e327ce1d79de3b6df9ef8094b0
+    folder: src
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+  script:
+    - cd dist
+    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
   host:
@@ -22,14 +28,18 @@ requirements:
     - pygments
 
 test:
+  source_files:
+    - src/test
   imports:
     - robotframeworklexer
+  commands:
+    - cd src && cd test && python test_robotframeworklexer.py
 
 about:
   home: https://github.com/robotframework/pygmentslexer
   license: Apache-2.0
   license_family: Apache
-  license_file: LICENSE.txt
+  license_file: dist/LICENSE.txt
   summary: >
     This project implements a Pygments lexer for Robot Framework test data in
     plain text format.
