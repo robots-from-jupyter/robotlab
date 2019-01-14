@@ -11,7 +11,7 @@ import signal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from . import WIN, BIN_DIR, SCRIPT_EXT
+from robotlab import WIN, BIN_DIR, SCRIPT_EXT
 
 
 ACTIVATE = [
