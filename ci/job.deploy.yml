@@ -1,0 +1,40 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+  githubConnection: robots-from-jupyter
+  repositoryName: robots-from-jupyter/robotlab
+  artifact: RobotLab
+
+jobs:
+  - job: Deploy
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+    dependsOn:
+      - Linux
+      - MacOSX
+      - Windows
+    steps:
+      - task: DownloadBuildArtifacts@0
+        displayName: Fetch OSX Installer
+        inputs:
+          artifactName: ${{ parameters.artifact }} For Linux
+          downloadPath: _artifacts/constructor
+      - task: DownloadBuildArtifacts@0
+        displayName: Fetch OSX Installer
+        inputs:
+          artifactName: ${{ parameters.artifact }} For OSX
+          downloadPath: _artifacts/constructor
+      - task: DownloadBuildArtifacts@0
+        displayName: Fetch Windows Installer
+        inputs:
+          artifactName: ${{ parameters.artifact }} For Windows
+          downloadPath: _artifacts/constructor
+      - script: find _artifacts
+        displayName: List Installers
+      - task: GithubRelease@0
+        inputs:
+          githubConnection: ${{ parameters.githubConnection }}
+          repositoryName: ${{ parameters.repositoryName }}
+          action: create
+          tagSource: auto
+          assets: _artifacts/constructor

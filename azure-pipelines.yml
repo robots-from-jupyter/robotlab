@@ -19,6 +19,14 @@ jobs:
     name: Linux
     vmImage: ubuntu-16.04
 
+- template: ci/job.deploy.yml
+  parameters:
+    name: Linux
+    vmImage: ubuntu-16.04
+    githubConnection: robots-from-jupyter
+    repositoryName: robots-from-jupyter/robotlab
+    artifact: RobotLab
+
 trigger: [master]
 
 pr: [master]
