@@ -24,7 +24,7 @@ ACTIVATE = [
 CMD = [
     "call python -m robotlab.labapp"
 ] if WIN else [
-    "pyton -m robotlab.labapp"
+    "python -m robotlab.labapp"
 ]
 
 
