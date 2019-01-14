@@ -31,10 +31,10 @@ jobs:
           downloadPath: _artifacts/constructor
       - script: find _artifacts
         displayName: List Installers
-      - task: GithubRelease@0
-        inputs:
-          githubConnection: ${{ parameters.githubConnection }}
-          repositoryName: ${{ parameters.repositoryName }}
-          action: create
-          tagSource: auto
-          assets: _artifacts/constructor
+      # - task: GithubRelease@0
+      #   inputs:
+      #     githubConnection: ${{ parameters.githubConnection }}
+      #     repositoryName: ${{ parameters.repositoryName }}
+      #     action: create
+      #     tagSource: auto
+      #     assets: _artifacts/constructor
