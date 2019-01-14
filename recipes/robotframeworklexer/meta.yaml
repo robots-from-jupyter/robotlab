@@ -13,8 +13,6 @@ build:
   number: 0
   script:
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
-  entry_points:
-    - pyshortcut = pyshortcuts:shortcut_cli
 
 requirements:
   host:
@@ -27,7 +25,6 @@ requirements:
 test:
   imports:
     - robotframeworklexer
-
 
 about:
   home: https://github.com/robotframework/pygmentslexer
