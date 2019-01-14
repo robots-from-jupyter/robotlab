@@ -32,7 +32,7 @@ def launch_robotlab():
         print(script.read_text(), "\n")
         proc = subprocess.Popen(
             [str(script)],
-            cwd=os.environ["HOME"],
+            cwd=os.path.expanduser("~"),
             preexec_fn=os.setsid
         )
         try:
