@@ -15,10 +15,16 @@ from robotlab import WIN, BIN_DIR, SCRIPT_EXT
 
 
 ACTIVATE = [
-    f'''"{BIN_DIR}\\activate"  "{sys.prefix}"  || activate "{sys.prefix}"'''
+    f'''call "{BIN_DIR}\\activate"  "{sys.prefix}"  || activate "{sys.prefix}"'''
 ] if WIN else [
     "#!" + "/usr/bin/env bash",
     f'''. "{BIN_DIR}/activate" "{sys.prefix}" || . activate "{sys.prefix}"'''
+]
+
+CMD = [
+    "call python -m robotlab.labapp"
+] if WIN else [
+    "pyton -m robotlab.labapp"
 ]
 
 
@@ -26,14 +32,13 @@ def launch_robotlab():
     with TemporaryDirectory() as td:
         tdp = Path(td)
         script = tdp / f"launch_robotlab.{SCRIPT_EXT}"
-        lines = ACTIVATE + ["python -m robotlab.labapp"]
+        lines = ACTIVATE + CMD
         script.write_text(os.linesep.join(lines))
         script.chmod(0o755)
         print(script.read_text(), "\n")
         proc = subprocess.Popen(
             [str(script)],
-            cwd=os.path.expanduser("~"),
-            preexec_fn=os.setsid
+            cwd=os.path.expanduser("~")
         )
         try:
             proc.wait()
