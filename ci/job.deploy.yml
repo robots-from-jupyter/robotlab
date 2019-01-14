@@ -15,14 +15,14 @@ jobs:
       - Windows
     steps:
       - task: DownloadBuildArtifacts@0
-        displayName: Fetch OSX Installer
+        displayName: Fetch Linux Installer
         inputs:
           artifactName: ${{ parameters.artifact }} For Linux
           downloadPath: _artifacts/constructor
       - task: DownloadBuildArtifacts@0
-        displayName: Fetch OSX Installer
+        displayName: Fetch MacOSX Installer
         inputs:
-          artifactName: ${{ parameters.artifact }} For OSX
+          artifactName: ${{ parameters.artifact }} For MacOSX
           downloadPath: _artifacts/constructor
       - task: DownloadBuildArtifacts@0
         displayName: Fetch Windows Installer
