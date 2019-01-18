@@ -14,7 +14,6 @@ specs:
   - ipywidgets =={{ ipyw_version }}
   - jupyterlab
   - nodejs >={{ node_min }},<{{ node_max }}
-  - opencv
   - pyshortcuts
   - python >={{ py_min }},<{{ py_max }}
   - chromedriver =={{ cd_version }}
