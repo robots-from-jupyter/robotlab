@@ -1,16 +1,16 @@
-{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@1.1.1" %}
+{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@2.3.1" %}
 {% set lab_min = "0.35.4" %}
 {% set lab_max = "0.36" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "0.10.2" %}{{ version }}
+  version: {% set version = "1.0rc1" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ version }}.tar.gz
-    sha256: e30b75e043f8fcb8a2072d6b1a506a1de7d69f7f8136886f222ba56e618d0da0
+    sha256: 5eed6419990ca3e1962528d0b37b9d8898020b752bd0646baea5db86f107893e
     folder: robotkernel
 
 build:
@@ -37,7 +37,7 @@ build:
     - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
     - cd ..
     - cd docs
-    - cd tutorial
+    - cd notebooks
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
