@@ -13,19 +13,22 @@ from tempfile import TemporaryDirectory
 
 from robotlab import WIN, BIN_DIR, SCRIPT_EXT
 
+BAT_ACTIVATE = [
+    f'call "{BIN_DIR}\\activate"  "{sys.prefix}"  || activate "{sys.prefix}"'
+]
 
-ACTIVATE = [
-    f'''call "{BIN_DIR}\\activate"  "{sys.prefix}"  || activate "{sys.prefix}"'''
-] if WIN else [
+SH_ACTIVATE = [
     "#!" + "/usr/bin/env bash",
-    f'''. "{BIN_DIR}/activate" "{sys.prefix}" || . activate "{sys.prefix}"'''
+    f'. "{BIN_DIR}/activate" "{sys.prefix}" || . activate "{sys.prefix}"',
 ]
 
-CMD = [
-    "call python -m robotlab.labapp"
-] if WIN else [
-    "python -m robotlab.labapp"
-]
+ACTIVATE = BAT_ACTIVATE if WIN else SH_ACTIVATE
+
+BAT_CMD = ["call python -m robotlab.labapp"]
+
+SH_CMD = ["python -m robotlab.labapp"]
+
+CMD = BAT_CMD if WIN else SH_CMD
 
 
 def launch_robotlab():
@@ -36,10 +39,7 @@ def launch_robotlab():
         script.write_text(os.linesep.join(lines))
         script.chmod(0o755)
         print(script.read_text(), "\n")
-        proc = subprocess.Popen(
-            [str(script)],
-            cwd=os.path.expanduser("~")
-        )
+        proc = subprocess.Popen([str(script)], cwd=os.path.expanduser("~"))
         try:
             proc.wait()
         except KeyboardInterrupt:

@@ -10,7 +10,7 @@ def make_shortcuts():
         name="RobotLab",
         terminal=True,
         description="Launch RobotLab in your $HOME",
-        icon=str(HERE / "icons" / f"lab.{ICON_EXT}")
+        icon=str(HERE / "icons" / f"lab.{ICON_EXT}"),
     )
 
 
