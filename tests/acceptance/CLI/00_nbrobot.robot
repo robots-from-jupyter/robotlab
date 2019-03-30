@@ -17,5 +17,5 @@ Can I get help on nbrobot?
 Run nbrobot
     [Arguments]    ${args}    ${log}
     [Documentation]    Run nbrobot and write the output to a log file
-    ${proc} =    Run Process    ${ACTIVATE} && nbrobot ${args}    shell=True    stdout=${log}    stderr=STDOUT
+    ${proc} =    Run Process    ${ACTIVATE} && nbrobot ${args}    shell=True    stdout=${log}    stderr=STDOUT    env:PS1=[:|]
     [Return]    ${proc}
