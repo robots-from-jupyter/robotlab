@@ -1,10 +1,10 @@
-{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@1.1.1" %}
+{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.39.1 jupyterlab_robotmode@2.3.1" %}
 {% set lab_min = "0.35.4" %}
 {% set lab_max = "0.36" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "0.10.2" %}{{ version }}
+  version: {% set version = "0.12.1" %}{{ version }}
 
 source:
   - path: ../../robotlab
