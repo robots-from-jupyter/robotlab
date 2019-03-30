@@ -5,7 +5,7 @@ Library           Process
 Library           JupyterLibrary
 
 *** Variables ***
-${INSTALLER VERSION}    0.10.2
+${INSTALLER VERSION}    0.12.1
 ${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}constructor
 ${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
 
