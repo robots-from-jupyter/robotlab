@@ -19,7 +19,7 @@ Can RobotLab make an IPython Notebook?
     Open JupyterLab    browser=${browser}
 
     # Try to work around possible issue that JupyterLibrary does not wait
-    Page should contain element  xpath://div[@class='jp-LauncherCard']
+    Wait until page contains element  xpath://div[@class='jp-LauncherCard']
 
     Launch a new JupyterLab Document    Python 3    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
