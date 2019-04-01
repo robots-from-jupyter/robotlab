@@ -4,13 +4,13 @@
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "0.12.2" %}{{ version }}
+  version: {% set version = "1.0rc1" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ version }}.tar.gz
-    sha256: 980d92dbd9a3d126af05d1c00b2512fbc08eb81b4476a7284b36799194a02118
+    sha256: 5eed6419990ca3e1962528d0b37b9d8898020b752bd0646baea5db86f107893e
     folder: robotkernel
 
 build:
@@ -37,7 +37,7 @@ build:
     - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
     - cd ..
     - cd docs
-    - cd tutorial
+    - cd notebooks
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
