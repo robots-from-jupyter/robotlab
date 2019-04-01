@@ -10,6 +10,7 @@ Chrome
 Firefox
     headlessfirefox
 
+*** Keywords ***
 Can RobotLab make an IPython Notebook?
     [Arguments]    ${browser}
     [Documentation]    Try a basic IPython Notebook
