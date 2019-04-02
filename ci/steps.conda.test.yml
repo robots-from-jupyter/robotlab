@@ -13,7 +13,7 @@ steps:
           constructor
           geckodriver
           pillow
-          python-chromedriver-binary==2.42
+          python-chromedriver-binary==2.46
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.3.1
           robotframework>=3.1
@@ -32,7 +32,7 @@ steps:
           constructor
           geckodriver
           pillow
-          python-chromedriver-binary>=2.45
+          python-chromedriver-binary==2.46
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.3.1
           robotframework>=3.1

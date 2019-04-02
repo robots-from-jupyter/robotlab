@@ -144,7 +144,7 @@ env_specs:
     - flake8
     - geckodriver
     - python >=3.6,<3.7
-    - python-chromedriver-binary >=2.45
+    - python-chromedriver-binary ==2.46
     - robotframework
     - robotframework-lint
     - robotframework-seleniumlibrary
