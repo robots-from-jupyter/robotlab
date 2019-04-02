@@ -1,0 +1,40 @@
+package:
+  name: {% set name = "robotlab-wheelhouse" %}{{ name }}
+  version: {% set version = "1.0rc1" %}{{ version }}
+
+source:
+  - url: https://pypi.io/packages/source/r/robotframework-whitelibrary/robotframework-whitelibrary-1.4.0.tar.gz
+    sha256: 8247842a2aeb9798182c6eb25a0732851f2b949c63b00e51486f5f92116e1c54
+    folder: wheelhouse
+
+build:
+  number: 0
+  skip: true  # [unix]
+  script:
+    - md %PREFIX\share\wheelhouse
+    - xcopy /s /e wheelhouse\* %PREFIX\share\wheelhouse\
+
+requirements:
+  run:
+    - pythonnet
+test:
+  commands:
+    - python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary
+    - python -c "import WhiteLibrary"
+
+about:
+  home: https://github.com/robots-from-jupyter/robotlab
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: robotlab/LICENSE
+  summary: Offline-installable wheels for RobotLab
+  description: |-
+    An offline collection of complicated binary wheels. This doesn't actually
+    _install_ anything, but does have dependencies.
+
+    Usage:
+
+      python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary
+
+    Includes
+    - robotframework-whitelibrary (Apache 2.0)
