@@ -21,7 +21,7 @@ requirements:
     - pycparser
 test:
   commands:
-    - ls -R %PREFIX%/share/wheelhouse
+    - tree %PREFIX%/share/wheelhouse
     - python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnnet
     - python -c "import WhiteLibrary"
 
