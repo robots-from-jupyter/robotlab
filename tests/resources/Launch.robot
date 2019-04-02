@@ -12,7 +12,3 @@ Start New RobotLab Server
     Should Not Be Empty    ${ROBOTLAB DIR}    msg=Needs a RobotLab installation
     Should Not Be Empty    ${ROBOTLAB PATH ENV}    msg=Needs a RobotLab environment
     ${proc} =    Start New Jupyter Server    ${ROBOTLAB CMD}    env:PATH=${ROBOTLAB PATH ENV}
-
-*** Keywords ***
-Reset JupyterLab
-    Wait Until Keyword Succeeds    2 x    1 s    Execute JupyterLab Command    Reset Application State
