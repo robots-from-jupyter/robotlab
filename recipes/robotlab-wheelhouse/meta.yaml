@@ -22,7 +22,7 @@ requirements:
 test:
   commands:
     - tree %PREFIX%/share/wheelhouse
-    - python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnnet
+    - python -m pip install --no-index --find-links=%PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnnet
     - python -c "import WhiteLibrary"
 
 about:
@@ -37,7 +37,7 @@ about:
 
     Usage:
 
-      python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnet
+      python -m pip install --no-index --find-links=%PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnet
 
     Includes:
     - robotframework-whitelibrary (Apache 2.0)
