@@ -6,6 +6,8 @@ source:
   - url: https://pypi.io/packages/source/r/robotframework-whitelibrary/robotframework-whitelibrary-1.4.0.tar.gz
     sha256: 8247842a2aeb9798182c6eb25a0732851f2b949c63b00e51486f5f92116e1c54
     folder: wheelhouse
+  - url: https://pypi.anaconda.org/pythonnet/simple/pythonnet/2.3.0/pythonnet-2.3.0-cp36-cp36m-win_amd64.whl
+    sha256: 9fdc77bea92ce04804a7add1bda0450e3931973be1c1719a1279d4764397320b
 
 build:
   number: 0
@@ -16,10 +18,10 @@ build:
 
 requirements:
   run:
-    - pythonnet
+    - pycparser
 test:
   commands:
-    - python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary
+    - python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnnet
     - python -c "import WhiteLibrary"
 
 about:
@@ -34,7 +36,8 @@ about:
 
     Usage:
 
-      python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary
+      python -m pip install --no-index --find-links %PREFIX%/share/wheelhouse robotframework-whitelibrary pythonnet
 
-    Includes
+    Includes:
     - robotframework-whitelibrary (Apache 2.0)
+    - pythonnet (MIT)

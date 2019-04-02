@@ -3,6 +3,7 @@
 python -m pip install ^
   --no-index ^
   --find-links %PREFIX%/share/wheelhouse ^
-  robotframework-whitelibrary
+  robotframework-whitelibrary ^
+  pythonnet
 
 robotlab-shortcuts

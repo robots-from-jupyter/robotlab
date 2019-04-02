@@ -1,6 +1,8 @@
 name: RobotLab
 version: {{ version }}
 company: Robots from Jupyter
+install_in_dependency_order: True
+post_install: post_install.{{ script_ext }}
 
 channels:
   - {{ build_channel }}
@@ -27,15 +29,5 @@ specs:
   - robotframeworklexer
   - robotkernel =={{ version }}
   - robotlab =={{ version }}
-  {% if platform == "darwin" %}
-  - python.app
-  {% endif -%}
-  {% if platform == "windows" %}
-  - pycparser
-  - pythonnet
-  - robotlab-wheelhouse
-  {% endif -%}
-
-install_in_dependency_order: True
-
-post_install: post_install.{{ script_ext }}
+  {% if platform == "darwin" %}- python.app{% endif %}
+  {% if platform == "windows" %}- robotlab-wheelhouse{% endif %}

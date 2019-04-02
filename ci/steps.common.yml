@@ -26,10 +26,8 @@ steps:
 
   - ${{ if eq(parameters.name, 'Windows') }}:
     - script: >
-        python -m scripts.build conda
-        pythonnet
-        robotlab-wheelhouse
-      displayName: Build WhiteLibrary & Dependencies
+        python -m scripts.build conda robotlab-wheelhouse
+      displayName: Vendor WhiteLibrary & Dependencies
 
   - template: steps.jupyterlibrary.yml
     parameters:
