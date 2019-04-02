@@ -8,22 +8,22 @@ source:
     folder: wheelhouse
   - url: https://pypi.anaconda.org/pythonnet/simple/pythonnet/2.3.0/pythonnet-2.3.0-cp36-cp36m-win_amd64.whl
     sha256: 9fdc77bea92ce04804a7add1bda0450e3931973be1c1719a1279d4764397320b
+    folder: wheelhouse
 
 build:
   number: 0
   skip: true  # [unix]
   script:
-    - dir wheelhouse
-    - dir %PREFIX%
     - md %PREFIX%\share\wheelhouse
     - xcopy /s /e wheelhouse\* %PREFIX%\share\wheelhouse\
+    - dir %PREFIX%\share\wheelhouse
 
 requirements:
   run:
     - pycparser
 test:
   commands:
-    - dir %PREFIX%
+    - dir %PREFIX%\share\wheelhouse
     - python -m pip install --no-index --find-links=%PREFIX%\share\wheelhouse robotframework-whitelibrary pythonnnet
     - python -c "import WhiteLibrary"
 
