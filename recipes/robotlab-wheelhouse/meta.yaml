@@ -28,7 +28,7 @@ about:
   home: https://github.com/robots-from-jupyter/robotlab
   license: BSD-3-Clause
   license_family: BSD
-  license_file: robotlab/LICENSE
+  license_file: wheelhouse/LICENSE
   summary: Offline-installable wheels for RobotLab
   description: |-
     An offline collection of complicated binary wheels. This doesn't actually
