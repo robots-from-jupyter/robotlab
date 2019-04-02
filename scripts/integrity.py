@@ -3,20 +3,20 @@ import re
 from . import ROOT, RECIPE_DIR, ROBOTLAB_DIR, SCRIPTS_DIR, TEST_DIR
 
 
-META_PATTERN = r""" set version = "([\d\.]+)" """
+META_PATTERN = r""" set version = "([\d\.rc]+)" """
 
 VERSIONS = {
     RECIPE_DIR / "robotkernel" / "meta.yaml": META_PATTERN,
     RECIPE_DIR / "robotlab" / "meta.yaml": META_PATTERN,
-    ROBOTLAB_DIR / "setup.cfg": r"version = ([\d\.]+)",
+    ROBOTLAB_DIR / "setup.cfg": r"version = ([\d\.rc]+)",
     ROBOTLAB_DIR
     / "src"
     / "robotlab"
-    / "_version.py": r"""__version__ = "([\d\.]+)""",
-    SCRIPTS_DIR / "__init__.py": r"""ROBOTLAB_VERSION", "([\d\.]+)""",
+    / "_version.py": r"""__version__ = "([\d\.rc]+)""",
+    SCRIPTS_DIR / "__init__.py": r"""ROBOTLAB_VERSION", "([\d\.rc]+)""",
     TEST_DIR
     / "resources"
-    / "Install.robot": r"\$\{INSTALLER VERSION\}\s+([\d\.]+)",
+    / "Install.robot": r"\$\{INSTALLER VERSION\}\s+([\d\.rc]+)",
 }
 
 
