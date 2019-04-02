@@ -13,8 +13,8 @@ build:
   number: 0
   skip: true  # [unix]
   script:
-    - md %PREFIX\share\wheelhouse
-    - xcopy /s /e wheelhouse\* %PREFIX\share\wheelhouse\
+    - md %PREFIX%\share\wheelhouse
+    - xcopy /s /e wheelhouse\* %PREFIX%\share\wheelhouse\
 
 requirements:
   run:
