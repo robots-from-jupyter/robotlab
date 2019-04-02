@@ -3,7 +3,7 @@ package:
   version: {% set version = "1.0rc1" %}{{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/r/robotframework-whitelibrary/robotframework-whitelibrary-1.4.0.tar.gz
+  - url: https://pypi.io/packages/source/r/robotframework-whitelibrary/robotframework-whitelibrary-1.4.0.zip
     sha256: 8247842a2aeb9798182c6eb25a0732851f2b949c63b00e51486f5f92116e1c54
     folder: wheelhouse
   - url: https://pypi.anaconda.org/pythonnet/simple/pythonnet/2.3.0/pythonnet-2.3.0-cp36-cp36m-win_amd64.whl
