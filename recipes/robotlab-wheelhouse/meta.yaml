@@ -16,6 +16,8 @@ build:
   script:
     - md %PREFIX%\share\wheelhouse
     - xcopy /s /e wheelhouse\* %PREFIX%\share\wheelhouse\
+    - cd %PREFIX%\share\wheelhouse
+    - Compress-Archive -Path robotframework-whitelibrary -DestinationPath robotframework-whitelibrary-1.4.0.zip
     - dir %PREFIX%\share\wheelhouse
 
 requirements:
