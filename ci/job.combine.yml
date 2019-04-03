@@ -1,4 +1,4 @@
-parameters:
+ parameters:
   name: Linux
   vmImage: ubuntu-16.04
 
@@ -18,24 +18,27 @@ jobs:
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Robot Output Linux
+          artifactName: Robot Output Linux ${{ Build.BuildId }}
           targetPath: _artifacts/test_output
+        displayName: Restore Robot Output Linux
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Robot Output MacOSX
+          artifactName: Robot Output MacOSX ${{ Build.BuildId }}
           targetPath: _artifacts/test_output
+        displayName: Restore Robot Output MacOSX
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Robot Output Windows
+          artifactName: Robot Output Windows ${{ Build.BuildId }}
           targetPath: _artifacts/test_output
+        displayName: Restore Robot Output Windows
       - script: python -m scripts.combine
         condition: always()
         displayName: Rebot
       - task: PublishBuildArtifacts@1
         condition: always()
-        displayName: Publish Robot Output
+        displayName: Publish Combined Robot Output
         inputs:
           pathtoPublish: _artifacts/test_output
-          artifactName: RobotLab Robot Output
+          artifactName: RobotLab Robot Output ${{ Build.BuildId }}
