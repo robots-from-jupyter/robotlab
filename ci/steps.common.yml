@@ -53,12 +53,12 @@ steps:
     displayName: Publish ${{ parameters.name }} Robot Output
     inputs:
       targetPath: _artifacts/test_output
-      artifactName: Robot Output ${{ parameters.name }} ${{ Build.BuildId }}
+      artifactName: Robot Output ${{ parameters.name }}
     condition: always()
 
   - task: PublishBuildArtifacts@1
     displayName: Publish Installer
     inputs:
       PathtoPublish: _artifacts/constructor
-      ArtifactName: RobotLab for ${{ parameters.name }} ${{ Build.BuildId }}
+      ArtifactName: RobotLab for ${{ parameters.name }}
     condition: succeeded()

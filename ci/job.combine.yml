@@ -18,19 +18,19 @@ jobs:
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Robot Output Linux ${{ Build.BuildId }}
+          artifactName: Robot Output Linux
           targetPath: _artifacts/test_output
         displayName: Restore Robot Output Linux
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Robot Output MacOSX ${{ Build.BuildId }}
+          artifactName: Robot Output MacOSX
           targetPath: _artifacts/test_output
         displayName: Restore Robot Output MacOSX
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Robot Output Windows ${{ Build.BuildId }}
+          artifactName: Robot Output Windows
           targetPath: _artifacts/test_output
         displayName: Restore Robot Output Windows
       - script: python -m scripts.combine
@@ -41,4 +41,4 @@ jobs:
         displayName: Publish Combined Robot Output
         inputs:
           pathtoPublish: _artifacts/test_output
-          artifactName: RobotLab Robot Output ${{ Build.BuildId }}
+          artifactName: RobotLab Robot Output
