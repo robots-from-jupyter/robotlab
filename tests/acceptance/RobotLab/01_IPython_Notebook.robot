@@ -17,7 +17,7 @@ Can RobotLab make an IPython Notebook?
     Set Tags    browser:${browser}
     ${prefix} =    Set Variable    ipython_${browser}_
     Open JupyterLab    browser=${browser}
-    Execute JupyterLab Command  Close All
+    Execute JupyterLab Command    Close All
     Launch a new JupyterLab Document    Python 3    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
     Add and Run JupyterLab Code Cell    print("Hello" + " World")

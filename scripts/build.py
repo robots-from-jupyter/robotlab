@@ -60,6 +60,8 @@ def build_conda(packages=None, force=False):
                 "https://repo.anaconda.com/pkgs/free",
                 "-c",
                 "https://conda.anaconda.org/conda-forge",
+                "-c",
+                "https://conda.anaconda.org/pythonnet",
                 "--python",
                 PY_MIN,
             ]

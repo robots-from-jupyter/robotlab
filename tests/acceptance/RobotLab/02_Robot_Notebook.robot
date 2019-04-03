@@ -17,7 +17,7 @@ Can RobotLab make a Robot Notebook?
     Set Tags    browser:${browser}
     ${prefix} =    Set Variable    robot_${browser}_
     Open JupyterLab    browser=${browser}
-    Execute JupyterLab Command  Close All
+    Execute JupyterLab Command    Close All
     Launch a new JupyterLab Document    Robot Framework    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
     Add and Run JupyterLab Code Cell    | *Test Case* |${\n}| Hello |${\n}| | Log | Hello World
