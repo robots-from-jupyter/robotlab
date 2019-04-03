@@ -26,7 +26,7 @@ steps:
 
   - ${{ if eq(parameters.name, 'Windows') }}:
     - script: >
-        python -m scripts.build conda robotlab-wheelhouse
+        python -m scripts.build conda robotframework-whitelibrary
       displayName: Vendor WhiteLibrary & Dependencies
 
   - template: steps.jupyterlibrary.yml
