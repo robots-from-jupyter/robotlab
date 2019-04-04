@@ -24,6 +24,11 @@ steps:
       robotlab
     displayName: Build Conda Packages
 
+  - ${{ if eq(parameters.name, 'Windows') }}:
+    - script: >
+        python -m scripts.build conda robotframework-whitelibrary
+      displayName: Vendor WhiteLibrary & Dependencies
+
   - template: steps.jupyterlibrary.yml
     parameters:
       name: ${{ parameters.name }}
@@ -45,7 +50,7 @@ steps:
     condition: always()
 
   - task: PublishPipelineArtifact@0
-    displayName: Publish Robot Output
+    displayName: Publish ${{ parameters.name }} Robot Output
     inputs:
       targetPath: _artifacts/test_output
       artifactName: Robot Output ${{ parameters.name }}

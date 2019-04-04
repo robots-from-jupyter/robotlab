@@ -1,12 +1,15 @@
 name: RobotLab
 version: {{ version }}
 company: Robots from Jupyter
+install_in_dependency_order: True
+post_install: post_install.{{ script_ext }}
 
 channels:
   - {{ build_channel }}
   - https://repo.anaconda.com/pkgs/main
   - https://repo.anaconda.com/pkgs/free
   - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/pythonnet
 
 specs:
   - conda
@@ -28,7 +31,4 @@ specs:
   - robotkernel =={{ version }}
   - robotlab =={{ version }}
   {% if platform == "darwin" %}- python.app{% endif %}
-
-install_in_dependency_order: True
-
-post_install: post_install.{{ script_ext }}
+  {% if platform == "windows" %}- robotframework-whitelibrary{% endif %}
