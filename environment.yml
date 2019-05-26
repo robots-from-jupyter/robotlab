@@ -7,14 +7,14 @@ channels:
 
 dependencies:
   - black
-  - conda >=4.5.11,<4.6
-  - conda-build >=3.15,<3.16
+  - conda >=4.6,<4.7
+  - conda-build >=3.18.2,<3.19
   - conda-verify
   - constructor >=2.3,<2.4
   - flake8
   - geckodriver
   - python >=3.6,<3.7
-  - python-chromedriver-binary ==2.46
+  - python-chromedriver-binary >=74,<75
   - robotframework
   - robotframework-lint
   - robotframework-seleniumlibrary

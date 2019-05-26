@@ -22,22 +22,23 @@ Can RobotLab make a Robot Notebook?
     Capture Page Screenshot    ${prefix}_01_notebook.png
     Add and Run JupyterLab Code Cell    | *Test Case* |${\n}| Hello |${\n}| | Log | Hello World
     Capture Page Screenshot    ${prefix}_02_execute.png
-    Sleep    3s
+    Wait Until JupyterLab Kernel Is Idle
+    Wait Until Element Does Not Contain    css:.jp-InputPrompt    [*]:    timeout=20s
     Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
-    The Robot Popup Should Contain    ${prefix}    Log    1 passed, 0 failed
     The Robot Popup Should Contain    ${prefix}    Report    All tests passed
+    The Robot Popup Should Contain    ${prefix}    Log    1 passed, 0 failed
     Execute JupyterLab Command    Save Notebook
-    Sleep    2s
     Capture Page Screenshot    ${prefix}_09_save.png
+    Execute JupyterLab Command    Close All
 
 The Robot Popup Should Contain
     [Arguments]    ${prefix}    ${document}    ${msg}
     [Documentation]    With an open Robot Notebook, take a look at the log or report
     Click Link    ${document}
-    Sleep    1s
+    Sleep    2s
     Select Window    Jupyter ${document}
-    Page Should Contain    ${msg}
+    Wait Until Page Contains    ${msg}
     Capture Page Screenshot    ${prefix}_10_${document.lower()}.png
     Close Window
     Select Window    JupyterLab

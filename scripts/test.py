@@ -1,10 +1,21 @@
-from . import run, TEST_DIR, TEST_OUT, PLATFORM
+import shutil
 import sys
 
-import chromedriver_binary  # noqa
+try:
+    import chromedriver_binary  # noqa
+except ImportError:
+    print(
+        "couldn't import chromedriver_binary, hoping chromedriver is on $PATH"
+    )
+
+from . import run, TEST_DIR, TEST_OUT, PLATFORM
 
 
 def run_tests(robot_args):
+    out = TEST_OUT / PLATFORM
+    if out.exists():
+        shutil.rmtree(out)
+    out.mkdir(parents=True)
     args = (
         [
             sys.executable,
@@ -13,20 +24,20 @@ def run_tests(robot_args):
             "--name",
             PLATFORM,
             "--outputdir",
-            str(TEST_OUT),
+            TEST_OUT / PLATFORM,
             "--output",
-            f"{PLATFORM}.robot.xml",
+            TEST_OUT / f"{PLATFORM}.robot.xml",
             "--log",
-            f"{PLATFORM}.log.html",
+            TEST_OUT / f"{PLATFORM}.log.html",
             "--report",
-            f"{PLATFORM}.report.html",
+            TEST_OUT / f"{PLATFORM}.report.html",
             "--xunit",
-            f"{PLATFORM}.xunit.xml",
+            TEST_OUT / f"{PLATFORM}.xunit.xml",
             "--variable",
             f"OS:{PLATFORM}",
         ]
         + list(robot_args or [])
-        + [str(TEST_DIR)]
+        + [TEST_DIR]
     )
     return run(args)
 

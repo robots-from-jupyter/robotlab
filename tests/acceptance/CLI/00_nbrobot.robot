@@ -7,7 +7,7 @@ Library           OperatingSystem
 *** Test Cases ***
 Can I get help on nbrobot?
     [Documentation]    Verify the nbrobot command returns help
-    ${log} =    Set Variable    ${OUTPUT DIR}${/}${OS}${/}nbrobot_help.log
+    ${log} =    Set Variable    ${OUTPUT DIR}${/}nbrobot_help.log
     ${proc} =    Run nbrobot    --help    ${log}
     Should Be Equal As Numbers    ${proc.rc}    251
     ${log text} =    Get File    ${log}

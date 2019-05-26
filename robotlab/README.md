@@ -1,7 +1,7 @@
 # robotlab
 
 A pre-configured JupyterLab for productive Robot Framework authoring with
-robotkernel.
+[robotkernel][].
 
 ## Credits
 - Borrows heavily from [jupyterlab_delux][].

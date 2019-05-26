@@ -6,6 +6,7 @@
 
 
 ## Build It
+
 Get [Miniconda][]. Install [anaconda-project][].
 
 On OSX/Linux, run:
@@ -37,6 +38,7 @@ possible in the event that network problems arise.
 
 
 ## conda packaging
+
 Once it has matured, `robotkernel` will be available from [conda-forge][], the
 community-driven upstream of the Anaconda Distribution.
 However, in the name of efficiency, `conda-forge` builds `noarch: python`
@@ -47,7 +49,9 @@ as [robotframework][] 3.1 and SeleniumLibrary 3.2.0.
 
 > TODO: automated detection and re-arching of packages from conda-forge feedstocks
 
+
 ### robotlab
+
 While still pre-`1.0`, JupyterLab's build chain has some negative externalities
 for end users, namely an install- or run-time dependency on NodeJS and npmjs.org
 when using any labextensions other than the built-in set (e.g. Notebook, Terminal,
@@ -67,6 +71,7 @@ do most of the things `jupyter lab` can do.
 an intrepid user can still install any of the [labextensions][] that are
 compatible with the version `robotlab` was built with: as of writing, `0.35.x`.
 
+
 ## [constructor][]
 All of the dependencies are captured in [construct.yaml.in][]. In addition to
 everything mentioned above, you'll also find:
@@ -76,7 +81,7 @@ showcase some of the features of using Robot Framework interactively.
 - `JupyterLibrary` for testing Jupyter clients with robotframework
   - `SeleniumLibrary` for controlling browsers
     - `geckodriver` for interacting with Mozilla Firefox
-    - `chromedriver` for interacting with Chromium and Google Chrome
+    - `python-chromedriver-binary` for interacting with Chromium and Google Chrome
     - > it's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but
         can't be redistributed
 - `opencv` for image-driven testing

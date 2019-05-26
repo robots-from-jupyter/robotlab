@@ -7,5 +7,5 @@ Library           OperatingSystem
 *** Test Cases ***
 Can I install the tutorial?
     [Documentation]    Verify the robotlab-tutorial command works
-    Run Process    ${ACTIVATE} && robotlab-tutorial    shell=True    cwd=${OUTPUT DIR}${/}${OS}
-    Directory Should Not Be Empty    ${OUTPUT DIR}${/}${OS}${/}robotkernel-tutorial
+    Run Process    ${ACTIVATE} && robotlab-tutorial    shell=True    cwd=${OUTPUT DIR}
+    Directory Should Not Be Empty    ${OUTPUT DIR}${/}robotkernel-tutorial

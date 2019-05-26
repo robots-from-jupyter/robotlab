@@ -1,5 +1,5 @@
 {% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@2.3.1" %}
-{% set lab_min = "0.35.4" %}
+{% set lab_min = "0.35.6" %}
 {% set lab_max = "0.36" %}
 
 package:
@@ -18,7 +18,9 @@ build:
   entry_points:
     - robotlab = robotlab.labapp:main
     - robotlab-extension = robotlab.labextensionapp:main
+    - robotlab-shortcuts = robotlab.shortcuts:make_shortcuts
     - robotlab-examples = robotlab.examples:copy_robotkernel_examples
+    - robotlab-tutorial = robotlab.tutorial:copy_robotkernel_tutorial
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .

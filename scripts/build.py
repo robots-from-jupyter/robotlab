@@ -3,7 +3,8 @@ import sys
 from jinja2 import Template
 
 from . import (
-    CHROMEDRIVER_VERSION,
+    CHROMEDRIVER_MIN,
+    CHROMEDRIVER_MAX,
     CONDA_CACHE,
     CONDA_OUT,
     CONSTRUCT_CACHE,
@@ -28,7 +29,7 @@ CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 
 
 def build_conda(packages=None, force=False):
-    """ Build some packages (mostly re-arching conda-forge `noarch: python`)
+    """ Build some packages (mostly re-arching `noarch: python`)
     """
 
     [
@@ -87,7 +88,8 @@ def build_constructor():
         node_max=NODE_MAX,
         rf_version=RF_VERSION,
         version=VERSION,
-        cd_version=CHROMEDRIVER_VERSION,
+        cd_min=CHROMEDRIVER_MIN,
+        cd_max=CHROMEDRIVER_MAX,
         ipyw_version=IPYWIDGETS_VERSION,
         script_ext=SCRIPT_EXT,
         platform=PLATFORM,

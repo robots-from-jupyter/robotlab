@@ -14,7 +14,7 @@ def copy_robotkernel_examples(dest=None):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        dest = Path(sys.argv(1))
+        dest = Path(sys.argv[1])
     else:
         dest = None
     sys.exit(copy_robotkernel_examples(dest))

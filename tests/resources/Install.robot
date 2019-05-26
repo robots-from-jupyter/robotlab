@@ -6,8 +6,8 @@ Library           JupyterLibrary
 
 *** Variables ***
 ${INSTALLER VERSION}    1.0rc1
-${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}constructor
-${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
+${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}..${/}constructor
+${INSTALL LOG}    ${OUTPUT DIR}${/}00_installer.log
 
 *** Keywords ***
 Clean up the RobotLab installation
@@ -22,10 +22,10 @@ Clean up the RobotLab installation
 Run the RobotLab installer
     [Documentation]    Detect and tag the platform, then run the appropriate installer
     ${path} =    Evaluate    __import__("tempfile").mkdtemp("RobotLab")
-    Create Directory    ${OUTPUT DIR}${/}${OS}
     Set Global Variable    ${ROBOTLAB DIR}    ${path}${/}robotlab
     Set Global Variable    ${FAKE HOME}    ${path}${/}home
     Create Directory    ${FAKE HOME}${/}Desktop
+    Set Screenshot Directory    ${OUTPUT DIR}
     ${result} =    Run Keyword If    "${OS}" == "linux"    Run the RobotLab Linux installer
     ...    ELSE IF    "${OS}" == "windows"    Run the RobotLab Windows Installer
     ...    ELSE IF    "${OS}" == "darwin"    Run the RobotLab OSX Installer

@@ -7,8 +7,14 @@ steps:
 
   - script: >
       python -m scripts.build conda
+      pytz
+      strict-rfc3339
+      defusedxml
+      genson
+      pygments
+      nbconvert
+      parso
       pyshortcuts
-      chromedriver
       jsonpointer
       rfc3987
       jsonpath-ng
