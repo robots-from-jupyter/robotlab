@@ -69,6 +69,7 @@ test:
     - robotlab --version
     - robotlab-extension list
     - robotlab-examples
+    - dir  # [win]
     - robotlab-tutorial
     - mkdir Desktop  # [unix]
     - HOME=$(pwd) robotlab-shortcuts  # [unix]
