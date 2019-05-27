@@ -6,5 +6,5 @@ steps:
       updateConda: false
       environmentName: robotframework-jupyterlibrary-robot
       packageSpecs: >
-        python>=3.6,<3.7
+        python>=3.7,<3.8
         robotframework>=3.1

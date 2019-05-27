@@ -32,7 +32,7 @@ ROBOTLAB_DIR = ROOT / "robotlab"
 README = ROOT / "README.md"
 
 # for easy overriding in CI
-PY_MIN = os.environ.get("PY_MIN", "3.6")
+PY_MIN = os.environ.get("PY_MIN", "3.7")
 PY_MAX = os.environ.get("PY_MAX", "3.7")
 NODE_MIN = os.environ.get("NODE_MIN", "8")
 NODE_MAX = os.environ.get("NODE_MAX", "9")

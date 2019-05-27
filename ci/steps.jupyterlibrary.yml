@@ -7,15 +7,15 @@ steps:
           cd _artifacts
           && cd conda-bld
           && cd win-64
-          && conda install -fv robotframework-jupyterlibrary-0.2.0-py36_0.tar.bz2
+          && conda install -fv robotframework-jupyterlibrary-0.2.0-py37_0.tar.bz2
         displayName: Install JupyterLibrary on Windows
 
   - ${{ if eq(parameters.name, 'MacOSX') }}:
       - script: >
-          conda install -fv _artifacts/conda-bld/osx-64/robotframework-jupyterlibrary-0.2.0-py36_0.tar.bz2
+          conda install -fv _artifacts/conda-bld/osx-64/robotframework-jupyterlibrary-0.2.0-py37_0.tar.bz2
         displayName: Install JupyterLibrary on OSX
 
   - ${{ if eq(parameters.name, 'Linux') }}:
       - script: >
-          conda install -fv _artifacts/conda-bld/linux-64/robotframework-jupyterlibrary-0.2.0-py36_0.tar.bz2
+          conda install -fv _artifacts/conda-bld/linux-64/robotframework-jupyterlibrary-0.2.0-py37_0.tar.bz2
         displayName: Install JupyterLibrary on Linux

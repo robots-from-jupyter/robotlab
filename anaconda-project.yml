@@ -118,7 +118,7 @@ env_specs:
     - jupyterlab >=0.35,<0.36
     - nodejs >=8,<9
     - pyshortcuts
-    - python >=3.6,<3.7
+    - python >=3.7,<3.8
     - restinstance
     - robotframework-seleniumscreenshots
     - robotkernel
@@ -143,7 +143,7 @@ env_specs:
     - constructor >=2.3,<2.4
     - flake8
     - geckodriver
-    - python >=3.6,<3.7
+    - python >=3.7,<3.8
     - python-chromedriver-binary ==2.46
     - robotframework
     - robotframework-lint
