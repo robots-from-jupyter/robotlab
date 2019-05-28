@@ -18,7 +18,9 @@ build:
   entry_points:
     - robotlab = robotlab.labapp:main
     - robotlab-extension = robotlab.labextensionapp:main
+    - robotlab-shortcuts = robotlab.shortcuts:make_shortcuts
     - robotlab-examples = robotlab.examples:copy_robotkernel_examples
+    - robotlab-tutorial = robotlab.tutorial:copy_robotkernel_tutorial
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
