@@ -1,12 +1,12 @@
 from pathlib import Path
 import sys
 import shutil
-import re
 from tempfile import TemporaryDirectory
 
 from . import RECIPE_DIR, run
 
 CF = "https://github.com/conda-forge/{}-feedstock.git"
+
 
 def rearch(pkgs):
     for pkg in pkgs:
@@ -17,10 +17,15 @@ def rearch(pkgs):
             recipe_out = RECIPE_DIR / pkg
             meta = recipe_in / "meta.yaml"
 
-            meta.write_text("\n".join([
-                line for line in meta.read_text().split("\n")
-                if "noarch: python" not in line
-            ]))
+            meta.write_text(
+                "\n".join(
+                    [
+                        line
+                        for line in meta.read_text().split("\n")
+                        if "noarch: python" not in line
+                    ]
+                )
+            )
 
             shutil.copytree(recipe_in, recipe_out)
 

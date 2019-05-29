@@ -23,7 +23,7 @@ Can RobotLab make an IPython Notebook?
     Add and Run JupyterLab Code Cell    print("Hello" + " World")
     Capture Page Screenshot    ${prefix}_02_execute.png
     Wait Until JupyterLab Kernel Is Idle
-    Wait Until Page Does Not Contain   [*]:
+    Wait Until Element Does Not Contain    css:.jp-InputPrompt    [*]:    timeout=20s
     Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
     Page Should Contain    Hello World
