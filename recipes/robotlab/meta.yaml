@@ -1,5 +1,5 @@
 {% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@2.3.1" %}
-{% set lab_min = "0.35.4" %}
+{% set lab_min = "0.35.6" %}
 {% set lab_max = "0.36" %}
 
 package:
@@ -71,7 +71,6 @@ test:
     - robotlab --version
     - robotlab-extension list
     - robotlab-examples
-    - dir  # [win]
     - robotlab-tutorial
     - mkdir Desktop  # [unix]
     - HOME=$(pwd) robotlab-shortcuts  # [unix]
