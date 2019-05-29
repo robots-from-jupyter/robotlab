@@ -13,7 +13,7 @@ def run_tests(robot_args):
             "--name",
             PLATFORM,
             "--outputdir",
-            str(TEST_OUT),
+            str(TEST_OUT / PLATFORM),
             "--output",
             f"{PLATFORM}.robot.xml",
             "--log",

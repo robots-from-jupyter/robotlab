@@ -1,10 +1,10 @@
 package:
   name: {% set name = "RESTinstance" %}{{ name|lower }}
-  version: {% set version = "1.0.0rc4" %}{{ version }}
+  version: {% set version = "1.0.0rc5" %}{{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e60e613125f013511387dc3cc3b1342abcbf195409a148cac1b4a8be191e6621
+  sha256: 9ac970fb6205dc620931a6e80e018851e750545da540d1a999a8a0bdf949441d
 
 build:
   number: 0
@@ -16,13 +16,13 @@ requirements:
     - python
   run:
     - python
-    - flex-swagger >=6.13.2
-    - genson >=1.0.1
+    - flex-swagger >=6.14
+    - genson >=1.0.2
     - jsonpath-ng >=1.4.3
-    - jsonschema >=3.0.0a3
-    - pygments >=2.2.0
+    - jsonschema >=3.0.1
+    - pygments >=2.3.1
     - pytz >=2018.5
-    - requests >=2.20.0
+    - requests >=2.21.0
     - rfc3987 >=1.3.8
     - robotframework >=2.9
     - strict-rfc3339 >=0.7

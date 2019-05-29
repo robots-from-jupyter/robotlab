@@ -1,13 +1,13 @@
 package:
   name: {% set name = "flex" %}flex-swagger
-  version: {% set version = "6.13.2" %}{{ version }}
+  version: {% set version = "6.14" %}{{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 17a58b3c0ca6524dbc79e1b266dcb8fc39d18060fbe8072ae297f14249ee0909
+  sha256: 6d1aaafc5246cad127a3433ddfec10589fee33814d142157acbc371016f5a362
 
 build:
-  number: 2
+  number: 0
   entry_points:
     - swagger-flex=flex.cli:main
   script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
