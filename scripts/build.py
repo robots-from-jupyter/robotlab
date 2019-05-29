@@ -28,7 +28,7 @@ CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 
 
 def build_conda(packages=None, force=False):
-    """ Build some packages (mostly re-arching conda-forge `noarch: python`)
+    """ Build some packages (mostly re-arching `noarch: python`)
     """
 
     [
