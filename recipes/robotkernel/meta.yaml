@@ -16,8 +16,6 @@ build:
     - nblibdoc = robotkernel.nbreader:libdoc
 
 requirements:
-  build:
-    - patch
   host:
     - pip
     - python
