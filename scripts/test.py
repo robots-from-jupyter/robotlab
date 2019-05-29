@@ -1,7 +1,8 @@
-from . import run, TEST_DIR, TEST_OUT, PLATFORM
 import sys
 
 import chromedriver_binary  # noqa
+
+from . import run, TEST_DIR, TEST_OUT, PLATFORM
 
 
 def run_tests(robot_args):
