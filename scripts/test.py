@@ -1,7 +1,12 @@
 import shutil
 import sys
 
-import chromedriver_binary  # noqa
+try:
+    import chromedriver_binary  # noqa
+except ImportError:
+    print(
+        "couldn't import chromedriver_binary, hoping chromedriver is on $PATH"
+    )
 
 from . import run, TEST_DIR, TEST_OUT, PLATFORM
 
