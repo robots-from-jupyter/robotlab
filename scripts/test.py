@@ -13,20 +13,20 @@ def run_tests(robot_args):
             "--name",
             PLATFORM,
             "--outputdir",
-            str(TEST_OUT / PLATFORM),
+            TEST_OUT / PLATFORM,
             "--output",
-            f"{PLATFORM}.robot.xml",
+            TEST_OUT / f"{PLATFORM}.robot.xml",
             "--log",
-            f"{PLATFORM}.log.html",
+            TEST_OUT / f"{PLATFORM}.log.html",
             "--report",
-            f"{PLATFORM}.report.html",
+            TEST_OUT / f"{PLATFORM}.report.html",
             "--xunit",
-            f"{PLATFORM}.xunit.xml",
+            TEST_OUT / f"{PLATFORM}.xunit.xml",
             "--variable",
             f"OS:{PLATFORM}",
         ]
         + list(robot_args or [])
-        + [str(TEST_DIR)]
+        + [TEST_DIR]
     )
     return run(args)
 
