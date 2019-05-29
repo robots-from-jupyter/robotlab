@@ -22,11 +22,11 @@ Can RobotLab make an IPython Notebook?
     Capture Page Screenshot    ${prefix}_01_notebook.png
     Add and Run JupyterLab Code Cell    print("Hello" + " World")
     Capture Page Screenshot    ${prefix}_02_execute.png
-    Sleep    2s
     Wait Until JupyterLab Kernel Is Idle
-    Sleep    2s
+    Wait Until Page Does Not Contain   [*]:
+    Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
     Page Should Contain    Hello World
     Execute JupyterLab Command    Save Notebook
-    Sleep    2s
     Capture Page Screenshot    ${prefix}_09_save.png
+    Execute JupyterLab Command    Close All
