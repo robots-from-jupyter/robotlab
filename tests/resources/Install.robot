@@ -25,6 +25,7 @@ Run the RobotLab installer
     Set Global Variable    ${ROBOTLAB DIR}    ${path}${/}robotlab
     Set Global Variable    ${FAKE HOME}    ${path}${/}home
     Create Directory    ${FAKE HOME}${/}Desktop
+    Set Screenshot Directory    ${OUTPUT DIR}
     ${result} =    Run Keyword If    "${OS}" == "linux"    Run the RobotLab Linux installer
     ...    ELSE IF    "${OS}" == "windows"    Run the RobotLab Windows Installer
     ...    ELSE IF    "${OS}" == "darwin"    Run the RobotLab OSX Installer

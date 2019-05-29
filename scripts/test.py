@@ -1,3 +1,4 @@
+import shutil
 import sys
 
 import chromedriver_binary  # noqa
@@ -6,6 +7,10 @@ from . import run, TEST_DIR, TEST_OUT, PLATFORM
 
 
 def run_tests(robot_args):
+    out = TEST_OUT / PLATFORM
+    if out.exists():
+        shutil.rmtree(out)
+    out.mkdir(parents=True)
     args = (
         [
             sys.executable,
