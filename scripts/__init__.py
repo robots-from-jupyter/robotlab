@@ -38,7 +38,8 @@ NODE_MIN = os.environ.get("NODE_MIN", "8")
 NODE_MAX = os.environ.get("NODE_MAX", "9")
 RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.2")
 VERSION = os.environ.get("ROBOTLAB_VERSION", "1.0rc1")
-CHROMEDRIVER_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "2.45")
+CHROMEDRIVER_MIN = os.environ.get("CHROMEDRIVER_MIN", "74")
+CHROMEDRIVER_MAX = os.environ.get("CHROMEDRIVER_MAX", "75")
 IPYWIDGETS_VERSION = os.environ.get("IPYWIDGETS_VERSION", "7.4.2")
 
 
