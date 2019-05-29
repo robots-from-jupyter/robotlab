@@ -1,0 +1,33 @@
+{% set version = "0.6.0" %}
+
+package:
+  name: defusedxml
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/d/defusedxml/defusedxml-{{ version }}.tar.gz
+  sha256: f684034d135af4c6cbb949b8a4d2ed61634515257a67299e5f940fbaa34377f5
+
+build:
+  number: 1
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - defusedxml
+
+about:
+  home: https://bitbucket.org/tiran/defusedxml
+  license: PSF 2.0
+  license_file: LICENSE
+  license_family: PSF
+  summary: 'XML bomb protection for Python stdlib modules'
+  dev_url: https://bitbucket.org/tiran/defusedxml
+  doc_url: https://bitbucket.org/tiran/defusedxml

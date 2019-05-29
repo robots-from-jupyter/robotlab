@@ -1,0 +1,47 @@
+{% set name = "genson" %}
+{% set version = "1.1.0" %}
+{% set bundle = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash = "7557f5c989ddc194a4dbdfc828520d911922f932dc076c7e850774162f61d6d5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.{{ bundle }}
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ bundle }}
+  {{ hash_type }}: {{ hash }}
+
+build:
+  entry_points:
+    - genson = genson.cli:main
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+
+  run:
+    - python
+
+test:
+  imports:
+    - genson
+
+  commands:
+    - genson --help
+
+about:
+  home: https://github.com/wolverdude/genson/
+  license: MIT
+  license_file: LICENSE
+  license_family: MIT
+  summary: 'GenSON is a powerful, user-friendly JSON Schema generator.'
+  dev_url: https://github.com/wolverdude/genson/
+
+extra:
+  recipe-maintainers:
+    - pmlandwehr
