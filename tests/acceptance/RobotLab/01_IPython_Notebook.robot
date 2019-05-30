@@ -26,7 +26,7 @@ Can RobotLab make an IPython Notebook?
     Wait Until Element Does Not Contain    css:.jp-InputPrompt    [*]:    timeout=20s
     Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
-    Page Should Contain    Hello World
+    Wait Until Page Contains    Hello World
     Execute JupyterLab Command    Save Notebook
     Capture Page Screenshot    ${prefix}_09_save.png
     Execute JupyterLab Command    Close All

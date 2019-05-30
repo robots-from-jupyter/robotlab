@@ -39,7 +39,7 @@ The Robot Popup Should Contain
     Click Link    ${document}
     Sleep    2s
     Select Window    Jupyter ${document}
-    Page Should Contain    ${msg}
+    Wait Until Page Contains    ${msg}
     Capture Page Screenshot    ${prefix}_10_${document.lower()}.png
     Close Window
     Select Window    JupyterLab
