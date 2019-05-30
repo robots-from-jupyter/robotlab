@@ -35,7 +35,6 @@ Can RobotLab make a Robot Notebook?
 The Robot Popup Should Contain
     [Arguments]    ${prefix}    ${document}    ${msg}
     [Documentation]    With an open Robot Notebook, take a look at the log or report
-    Wait Until Page Contains    ${document}    timeout=20s
     Click Link    ${document}
     Sleep    2s
     Select Window    Jupyter ${document}
