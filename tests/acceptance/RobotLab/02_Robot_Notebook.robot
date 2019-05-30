@@ -26,8 +26,8 @@ Can RobotLab make a Robot Notebook?
     Wait Until Element Does Not Contain    css:.jp-InputPrompt    [*]:    timeout=20s
     Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_03_execute_result.png
-    The Robot Popup Should Contain    ${prefix}    Log    1 passed, 0 failed
     The Robot Popup Should Contain    ${prefix}    Report    All tests passed
+    The Robot Popup Should Contain    ${prefix}    Log    1 passed, 0 failed
     Execute JupyterLab Command    Save Notebook
     Capture Page Screenshot    ${prefix}_09_save.png
     Execute JupyterLab Command    Close All
@@ -35,7 +35,7 @@ Can RobotLab make a Robot Notebook?
 The Robot Popup Should Contain
     [Arguments]    ${prefix}    ${document}    ${msg}
     [Documentation]    With an open Robot Notebook, take a look at the log or report
-    Sleep    2s
+    Wait Until Page Contains    ${document}    timeout=20s
     Click Link    ${document}
     Sleep    2s
     Select Window    Jupyter ${document}

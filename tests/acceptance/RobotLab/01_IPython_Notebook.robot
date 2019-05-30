@@ -22,11 +22,8 @@ Can RobotLab make an IPython Notebook?
     Capture Page Screenshot    ${prefix}_01_notebook.png
     Add and Run JupyterLab Code Cell    print("Hello" + " World")
     Capture Page Screenshot    ${prefix}_02_execute.png
-    Wait Until JupyterLab Kernel Is Idle
-    Wait Until Element Does Not Contain    css:.jp-InputPrompt    [*]:    timeout=20s
-    Wait Until JupyterLab Kernel Is Idle
+    Wait Until Page Contains    Hello World    timeout=20s
     Capture Page Screenshot    ${prefix}_03_execute_result.png
-    Wait Until Page Contains    Hello World
     Execute JupyterLab Command    Save Notebook
     Capture Page Screenshot    ${prefix}_09_save.png
     Execute JupyterLab Command    Close All
