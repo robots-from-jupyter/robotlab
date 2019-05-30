@@ -7,6 +7,13 @@ steps:
 
   - script: >
       python -m scripts.build conda
+      pytz
+      strict-rfc3339
+      defusedxml
+      genson
+      pygments
+      nbconvert
+      parso
       pyshortcuts
       jsonpointer
       rfc3987
