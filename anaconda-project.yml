@@ -141,8 +141,8 @@ env_specs:
   _robots_from_jupyter:
     packages:
     - black
-    - conda >=4.6,<4.7
-    - conda-build >=3.18.2,<3.19
+    - conda >=4.7.11,<4.8
+    - conda-build >=3.18.9,<3.19
     - conda-verify
     - constructor >=2.3,<2.4
     - flake8

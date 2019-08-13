@@ -7,9 +7,9 @@ steps:
         updateConda: false
         environmentName: _robots_from_jupyter
         packageSpecs: >
-          conda-build>=3.18.2,<3.19
+          conda-build>=3.18.9,<3.19
           conda-verify
-          conda>=4.6,<4.7
+          conda>=4.7.11,<4.8
           constructor
           geckodriver
           pillow
@@ -26,9 +26,9 @@ steps:
         updateConda: false
         environmentName: _robots_from_jupyter
         packageSpecs: >
-          conda-build>=3.18.2,<3.19
+          conda-build>=3.18.9,<3.19
           conda-verify
-          conda>=4.6,<4.7
+          conda>=4.7.11,<4.8
           constructor
           geckodriver
           pillow>=6,<6.1
