@@ -89,7 +89,6 @@ env_specs:
     channels:
     - ./_artifacts/conda-bld
     - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
     - https://conda.anaconda.org/conda-forge
     packages:
     - robotframework-jupyterlibrary
@@ -102,7 +101,6 @@ env_specs:
     channels:
     - ./_artifacts/conda-bld
     - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
     - https://conda.anaconda.org/conda-forge
     packages:
     - robotframework-jupyterlibrary
@@ -112,13 +110,12 @@ env_specs:
     channels:
     - ./_artifacts/conda-bld
     - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
     - https://conda.anaconda.org/conda-forge
     packages:
-    - jupyterlab >=0.35,<0.36
-    - nodejs >=8,<9
+    - jupyterlab ==1.1.3
+    - nodejs >=11,<12
     - pyshortcuts
-    - python >=3.6,<3.7
+    - python >=3.7,<3.8.0a0
     - restinstance
     - robotframework-seleniumscreenshots
     - robotkernel
@@ -137,18 +134,17 @@ env_specs:
   _robots_from_jupyter:
     packages:
     - black
-    - conda >=4.5.11,<4.6
-    - conda-build >=3.15,<3.16
+    - conda >=4.7.12,<4.8
+    - conda-build >=3.18.9,<3.19
     - conda-verify
-    - constructor >=2.3,<2.4
+    - constructor >=3,<3.1
     - flake8
     - geckodriver
-    - python >=3.6,<3.7
-    - python-chromedriver-binary ==2.46
+    - python >=3.7,<3.8.0a0
+    - python-chromedriver-binary
     - robotframework
     - robotframework-lint
     - robotframework-seleniumlibrary
     channels:
     - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
     - https://conda.anaconda.org/conda-forge

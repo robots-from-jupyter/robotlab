@@ -1,14 +1,14 @@
 package:
   name: {% set name = "robotkernel" %}{{ name }}
-  version: {% set version = "1.0rc1" %}{{ version }}
+  version: {% set version = "1.0" %}{{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 7914dbb25efb70b2392f6864c554b057936826f8341868d6ece88f3bc3094e27
 
 build:
+  noarch: python
   number: 0
-  skip: true  # [py<36]
   script:
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
   entry_points:

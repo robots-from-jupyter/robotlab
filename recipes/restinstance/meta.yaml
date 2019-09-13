@@ -1,12 +1,13 @@
 package:
   name: {% set name = "RESTinstance" %}{{ name|lower }}
-  version: {% set version = "1.0.0rc4" %}{{ version }}
+  version: {% set version = "1.0.2" %}{{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e60e613125f013511387dc3cc3b1342abcbf195409a148cac1b4a8be191e6621
+  sha256: badb33f
 
 build:
+  noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
 

@@ -7,9 +7,8 @@ post_install: post_install.{{ script_ext }}
 channels:
   - {{ build_channel }}
   - https://repo.anaconda.com/pkgs/main
-  - https://repo.anaconda.com/pkgs/free
   - https://conda.anaconda.org/conda-forge
-  - https://conda.anaconda.org/pythonnet
+  {% if platform == "windows" %}- https://conda.anaconda.org/pythonnet{% endif %}
 
 specs:
   - conda
@@ -27,8 +26,7 @@ specs:
   - robotframework-lint
   - robotframework-seleniumlibrary
   - robotframework-seleniumscreenshots
-  - robotframeworklexer
-  - robotkernel =={{ version }}
+  - robotkernel =={{ rk_version }}
   - robotlab =={{ version }}
   {% if platform == "darwin" %}- python.app{% endif %}
   {% if platform == "windows" %}- robotframework-whitelibrary{% endif %}

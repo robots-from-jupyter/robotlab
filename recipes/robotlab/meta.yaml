@@ -1,15 +1,15 @@
-{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@2.3.1" %}
-{% set lab_min = "0.35.4" %}
-{% set lab_max = "0.36" %}
+{% set robotkernel = "1.0" %}
+{% set jupyterlab = "1.1.3" %}
+{% set extensions = "@jupyterlab/toc@1.0.1 @jupyter-widgets/jupyterlab-manager@1.0.2 jupyterlab_robotmode@2.4.0" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "1.0rc1" %}{{ version }}
+  version: {% set version = "2019.9.0" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
-  - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ version }}.tar.gz
+  - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
     sha256: 5eed6419990ca3e1962528d0b37b9d8898020b752bd0646baea5db86f107893e
     folder: robotkernel
 
@@ -46,13 +46,13 @@ build:
 requirements:
   host:
     - jupyterlab >={{ lab_min }},<{{ lab_max }}
-    - nodejs >=8,<9
+    - nodejs >=11,<12
     - pip
     - python
   run:
     - ipywidgets
-    - jupyterlab >={{ lab_min }},<{{ lab_max }}
-    - nodejs >=8,<9
+    - jupyterlab =={{ jupyterlab }}
+    - nodejs >=11,<12
     - pyshortcuts
     - python
     - robotkernel >={{ version }}

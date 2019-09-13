@@ -32,14 +32,14 @@ ROBOTLAB_DIR = ROOT / "robotlab"
 README = ROOT / "README.md"
 
 # for easy overriding in CI
-PY_MIN = os.environ.get("PY_MIN", "3.6")
-PY_MAX = os.environ.get("PY_MAX", "3.7")
-NODE_MIN = os.environ.get("NODE_MIN", "8")
-NODE_MAX = os.environ.get("NODE_MAX", "9")
-RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.1")
-VERSION = os.environ.get("ROBOTLAB_VERSION", "1.0rc1")
+PY_MIN = os.environ.get("PY_MIN", "3.7")
+PY_MAX = os.environ.get("PY_MAX", "3.8.0a0")
+NODE_MIN = os.environ.get("NODE_MIN", "11")
+NODE_MAX = os.environ.get("NODE_MAX", "12")
+RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.2")
+VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.0")
 CHROMEDRIVER_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "2.45")
-IPYWIDGETS_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "7.4.2")
+IPYWIDGETS_VERSION = os.environ.get("IPYWIDGETS_VERSION", "7.5.1")
 
 
 def run(args, **kwargs):
@@ -51,6 +51,7 @@ def run(args, **kwargs):
         p.wait()
     except KeyboardInterrupt as err:
         p.kill()
+        p.wait()
         raise err
 
     return p.returncode
