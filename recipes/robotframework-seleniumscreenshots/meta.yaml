@@ -1,9 +1,6 @@
-{% set name = "robotframework-seleniumscreenshots" %}
-{% set version = "0.9.5" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: '{% set name = "robotframework-seleniumscreenshots" %}{{ name }}'
+  version: '{% set version = "0.9.5" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
@@ -11,10 +8,10 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+  script: {{ PYTHON }} -m pip install --no-deps -vvv .
 
 requirements:
-  build:
+  host:
     - pip
     - python
   run:

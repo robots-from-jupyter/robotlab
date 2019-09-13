@@ -1,9 +1,6 @@
-{% set name = "robotframework-jupyterlibrary" %}
-{% set version = "0.2.0" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: '{% set name = "robotframework-jupyterlibrary" %}{{ name }}'
+  version: '{% set version = "0.2.0" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
@@ -12,10 +9,10 @@ source:
 build:
   noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+  script: {{ PYTHON }} -m pip install -vv .
 
 requirements:
-  build:
+  host:
     - pip
     - python
   run:

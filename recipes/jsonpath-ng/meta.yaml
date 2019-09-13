@@ -1,6 +1,6 @@
 package:
-  name: {% set name = "jsonpath-ng" %}{{ name|lower }}
-  version: {% set version = "1.4.3" %}{{ version }}
+  name: '{% set name = "jsonpath-ng" %}{{ name }}'
+  version: '{% set version = "1.4.3" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
@@ -9,10 +9,10 @@ source:
 build:
   noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+  script: {{ PYTHON }} -m pip install --no-deps -vv .
 
 requirements:
-  build:
+  host:
     - pip
     - python
   run:
@@ -29,5 +29,5 @@ about:
   home: https://github.com/h2non/jsonpath-ng
   license: Apache-2.0
   license_family: Apache
-  license_file: {{ environ["RECIPE_DIR"] }}/apache-2.0.txt
+  license_file: apache-2.0.txt
   summary: Finally, a JSONPath implementation for Python that aims to be standard compliant. That's all. Enjoy it.

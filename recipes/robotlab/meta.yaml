@@ -10,7 +10,7 @@ source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
-    sha256: 5eed6419990ca3e1962528d0b37b9d8898020b752bd0646baea5db86f107893e
+    sha256: 93819e902be42895b02d8142c6fb13f5a88c69fdc49a7b49a15a65371d80547d
     folder: robotkernel
 
 build:
@@ -45,7 +45,7 @@ build:
 
 requirements:
   host:
-    - jupyterlab >={{ lab_min }},<{{ lab_max }}
+    - jupyterlab =={{ jupyterlab }}
     - nodejs >=11,<12
     - pip
     - python
@@ -55,7 +55,7 @@ requirements:
     - nodejs >=11,<12
     - pyshortcuts
     - python
-    - robotkernel >={{ version }}
+    - robotkernel >={{ robotkernel }}
 
 test:
   imports:

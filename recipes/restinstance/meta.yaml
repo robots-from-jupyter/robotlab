@@ -1,18 +1,22 @@
 package:
-  name: {% set name = "RESTinstance" %}{{ name|lower }}
-  version: {% set version = "1.0.2" %}{{ version }}
+  name: '{% set name = "RESTinstance" %}{{ name|lower }}'
+  version: '{% set version = "1.0.2" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: badb33f
+  sha256: c241e44e51c7a793c7c5ca0476caac2b703cc78da8041ab05ded965ce49bc187
 
 build:
   noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+  script: {{ PYTHON }} -m pip install --no-deps -vv .
+  patches:
+    - 0001-setup-entry-point.patch
 
 requirements:
   build:
+    - patch
+  host:
     - pip
     - python
   run:
@@ -37,6 +41,6 @@ about:
   home: https://asyrjasalo.github.io/RESTinstance
   license: Apache-2.0
   license_family: Apache
-  license_file: LICENSE
+  license_file: apache-2.0.txt
   summary: Robot Framework test library for (RESTful) JSON APIs
   dev_url: https://github.com/asyrjasalo/RESTinstance
