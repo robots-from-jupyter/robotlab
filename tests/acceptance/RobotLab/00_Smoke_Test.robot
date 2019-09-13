@@ -4,9 +4,6 @@ Test Template     Does RobotLab Load?
 Library           JupyterLibrary
 
 *** Test Cases ***
-Chrome
-    headlesschrome
-
 Firefox
     headlessfirefox
 

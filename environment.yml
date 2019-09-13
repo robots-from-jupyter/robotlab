@@ -10,6 +10,7 @@ dependencies:
   - conda-build >=3.18.9,<3.19
   - conda-verify
   - constructor >=3,<3.1
+  - firefox ==68.0.2
   - flake8
   - geckodriver
   - python >=3.7,<3.8.0a0

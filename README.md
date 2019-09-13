@@ -78,14 +78,18 @@ showcase some of the features of using Robot Framework interactively.
 - `robotframework-lint` for helping you write clean robot syntax
 - `RESTInstance` for testing REST APIs, including swagger
 
-## other ****drivers
-### webdriver
-It's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge
+## On Browsers and WebDrivers
+RobotLab includes Mozilla Firefox and `geckodriver`, with versions that will be
+supported for _years_, not _months_, by a team that is committed to open source
+and web standards.
+
+### webdriver for Microsoft Internet Explorer
+It's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but...
   - it but can't be redistributed
   - it has to match the version of Edge/Explorer exactly
 
-### chromedriver
-It's also pretty easy to get [chromedriver][] for Google Chrome, but
+### chromedriver for Google Chrome
+It's also pretty easy to get [chromedriver][] for Google Chrome, but...
   - it has to match the version of Chrome exactly
 
 [anaconda-project]: https://github.com/anaconda-platform/anaconda-project

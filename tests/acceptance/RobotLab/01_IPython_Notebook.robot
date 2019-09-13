@@ -4,9 +4,6 @@ Test Template     Can RobotLab make an IPython Notebook?
 Library           JupyterLibrary
 
 *** Test Cases ***
-Chrome
-    headlesschrome
-
 Firefox
     headlessfirefox
 

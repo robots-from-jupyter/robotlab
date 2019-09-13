@@ -79,16 +79,17 @@ def build_constructor():
     """
     construct = CONSTRUCT_IN.render(
         build_channel=CONDA_OUT.as_uri(),
-        py_min=PY_MIN,
-        py_max=PY_MAX,
-        node_min=NODE_MIN,
+        ff_version=FIREFOX_VERSION,
+        ipyw_version=IPYWIDGETS_VERSION,
         node_max=NODE_MAX,
+        node_min=NODE_MIN,
+        platform=PLATFORM,
+        py_max=PY_MAX,
+        py_min=PY_MIN,
         rf_version=RF_VERSION,
         rk_version=RK_VERSION,
-        version=VERSION,
-        ipyw_version=IPYWIDGETS_VERSION,
         script_ext=SCRIPT_EXT,
-        platform=PLATFORM,
+        version=VERSION,
     )
 
     CONSTRUCT.write_text(construct)
