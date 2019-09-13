@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Try out some browsers with RobotLab Notebooks
+Documentation     Try out Robot Notebooks
 Test Template     Can RobotLab make a Robot Notebook?
 Library           JupyterLibrary
 
