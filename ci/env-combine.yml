@@ -1,0 +1,8 @@
+name: robotlab-combine
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - robotframework

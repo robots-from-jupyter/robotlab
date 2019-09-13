@@ -1,89 +1,76 @@
-name: robocon-2019-workshop
+name: robotlab
 
 commands:
-  build:
-    unix: python -m scripts.build
-    env_spec: _build
+  integrity:
+    unix: python -m scripts.integrity
+    env_spec: _qa
 
   lint:
     unix: python -m scripts.lint
-    env_spec: _build
+    env_spec: _qa
 
-  integrity:
-    unix: python -m scripts.integrity
-    env_spec: _build
-
-  build:win:
+  build:
+    unix: python -m scripts.build
     windows: python -m scripts.build
-    env_spec: _build_win
+    env_spec: _robots_from_jupyter
 
   test:
     unix: python -m scripts.test
-    env_spec: _test
-
-  test:win:
     windows: python -m scripts.test
-    env_spec: _test_win
+    env_spec: _test
 
   combine:
     unix: python -m scripts.combine
-    env_spec: _build
+    env_spec: _qa
 
   robotlab:setup:
+    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps -vv
+    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps -vv
     env_spec: robotlab-dev
-    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
-    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
-
-  robotlab:setup:win:
-    env_spec: robotlab-dev-win
-    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
-
-  robotlab:shortcuts:
-    env_spec: robotlab-dev
-    unix: robotlab-shortcuts
-
-  robotlab:launch:
-    env_spec: robotlab-dev
-    unix: python ./robotlab/src/robotlab/launch.py
-
-  robotlab:launch:win:
-    env_spec: robotlab-dev-win
-    windows: python -m robotlab.launch
-
-  robotlab:build:
-    env_spec: robotlab-dev
-    unix: robotlab build
-
-  robotlab:build:win:
-    env_spec: robotlab-dev-win
-    windows: robotlab build
 
   robotlab:
-    env_spec: robotlab-dev
     unix: robotlab
-
-  robotlab:win:
-    env_spec: robotlab-dev-win
     windows: robotlab
+    env_spec: robotlab-dev
+
+  robotlab:launch:
+    unix: python -m robotlab.launch
+    windows: python -m robotlab.launch
+    env_spec: robotlab-dev
+
+  robotlab:build:
+    unix: robotlab build
+    windows: robotlab build
+    env_spec: robotlab-dev
+
 
 env_specs:
-  _build:
-    platforms:
-    - linux-64
-    - osx-64
-    inherit_from:
-    - _robots_from_jupyter
+  _robots_from_jupyter:
+    description: the main build/test environment
+    packages:
+      - conda >=4.7.12,<4.8
+      - conda-build >=3.18.9,<3.19
+      - conda-verify
+      - constructor >=3,<3.1
+      - firefox ==68.0.2
+      - geckodriver
+      - python >=3.7,<3.8.0a0
+      - ripgrep
+      - robotframework
+      - robotframework-seleniumlibrary
+    channels:
+    - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
 
-  _build_win:
+  _qa:
     platforms:
-    - win-64
-    inherit_from:
-    - _robots_from_jupyter
+      - linux-64
+    packages:
+      - black
+      - flake8
+      - robotframework-lint
 
   _test:
-    platforms:
-    - linux-64
-    - osx-64
     inherit_from:
     - _robots_from_jupyter
     channels:
@@ -92,21 +79,9 @@ env_specs:
     - https://conda.anaconda.org/anaconda
     packages:
     - robotframework-jupyterlibrary
-
-  _test_win:
-    platforms:
-    - win-64
-    inherit_from:
-    - _robots_from_jupyter
-    channels:
-    - ./_artifacts/conda-bld
-    - https://conda.anaconda.org/conda-forge
-    - https://conda.anaconda.org/anaconda
-    packages:
-    - robotframework-jupyterlibrary
-
 
   robotlab-dev:
+    description: basically what goes in the constructor for interactive dev/test
     channels:
     - ./_artifacts/conda-bld
     - https://conda.anaconda.org/conda-forge
@@ -123,28 +98,11 @@ env_specs:
   robotlab-dev-win:
     inherit_from:
     - robotlab-dev
-
+    packages:
+    - robotframework-whitelibrary
 
   robotlab-test:
     inherit_from:
     - robotlab-dev
     packages:
     - robotlab
-
-  _robots_from_jupyter:
-    packages:
-    - black
-    - conda >=4.7.12,<4.8
-    - conda-build >=3.18.9,<3.19
-    - conda-verify
-    - constructor >=3,<3.1
-    - flake8
-    - firefox ==68.0.2
-    - geckodriver
-    - python >=3.7,<3.8.0a0
-    - robotframework
-    - robotframework-lint
-    - robotframework-seleniumlibrary
-    channels:
-    - https://conda.anaconda.org/conda-forge
-    - https://conda.anaconda.org/anaconda

@@ -8,14 +8,47 @@ jobs:
       vmImage: ${{ parameters.vmImage }}
 
     steps:
-      - template: steps.browser.yml
-        parameters:
-          name: ${{ parameters.name }}
+      - script: conda env update -n base --file environment.yml
+        displayName: install full build/test environment
 
-      - template: steps.conda.test.yml
-        parameters:
-          name: ${{ parameters.name }}
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: noarch conda packages
+          targetPath: _artifacts/conda-bld/noarch
+        displayName: restore noarch packages
 
-      - template: steps.common.yml
-        parameters:
-          name: ${{ parameters.name }}
+      - script: python -m scripts.build conda
+        displayName: build remaining packages
+
+      - script: python -m scripts.build constructor
+        displayName: build installer
+
+      - script: conda install -c _artifacts/conda-bld -c conda-forge robotframework-jupyterlibrary
+        displayName: install built test tools
+
+      - script: python -m scripts.test
+        displayName: acceptance tests
+
+      - ${{ if eq(parameters.name, 'MacOSX') }}:
+        - script: chmod -R 777 _artifacts
+          displayName: fix artifact permissions
+
+      - task: PublishTestResults@2
+        displayName: publish test results
+        inputs:
+          testResultsFiles: _artifacts/test_output/**/*.xunit.xml
+        condition: always()
+
+      - task: PublishPipelineArtifact@0
+        displayName: publish ${{ parameters.name }} robot output
+        inputs:
+          targetPath: _artifacts/test_output
+          artifactName: Robot Output ${{ parameters.name }}
+        condition: always()
+
+      - task: PublishBuildArtifacts@1
+        displayName: publish installer
+        inputs:
+          PathtoPublish: _artifacts/constructor
+          ArtifactName: RobotLab for ${{ parameters.name }}
+        condition: succeeded()

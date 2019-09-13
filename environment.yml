@@ -5,15 +5,13 @@ channels:
   - https://conda.anaconda.org/anaconda
 
 dependencies:
-  - black
   - conda >=4.7.12,<4.8
   - conda-build >=3.18.9,<3.19
   - conda-verify
   - constructor >=3,<3.1
   - firefox ==68.0.2
-  - flake8
   - geckodriver
   - python >=3.7,<3.8.0a0
+  - ripgrep
   - robotframework
-  - robotframework-lint
   - robotframework-seleniumlibrary

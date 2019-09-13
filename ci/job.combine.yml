@@ -12,9 +12,8 @@ jobs:
       - MacOSX
       - Windows
     steps:
-      - template: steps.conda.robot.yml
-        parameters:
-          name: Linux
+      - script: conda env update -n base --file ci/env-combine.yml
+        displayName: install full build/test environment
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
