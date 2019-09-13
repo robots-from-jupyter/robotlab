@@ -9,6 +9,7 @@ from . import (
     CONSTRUCT_DIR,
     CONSTRUCT_OUT,
     CONSTRUCT,
+    FIREFOX_VERSION,
     IPYWIDGETS_VERSION,
     NODE_MAX,
     NODE_MIN,

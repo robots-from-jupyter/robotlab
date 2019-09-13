@@ -19,7 +19,6 @@ jobs:
 
       - script: |-
           python -m scripts.build conda \
-            jsonpath-ng \
             restinstance \
             robotframework-jupyterlibrary \
             robotframework-seleniumscreenshots \

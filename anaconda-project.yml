@@ -63,8 +63,9 @@ env_specs:
     - https://conda.anaconda.org/anaconda
 
   _qa:
-    platforms:
-      - linux-64
+    channels:
+    - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
     packages:
       - black
       - flake8
