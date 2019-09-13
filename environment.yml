@@ -1,8 +1,8 @@
 name: _robots_from_jupyter
 
 channels:
-  - https://repo.anaconda.com/pkgs/main
   - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
 
 dependencies:
   - black
@@ -13,7 +13,6 @@ dependencies:
   - flake8
   - geckodriver
   - python >=3.7,<3.8.0a0
-  - python-chromedriver-binary
   - robotframework
   - robotframework-lint
   - robotframework-seleniumlibrary

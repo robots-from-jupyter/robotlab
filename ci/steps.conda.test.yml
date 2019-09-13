@@ -2,7 +2,7 @@ steps:
   - ${{ if eq(parameters.name, 'MacOSX') }}:
     - task: CondaEnvironment@1
       inputs:
-        createOptions: -c defaults -c conda-forge
+        createOptions: -c conda-forge -c defaults
         createCustomEnvironment: true
         updateConda: false
         environmentName: _robots_from_jupyter
@@ -13,7 +13,6 @@ steps:
           constructor
           geckodriver
           pillow
-          python-chromedriver-binary>2.46,<74
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.3.1
           robotframework>=3.1
@@ -21,7 +20,7 @@ steps:
   - ${{ if not(eq(parameters.name, 'MacOSX')) }}:
     - task: CondaEnvironment@1
       inputs:
-        createOptions: -c defaults -c conda-forge
+        createOptions: -c conda-forge -c defaults
         createCustomEnvironment: true
         updateConda: false
         environmentName: _robots_from_jupyter
@@ -32,7 +31,6 @@ steps:
           constructor
           geckodriver
           pillow
-          python-chromedriver-binary==2.46
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.3.1
           robotframework>=3.1

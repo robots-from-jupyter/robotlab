@@ -9,3 +9,4 @@ constructor/construct.yaml
 dist/
 envs/
 **/icons/*.png
+constructor/.*

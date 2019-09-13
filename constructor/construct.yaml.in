@@ -6,8 +6,8 @@ post_install: post_install.{{ script_ext }}
 
 channels:
   - {{ build_channel }}
-  - https://repo.anaconda.com/pkgs/main
   - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
   {% if platform == "windows" %}- https://conda.anaconda.org/pythonnet{% endif %}
 
 specs:
@@ -18,7 +18,6 @@ specs:
   - opencv
   - pyshortcuts
   - python >={{ py_min }},<{{ py_max }}
-  - python-chromedriver-binary =76
   - restinstance
   - robotframework
   - robotframework-jupyterlibrary

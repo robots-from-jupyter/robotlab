@@ -73,14 +73,20 @@ In addition to required dependencies a number of extra libraries are included to
 showcase some of the features of using Robot Framework interactively.
 - `JupyterLibrary` for testing Jupyter clients with robotframework
   - `SeleniumLibrary` for controlling browsers
-    - `geckodriver` for interacting with Mozilla Firefox
-    - `chromedriver` for interacting with Chromium and Google Chrome
-    - > it's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge, but
-        can't be redistributed
+    - `geckodriver` for interacting with Mozilla Firefox 57+
 - `opencv` for image-driven testing
 - `robotframework-lint` for helping you write clean robot syntax
 - `RESTInstance` for testing REST APIs, including swagger
 
+## other ****drivers
+### webdriver
+It's pretty easy to [get `webdriver`][webdriver] for Microsoft Edge
+  - it but can't be redistributed
+  - it has to match the version of Edge/Explorer exactly
+
+### chromedriver
+It's also pretty easy to get [chromedriver][] for Google Chrome, but
+  - it has to match the version of Chrome exactly
 
 [anaconda-project]: https://github.com/anaconda-platform/anaconda-project
 [conda-forge]: https://github.com/conda-forge
@@ -92,3 +98,4 @@ showcase some of the features of using Robot Framework interactively.
 [Miniconda]: https://conda.io/miniconda.html
 [robotkernel]: https://github.com/robots-from-jupyter/robotkernel
 [webdriver]: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads
+[chromedriver]: https://chromedriver.chromium.org/downloads

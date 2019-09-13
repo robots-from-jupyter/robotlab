@@ -1,8 +1,6 @@
 from . import run, TEST_DIR, TEST_OUT, PLATFORM
 import sys
 
-import chromedriver_binary  # noqa
-
 
 def run_tests(robot_args):
     args = (

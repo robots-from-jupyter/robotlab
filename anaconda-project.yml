@@ -88,8 +88,8 @@ env_specs:
     - _robots_from_jupyter
     channels:
     - ./_artifacts/conda-bld
-    - https://repo.anaconda.com/pkgs/main
     - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
     packages:
     - robotframework-jupyterlibrary
 
@@ -100,8 +100,8 @@ env_specs:
     - _robots_from_jupyter
     channels:
     - ./_artifacts/conda-bld
-    - https://repo.anaconda.com/pkgs/main
     - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
     packages:
     - robotframework-jupyterlibrary
 
@@ -109,8 +109,8 @@ env_specs:
   robotlab-dev:
     channels:
     - ./_artifacts/conda-bld
-    - https://repo.anaconda.com/pkgs/main
     - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
     packages:
     - jupyterlab ==1.1.3
     - nodejs >=11,<12
@@ -141,10 +141,9 @@ env_specs:
     - flake8
     - geckodriver
     - python >=3.7,<3.8.0a0
-    - python-chromedriver-binary
     - robotframework
     - robotframework-lint
     - robotframework-seleniumlibrary
     channels:
-    - https://repo.anaconda.com/pkgs/main
     - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
