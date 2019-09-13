@@ -7,10 +7,6 @@ jobs:
     condition: always()
     pool:
       vmImage: ${{ parameters.vmImage }}
-    dependsOn:
-      - Linux
-      - MacOSX
-      - Windows
     steps:
       - script: conda env update -n base --file ci/env-combine.yml
         displayName: install full build/test environment
