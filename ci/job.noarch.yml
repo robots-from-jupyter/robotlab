@@ -8,6 +8,9 @@ jobs:
       vmImage: ${{ parameters.vmImage }}
 
     steps:
+      - bash: echo "##vso[task.prependpath]$CONDA/bin"
+        displayName: conda $PATH
+
       - script: conda env update -n base --file ci/env-noarch.yml
         displayName: install minimal build/qa environment
 

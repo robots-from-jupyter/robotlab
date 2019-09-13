@@ -8,29 +8,37 @@ jobs:
     pool:
       vmImage: ${{ parameters.vmImage }}
     steps:
+      - bash: echo "##vso[task.prependpath]$CONDA/bin"
+        displayName: conda $PATH
+
       - script: conda env update -n base --file ci/env-combine.yml
         displayName: install full build/test environment
+
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
           artifactName: Robot Output Linux
           targetPath: _artifacts/test_output
         displayName: Restore Robot Output Linux
+
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
           artifactName: Robot Output MacOSX
           targetPath: _artifacts/test_output
         displayName: Restore Robot Output MacOSX
+
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
           artifactName: Robot Output Windows
           targetPath: _artifacts/test_output
         displayName: Restore Robot Output Windows
+
       - script: python -m scripts.combine
         condition: always()
         displayName: Rebot
+
       - task: PublishBuildArtifacts@1
         condition: always()
         displayName: Publish Combined Robot Output
