@@ -6,7 +6,6 @@ from . import ROOT, RECIPE_DIR, ROBOTLAB_DIR, SCRIPTS_DIR, TEST_DIR
 META_PATTERN = r""" set version = "([\d\.rc]+)" """
 
 VERSIONS = {
-    RECIPE_DIR / "robotkernel" / "meta.yaml": META_PATTERN,
     RECIPE_DIR / "robotlab" / "meta.yaml": META_PATTERN,
     ROBOTLAB_DIR / "setup.cfg": r"version = ([\d\.rc]+)",
     ROBOTLAB_DIR

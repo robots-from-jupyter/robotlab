@@ -1,2 +1,1 @@
-# Not strictly meaningful: currently tied to robotkernel version
-__version__ = "1.0rc1"
+__version__ = "2019.9.0"

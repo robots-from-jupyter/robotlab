@@ -39,7 +39,6 @@ NODE_MAX = os.environ.get("NODE_MAX", "12")
 RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.2")
 RK_VERSION = os.environ.get("ROBOTKERNEL_VERSION", "1.0")
 VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.0")
-CHROMEDRIVER_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "2.45")
 IPYWIDGETS_VERSION = os.environ.get("IPYWIDGETS_VERSION", "7.5.1")
 
 

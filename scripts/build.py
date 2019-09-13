@@ -3,7 +3,6 @@ import sys
 from jinja2 import Template
 
 from . import (
-    CHROMEDRIVER_VERSION,
     CONDA_CACHE,
     CONDA_OUT,
     CONSTRUCT_CACHE,
@@ -87,7 +86,6 @@ def build_constructor():
         rf_version=RF_VERSION,
         rk_version=RK_VERSION,
         version=VERSION,
-        cd_version=CHROMEDRIVER_VERSION,
         ipyw_version=IPYWIDGETS_VERSION,
         script_ext=SCRIPT_EXT,
         platform=PLATFORM,
