@@ -43,10 +43,16 @@ commands:
     windows: robotlab build
     env_spec: robotlab-dev
 
+channels:
+- https://conda.anaconda.org/conda-forge
+- https://conda.anaconda.org/anaconda
 
 env_specs:
   _robots_from_jupyter:
     description: the main build/test environment
+    channels:
+    - https://conda.anaconda.org/conda-forge
+    - https://conda.anaconda.org/anaconda
     packages:
       - conda >=4.7.12,<4.8
       - conda-build >=3.18.9,<3.19
@@ -54,18 +60,13 @@ env_specs:
       - constructor >=3,<3.1
       - firefox ==68.0.2
       - geckodriver
+      - pillow
       - python >=3.7,<3.8.0a0
       - ripgrep
       - robotframework
       - robotframework-seleniumlibrary
-    channels:
-    - https://conda.anaconda.org/conda-forge
-    - https://conda.anaconda.org/anaconda
 
   _qa:
-    channels:
-    - https://conda.anaconda.org/conda-forge
-    - https://conda.anaconda.org/anaconda
     packages:
       - black
       - flake8
@@ -76,8 +77,6 @@ env_specs:
     - _robots_from_jupyter
     channels:
     - ./_artifacts/conda-bld
-    - https://conda.anaconda.org/conda-forge
-    - https://conda.anaconda.org/anaconda
     packages:
     - robotframework-jupyterlibrary
 
@@ -85,8 +84,6 @@ env_specs:
     description: basically what goes in the constructor for interactive dev/test
     channels:
     - ./_artifacts/conda-bld
-    - https://conda.anaconda.org/conda-forge
-    - https://conda.anaconda.org/anaconda
     packages:
     - jupyterlab ==1.1.3
     - nodejs >=11,<12
