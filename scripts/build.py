@@ -128,7 +128,7 @@ def build_lab():
         ]
     )
     rc = rc or run(
-        [*JP, "lab", "build", *app_dir, "--dev-build=False", "--minimize=True"]
+        [*JP, "lab", "build", *app_dir, "--dev-build=False", "--minimize=True", "--name='RobotLab'"]
     )
 
     return rc
