@@ -40,16 +40,16 @@ jobs:
           targetPath: _artifacts/conda-bld/noarch
         displayName: restore noarch packages
 
-      - script: python -m scripts.build conda
+      - script: conda run python -m scripts.build conda
         displayName: build remaining packages
 
-      - script: python -m scripts.build constructor
+      - script: conda run python -m scripts.build constructor
         displayName: build installer
 
       - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
         displayName: install built test tools
 
-      - script: python -m scripts.test
+      - script: conda run python -m scripts.test
         displayName: acceptance tests
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:
