@@ -1,6 +1,7 @@
 parameters:
   name: Linux
   vmImage: ubuntu-16.04
+  activate: ""
 
 jobs:
   - job: ${{ parameters.name }}
@@ -42,16 +43,16 @@ jobs:
           targetPath: _artifacts/app_dir
         displayName: restore jupyterlab
 
-      - script: conda run python -m scripts.build conda
+      - script: ${{ parameters.activate }} python -m scripts.build conda
         displayName: build remaining packages
 
-      - script: conda run python -m scripts.build constructor
+      - script: ${{ parameters.activate }} python -m scripts.build constructor
         displayName: build installer
 
       - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
         displayName: install built test tools
 
-      - script: conda run python -m scripts.test --headless
+      - script: ${{ parameters.activate }} python -m scripts.test --headless
         displayName: acceptance tests
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:
