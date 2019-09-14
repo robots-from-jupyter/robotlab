@@ -1,10 +1,14 @@
+trigger: [master]
+
+pr: [master]
+
 stages:
-  - stage: noarch
+  - stage: common
     jobs:
       - template: ci/job.noarch.yml
 
-  - stage: build
-    dependsOn: Noarch
+  - stage: platforms
+    dependsOn: common
     condition: succeeded()
     jobs:
       - template: ci/job.test.yml
@@ -23,11 +27,7 @@ stages:
           vmImage: vs2017-win2016
 
   - stage: combine
-    dependsOn: build
+    dependsOn: platforms
     condition: always()
     jobs:
     - template: ci/job.combine.yml
-
-trigger: [master]
-
-pr: [master]
