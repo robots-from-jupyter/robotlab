@@ -25,8 +25,14 @@ jobs:
         - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
           displayName: conda %PATH%
 
-      - script: conda env update -n base --file environment.yml
+      - script: conda env update -n base --file environment.yml --quiet
         displayName: install full build/test environment
+
+      - script: conda info --json
+        displayName: emit conda info
+
+      - script: conda list --explicit
+        displayName: list conda packages
 
       - task: DownloadPipelineArtifact@0
         inputs:
@@ -40,7 +46,7 @@ jobs:
       - script: python -m scripts.build constructor
         displayName: build installer
 
-      - script: conda install -c _artifacts/conda-bld -c conda-forge robotframework-jupyterlibrary
+      - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
         displayName: install built test tools
 
       - script: python -m scripts.test
