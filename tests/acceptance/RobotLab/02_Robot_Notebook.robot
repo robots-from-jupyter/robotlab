@@ -1,19 +1,13 @@
 *** Settings ***
 Documentation     Try out Robot Notebooks
-Test Template     Can RobotLab make a Robot Notebook?
 Library           JupyterLibrary
+Resource          ../../resources/Browser.robot
 
 *** Test Cases ***
-Firefox
-    headlessfirefox
-
-*** Keywords ***
 Can RobotLab make a Robot Notebook?
-    [Arguments]    ${browser}
     [Documentation]    Try a basic Robot Notebook
-    Set Tags    browser:${browser}
-    ${prefix} =    Set Variable    robot_${browser}_
-    Open JupyterLab    browser=${browser}
+    ${prefix} =    Set Variable    robot_
+    Open RobotLab
     Execute JupyterLab Command    Close All
     Launch a new JupyterLab Document    Robot Framework    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png
@@ -28,6 +22,7 @@ Can RobotLab make a Robot Notebook?
     Sleep    2s
     Capture Page Screenshot    ${prefix}_09_save.png
 
+*** Keywords ***
 The Robot Popup Should Contain
     [Arguments]    ${prefix}    ${document}    ${msg}
     [Documentation]    With an open Robot Notebook, take a look at the log or report

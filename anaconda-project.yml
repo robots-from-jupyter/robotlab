@@ -14,6 +14,11 @@ commands:
     windows: python -m scripts.build
     env_spec: _robots_from_jupyter
 
+  build:lab:
+    unix: python -m scripts.build lab
+    windows: python -m scripts.build lab
+    env_spec: _qa
+
   test:
     unix: python -m scripts.test
     windows: python -m scripts.test
@@ -66,7 +71,15 @@ env_specs:
       - robotframework
       - robotframework-seleniumlibrary
 
+  _lab:
+    packages:
+      - jupyterlab ==1.1.3
+      - nodejs >=11,<12
+      - python >=3.7,<3.8.0a0
+
   _qa:
+    inherit_from:
+      - _lab
     packages:
       - black
       - flake8
@@ -82,13 +95,12 @@ env_specs:
 
   robotlab-dev:
     description: basically what goes in the constructor for interactive dev/test
+    inherit_from:
+      - _lab
     channels:
     - ./_artifacts/conda-bld
     packages:
-    - jupyterlab ==1.1.3
-    - nodejs >=11,<12
     - pyshortcuts
-    - python >=3.7,<3.8.0a0
     - restinstance
     - robotframework-seleniumscreenshots
     - robotkernel

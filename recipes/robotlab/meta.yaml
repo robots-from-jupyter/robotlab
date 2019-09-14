@@ -1,12 +1,13 @@
 {% set robotkernel = "1.0" %}
 {% set jupyterlab = "1.1.3" %}
-{% set extensions = "@jupyterlab/toc@1.0.1 @jupyter-widgets/jupyterlab-manager@1.0.2 jupyterlab_robotmode@2.4.0" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
   version: {% set version = "2019.9.0" %}{{ version }}
 
 source:
+  - path: ../../_artifacts/app_dir
+    folder: app_dir
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
@@ -23,13 +24,12 @@ build:
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
-    - {{ PYTHON }} -m robotlab.labextensionapp install {{ extensions }} --no-build
-    - {{ PYTHON }} -m robotlab.labextensionapp list
-    - {{ PYTHON }} -m robotlab.labapp build
+    - cd {{ SRC_DIR }}
+    - cp -r app_dir {{ PREFIX }}/share/jupyter/robotlab  # [unix]
     - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
+    - copy app_dir {{ PREFIX }}\\share\\jupyter\\robotlab  # [win]
     - rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging  # [win]
     - {{ PYTHON }} -m robotlab.labextensionapp list
-    - cd {{ SRC_DIR }}
     - cd robotkernel
     - cd examples
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]

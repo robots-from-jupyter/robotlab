@@ -11,6 +11,8 @@ from . import (
     CONSTRUCT,
     FIREFOX_VERSION,
     IPYWIDGETS_VERSION,
+    LABEXTENSIONS,
+    LAB_OUT,
     NODE_MAX,
     NODE_MIN,
     PLATFORM,
@@ -111,13 +113,40 @@ def build_constructor():
     )
 
 
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "conda":
-            sys.exit(build_conda(sys.argv[2:]))
-        elif sys.argv[1] == "constructor":
-            sys.exit(build_constructor())
+def build_lab():
+    JP = [sys.executable, "-m", "jupyter"]
+    app_dir = ["--app-dir", LAB_OUT]
 
-    if build_conda() == 0:
-        sys.exit(build_constructor())
-    sys.exit(1)
+    rc = run(
+        [
+            *JP,
+            "labextension",
+            "install",
+            "--no-build",
+            *app_dir,
+            *LABEXTENSIONS,
+        ]
+    )
+    rc = rc or run(
+        [*JP, "lab", "build", *app_dir, "--dev-build=False", "--minimize=True"]
+    )
+
+    return rc
+
+
+if __name__ == "__main__":
+    rc = 1
+
+    if len(sys.argv) > 1:
+        it, rest = sys.argv[1], sys.argv[2:]
+        if it == "lab":
+            rc = build_lab()
+        elif it == "conda":
+            rc = build_conda(sys.argv[2:])
+        elif it == "constructor":
+            rc = build_constructor()
+    else:
+        rc = build_conda()
+        rc = rc or build_constructor()
+
+    sys.exit(rc)

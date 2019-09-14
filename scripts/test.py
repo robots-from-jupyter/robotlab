@@ -1,8 +1,13 @@
-from . import run, TEST_DIR, TEST_OUT, PLATFORM
 import sys
+import os
+
+from . import run, TEST_DIR, TEST_OUT, PLATFORM
 
 
-def run_tests(robot_args):
+def run_tests(robot_args, headless=False):
+    if headless:
+        os.environ["MOZ_HEADLESS"] = "1"
+
     args = (
         [
             sys.executable,
@@ -30,4 +35,11 @@ def run_tests(robot_args):
 
 
 if __name__ == "__main__":
-    sys.exit(run_tests(sys.argv[1:]))
+    headless = False
+    args = sys.argv[1:]
+
+    if "--headless" in args:
+        headless = True
+        args.remove("--headless")
+
+    sys.exit(run_tests(args, headless=headless))

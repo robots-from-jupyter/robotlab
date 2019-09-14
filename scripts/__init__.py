@@ -26,9 +26,9 @@ TEST_DIR = ROOT / "tests"
 CONDA_OUT = ARTIFACTS / "conda-bld"
 CONSTRUCT_OUT = ARTIFACTS / "constructor"
 TEST_OUT = ARTIFACTS / "test_output"
+LAB_OUT = ARTIFACTS / "app_dir"
 
 ROBOTLAB_DIR = ROOT / "robotlab"
-
 README = ROOT / "README.md"
 
 # for easy overriding in CI
@@ -41,6 +41,16 @@ PY_MAX = os.environ.get("PY_MAX", "3.8.0a0")
 PY_MIN = os.environ.get("PY_MIN", "3.7")
 RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.2")
 RK_VERSION = os.environ.get("ROBOTKERNEL_VERSION", "1.0")
+LABEXTENSIONS = os.environ.get(
+    "LABEXTENSIONS",
+    """
+@jupyterlab/toc@1.0.1
+@jupyter-widgets/jupyterlab-manager@1.0.2
+jupyterlab_robotmode@2.4.0
+""".replace(
+        "\n", " "
+    ),
+).split()
 
 
 def run(args, **kwargs):

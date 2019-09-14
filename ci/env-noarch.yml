@@ -5,11 +5,8 @@ channels:
   - defaults
 
 dependencies:
-  - black
   - conda >=4.7.12,<4.8
   - conda-build >=3.18.9,<3.19
   - conda-verify
-  - flake8
   - python >=3.7,<3.8.0a0
   - ripgrep
-  - robotframework-lint

@@ -1,0 +1,11 @@
+name: robotlab-qa
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - black
+  - flake8
+  - python >=3.7,<3.8.0a0
+  - robotframework-lint

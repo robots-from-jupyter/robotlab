@@ -1,19 +1,13 @@
 *** Settings ***
 Documentation     Try out IPython Notebooks
-Test Template     Can RobotLab make an IPython Notebook?
 Library           JupyterLibrary
+Resource          ../../resources/Browser.robot
 
 *** Test Cases ***
-Firefox
-    headlessfirefox
-
-*** Keywords ***
 Can RobotLab make an IPython Notebook?
-    [Arguments]    ${browser}
     [Documentation]    Try a basic IPython Notebook
-    Set Tags    browser:${browser}
-    ${prefix} =    Set Variable    ipython_${browser}_
-    Open JupyterLab    browser=${browser}
+    ${prefix} =    Set Variable    ipython_
+    Open RobotLab
     Execute JupyterLab Command    Close All
     Launch a new JupyterLab Document    Python 3    Notebook
     Capture Page Screenshot    ${prefix}_01_notebook.png

@@ -4,7 +4,9 @@ parameters:
 
 jobs:
   - job: ${{ parameters.name }}
-    dependsOn: common
+    dependsOn:
+      - lab
+      - noarch
     condition: succeeded()
     pool:
       vmImage: ${{ parameters.vmImage }}
@@ -34,6 +36,12 @@ jobs:
           targetPath: _artifacts/conda-bld/noarch
         displayName: restore noarch packages
 
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: robotlab app_dir
+          targetPath: _artifacts/conda-bld/app_dir
+        displayName: restore jupyterlab
+
       - script: conda run python -m scripts.build conda
         displayName: build remaining packages
 
@@ -43,7 +51,7 @@ jobs:
       - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
         displayName: install built test tools
 
-      - script: conda run python -m scripts.test
+      - script: conda run python -m scripts.test --headless
         displayName: acceptance tests
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:

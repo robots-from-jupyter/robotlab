@@ -1,0 +1,10 @@
+name: robotlab-lab
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - jupyterlab ==1.1.3
+  - python =3.7
+  - nodejs =11
