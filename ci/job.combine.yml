@@ -12,7 +12,7 @@ jobs:
         displayName: conda $PATH
 
       - script: conda env update -n base --file ci/env-combine.yml
-        displayName: install full build/test environment
+        displayName: install minimal reporting environment
 
       - task: DownloadPipelineArtifact@0
         condition: always()
