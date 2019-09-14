@@ -7,6 +7,8 @@ jobs:
 
   - template: ci/job.lab.yml
 
+  - template: ci/job.qa.yml
+
   - template: ci/job.test.yml
     parameters:
       name: Linux

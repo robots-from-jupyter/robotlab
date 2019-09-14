@@ -39,7 +39,7 @@ jobs:
       - task: DownloadPipelineArtifact@0
         inputs:
           artifactName: robotlab app_dir
-          targetPath: _artifacts/conda-bld/app_dir
+          targetPath: _artifacts/app_dir
         displayName: restore jupyterlab
 
       - script: conda run python -m scripts.build conda
