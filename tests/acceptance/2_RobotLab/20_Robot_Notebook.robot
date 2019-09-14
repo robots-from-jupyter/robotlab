@@ -32,4 +32,4 @@ The Robot Popup Should Contain
     Page Should Contain    ${msg}
     Capture Page Screenshot    ${prefix}_10_${document.lower()}.png
     Close Window
-    Select Window    JupyterLab
+    Select Window    RobotLab
