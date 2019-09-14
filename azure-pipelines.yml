@@ -2,9 +2,6 @@ stages:
   - stage: noarch
     jobs:
       - template: ci/job.noarch.yml
-        parameters:
-          name: Linux
-          vmImage: ubuntu-16.04
 
   - stage: build
     dependsOn: Noarch
@@ -30,9 +27,6 @@ stages:
     condition: always()
     jobs:
     - template: ci/job.combine.yml
-      parameters:
-        name: Linux
-        vmImage: ubuntu-16.04
 
 trigger: [master]
 
