@@ -28,12 +28,6 @@ jobs:
       - script: conda env update -n base --file environment.yml --quiet
         displayName: install full build/test environment
 
-      - script: conda info --json
-        displayName: emit conda info
-
-      - script: conda list --explicit
-        displayName: list conda packages
-
       - task: DownloadPipelineArtifact@0
         inputs:
           artifactName: noarch conda packages
