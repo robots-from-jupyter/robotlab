@@ -2,32 +2,22 @@ trigger: [master]
 
 pr: [master]
 
-stages:
-  - stage: common
-    jobs:
-      - template: ci/job.noarch.yml
+jobs:
+  - template: ci/job.noarch.yml
 
-  - stage: platforms
-    dependsOn: common
-    condition: succeeded()
-    jobs:
-      - template: ci/job.test.yml
-        parameters:
-          name: Linux
-          vmImage: ubuntu-16.04
+  - template: ci/job.test.yml
+    parameters:
+      name: Linux
+      vmImage: ubuntu-16.04
 
-      - template: ci/job.test.yml
-        parameters:
-          name: MacOSX
-          vmImage: macos-10.13
+  - template: ci/job.test.yml
+    parameters:
+      name: MacOSX
+      vmImage: macos-10.13
 
-      - template: ci/job.test.yml
-        parameters:
-          name: Windows
-          vmImage: vs2017-win2016
+  - template: ci/job.test.yml
+    parameters:
+      name: Windows
+      vmImage: vs2017-win2016
 
-  - stage: combine
-    dependsOn: platforms
-    condition: always()
-    jobs:
-    - template: ci/job.combine.yml
+  - template: ci/job.combine.yml
