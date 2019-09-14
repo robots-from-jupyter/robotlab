@@ -1,6 +1,5 @@
 *** Settings ***
 Documentation     Verify some properties of the RobotLab installation
-Force Tags        smoke
 Library           OperatingSystem
 
 *** Test Cases ***

@@ -6,5 +6,4 @@ Test Teardown     Run Keywords    Wait Until Keyword Succeeds    2 x    1 s    E
 ...               AND    Close Browser
 Force Tags        ui:lab
 Library           JupyterLibrary
-Library           SeleniumLibrary
 Resource          ../../resources/Launch.robot

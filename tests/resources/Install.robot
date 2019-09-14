@@ -8,6 +8,8 @@ Library           JupyterLibrary
 ${INSTALLER VERSION}    2019.9.0
 ${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}constructor
 ${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
+&{ROBOTLAB GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Library${/}bin${/}firefox.exe
+&{ROBOTLAB FIREFOX}    linux=bin${/}firefox    darwin=bin${/}firefox    windows=Scripts${/}geckodriver.exe
 
 *** Keywords ***
 Clean up the RobotLab installation
@@ -66,3 +68,11 @@ Run the RobotLab Windows installer
     Set Global Variable    ${ROBOTLAB CMD}    ${ROBOTLAB DIR}${/}Scripts${/}robotlab.exe
     Set Global Variable    ${ROBOTLAB SHORTCUT}    RobotLab.lnk
     [Return]    ${result}
+
+Get RobotLab GeckoDriver
+    [Documentation]    Get the path to the bundled geckodriver
+    [Return]    ${ROBOTLAB DIR}${/}&{ROBOTLAB GECKODRIVER}[${OS}]
+
+Get RobotLab Firefox
+    [Documentation]    Get the path to the bundled firefox
+    [Return]    ${ROBOTLAB DIR}${/}&{ROBOTLAB FIREFOX}[${OS}]

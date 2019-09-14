@@ -1,19 +1,8 @@
 *** Settings ***
 Library           JupyterLibrary
-
-*** Variables ***
-&{ROBOTLAB GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Library${/}bin${/}firefox.exe
-&{ROBOTLAB FIREFOX}    linux=bin${/}firefox    darwin=bin${/}firefox    windows=Scripts${/}geckodriver.exe
+Resource          Install.robot
 
 *** Keywords ***
-Get RobotLab GeckoDriver
-    [Documentation]    Get the path to the bundled geckodriver
-    [Return]    %{CONDA_PREFIX}${/}&{ROBOTLAB GECKODRIVER}[${OS}]
-
-Get RobotLab Firefox
-    [Documentation]    Get the path to the bundled firefox
-    [Return]    %{CONDA_PREFIX}${/}&{ROBOTLAB FIREFOX}[${OS}]
-
 Open RobotLab
     [Arguments]    ${nbserver}=${None}    ${url}=${EMPTY}    &{configuration}
     [Documentation]    Open RobotLab with the bundled Firefox, served from the
