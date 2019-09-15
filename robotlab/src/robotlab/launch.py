@@ -1,7 +1,5 @@
 """
 Perform a proper conda activate and launch robotlab
-
-This only works if installed in a conda `root` environment
 """
 
 import subprocess

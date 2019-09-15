@@ -1,14 +1,21 @@
-from pyshortcuts.utils import platform
+""" Paths
+
+    These will probably only work with the like-versioned RobotLab distribution
+"""
 from pathlib import Path
 import sys
+
+from pyshortcuts.utils import platform
+
 
 HERE = Path(__file__).parent
 
 PREFIX = Path(sys.prefix).resolve()
+PYTHON_EXE = Path(sys.executable)
 
 ROBOTLAB_PATH = PREFIX / "share" / "jupyter" / "robotlab"
 
-PLATFORM = platform.system().lower()
+PLATFORM = platform
 WIN = PLATFORM == "windows"
 OSX = PLATFORM == "darwin"
 SCRIPT_EXT = "bat" if WIN else "sh"
@@ -38,9 +45,9 @@ SH_ACTIVATE = [
 ACTIVATE = BAT_ACTIVATE if WIN else SH_ACTIVATE
 BROWSER = f"--browser='{FIREFOX}'"
 
-BAT_LAUNCH_CMD = [f"call python -m robotlab.labapp {BROWSER}"]
+BAT_LAUNCH_CMD = [f"call '{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"]
 
-SH_LAUNCH_CMD = [f"python -m robotlab.labapp {BROWSER}"]
+SH_LAUNCH_CMD = [f"'{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"]
 
 LAUNCH_CMD = BAT_LAUNCH_CMD if WIN else SH_LAUNCH_CMD
 LAUNCH_SCRIPT = f"launch_robotlab.{SCRIPT_EXT}"
