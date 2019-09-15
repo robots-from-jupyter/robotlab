@@ -7,7 +7,8 @@ jobs:
   - job: ${{ parameters.name }}
     dependsOn:
       - lab
-      - noarch
+      - conda noarch
+      - conda win
     condition: succeeded()
     pool:
       vmImage: ${{ parameters.vmImage }}
@@ -36,6 +37,13 @@ jobs:
           artifactName: noarch conda packages
           targetPath: _artifacts/conda-bld/noarch
         displayName: restore noarch packages
+
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        - task: DownloadPipelineArtifact@0
+          inputs:
+            artifactName: windows conda packages
+            targetPath: _artifacts/conda-bld/noarch
+          displayName: restore windows packages
 
       - task: DownloadPipelineArtifact@0
         inputs:

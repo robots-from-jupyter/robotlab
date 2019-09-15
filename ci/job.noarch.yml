@@ -1,5 +1,5 @@
 jobs:
-  - job: noarch
+  - job: conda noarch
     pool:
       vmImage: ubuntu-16.04
 
@@ -22,5 +22,5 @@ jobs:
         displayName: publish noarch packages
         inputs:
           targetPath: _artifacts/conda-bld/noarch
-          artifactName: Noarch Conda Packages
+          artifactName: noarch conda packages
         condition: succeeded()

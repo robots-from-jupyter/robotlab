@@ -1,0 +1,26 @@
+parameters:
+  vmImage: vs2017-win2016
+  activate: call activate &&
+
+jobs:
+  - job: conda win
+    condition: succeeded()
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+
+    steps:
+      - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+        displayName: conda %PATH%
+
+      - script: conda env update -n base --file ci/env-noarch.yml --quiet
+        displayName: install minimal build environment
+
+      - script: ${{ parameters.activate }} python -m scripts.build conda pyshortcuts robotframework-whitelibrary
+        displayName: build win packages
+
+      - task: PublishPipelineArtifact@0
+        displayName: publish windows packages
+        inputs:
+          targetPath: _artifacts/conda-bld/win-64
+          artifactName: Windows Conda Packages
+        condition: succeeded()

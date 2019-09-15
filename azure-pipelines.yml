@@ -5,6 +5,8 @@ pr: [master]
 jobs:
   - template: ci/job.noarch.yml
 
+  - template: ci/job.win.yml
+
   - template: ci/job.lab.yml
 
   - template: ci/job.qa.yml
