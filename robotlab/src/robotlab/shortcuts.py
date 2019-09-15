@@ -1,4 +1,4 @@
-import pprint
+from pprint import pprint
 import sys
 
 import pyshortcuts.utils
