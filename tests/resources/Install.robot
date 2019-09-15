@@ -33,7 +33,7 @@ Run the RobotLab installer
     ...    ELSE IF    "${OS}" == "darwin"    Run the RobotLab OSX Installer
     ...    ELSE    Fatal Error    Can't install on platform ${OS}!
     Should Be Equal as Integers    ${result.rc}    0    msg=Couldn't complete installer, see ${INSTALL LOG}
-    Wait Until Created    ${ACTIVATE SCRIPT}    msg=Activation script ${ACTIVATE SCRIPT} was not created
+    Wait Until Created    ${ACTIVATE SCRIPT}
 
 Run the RobotLab Linux installer
     [Documentation]    Install RobotLab on Linux
