@@ -6,4 +6,4 @@ Resource          ../../resources/CLI.robot
 *** Test Cases ***
 Can I install the tutorial?
     [Documentation]    Verify the robotlab-tutorial command works
-    Run a RobotLab CLI command    robotlab-examples
+    Check A RobotLab CLI Command    robotlab-examples

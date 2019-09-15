@@ -6,4 +6,4 @@ Resource          ../../resources/CLI.robot
 *** Test Cases ***
 Can I install the examples?
     [Documentation]    Verify the robotlab-examples command works
-    Run a RobotLab CLI command    robotlab-examples
+    Check A RobotLab CLI Command    robotlab-examples
