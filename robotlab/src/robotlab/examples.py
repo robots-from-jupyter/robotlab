@@ -11,7 +11,7 @@ def copy_robotkernel_examples(dest=None):
     if not dest.exists():
         dest.mkdir(parents=True)
 
-    print("\n".join(map(str, (dest / EXAMPLES_NAME).glob("*"))))
+    print("\n".join(sorted(map(str, (dest / EXAMPLES_NAME).glob("*")))))
     return 0
 
 

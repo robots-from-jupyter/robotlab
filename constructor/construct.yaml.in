@@ -3,6 +3,7 @@ version: {{ version }}
 company: Robots from Jupyter
 install_in_dependency_order: True
 post_install: post_install.{{ script_ext }}
+ignore_duplicate_files: True
 
 channels:
   - {{ build_channel }}
@@ -11,21 +12,6 @@ channels:
   {% if platform == "windows" %}- https://conda.anaconda.org/pythonnet{% endif %}
 
 specs:
-  - conda
-  - geckodriver
-  - ipywidgets =={{ ipyw_version }}
-  - firefox =={{ ff_version }}
-  - nodejs >={{ node_min }},<{{ node_max }}
-  - opencv
-  - pyshortcuts
   - python >={{ py_min }},<{{ py_max }}
-  - restinstance
-  - robotframework
-  - robotframework-jupyterlibrary
-  - robotframework-lint
-  - robotframework-seleniumlibrary
-  - robotframework-seleniumscreenshots
-  - robotkernel =={{ rk_version }}
   - robotlab =={{ version }}
   {% if platform == "darwin" %}- python.app{% endif %}
-  {% if platform == "windows" %}- robotframework-whitelibrary{% endif %}

@@ -10,7 +10,7 @@ def copy_robotkernel_tutorial(dest=None):
     shutil.copytree(TUTORIAL, dest / TUTORIAL_NAME)
     if not dest.exists():
         dest.mkdir(parents=True)
-    print("\n".join(map(str, (dest / TUTORIAL_NAME).glob("*"))))
+    print("\n".join(sorted(map(str, (dest / TUTORIAL_NAME).glob("*")))))
     return 0
 
 

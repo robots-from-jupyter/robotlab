@@ -33,14 +33,8 @@ README = ROOT / "README.md"
 
 # for easy overriding in CI
 VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.0")
-FIREFOX_VERSION = os.environ.get("FIREFOX_VERSION", "68.0.2")
-IPYWIDGETS_VERSION = os.environ.get("IPYWIDGETS_VERSION", "7.5.1")
-NODE_MAX = os.environ.get("NODE_MAX", "12")
-NODE_MIN = os.environ.get("NODE_MIN", "11")
 PY_MAX = os.environ.get("PY_MAX", "3.7.0a0")
 PY_MIN = os.environ.get("PY_MIN", "3.6")
-RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.2")
-RK_VERSION = os.environ.get("ROBOTKERNEL_VERSION", "1.0")
 LABEXTENSIONS = os.environ.get(
     "LABEXTENSIONS",
     """
