@@ -31,7 +31,6 @@ build:
     - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
     - copy app_dir {{ PREFIX }}\\share\\jupyter\\robotlab  # [win]
     - rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging  # [win]
-    - {{ PYTHON }} -m robotlab.labextensionapp list
     - cd robotkernel
     - cd examples
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
@@ -43,13 +42,11 @@ build:
     - cd notebooks
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
-    - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
-    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
+    - md {{ PREFIX }}\\var\\www\\robotkernel-tutorial  # [win]
+    - copy *.ipynb {{ PREFIX }}\\var\\www\\robotkernel-tutorial  # [win]
 
 requirements:
   host:
-    - jupyterlab =={{ jupyterlab }}
-    - nodejs >=11,<12
     - pip
     - python
   run:
@@ -63,9 +60,10 @@ requirements:
 test:
   imports:
     - robotlab
-    - robotlab.launch
     - robotlab.examples
     - robotlab.labextensionapp
+    - robotlab.launch
+    - robotlab.paths
     - robotlab.shortcuts
     - robotlab.tutorial
   commands:
@@ -81,4 +79,4 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: robotlab/LICENSE
-  summary: A JupyterLab built for a robotkernel
+  summary: A JupyterLab built for robotkernel as part of the RobotLab distribution
