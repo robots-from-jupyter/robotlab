@@ -25,6 +25,8 @@ def rflint():
             "--configure",
             "TooManyTestSteps:20",
             "--configure",
+            "TooFewTestSteps:0",
+            "--configure",
             "TooFewKeywordSteps:0",
             "--configure",
             "LineTooLong:200",

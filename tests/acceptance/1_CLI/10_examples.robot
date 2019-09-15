@@ -1,11 +1,9 @@
 *** Settings ***
 Documentation     robotlab ships the robokernel examples
 Force Tags        app:robotlab-examples
-Library           Process
-Library           OperatingSystem
+Resource          ../../resources/CLI.robot
 
 *** Test Cases ***
 Can I install the examples?
     [Documentation]    Verify the robotlab-examples command works
-    Run Process    ${ACTIVATE} && robotlab-examples    shell=True    cwd=${OUTPUT DIR}${/}${OS}
-    Directory Should Not Be Empty    ${OUTPUT DIR}${/}${OS}${/}robotkernel-examples
+    Run a RobotLab CLI command    robotlab-examples

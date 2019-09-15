@@ -1,3 +1,5 @@
+import sys
+
 import pyshortcuts.utils
 
 from .paths import HERE, ICON_PATH
@@ -17,8 +19,9 @@ def make_shortcuts():
     )
     ""
     print("Shortcut created...")
-    print("", scut)
+    print("", scut.__dict__)
+    return 0
 
 
 if __name__ == "__main__":
-    make_shortcuts()
+    sys.exit(make_shortcuts())

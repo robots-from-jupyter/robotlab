@@ -6,13 +6,14 @@ package:
   version: {% set version = "2019.9.0" %}{{ version }}
 
 source:
-  - path: ../../_artifacts/app_dir
-    folder: app_dir
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
     sha256: 93819e902be42895b02d8142c6fb13f5a88c69fdc49a7b49a15a65371d80547d
     folder: robotkernel
+  # we do the jupyterlab build off-line to keep conda-build time low
+  - path: ../../_artifacts/app_dir
+    folder: app_dir
 
 build:
   number: 0
@@ -27,21 +28,31 @@ build:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
     - cd {{ SRC_DIR }}
+
+    - mkdir -p {{ PREFIX }}/share/jupyter # [unix]
     - cp -r app_dir {{ PREFIX }}/share/jupyter/robotlab  # [unix]
     - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
+
+    - md {{ PREFIX }}\\share\\jupyter  # [win]
     - copy app_dir {{ PREFIX }}\\share\\jupyter\\robotlab  # [win]
     - rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging  # [win]
+
     - cd robotkernel
     - cd examples
+
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
+
     - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
     - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
+
     - cd ..
     - cd docs
     - cd notebooks
+
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
+
     - md {{ PREFIX }}\\var\\www\\robotkernel-tutorial  # [win]
     - copy *.ipynb {{ PREFIX }}\\var\\www\\robotkernel-tutorial  # [win]
 
