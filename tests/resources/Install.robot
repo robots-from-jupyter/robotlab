@@ -24,8 +24,9 @@ Clean up the RobotLab installation
 Run the RobotLab installer
     [Documentation]    Detect and tag the platform, then run the appropriate installer
     Create Directory    ${OUTPUT DIR}${/}${OS}
+    ${tmpdir} =    Evaluate    __import__("tempfile").mkdtemp("RobotLab")
     ${path} =    Set Variable    ${OUTPUT DIR}${/}${OS}
-    Set Global Variable    ${ROBOTLAB DIR}    ${path}${/}install
+    Set Global Variable    ${ROBOTLAB DIR}    ${tmpdir}
     Set Global Variable    ${FAKE HOME}    ${path}${/}home
     Create Directory    ${FAKE HOME}${/}Desktop
     ${result} =    Run Keyword If    "${OS}" == "linux"    Run the RobotLab Linux installer
