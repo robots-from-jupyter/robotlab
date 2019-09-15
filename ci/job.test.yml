@@ -42,7 +42,7 @@ jobs:
         - task: DownloadPipelineArtifact@0
           inputs:
             artifactName: windows conda packages
-            targetPath: _artifacts/conda-bld/noarch
+            targetPath: _artifacts/conda-bld/win-64
           displayName: restore windows packages
 
       - task: DownloadPipelineArtifact@0
