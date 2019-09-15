@@ -2,8 +2,7 @@ from pathlib import Path
 import shutil
 import sys
 
-EXAMPLES_NAME = "robotkernel-examples"
-EXAMPLES = Path(sys.prefix) / "var" / "www" / EXAMPLES_NAME
+from .paths import EXAMPLES, EXAMPLES_NAME
 
 
 def copy_robotkernel_examples(dest=None):
@@ -13,8 +12,5 @@ def copy_robotkernel_examples(dest=None):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        dest = Path(sys.argv(1))
-    else:
-        dest = None
+    dest = Path(sys.argv(1)) if len(sys.argv) > 1 else None
     sys.exit(copy_robotkernel_examples(dest))
