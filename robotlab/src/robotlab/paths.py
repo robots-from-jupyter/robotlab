@@ -29,7 +29,7 @@ FIREFOXEN = {
     **{unix: PREFIX / "bin" / "firefox" for unix in ["linux", "darwin"]},
 }
 
-FIREFOX = FIREFOXEN[platform]
+FIREFOX = FIREFOXEN[PLATFORM]
 
 
 BAT_ACTIVATE = [
