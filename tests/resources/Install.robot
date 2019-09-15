@@ -8,8 +8,8 @@ Library           JupyterLibrary
 ${INSTALLER VERSION}    2019.9.0
 ${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}constructor
 ${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
-&{ROBOTLAB GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Library${/}bin${/}firefox.exe
-&{ROBOTLAB FIREFOX}    linux=bin${/}firefox    darwin=bin${/}firefox    windows=Scripts${/}geckodriver.exe
+&{ROBOTLAB GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Scripts${/}geckodriver.exe
+&{ROBOTLAB FIREFOX}    linux=bin${/}firefox    darwin=bin${/}firefox    windows=Library${/}bin${/}firefox.exe
 
 *** Keywords ***
 Clean up the RobotLab installation
