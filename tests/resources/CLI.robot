@@ -10,7 +10,7 @@ Check a RobotLab CLI command
     ${prefix} =    Set Variable    ${OUTPUT DIR}${/}${OS}
     ${proc} =    Run Process    ${ACTIVATE} && ${cmd}    shell=True    cwd=${prefix}    stdout=${prefix}${/}cli-${cmd}.log    stderr=STDOUT
     Should Be Equal As Numbers    ${proc.rc}    0
-    Run Keyword If    ${check_dir}    Directory Should Not Be Empty    ${prefix}${/}${cmd}
+    Run Keyword If    ${check_dir}    Directory Should Not Be Empty    ${prefix}${/}${cmd.replace('lab', 'kernel')}
 
 Run nbrobot CLI
     [Arguments]    ${args}    ${log}    ${rc}=${0}
