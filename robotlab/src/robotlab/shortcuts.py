@@ -1,3 +1,4 @@
+import pprint
 import sys
 
 import pyshortcuts.utils
@@ -19,7 +20,7 @@ def make_shortcuts():
     )
     ""
     print("Shortcut created...")
-    print("", scut.__dict__)
+    pprint(scut.__dict__)
     return 0
 
 
