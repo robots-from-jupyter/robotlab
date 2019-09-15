@@ -1,8 +1,8 @@
 name: robotlab-combine
 
 channels:
-  - conda-forge
-  - defaults
+  - https://conda.anaconda.org/anaconda
+  - https://conda.anaconda.org/conda-forge
 
 dependencies:
   - robotframework
