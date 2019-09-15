@@ -5,8 +5,7 @@
 from pathlib import Path
 import sys
 
-from pyshortcuts.utils import platform
-
+import platform
 
 HERE = Path(__file__).parent
 
@@ -15,7 +14,7 @@ PYTHON_EXE = Path(sys.executable)
 
 ROBOTLAB_PATH = PREFIX / "share" / "jupyter" / "robotlab"
 
-PLATFORM = platform
+PLATFORM = platform.system().lower()
 WIN = PLATFORM == "windows"
 OSX = PLATFORM == "darwin"
 SCRIPT_EXT = "bat" if WIN else "sh"
