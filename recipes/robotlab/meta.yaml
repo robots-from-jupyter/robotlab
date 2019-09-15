@@ -30,15 +30,18 @@ build:
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+
     - cd {{ SRC_DIR }}
 
     - mkdir -p {{ PREFIX }}/share/jupyter # [unix]
     - cp -r app_dir {{ PREFIX }}/share/jupyter/robotlab  # [unix]
     - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
+    - ls {{ PREFIX }}/share/jupyter/robotlab  # [unix]
 
-    - md {{ PREFIX }}\\share\\jupyter  # [win]
-    - copy app_dir {{ PREFIX }}\\share\\jupyter\\robotlab  # [win]
-    - rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging  # [win]
+    - md {{ PREFIX }}\share\jupyter\robotlab  # [win]
+    - xcopy /e app_dir\* {{ PREFIX }}\share\jupyter\robotlab\  # [win]
+    - rd /s /q {{ PREFIX }}\share\jupyter\robotlab\staging  # [win]
+    - dir {{ PREFIX }}\share\jupyter\robotlab  # [win]
 
     - cd robotkernel
     - cd examples
@@ -47,7 +50,7 @@ build:
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
 
     - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
-    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
+    - xcopy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples\  # [win]
 
     - cd ..
     - cd docs
@@ -56,8 +59,8 @@ build:
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
 
-    - md {{ PREFIX }}\\var\\www\\robotkernel-tutorial  # [win]
-    - copy *.ipynb {{ PREFIX }}\\var\\www\\robotkernel-tutorial  # [win]
+    - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
+    - xcopy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial\  # [win]
 
 requirements:
   host:
