@@ -12,7 +12,7 @@ dependencies:
   - firefox ==68.0.2
   - geckodriver
   - pillow
-  - python >=3.7,<3.8.0a0
+  - python >=3.6,<3.7.0a0
   - ripgrep
   - robotframework
   - robotframework-seleniumlibrary
