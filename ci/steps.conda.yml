@@ -18,5 +18,5 @@ steps:
     - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
       displayName: conda %PATH%
 
-  - script: conda env update -n base --file ${{ envPath }} --quiet
+  - script: conda env update -n base --file ${{ parameters.envPath }} --quiet
     displayName: install conda environment
