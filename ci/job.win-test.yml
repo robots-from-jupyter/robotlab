@@ -19,5 +19,5 @@ jobs:
         parameters:
           name: Windows
 
-      - script: ${{ parameters.activate }} python -m scripts.build test conda
+      - script: ${{ parameters.activate }} python -m scripts.test conda
         displayName: test built packages
