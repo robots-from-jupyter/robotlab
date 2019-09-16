@@ -9,7 +9,6 @@ channels:
   - {{ build_channel }}
   - https://conda.anaconda.org/anaconda
   - https://conda.anaconda.org/conda-forge
-  {% if platform == "windows" %}- https://conda.anaconda.org/pythonnet{% endif %}
 
 specs:
   - python >={{ py_min }},<{{ py_max }}

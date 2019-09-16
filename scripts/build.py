@@ -3,9 +3,9 @@ import sys
 from jinja2 import Template
 
 from . import (
-    CONDA_CACHE,
+    CONDA_BUILD_ARGS,
     CONDA_OUT,
-    CONSTRUCT_CACHE,
+    CONSTRUCTOR_ARGS,
     CONSTRUCT_DIR,
     CONSTRUCT_OUT,
     CONSTRUCT,
@@ -24,7 +24,7 @@ from . import (
 CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 
 
-def build_conda(packages=None, force=False):
+def build_conda(packages=None, force=False, no_test=False):
     """ Build some packages (mostly re-arching conda-forge `noarch: python`)
     """
 
@@ -41,32 +41,18 @@ def build_conda(packages=None, force=False):
     else:
         packages = ["."]
 
+    extra_args = []
+    extra_args += [] if force else ["--skip-existing"]
+    extra_args += ["--no-test"] if no_test else []
+
+    rc = 0
+
     for package in packages:
-
-        rc = run(
-            [
-                "conda-build",
-                package,
-                "--output-folder",
-                CONDA_OUT,
-                "--cache-dir",
-                CONDA_CACHE,
-                "-c",
-                "https://conda.anaconda.org/anaconda",
-                "-c",
-                "https://conda.anaconda.org/conda-forge",
-                "-c",
-                "https://conda.anaconda.org/pythonnet",
-                "--python",
-                PY_MIN,
-            ]
-            + ([] if force else ["--skip-existing"]),
-            cwd=str(RECIPE_DIR),
+        rc = rc or run(
+            [*CONDA_BUILD_ARGS, extra_args, package], cwd=str(RECIPE_DIR)
         )
-        if rc:
-            return rc
 
-    return 0
+    return rc
 
 
 def build_constructor():
@@ -87,18 +73,7 @@ def build_constructor():
 
     CONSTRUCT_OUT.mkdir(exist_ok=True)
 
-    return run(
-        [
-            "constructor",
-            ".",
-            "--output-dir",
-            str(CONSTRUCT_OUT),
-            "--cache-dir",
-            str(CONSTRUCT_CACHE),
-            "--verbose",
-        ],
-        cwd=str(CONSTRUCT_DIR),
-    )
+    return run(CONSTRUCTOR_ARGS, cwd=str(CONSTRUCT_DIR))
 
 
 def build_lab():
@@ -134,11 +109,17 @@ if __name__ == "__main__":
     rc = 1
 
     if len(sys.argv) > 1:
+        args = sys.argv[1]
+
         it, rest = sys.argv[1], sys.argv[2:]
         if it == "lab":
             rc = build_lab()
         elif it == "conda":
-            rc = build_conda(sys.argv[2:])
+            no_test = False
+            if "--no-test" in rest:
+                no_test = True
+                rest.remove("--no-test")
+            rc = build_conda(rest, no_test=no_test)
         elif it == "constructor":
             rc = build_constructor()
     else:

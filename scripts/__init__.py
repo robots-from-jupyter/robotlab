@@ -46,6 +46,29 @@ jupyterlab_robotmode@2.4.0
     ),
 ).split()
 
+CONDA_BUILD_ARGS = [
+    "conda-build",
+    "--output-folder",
+    CONDA_OUT,
+    "--cache-dir",
+    CONDA_CACHE,
+    "-c",
+    "https://conda.anaconda.org/anaconda",
+    "-c",
+    "https://conda.anaconda.org/conda-forge",
+    "--python",
+    PY_MIN,
+]
+
+CONSTRUCTOR_ARGS = [
+    "constructor",
+    "--output-dir",
+    str(CONSTRUCT_OUT),
+    "--cache-dir",
+    str(CONSTRUCT_CACHE),
+    "--verbose",
+]
+
 
 def run(args, **kwargs):
     """ Probably unneccessary "convenience" wrapper
