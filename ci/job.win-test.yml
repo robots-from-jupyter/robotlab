@@ -2,7 +2,7 @@ parameters:
   activate: call activate &&
 
 jobs:
-  - job: conda_win
+  - job: conda_win_test
     pool:
       vmImage: vs2017-win2016
     condition: succeeded()
