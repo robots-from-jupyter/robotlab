@@ -9,13 +9,11 @@ jobs:
       vmImage: ${{ parameters.vmImage }}
 
     steps:
-      - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
-        displayName: conda %PATH%
+      - template: steps.conda.yml
+        parameters:
+          name: Windows
 
-      - script: conda env update -n base --file ci/env-noarch.yml --quiet
-        displayName: install minimal build environment
-
-      - script: ${{ parameters.activate }} python -m scripts.build conda pyshortcuts robotframework-whitelibrary
+      - script: ${{ parameters.activate }} python -m scripts.build conda --no-test pyshortcuts robotframework-whitelibrary
         displayName: build win packages
 
       - task: PublishPipelineArtifact@0

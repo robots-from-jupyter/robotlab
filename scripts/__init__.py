@@ -73,7 +73,9 @@ CONSTRUCTOR_ARGS = [
 def run(args, **kwargs):
     """ Probably unneccessary "convenience" wrapper
     """
-    p = subprocess.Popen(list(map(str, args)), **kwargs)
+    str_args = list(map(str, args))
+    print("===\n", " ".join(str_args), "\n===")
+    p = subprocess.Popen(str_args, **kwargs)
 
     try:
         p.wait()

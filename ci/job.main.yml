@@ -5,45 +5,18 @@ parameters:
 
 jobs:
   - job: ${{ parameters.name }}
+    condition: succeeded()
     dependsOn:
       - lab
       - conda_noarch
       - conda_win
-    condition: succeeded()
     pool:
       vmImage: ${{ parameters.vmImage }}
 
     steps:
-      - ${{ if eq(parameters.name, 'Linux') }}:
-        - bash: echo "##vso[task.prependpath]$CONDA/bin"
-          displayName: conda $PATH
-
-      - ${{ if eq(parameters.name, 'MacOSX') }}:
-        - bash: echo "##vso[task.prependpath]$CONDA/bin"
-          displayName: conda $PATH
-
-        - bash: sudo chown -R $USER $CONDA
-          displayName: own conda
-
-      - ${{ if eq(parameters.name, 'Windows') }}:
-        - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
-          displayName: conda %PATH%
-
-      - script: conda env update -n base --file environment.yml --quiet
-        displayName: install full build/test environment
-
-      - task: DownloadPipelineArtifact@0
-        inputs:
-          artifactName: noarch conda packages
-          targetPath: _artifacts/conda-bld/noarch
-        displayName: restore noarch packages
-
-      - ${{ if eq(parameters.name, 'Windows') }}:
-        - task: DownloadPipelineArtifact@0
-          inputs:
-            artifactName: windows conda packages
-            targetPath: _artifacts/conda-bld/win-64
-          displayName: restore windows packages
+      - template: steps.restore.yml
+        parameters:
+          name: ${{ parameters.name }}
 
       - task: DownloadPipelineArtifact@0
         inputs:
@@ -51,8 +24,13 @@ jobs:
           targetPath: _artifacts/app_dir
         displayName: restore jupyterlab
 
+      - template: steps.conda.yml
+        parameters:
+          name: ${{ parameters.name }}
+          envPath: environment.yml
+
       - script: ${{ parameters.activate }} python -m scripts.build conda
-        displayName: build remaining packages
+        displayName: build/test remaining packages
 
       - script: ${{ parameters.activate }} python -m scripts.build constructor
         displayName: build installer
@@ -60,7 +38,7 @@ jobs:
       - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
         displayName: install built test tools
 
-      - script: ${{ parameters.activate }} python -m scripts.test --headless
+      - script: ${{ parameters.activate }} python -m scripts.test robot --headless
         displayName: acceptance tests
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:

@@ -5,6 +5,10 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 dependencies:
+  - black
+  - flake8
   - jupyterlab ==1.1.3
-  - python >=3.6,<3.7.0a0
   - nodejs >=11,<12
+  - python >=3.6,<3.7.0a0
+  - python >=3.6,<3.7.0a0
+  - robotframework-lint

@@ -48,9 +48,8 @@ def build_conda(packages=None, force=False, no_test=False):
     rc = 0
 
     for package in packages:
-        rc = rc or run(
-            [*CONDA_BUILD_ARGS, extra_args, package], cwd=str(RECIPE_DIR)
-        )
+        args = [*CONDA_BUILD_ARGS, *extra_args, package]
+        rc = rc or run(args, cwd=str(RECIPE_DIR))
 
     return rc
 

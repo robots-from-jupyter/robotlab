@@ -8,11 +8,9 @@ jobs:
     pool:
       vmImage: ubuntu-16.04
     steps:
-      - bash: echo "##vso[task.prependpath]$CONDA/bin"
-        displayName: conda $PATH
-
-      - script: conda env update -n base --file ci/env-combine.yml
-        displayName: install minimal reporting environment
+      - template: steps.conda.yml
+        parameters:
+          envPath: ci/env-combine.yml
 
       - task: DownloadPipelineArtifact@0
         condition: always()
