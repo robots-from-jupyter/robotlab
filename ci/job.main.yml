@@ -9,7 +9,8 @@ jobs:
     dependsOn:
       - lab
       - conda_noarch
-      - conda_win
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        - conda_win
     pool:
       vmImage: ${{ parameters.vmImage }}
 
