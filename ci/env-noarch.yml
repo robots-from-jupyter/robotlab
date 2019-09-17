@@ -9,4 +9,5 @@ dependencies:
   - conda-build >=3.18.9,<3.19
   - conda-verify
   - python >=3.6,<3.7.0a0
+  - python-libarchive-c
   - ripgrep

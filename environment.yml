@@ -13,6 +13,7 @@ dependencies:
   - geckodriver
   - pillow
   - python >=3.6,<3.7.0a0
+  - python-libarchive-c
   - ripgrep
   - robotframework
   - robotframework-seleniumlibrary
