@@ -5,6 +5,10 @@ install_in_dependency_order: True
 post_install: post_install.{{ script_ext }}
 ignore_duplicate_files: True
 
+channels_remap:
+  - src: {{ build_channel }}
+    dest: https://conda.anaconda.org/conda-forge
+
 channels:
   - {{ build_channel }}
   - https://conda.anaconda.org/anaconda

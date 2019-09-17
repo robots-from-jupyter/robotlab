@@ -36,6 +36,14 @@ jobs:
       - script: ${{ parameters.activate }} python -m scripts.build constructor
         displayName: build installer
 
+      - ${{ if not(eq(parameters.name, 'Windows')) }}:
+        script: rm -rf _artifacts/conda-bld
+        displayName: clean build channel
+
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        script: rd /s /q _artifacts\conda-bld
+        displayName: clean build channel
+
       - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
         displayName: install built test tools
 
