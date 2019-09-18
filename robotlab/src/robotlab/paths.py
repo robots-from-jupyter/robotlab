@@ -44,9 +44,9 @@ SH_ACTIVATE = [
 ACTIVATE = BAT_ACTIVATE if WIN else SH_ACTIVATE
 BROWSER = f"--browser='{FIREFOX}'"
 
-BAT_LAUNCH_CMD = [f"call '{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"]
+BAT_LAUNCH_CMD = f"call '{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"
 
-SH_LAUNCH_CMD = [f"'{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"]
+SH_LAUNCH_CMD = f"'{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"
 
 LAUNCH_CMD = BAT_LAUNCH_CMD if WIN else SH_LAUNCH_CMD
 LAUNCH_SCRIPT = f"launch_robotlab.{SCRIPT_EXT}"

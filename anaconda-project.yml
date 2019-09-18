@@ -101,6 +101,8 @@ env_specs:
     channels:
     - ./_artifacts/conda-bld
     packages:
+    - conda
+    - firefox
     - pyshortcuts
     - restinstance
     - robotframework-seleniumscreenshots

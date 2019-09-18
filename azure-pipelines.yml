@@ -2,6 +2,9 @@ trigger: [master]
 
 pr: [master]
 
+variables:
+  ROBOTLAB_VERSION: 2019.9.0
+
 jobs:
   # group one: simple conda/webpack builds, validation
   - template: ci/job.noarch.yml
