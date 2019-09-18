@@ -36,11 +36,7 @@ SH_ACTIVATE = [
 ACTIVATE = BAT_ACTIVATE if WIN else SH_ACTIVATE
 BROWSER = f"--browser=firefox"
 
-BAT_LAUNCH_CMD = f'"{PYTHON_EXE}" -m robotlab.labapp {BROWSER}'
-
-SH_LAUNCH_CMD = f'"{PYTHON_EXE}" -m robotlab.labapp {BROWSER}
-
-LAUNCH_CMD = BAT_LAUNCH_CMD if WIN else SH_LAUNCH_CMD
+LAUNCH_CMD = f"python -m robotlab.labapp {BROWSER}"
 LAUNCH_SCRIPT = f"launch_robotlab.{SCRIPT_EXT}"
 
 TUTORIAL_NAME = "robotkernel-tutorial"
