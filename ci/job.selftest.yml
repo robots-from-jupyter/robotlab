@@ -19,18 +19,18 @@ jobs:
 
       - ${{ if not(eq(parameters.name, 'Windows')) }}:
         - script: bash _artifacts/constructor/RobotLab-$(ROBOTLAB_VERSION)-${{ parameters.name }}-x86_64.sh -fbp _robotlab
-          displayName: run installer
-
-      - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: _artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
-          displayName: run installer
-
-      - ${{ if not(eq(parameters.name, 'Windows')) }}:
+          displayName: run .sh installer
         - script: . ./_robotlab/bin/activate ./_robotlab && python -m scripts.test robot --headless --in-robotlab
           displayName: run robotlab acceptance tests in robotlab
 
       - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: call .\_robotlab\Scripts\activate .\_robotlab && python -m scripts.test robot --headless --in-robotlab
+        - script: _artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
+          displayName: run .exe installer
+        - script: |
+            dir _robotlab
+            dir _robotlab\Scripts
+            call _robotlab\Scripts\activate .\_robotlab
+            python -m scripts.test robot --headless --in-robotlab
           displayName: run robotlab acceptance tests in robotlab
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:
