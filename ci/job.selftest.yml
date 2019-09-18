@@ -24,13 +24,15 @@ jobs:
           displayName: run robotlab acceptance tests in robotlab
 
       - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: _artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
+        - script: |
+            _artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%HOME%\_robotlab
+            dir %HOME%
           displayName: run .exe installer
         - script: |
-            dir _robotlab
-            dir _robotlab\Scripts
-            call _robotlab\Scripts\activate .\_robotlab
-            python -m scripts.test robot --headless --in-robotlab
+            dir %HOME%\_robotlab
+            dir %HOME%\_robotlab\Scripts
+            call %HOME%\_robotlab\Scripts\activate .\_robotlab
+            %HOME%\python.exe -m scripts.test robot --headless --in-robotlab
           displayName: run robotlab acceptance tests in robotlab
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:
