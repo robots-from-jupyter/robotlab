@@ -37,9 +37,9 @@ jobs:
         condition: always()
         displayName: Rebot
 
-      - task: PublishBuildArtifacts@1
+      - task: PublishPipelineArtifact@1
         condition: always()
         displayName: Publish Combined Robot Output
         inputs:
-          pathtoPublish: _artifacts/test_output
+          targetPath: _artifacts/test_output
           artifactName: RobotLab Robot Output

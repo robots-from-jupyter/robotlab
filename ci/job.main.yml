@@ -40,9 +40,9 @@ jobs:
         - script: chmod -R 777 _artifacts
           displayName: fix artifact permissions
 
-      - task: PublishBuildArtifacts@1
+      - task: PublishPipelineArtifact@1
         displayName: publish installer
         inputs:
-          PathtoPublish: _artifacts/constructor
-          ArtifactName: RobotLab for ${{ parameters.name }}
+          targetPath: _artifacts/constructor
+          artifactName: RobotLab for ${{ parameters.name }}
         condition: succeeded()
