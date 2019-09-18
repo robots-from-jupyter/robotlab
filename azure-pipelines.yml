@@ -28,5 +28,20 @@ jobs:
       vmImage: vs2017-win2016
       activate: call activate &&
 
+  - template: ci/job.selftest.yml
+    parameters:
+      name: Linux
+      vmImage: ubuntu-16.04
+
+  - template: ci/job.selftest.yml
+    parameters:
+      name: MacOSX
+      vmImage: macos-10.13
+
+  - template: ci/job.selftest.yml
+    parameters:
+      name: Windows
+      vmImage: vs2017-win2016
+
   # group 3: reporting, etc
   - template: ci/job.combine.yml

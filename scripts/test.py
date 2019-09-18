@@ -18,7 +18,7 @@ def test_conda(packages=None):
     return rc
 
 
-def test_robot(robot_args, headless=False):
+def test_robot(robot_args=None, headless=False, in_robotlab=False):
     if headless:
         os.environ["MOZ_HEADLESS"] = "1"
 
@@ -41,6 +41,8 @@ def test_robot(robot_args, headless=False):
             f"{PLATFORM}.xunit.xml",
             "--variable",
             f"OS:{PLATFORM}",
+            "--variable",
+            f"IN_ROBOTLAB:{int(in_robotlab)}",
         ]
         + list(robot_args or [])
         + [str(TEST_DIR)]
@@ -50,7 +52,7 @@ def test_robot(robot_args, headless=False):
 
 if __name__ == "__main__":
     rc = 0
-    headless = False
+    headless = in_robotlab = False
 
     args = sys.argv[1:]
 
@@ -58,15 +60,19 @@ if __name__ == "__main__":
         headless = True
         args.remove("--headless")
 
+    if "--in-robotlab" in args:
+        in_robotlab = True
+        args.remove("--in-robotlab")
+
     if not args:
         rc = test_conda()
-        rc = rc or test_robot(headless=headless)
+        rc = rc or test_robot(headless=headless, in_robotlab=in_robotlab)
     else:
         it, rest = args[0], args[1:]
 
         if it == "conda":
             rc = test_conda(rest)
         elif it == "robot":
-            rc = test_robot(rest, headless=headless)
+            rc = test_robot(rest, headless=headless, in_robotlab=in_robotlab)
 
     sys.exit(rc)

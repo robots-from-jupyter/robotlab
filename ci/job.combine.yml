@@ -1,9 +1,9 @@
 jobs:
   - job: Combine
     dependsOn:
-      - Linux
-      - MacOSX
-      - Windows
+      - LinuxTest
+      - MacOSXTest
+      - WindowsTest
     condition: always()
     pool:
       vmImage: ubuntu-16.04

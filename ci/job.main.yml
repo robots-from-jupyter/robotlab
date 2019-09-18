@@ -4,7 +4,7 @@ parameters:
   activate: ""
 
 jobs:
-  - job: ${{ parameters.name }}
+  - job: ${{ parameters.name }}Build
     condition: succeeded()
     dependsOn:
       - lab
@@ -36,36 +36,9 @@ jobs:
       - script: ${{ parameters.activate }} python -m scripts.build constructor
         displayName: build installer
 
-      - ${{ if not(eq(parameters.name, 'Windows')) }}:
-        - script: rm -rf _artifacts/conda-bld
-          displayName: clean build channel
-
-      - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: rd /s /q _artifacts\conda-bld
-          displayName: clean build channel
-
-      - script: conda install _artifacts/conda-bld/noarch/robotframework-jupyterlibrary-0.2.0-py_0.tar.bz2
-        displayName: install built test tools
-
-      - script: ${{ parameters.activate }} python -m scripts.test robot --headless
-        displayName: acceptance tests
-
       - ${{ if eq(parameters.name, 'MacOSX') }}:
         - script: chmod -R 777 _artifacts
           displayName: fix artifact permissions
-
-      - task: PublishTestResults@2
-        displayName: publish test results
-        inputs:
-          testResultsFiles: _artifacts/test_output/**/*.xunit.xml
-        condition: always()
-
-      - task: PublishPipelineArtifact@0
-        displayName: publish ${{ parameters.name }} robot output
-        inputs:
-          targetPath: _artifacts/test_output
-          artifactName: Robot Output ${{ parameters.name }}
-        condition: always()
 
       - task: PublishBuildArtifacts@1
         displayName: publish installer
