@@ -17,19 +17,21 @@ jobs:
           targetPath: _artifacts/constructor
         displayName: restore installer
 
-      - script:
-          - ${{ if not(eq(parameters.name, 'Windows')) }}:
-            - bash _artifacts/constructor/RobotLab-*-${{ parameters.name }}-x86_64.sh -fbp _robotlab
-          - ${{ if eq(parameters.name, 'Windows') }}:
-            - .\RobotLab-*-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
-        displayName: run installer
+      - ${{ if not(eq(parameters.name, 'Windows')) }}:
+        - script: bash _artifacts/constructor/RobotLab-*-${{ parameters.name }}-x86_64.sh -fbp _robotlab
+          displayName: run installer
 
-      - script:
-          - ${{ if not(eq(parameters.name, 'Windows')) }}:
-            - . ./_robotlab/bin/activate ./_robotlab && python -m scripts.test robot --headless --in-robotlab
-          - ${{ if eq(parameters.name, 'Windows') }}:
-            - call .\_robotlab\Scripts\activate .\_robotlab && python -m scripts.test robot --headless --in-robotlab
-        displayName: acceptance tests
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        - script: .\RobotLab-*-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
+          displayName: run installer
+
+      - ${{ if not(eq(parameters.name, 'Windows')) }}:
+        - script: . ./_robotlab/bin/activate ./_robotlab && python -m scripts.test robot --headless --in-robotlab
+          displayName: run robotlab acceptance tests in robotlab
+
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        - script: call .\_robotlab\Scripts\activate .\_robotlab && python -m scripts.test robot --headless --in-robotlab
+          displayName: run robotlab acceptance tests in robotlab
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:
         - script: chmod -R 777 _artifacts
