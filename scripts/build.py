@@ -61,14 +61,14 @@ def build_constructor():
     """
     construct = CONSTRUCT_IN.render(
         build_channel=CONDA_OUT.as_uri(),
-        platform=PLATFORM,
         py_max=PY_MAX,
         py_min=PY_MIN,
-        script_ext=SCRIPT_EXT,
         version=VERSION,
     )
 
     CONSTRUCT.write_text(construct)
+
+    print(construct)
 
     CONSTRUCT_OUT.mkdir(exist_ok=True)
 

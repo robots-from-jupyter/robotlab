@@ -36,7 +36,7 @@ jobs:
           displayName: run .exe installer
         - script: |
             @echo on
-            call %HOME%\_robotlab\Scripts\activate %HOME\_robotlab
+            call %HOME%\_robotlab\Scripts\activate.bat %HOME\_robotlab
             %HOME%\python.exe -m scripts.test robot --headless --in-robotlab
           displayName: run robotlab acceptance tests in robotlab
 
