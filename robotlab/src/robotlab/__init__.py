@@ -1,5 +1,4 @@
 import os
-import traitlets
 
 from ._version import __version__  # noqa
 
