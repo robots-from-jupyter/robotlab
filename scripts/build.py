@@ -11,11 +11,9 @@ from . import (
     CONSTRUCT,
     LABEXTENSIONS,
     LAB_OUT,
-    PLATFORM,
     PY_MAX,
     PY_MIN,
     RECIPE_DIR,
-    SCRIPT_EXT,
     VERSION,
     run,
 )
