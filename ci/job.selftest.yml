@@ -37,7 +37,9 @@ jobs:
         - script: |
             @echo on
             call "%cd%\_robotlab\Scripts\activate.bat" "%cd%\_robotlab"
-            "%cd%\_robotlab\python.exe" -m scripts.test robot --headless --in-robotlab
+            conda info || echo "no conda"
+            where python
+            python -m scripts.test robot --headless --in-robotlab
           displayName: run robotlab acceptance tests in robotlab
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:

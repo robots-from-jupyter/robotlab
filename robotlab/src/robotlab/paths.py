@@ -24,16 +24,8 @@ ICON_PATH = str(HERE / "icons" / f"lab.{ICON_EXT}")
 
 BIN_DIR = Path(sys.prefix, *(["Scripts"] if WIN else ["bin"]))
 
-FIREFOXEN = {
-    "windows": PREFIX / "Library" / "bin" / "firefox.exe",
-    **{unix: PREFIX / "bin" / "firefox" for unix in ["linux", "darwin"]},
-}
-
-FIREFOX = FIREFOXEN[PLATFORM]
-
-
 BAT_ACTIVATE = [
-    f'call "{BIN_DIR}\\activate"  "{PREFIX}"  || activate "{PREFIX}"'
+    f'call "{BIN_DIR}\\activate.bat" "{PREFIX}" || call activate "{PREFIX}"'
 ]
 
 SH_ACTIVATE = [
@@ -42,11 +34,11 @@ SH_ACTIVATE = [
 ]
 
 ACTIVATE = BAT_ACTIVATE if WIN else SH_ACTIVATE
-BROWSER = f"--browser='{FIREFOX}'"
+BROWSER = f"--browser=firefox"
 
-BAT_LAUNCH_CMD = f"call '{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"
+BAT_LAUNCH_CMD = f'"{PYTHON_EXE}" -m robotlab.labapp {BROWSER}'
 
-SH_LAUNCH_CMD = f"'{PYTHON_EXE}' -m robotlab.labapp {BROWSER}"
+SH_LAUNCH_CMD = f'"{PYTHON_EXE}" -m robotlab.labapp {BROWSER}
 
 LAUNCH_CMD = BAT_LAUNCH_CMD if WIN else SH_LAUNCH_CMD
 LAUNCH_SCRIPT = f"launch_robotlab.{SCRIPT_EXT}"
