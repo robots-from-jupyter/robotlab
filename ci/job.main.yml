@@ -28,7 +28,7 @@ jobs:
       - template: steps.conda.yml
         parameters:
           name: ${{ parameters.name }}
-          envPath: environment.yml
+          envPath: ci/env-main.yml
 
       - script: ${{ parameters.activate }} python -m scripts.build conda
         displayName: build/test remaining packages
