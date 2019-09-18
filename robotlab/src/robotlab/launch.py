@@ -9,7 +9,7 @@ import signal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from .paths import ACTIVATE, LAUNCH_CMD, LAUNCH_SCRIPT
+from robotlab.paths import ACTIVATE, LAUNCH_CMD, LAUNCH_SCRIPT
 
 
 def launch_robotlab(lab_args=None):
