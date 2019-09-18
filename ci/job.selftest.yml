@@ -27,12 +27,12 @@ jobs:
         - script: |
             @echo on
             echo %HOME%
-            md %HOME%\_robotlab
-            start /wait "" _artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%HOME%\_robotlab
-            dir %HOME%\_robotlab
+            md "%HOME%\_robotlab"
+            start /wait "" "_artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe" /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%HOME%\_robotlab
+            dir "%HOME%\_robotlab"
             timeout /t 20
-            dir %HOME%\_robotlab
-            dir %HOME%\_robotlab\Scripts
+            dir "%HOME%\_robotlab"
+            dir "%HOME%\_robotlab\Scripts"
           displayName: run .exe installer
         - script: |
             @echo on
