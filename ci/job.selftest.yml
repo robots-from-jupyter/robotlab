@@ -22,7 +22,7 @@ jobs:
           displayName: run installer
 
       - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: .\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
+        - script: _artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=_robotlab
           displayName: run installer
 
       - ${{ if not(eq(parameters.name, 'Windows')) }}:
