@@ -10,6 +10,7 @@ Can RobotLab make a Robot Notebook?
     Open RobotLab
     Execute JupyterLab Command    Close All
     Launch a new JupyterLab Document    Robot Framework    Notebook
+    Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot    ${prefix}_01_notebook.png
     Add and Run JupyterLab Code Cell    | *Test Case* |${\n}| Hello |${\n}| | Log | Hello World
     Capture Page Screenshot    ${prefix}_02_execute.png
