@@ -1,4 +1,4 @@
-{% set robotkernel = "1.0" %}
+{% set robotkernel = "1.0.1" %}
 {% set robot_jupyterlab = "==1.1.4" %}
 {% set robot_conda = ">=4.7.12,<4.8" %}
 {% set robot_fox = ">=68.0.2,<69" %}
@@ -13,7 +13,7 @@ source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
-    sha256: 93819e902be42895b02d8142c6fb13f5a88c69fdc49a7b49a15a65371d80547d
+    sha256: b239e50c2743a7b94704d1f3678303bc95d56be5cf7071e653189a9e9dc74a12
     folder: robotkernel
   # we do the jupyterlab build off-line to keep conda-build time low
   - path: ../../_artifacts/app_dir
