@@ -1,0 +1,42 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+  githubConnection: robots-from-jupyter
+  repositoryName: robots-from-jupyter/robotlab
+  artifact: RobotLab
+
+jobs:
+  - job: Deploy
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+    dependsOn:
+      - LinuxTest
+      - MacOSXTest
+      - WindowsTest
+      - conda_win_test
+      - conda_noarch_test
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+    steps:
+      - task: DownloadBuildArtifacts@0
+        displayName: Fetch Linux Installer
+        inputs:
+          artifactName: ${{ parameters.artifact }} For Linux
+          downloadPath: _artifacts/constructor
+      - task: DownloadBuildArtifacts@0
+        displayName: Fetch MacOSX Installer
+        inputs:
+          artifactName: ${{ parameters.artifact }} For MacOSX
+          downloadPath: _artifacts/constructor
+      - task: DownloadBuildArtifacts@0
+        displayName: Fetch Windows Installer
+        inputs:
+          artifactName: ${{ parameters.artifact }} For Windows
+          downloadPath: _artifacts/constructor
+      - script: cd _artifacts/constructor && sha256sum * >> SHA256SUMS
+        displayName: build hashes
+      - task: GithubRelease@0
+        inputs:
+          githubConnection: ${{ parameters.githubConnection }}
+          repositoryName: ${{ parameters.repositoryName }}
+          assets: _artifacts/constructor
+          isDraft: true
