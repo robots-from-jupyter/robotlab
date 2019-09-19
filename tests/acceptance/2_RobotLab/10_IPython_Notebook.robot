@@ -2,7 +2,6 @@
 Documentation     Try out IPython Notebooks
 Library           JupyterLibrary
 Resource          ../../resources/Browser.robot
-Resource          ../../resources/Selectors.robot
 
 *** Test Cases ***
 Can RobotLab make an IPython Notebook?

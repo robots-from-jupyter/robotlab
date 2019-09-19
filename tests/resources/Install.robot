@@ -65,8 +65,8 @@ Run the RobotLab Windows installer
     [Documentation]    Install RobotLab on Windows
     ${installer} =    Set Variable    ${INSTALLER DIR}${/}RobotLab-${INSTALLER VERSION}-Windows-x86_64.exe
     ${args} =    Set Variable    /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=${ROBOTLAB DIR}
-    ${result} =    Run Keyword If    not ${IN_ROBOTLAB}
-    ...    Run Process    ${installer} ${args}    stdout=${INSTALL LOG}    stderr=STDOUT    shell=True    env:HOME=${FAKE HOME}
+    ${result} =    Run Keyword If    not ${IN_ROBOTLAB}    Run Process    ${installer} ${args}    stdout=${INSTALL LOG}    stderr=STDOUT
+    ...    shell=True    env:HOME=${FAKE HOME}
     Set Global Variable    ${ACTIVATE SCRIPT}    ${ROBOTLAB DIR}${/}Scripts${/}activate.bat
     Set Global Variable    ${ACTIVATE}    "${ACTIVATE SCRIPT}" "${ROBOTLAB DIR}"
     Set Global Variable    ${ROBOTLAB PATH ENV}    ${ROBOTLAB DIR}${:}${ROBOTLAB DIR}${/}Scripts${:}${ROBOTLAB DIR}${/}Library${/}bin${:}%{PATH}

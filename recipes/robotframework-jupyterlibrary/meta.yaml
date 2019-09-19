@@ -5,6 +5,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 63bb7bd94bb21fbd6f88a640b605d51728bc48a1a9aebbe27ee033c218a5aa03
+  patches:
+    - 001-lab-114-icons.patch
 
 build:
   noarch: python
