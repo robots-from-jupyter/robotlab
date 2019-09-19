@@ -1,34 +1,20 @@
 name: RobotLab
 version: {{ version }}
 company: Robots from Jupyter
-install_in_dependency_order: True
-post_install: post_install.{{ script_ext }}
+post_install: post_install.bat  [win]
+post_install: post_install.sh  [unix]
+ignore_duplicate_files: True
+
+channels_remap:
+  - src: {{ build_channel }}
+    dest: https://conda.anaconda.org/conda-forge
 
 channels:
   - {{ build_channel }}
-  - https://repo.anaconda.com/pkgs/main
-  - https://repo.anaconda.com/pkgs/free
+  - https://conda.anaconda.org/anaconda
   - https://conda.anaconda.org/conda-forge
-  - https://conda.anaconda.org/pythonnet
 
 specs:
-  - conda
-  - geckodriver
-  - ipywidgets =={{ ipyw_version }}
-  - jupyterlab
-  - nodejs >={{ node_min }},<{{ node_max }}
-  - opencv
-  - pyshortcuts
   - python >={{ py_min }},<{{ py_max }}
-  - chromedriver =={{ cd_version }}
-  - restinstance
-  - robotframework =={{ rf_version }}
-  - robotframework-jupyterlibrary
-  - robotframework-lint
-  - robotframework-seleniumlibrary
-  - robotframework-seleniumscreenshots
-  - robotframeworklexer
-  - robotkernel =={{ version }}
   - robotlab =={{ version }}
-  {% if platform == "darwin" %}- python.app{% endif %}
-  {% if platform == "windows" %}- robotframework-whitelibrary{% endif %}
+  - python.app  [osx]

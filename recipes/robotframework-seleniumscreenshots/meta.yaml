@@ -1,20 +1,18 @@
-{% set name = "robotframework-seleniumscreenshots" %}
-{% set version = "0.9.5" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: '{% set name = "robotframework-seleniumscreenshots" %}{{ name }}'
+  version: '{% set version = "0.9.5" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 400f3c2213578d1e249216170cd1dd1e86999492d9e731a030beca0d87181b17
 
 build:
+  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+  script: {{ PYTHON }} -m pip install --no-deps -vvv .
 
 requirements:
-  build:
+  host:
     - pip
     - python
   run:

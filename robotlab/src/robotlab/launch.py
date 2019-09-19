@@ -1,43 +1,27 @@
 """
 Perform a proper conda activate and launch robotlab
-
-This only works if installed in a conda `root` environment
 """
 
 import subprocess
-import sys
 import os
+import sys
 import signal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from robotlab import WIN, BIN_DIR, SCRIPT_EXT
-
-BAT_ACTIVATE = [
-    f'call "{BIN_DIR}\\activate"  "{sys.prefix}"  || activate "{sys.prefix}"'
-]
-
-SH_ACTIVATE = [
-    "#!" + "/usr/bin/env bash",
-    f'. "{BIN_DIR}/activate" "{sys.prefix}" || . activate "{sys.prefix}"',
-]
-
-ACTIVATE = BAT_ACTIVATE if WIN else SH_ACTIVATE
-
-BAT_CMD = ["call python -m robotlab.labapp"]
-
-SH_CMD = ["python -m robotlab.labapp"]
-
-CMD = BAT_CMD if WIN else SH_CMD
+from robotlab.paths import ACTIVATE, LAUNCH_CMD, LAUNCH_SCRIPT
 
 
-def launch_robotlab():
+def launch_robotlab(lab_args=None):
+    lab_cmd = " ".join([LAUNCH_CMD] + (lab_args or []))
+
     with TemporaryDirectory() as td:
         tdp = Path(td)
-        script = tdp / f"launch_robotlab.{SCRIPT_EXT}"
-        lines = ACTIVATE + CMD
+        script = tdp / LAUNCH_SCRIPT
+        lines = ACTIVATE + [lab_cmd]
         script.write_text(os.linesep.join(lines))
         script.chmod(0o755)
+        print("Launching RobotLab")
         print(script.read_text(), "\n")
         proc = subprocess.Popen([str(script)], cwd=os.path.expanduser("~"))
         try:
@@ -47,4 +31,4 @@ def launch_robotlab():
 
 
 if __name__ == "__main__":
-    launch_robotlab()
+    launch_robotlab(sys.argv[1:])

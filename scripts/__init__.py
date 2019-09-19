@@ -26,31 +26,62 @@ TEST_DIR = ROOT / "tests"
 CONDA_OUT = ARTIFACTS / "conda-bld"
 CONSTRUCT_OUT = ARTIFACTS / "constructor"
 TEST_OUT = ARTIFACTS / "test_output"
+LAB_OUT = ARTIFACTS / "app_dir"
 
 ROBOTLAB_DIR = ROOT / "robotlab"
-
 README = ROOT / "README.md"
 
 # for easy overriding in CI
+VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.0")
+PY_MAX = os.environ.get("PY_MAX", "3.7.0a0")
 PY_MIN = os.environ.get("PY_MIN", "3.6")
-PY_MAX = os.environ.get("PY_MAX", "3.7")
-NODE_MIN = os.environ.get("NODE_MIN", "8")
-NODE_MAX = os.environ.get("NODE_MAX", "9")
-RF_VERSION = os.environ.get("ROBOTFRAMEWORK_VERSION", "3.1.1")
-VERSION = os.environ.get("ROBOTLAB_VERSION", "1.0rc1")
-CHROMEDRIVER_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "2.45")
-IPYWIDGETS_VERSION = os.environ.get("CHROMEDRIVER_VERSION", "7.4.2")
+LABEXTENSIONS = os.environ.get(
+    "LABEXTENSIONS",
+    """
+@jupyterlab/toc@1.0.1
+@jupyter-widgets/jupyterlab-manager@1.0.2
+jupyterlab_robotmode@2.4.0
+""".replace(
+        "\n", " "
+    ),
+).split()
+
+CONDA_BUILD_ARGS = [
+    "conda-build",
+    "--output-folder",
+    CONDA_OUT,
+    "--cache-dir",
+    CONDA_CACHE,
+    "-c",
+    "https://conda.anaconda.org/anaconda",
+    "-c",
+    "https://conda.anaconda.org/conda-forge",
+    "--python",
+    PY_MIN,
+]
+
+CONSTRUCTOR_ARGS = [
+    "constructor",
+    "--output-dir",
+    str(CONSTRUCT_OUT),
+    "--cache-dir",
+    str(CONSTRUCT_CACHE),
+    "--verbose",
+]
 
 
 def run(args, **kwargs):
     """ Probably unneccessary "convenience" wrapper
     """
-    p = subprocess.Popen(list(map(str, args)), **kwargs)
+    str_args = list(map(str, args))
+    print("===\n", " ".join(str_args), "\n===")
+    p = subprocess.Popen(str_args, **kwargs)
 
     try:
         p.wait()
     except KeyboardInterrupt as err:
         p.kill()
+        p.wait()
         raise err
 
     return p.returncode

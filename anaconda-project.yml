@@ -1,124 +1,109 @@
-name: robocon-2019-workshop
+name: robotlab
 
 commands:
-  build:
-    unix: python -m scripts.build
-    env_spec: _build
+  integrity:
+    unix: python -m scripts.integrity
+    env_spec: _qa
 
   lint:
     unix: python -m scripts.lint
-    env_spec: _build
+    env_spec: _qa
 
-  integrity:
-    unix: python -m scripts.integrity
-    env_spec: _build
-
-  build:win:
+  build:
+    unix: python -m scripts.build
     windows: python -m scripts.build
-    env_spec: _build_win
+    env_spec: _robots_from_jupyter
+
+  build:lab:
+    unix: python -m scripts.build lab
+    windows: python -m scripts.build lab
+    env_spec: _qa
 
   test:
     unix: python -m scripts.test
-    env_spec: _test
-
-  test:win:
     windows: python -m scripts.test
-    env_spec: _test_win
+    env_spec: _test
 
   combine:
     unix: python -m scripts.combine
-    env_spec: _build
+    env_spec: _qa
 
   robotlab:setup:
+    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps -vv
+    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps -vv
     env_spec: robotlab-dev
-    unix: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
-    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
-
-  robotlab:setup:win:
-    env_spec: robotlab-dev-win
-    windows: cd robotlab && python -m pip install -e . --ignore-installed --no-deps --no-cache-dir -vv
-
-  robotlab:shortcuts:
-    env_spec: robotlab-dev
-    unix: robotlab-shortcuts
-
-  robotlab:launch:
-    env_spec: robotlab-dev
-    unix: python ./robotlab/src/robotlab/launch.py
-
-  robotlab:launch:win:
-    env_spec: robotlab-dev-win
-    windows: python -m robotlab.launch
-
-  robotlab:build:
-    env_spec: robotlab-dev
-    unix: robotlab build
-
-  robotlab:build:win:
-    env_spec: robotlab-dev-win
-    windows: robotlab build
 
   robotlab:
-    env_spec: robotlab-dev
     unix: robotlab
-
-  robotlab:win:
-    env_spec: robotlab-dev-win
     windows: robotlab
+    env_spec: robotlab-dev
+
+  robotlab:launch:
+    unix: python -m robotlab.launch
+    windows: python -m robotlab.launch
+    env_spec: robotlab-dev
+
+  robotlab:build:
+    unix: robotlab build
+    windows: robotlab build
+    env_spec: robotlab-dev
+
+channels:
+- https://conda.anaconda.org/anaconda
+- https://conda.anaconda.org/conda-forge
 
 env_specs:
-  _build:
-    platforms:
-    - linux-64
-    - osx-64
-    inherit_from:
-    - _robots_from_jupyter
+  _robots_from_jupyter:
+    description: the main build/test environment
+    channels:
+    - https://conda.anaconda.org/anaconda
+    - https://conda.anaconda.org/conda-forge
+    packages:
+      - conda >=4.7.12,<4.8
+      - conda-build >=3.18.9,<3.19
+      - conda-verify
+      - constructor >=3,<3.1
+      - firefox >=68.0.2,<69
+      - geckodriver
+      - pillow
+      - python >=3.6,<3.7.0a0
+      - python-libarchive-c
+      - ripgrep
+      - robotframework
+      - robotframework-seleniumlibrary
 
-  _build_win:
-    platforms:
-    - win-64
+  _lab:
+    packages:
+      - jupyterlab ==1.1.4
+      - nodejs >=11,<12
+      - python >=3.6,<3.7.0a0
+
+  _qa:
     inherit_from:
-    - _robots_from_jupyter
+      - _lab
+    packages:
+      - black
+      - flake8
+      - robotframework-lint
 
   _test:
-    platforms:
-    - linux-64
-    - osx-64
     inherit_from:
     - _robots_from_jupyter
     channels:
     - ./_artifacts/conda-bld
-    - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
-    - https://conda.anaconda.org/conda-forge
     packages:
     - robotframework-jupyterlibrary
-
-  _test_win:
-    platforms:
-    - win-64
-    inherit_from:
-    - _robots_from_jupyter
-    channels:
-    - ./_artifacts/conda-bld
-    - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
-    - https://conda.anaconda.org/conda-forge
-    packages:
-    - robotframework-jupyterlibrary
-
 
   robotlab-dev:
+    description: basically what goes in the constructor for interactive dev/test
+    inherit_from:
+      - _lab
     channels:
     - ./_artifacts/conda-bld
-    - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
-    - https://conda.anaconda.org/conda-forge
     packages:
-    - jupyterlab >=0.35,<0.36
-    - nodejs >=8,<9
+    - conda
+    - firefox
     - pyshortcuts
-    - python >=3.6,<3.7
     - restinstance
     - robotframework-seleniumscreenshots
     - robotkernel
@@ -126,29 +111,11 @@ env_specs:
   robotlab-dev-win:
     inherit_from:
     - robotlab-dev
-
+    packages:
+    - robotframework-whitelibrary
 
   robotlab-test:
     inherit_from:
     - robotlab-dev
     packages:
     - robotlab
-
-  _robots_from_jupyter:
-    packages:
-    - black
-    - conda >=4.5.11,<4.6
-    - conda-build >=3.15,<3.16
-    - conda-verify
-    - constructor >=2.3,<2.4
-    - flake8
-    - geckodriver
-    - python >=3.6,<3.7
-    - python-chromedriver-binary ==2.46
-    - robotframework
-    - robotframework-lint
-    - robotframework-seleniumlibrary
-    channels:
-    - https://repo.anaconda.com/pkgs/main
-    - https://repo.anaconda.com/pkgs/free
-    - https://conda.anaconda.org/conda-forge

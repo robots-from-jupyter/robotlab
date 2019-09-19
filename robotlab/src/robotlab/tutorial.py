@@ -2,19 +2,18 @@ from pathlib import Path
 import shutil
 import sys
 
-TUTORIAL_NAME = "robotkernel-tutorial"
-TUTORIAL = Path(sys.prefix) / "var" / "www" / TUTORIAL_NAME
+from .paths import TUTORIAL_NAME, TUTORIAL
 
 
 def copy_robotkernel_tutorial(dest=None):
-    dest = Path(dest) if dest else Path(".")
+    dest = (Path(dest) if dest else Path(".")).resolve()
     shutil.copytree(TUTORIAL, dest / TUTORIAL_NAME)
+    if not dest.exists():
+        dest.mkdir(parents=True)
+    print("\n".join(sorted(map(str, (dest / TUTORIAL_NAME).glob("*")))))
     return 0
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        dest = Path(sys.argv(1))
-    else:
-        dest = None
+    dest = Path(sys.argv(1)) if len(sys.argv) > 1 else None
     sys.exit(copy_robotkernel_tutorial(dest))

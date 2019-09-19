@@ -1,0 +1,48 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+  activate: ""
+
+jobs:
+  - job: ${{ parameters.name }}Build
+    condition: succeeded()
+    dependsOn:
+      - lab
+      - conda_noarch
+      - ${{ if eq(parameters.name, 'Windows') }}:
+        - conda_win
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+
+    steps:
+      - template: steps.restore.yml
+        parameters:
+          name: ${{ parameters.name }}
+
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: robotlab app_dir
+          targetPath: _artifacts/app_dir
+        displayName: restore jupyterlab
+
+      - template: steps.conda.yml
+        parameters:
+          name: ${{ parameters.name }}
+          envPath: ci/env-main.yml
+
+      - script: ${{ parameters.activate }} python -m scripts.build conda
+        displayName: build/test remaining packages
+
+      - script: ${{ parameters.activate }} python -m scripts.build constructor
+        displayName: build installer
+
+      - ${{ if eq(parameters.name, 'MacOSX') }}:
+        - script: chmod -R 777 _artifacts
+          displayName: fix artifact permissions
+
+      - task: PublishPipelineArtifact@1
+        displayName: publish installer
+        inputs:
+          targetPath: _artifacts/constructor
+          artifactName: RobotLab for ${{ parameters.name }}
+        condition: succeeded()

@@ -1,0 +1,28 @@
+jobs:
+  - job: lab
+    pool:
+      vmImage: ubuntu-16.04
+
+    steps:
+      - template: steps.conda.yml
+        parameters:
+          envPath: ci/env-lab.yml
+
+      - script: python -m scripts.integrity
+        displayName: check integrity
+
+      - script: python -m scripts.lint
+        displayName: lint
+
+      - script: python -m scripts.build lab
+        displayName: build lab
+
+      - script: rm -rf _artifacts/app_dir/staging
+        displayName: clean lab cruft
+
+      - task: PublishPipelineArtifact@0
+        displayName: publish jupyterlab package
+        inputs:
+          targetPath: _artifacts/app_dir
+          artifactName: robotlab app_dir
+        condition: succeeded()

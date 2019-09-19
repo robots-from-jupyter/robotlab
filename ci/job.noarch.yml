@@ -1,0 +1,23 @@
+jobs:
+  - job: conda_noarch
+    pool:
+      vmImage: ubuntu-16.04
+
+    steps:
+      - template: steps.conda.yml
+
+      - script: |-
+          python -m scripts.build conda \
+            --no-test \
+            restinstance \
+            robotframework-jupyterlibrary \
+            robotframework-seleniumscreenshots \
+            robotkernel
+        displayName: build noarch packages
+
+      - task: PublishPipelineArtifact@0
+        displayName: publish noarch packages
+        inputs:
+          targetPath: _artifacts/conda-bld/noarch
+          artifactName: noarch conda packages
+        condition: succeeded()

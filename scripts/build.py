@@ -3,22 +3,17 @@ import sys
 from jinja2 import Template
 
 from . import (
-    CHROMEDRIVER_VERSION,
-    CONDA_CACHE,
+    CONDA_BUILD_ARGS,
     CONDA_OUT,
-    CONSTRUCT_CACHE,
+    CONSTRUCTOR_ARGS,
     CONSTRUCT_DIR,
     CONSTRUCT_OUT,
     CONSTRUCT,
-    IPYWIDGETS_VERSION,
-    NODE_MAX,
-    NODE_MIN,
-    PLATFORM,
+    LABEXTENSIONS,
+    LAB_OUT,
     PY_MAX,
     PY_MIN,
     RECIPE_DIR,
-    RF_VERSION,
-    SCRIPT_EXT,
     VERSION,
     run,
 )
@@ -27,7 +22,7 @@ from . import (
 CONSTRUCT_IN = Template((CONSTRUCT_DIR / "construct.yaml.in").read_text())
 
 
-def build_conda(packages=None, force=False):
+def build_conda(packages=None, force=False, no_test=False):
     """ Build some packages (mostly re-arching conda-forge `noarch: python`)
     """
 
@@ -44,34 +39,17 @@ def build_conda(packages=None, force=False):
     else:
         packages = ["."]
 
+    extra_args = []
+    extra_args += [] if force else ["--skip-existing"]
+    extra_args += ["--no-test"] if no_test else []
+
+    rc = 0
+
     for package in packages:
+        args = [*CONDA_BUILD_ARGS, *extra_args, package]
+        rc = rc or run(args, cwd=str(RECIPE_DIR))
 
-        rc = run(
-            [
-                "conda-build",
-                package,
-                "--output-folder",
-                CONDA_OUT,
-                "--cache-dir",
-                CONDA_CACHE,
-                "-c",
-                "https://repo.anaconda.com/pkgs/main",
-                "-c",
-                "https://repo.anaconda.com/pkgs/free",
-                "-c",
-                "https://conda.anaconda.org/conda-forge",
-                "-c",
-                "https://conda.anaconda.org/pythonnet",
-                "--python",
-                PY_MIN,
-            ]
-            + ([] if force else ["--skip-existing"]),
-            cwd=str(RECIPE_DIR),
-        )
-        if rc:
-            return rc
-
-    return 0
+    return rc
 
 
 def build_constructor():
@@ -81,43 +59,68 @@ def build_constructor():
     """
     construct = CONSTRUCT_IN.render(
         build_channel=CONDA_OUT.as_uri(),
-        py_min=PY_MIN,
         py_max=PY_MAX,
-        node_min=NODE_MIN,
-        node_max=NODE_MAX,
-        rf_version=RF_VERSION,
+        py_min=PY_MIN,
         version=VERSION,
-        cd_version=CHROMEDRIVER_VERSION,
-        ipyw_version=IPYWIDGETS_VERSION,
-        script_ext=SCRIPT_EXT,
-        platform=PLATFORM,
     )
 
     CONSTRUCT.write_text(construct)
 
+    print(construct)
+
     CONSTRUCT_OUT.mkdir(exist_ok=True)
 
-    return run(
+    return run(CONSTRUCTOR_ARGS, cwd=str(CONSTRUCT_DIR))
+
+
+def build_lab():
+    JP = [sys.executable, "-m", "jupyter"]
+    app_dir = ["--app-dir", LAB_OUT]
+
+    rc = run(
         [
-            "constructor",
-            ".",
-            "--output-dir",
-            str(CONSTRUCT_OUT),
-            "--cache-dir",
-            str(CONSTRUCT_CACHE),
-            "--verbose",
-        ],
-        cwd=str(CONSTRUCT_DIR),
+            *JP,
+            "labextension",
+            "install",
+            "--no-build",
+            *app_dir,
+            *LABEXTENSIONS,
+        ]
     )
+    rc = rc or run(
+        [
+            *JP,
+            "lab",
+            "build",
+            *app_dir,
+            "--dev-build=False",
+            "--minimize=True",
+            "--name='RobotLab'",
+        ]
+    )
+
+    return rc
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "conda":
-            sys.exit(build_conda(sys.argv[2:]))
-        elif sys.argv[1] == "constructor":
-            sys.exit(build_constructor())
+    rc = 1
 
-    if build_conda() == 0:
-        sys.exit(build_constructor())
-    sys.exit(1)
+    if len(sys.argv) > 1:
+        args = sys.argv[1]
+
+        it, rest = sys.argv[1], sys.argv[2:]
+        if it == "lab":
+            rc = build_lab()
+        elif it == "conda":
+            no_test = False
+            if "--no-test" in rest:
+                no_test = True
+                rest.remove("--no-test")
+            rc = build_conda(rest, no_test=no_test)
+        elif it == "constructor":
+            rc = build_constructor()
+    else:
+        rc = build_conda()
+        rc = rc or build_constructor()
+
+    sys.exit(rc)

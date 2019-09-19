@@ -1,0 +1,15 @@
+jobs:
+  - job: conda_noarch_test
+    pool:
+      vmImage: ubuntu-16.04
+    condition: succeeded()
+    dependsOn:
+      - conda_noarch
+
+    steps:
+      - template: steps.restore.yml
+
+      - template: steps.conda.yml
+
+      - script: python -m scripts.test conda
+        displayName: test noarch packages

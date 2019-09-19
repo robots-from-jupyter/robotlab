@@ -1,0 +1,13 @@
+--- src/JupyterLibrary/clients/jupyterlab/Selectors.robot	2018-12-17 23:29:45.000000000 -0500
++++ src/JupyterLibrary/clients/jupyterlab/Selectors.robot	2019-09-18 23:05:13.135509964 -0400
+@@ -12,8 +12,8 @@
+ ${JLAB CSS BUSY KERNEL}  .jp-Toolbar-kernelStatus.jp-FilledCircleIcon
+ ${JLAB CSS CMD INPUT}    .p-CommandPalette-input
+ ${JLAB CSS CMD ITEM}    .p-CommandPalette-item
+-${JLAB CSS ICON ADD}  .jp-AddIcon
+-${JLAB CSS ICON RUN}  .jp-RunIcon
++${JLAB CSS ICON ADD}  [data-icon="add"]
++${JLAB CSS ICON RUN}  [data-icon="run"]
+ ${JLAB CSS NB TOOLBAR}  .jp-NotebookPanel-toolbar
+ ${JLAB CSS SIDEBAR TAB}  .jp-SideBar .p-TabBar-tab
+ ${JLAB CSS SPINNER}        .jp-Spinner

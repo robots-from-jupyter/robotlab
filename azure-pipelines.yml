@@ -1,24 +1,51 @@
-jobs:
-- template: ci/job.test.yml
-  parameters:
-    name: Linux
-    vmImage: ubuntu-16.04
-
-- template: ci/job.test.yml
-  parameters:
-    name: MacOSX
-    vmImage: macos-10.13
-
-- template: ci/job.test.yml
-  parameters:
-    name: Windows
-    vmImage: vs2017-win2016
-
-- template: ci/job.combine.yml
-  parameters:
-    name: Linux
-    vmImage: ubuntu-16.04
-
 trigger: [master]
 
 pr: [master]
+
+variables:
+  ROBOTLAB_VERSION: 2019.9.0
+  PYTHONUNBUFFERED: 1
+
+jobs:
+  # group one: simple conda/webpack builds, validation
+  - template: ci/job.noarch.yml
+  - template: ci/job.win.yml
+  - template: ci/job.lab.yml
+
+  # group two: verify conda builds, do acceptance tests
+  - template: ci/job.noarch-test.yml
+  - template: ci/job.win-test.yml
+
+  - template: ci/job.main.yml
+    parameters:
+      name: Linux
+      vmImage: ubuntu-16.04
+
+  - template: ci/job.main.yml
+    parameters:
+      name: MacOSX
+      vmImage: macos-10.13
+
+  - template: ci/job.main.yml
+    parameters:
+      name: Windows
+      vmImage: vs2017-win2016
+      activate: call activate &&
+
+  - template: ci/job.selftest.yml
+    parameters:
+      name: Linux
+      vmImage: ubuntu-16.04
+
+  - template: ci/job.selftest.yml
+    parameters:
+      name: MacOSX
+      vmImage: macos-10.13
+
+  - template: ci/job.selftest.yml
+    parameters:
+      name: Windows
+      vmImage: vs2017-win2016
+
+  # group 3: reporting, etc
+  - template: ci/job.combine.yml

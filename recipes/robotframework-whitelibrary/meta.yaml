@@ -1,6 +1,6 @@
 package:
   name: '{% set name = "robotframework-whitelibrary" %}{{ name }}'
-  version: '{% set version = "1.4.0" %}{{ version }}'
+  version: '{% set version = "1.6.0" %}{{ version }}'
 
 build:
   number: 0
@@ -23,7 +23,7 @@ about:
   home: https://github.com/Omenia/robotframework-whitelibrary
   license: Apache-2.0
   license_family: Apache
-  license_file: {{ environ.get("RECIPE_DIR") }}/apache-2.0.txt
+  license_file: apache-2.0.txt
   summary: WhiteLibrary is a Robot Framework library for automating Windows GUI.
   doc_url: http://omenia.github.io/robotframework-whitelibrary/keywords.html
   description: >

@@ -1,68 +1,94 @@
-{% set extensions = "@jupyterlab/toc@0.6.0 @jupyter-widgets/jupyterlab-manager@0.38.1 jupyterlab_robotmode@2.3.1" %}
-{% set lab_min = "0.35.4" %}
-{% set lab_max = "0.36" %}
+{% set robotkernel = "1.0" %}
+{% set robot_jupyterlab = "==1.1.4" %}
+{% set robot_conda = ">=4.7.12,<4.8" %}
+{% set robot_fox = ">=68.0.2,<69" %}
+{% set robot_widgets = ">=7.5.1" %}
+{% set robot_node = ">=11,<12" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "1.0rc1" %}{{ version }}
+  version: {% set version = "2019.9.0" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
-  - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ version }}.tar.gz
-    sha256: 5eed6419990ca3e1962528d0b37b9d8898020b752bd0646baea5db86f107893e
+  - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
+    sha256: 93819e902be42895b02d8142c6fb13f5a88c69fdc49a7b49a15a65371d80547d
     folder: robotkernel
+  # we do the jupyterlab build off-line to keep conda-build time low
+  - path: ../../_artifacts/app_dir
+    folder: app_dir
 
 build:
   number: 0
   entry_points:
     - robotlab = robotlab.labapp:main
     - robotlab-extension = robotlab.labextensionapp:main
+    - robotlab-shortcuts = robotlab.shortcuts:make_shortcuts
     - robotlab-examples = robotlab.examples:copy_robotkernel_examples
+    - robotlab-tutorial = robotlab.tutorial:copy_robotkernel_tutorial
   script:
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
-    - {{ PYTHON }} -m robotlab.labextensionapp install {{ extensions }} --no-build
-    - {{ PYTHON }} -m robotlab.labextensionapp list
-    - {{ PYTHON }} -m robotlab.labapp build
-    - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
-    - rd /s /q {{ PREFIX }}\\share\\jupyter\\robotlab\\staging  # [win]
-    - {{ PYTHON }} -m robotlab.labextensionapp list
+
     - cd {{ SRC_DIR }}
+
+    - mkdir -p {{ PREFIX }}/share/jupyter # [unix]
+    - cp -r app_dir {{ PREFIX }}/share/jupyter/robotlab  # [unix]
+    - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
+    - ls {{ PREFIX }}/share/jupyter/robotlab  # [unix]
+
+    - md {{ PREFIX }}\share\jupyter\robotlab  # [win]
+    - xcopy /e app_dir\* {{ PREFIX }}\share\jupyter\robotlab\  # [win]
+    - rd /s /q {{ PREFIX }}\share\jupyter\robotlab\staging  # [win]
+    - dir {{ PREFIX }}\share\jupyter\robotlab  # [win]
+
     - cd robotkernel
     - cd examples
+
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
+
     - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
-    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples  # [win]
+    - xcopy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples\  # [win]
+
     - cd ..
     - cd docs
     - cd notebooks
+
     - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
     - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
+
     - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
-    - copy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
+    - xcopy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial\  # [win]
 
 requirements:
   host:
-    - jupyterlab >={{ lab_min }},<{{ lab_max }}
-    - nodejs >=8,<9
     - pip
     - python
   run:
-    - ipywidgets
-    - jupyterlab >={{ lab_min }},<{{ lab_max }}
-    - nodejs >=8,<9
+    - conda {{ robot_conda }}
+    - firefox {{ robot_fox }}
+    - geckodriver
+    - ipywidgets {{ robot_widgets }}
+    - jupyterlab {{ robot_jupyterlab }}
+    - nodejs {{ robot_node }}
+    - opencv
     - pyshortcuts
     - python
-    - robotkernel >={{ version }}
+    - restinstance
+    - robotframework-jupyterlibrary
+    - robotframework-seleniumscreenshots
+    - robotframework-whitelibrary  # [win]
+    - robotkernel =={{ robotkernel }}
 
 test:
   imports:
     - robotlab
-    - robotlab.launch
     - robotlab.examples
     - robotlab.labextensionapp
+    - robotlab.launch
+    - robotlab.paths
     - robotlab.shortcuts
     - robotlab.tutorial
   commands:
@@ -78,4 +104,4 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: robotlab/LICENSE
-  summary: A JupyterLab built for a robotkernel
+  summary: A JupyterLab built for robotkernel as part of the RobotLab distribution

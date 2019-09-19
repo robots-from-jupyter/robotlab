@@ -1,4 +1,4 @@
-name: _robots_from_jupyter
+name: robotlab-main
 
 channels:
   - https://conda.anaconda.org/anaconda
@@ -9,11 +9,7 @@ dependencies:
   - conda-build >=3.18.9,<3.19
   - conda-verify
   - constructor >=3,<3.1
-  - firefox >=68.0.2,<69
-  - geckodriver
   - pillow
   - python >=3.6,<3.7.0a0
   - python-libarchive-c
   - ripgrep
-  - robotframework
-  - robotframework-seleniumlibrary

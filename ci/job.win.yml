@@ -1,0 +1,24 @@
+parameters:
+  vmImage: vs2017-win2016
+  activate: call activate &&
+
+jobs:
+  - job: conda_win
+    condition: succeeded()
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+
+    steps:
+      - template: steps.conda.yml
+        parameters:
+          name: Windows
+
+      - script: ${{ parameters.activate }} python -m scripts.build conda --no-test pyshortcuts robotframework-whitelibrary
+        displayName: build win packages
+
+      - task: PublishPipelineArtifact@0
+        displayName: publish windows packages
+        inputs:
+          targetPath: _artifacts/conda-bld/win-64
+          artifactName: Windows Conda Packages
+        condition: succeeded()
