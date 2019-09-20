@@ -3,6 +3,10 @@ parameters:
   vmImage: ubuntu-16.04
   githubConnection: release-robots-from-jupyter
   repositoryName: robots-from-jupyter/robotlab
+  platforms:
+    - Linux
+    - OSX
+    - MacOSX
   artifact: RobotLab
   constructors: _artifacts/constructor
 
@@ -11,30 +15,20 @@ jobs:
     pool:
       vmImage: ${{ parameters.vmImage }}
     dependsOn:
-      - LinuxTest
-      - MacOSXTest
-      - WindowsTest
+      - ${{ each platform in parameters.platforms }}:
+        - ${{ platform }}Test
       - conda_win_test
       - conda_noarch_test
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
     steps:
-      - task: DownloadBuildArtifacts@0
-        displayName: Fetch Linux Installer
-        inputs:
-          artifactName: ${{ parameters.artifact }} For Linux
-          downloadPath: ${{ parameters.constructors }}
-      - task: DownloadBuildArtifacts@0
-        displayName: Fetch MacOSX Installer
-        inputs:
-          artifactName: ${{ parameters.artifact }} For MacOSX
-          downloadPath: ${{ parameters.constructors }}
-      - task: DownloadBuildArtifacts@0
-        displayName: Fetch Windows Installer
-        inputs:
-          artifactName: ${{ parameters.artifact }} For Windows
-          downloadPath: ${{ parameters.releaseDir }}
+      - ${{ each platform in parameters.platforms }}:
+        - task: DownloadBuildArtifacts@0
+          displayName: Fetch ${{ platform }} Installer
+          inputs:
+            artifactName: ${{ parameters.artifact }} For ${{ platform }}
+            downloadPath: ${{ parameters.constructors }}
       - script: find .
-        displayName: build hashes
+        displayName: list files before release
       - script: cd ${{ parameters.constructors }} && sha256sum * >> SHA256SUMS
         displayName: build hashes
       - task: GithubRelease@0
