@@ -4,6 +4,7 @@ company: Robots from Jupyter
 post_install: post_install.bat  [win]
 post_install: post_install.sh  [unix]
 ignore_duplicate_files: True
+license_file: ../LICENSE
 
 channels_remap:
   - src: {{ build_channel }}

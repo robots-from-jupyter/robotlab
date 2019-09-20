@@ -16,4 +16,4 @@ dependencies:
   - python-libarchive-c
   - ripgrep
   - robotframework
-  - robotframework-seleniumlibrary
+  - robotframework-seleniumlibrary >=3.3.0,<4
