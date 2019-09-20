@@ -70,7 +70,7 @@ env_specs:
       - python-libarchive-c
       - ripgrep
       - robotframework
-      - robotframework-seleniumlibrary
+      - robotframework-seleniumlibrary >=3.3.0,<4
 
   _lab:
     packages:
