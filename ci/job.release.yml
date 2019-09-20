@@ -5,8 +5,8 @@ parameters:
   repositoryName: robots-from-jupyter/robotlab
   platforms:
     - Linux
-    - OSX
     - MacOSX
+    - Windows
   artifact: RobotLab
   constructors: _artifacts/constructor
 
