@@ -1,4 +1,9 @@
-trigger: [master]
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - refs/tags/v*
 
 pr: [master]
 
@@ -49,3 +54,4 @@ jobs:
 
   # group 3: reporting, etc
   - template: ci/job.combine.yml
+  - template: ci/job.release.yml
