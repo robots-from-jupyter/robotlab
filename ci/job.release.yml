@@ -35,5 +35,5 @@ jobs:
         inputs:
           githubConnection: ${{ parameters.githubConnection }}
           repositoryName: ${{ parameters.repositoryName }}
-          assets: ${{ parameters.constructors }}
+          assets: ${{ parameters.constructors }}/*
           isDraft: true
