@@ -4,6 +4,7 @@ parameters:
   githubConnection: release-robots-from-jupyter
   repositoryName: robots-from-jupyter/robotlab
   artifact: RobotLab
+  constructors: _artifacts/constructor
 
 jobs:
   - job: Deploy
@@ -21,22 +22,24 @@ jobs:
         displayName: Fetch Linux Installer
         inputs:
           artifactName: ${{ parameters.artifact }} For Linux
-          downloadPath: _artifacts/constructor
+          downloadPath: ${{ parameters.constructors }}
       - task: DownloadBuildArtifacts@0
         displayName: Fetch MacOSX Installer
         inputs:
           artifactName: ${{ parameters.artifact }} For MacOSX
-          downloadPath: _artifacts/constructor
+          downloadPath: ${{ parameters.constructors }}
       - task: DownloadBuildArtifacts@0
         displayName: Fetch Windows Installer
         inputs:
           artifactName: ${{ parameters.artifact }} For Windows
-          downloadPath: _artifacts/constructor
-      - script: cd _artifacts/constructor && sha256sum * >> SHA256SUMS
+          downloadPath: ${{ parameters.releaseDir }}
+      - script: find .
+        displayName: build hashes
+      - script: cd ${{ parameters.constructors }} && sha256sum * >> SHA256SUMS
         displayName: build hashes
       - task: GithubRelease@0
         inputs:
           githubConnection: ${{ parameters.githubConnection }}
           repositoryName: ${{ parameters.repositoryName }}
-          assets: _artifacts/constructor
+          assets: ${{ parameters.constructors }}
           isDraft: true
