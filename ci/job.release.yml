@@ -22,11 +22,11 @@ jobs:
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
     steps:
       - ${{ each platform in parameters.platforms }}:
-        - task: DownloadBuildArtifacts@0
+        - task: DownloadPipelineArtifact@0
           displayName: Fetch ${{ platform }} Installer
           inputs:
             artifactName: ${{ parameters.artifact }} For ${{ platform }}
-            downloadPath: ${{ parameters.constructors }}
+            targetPath: ${{ parameters.constructors }}
       - script: find .
         displayName: list files before release
       - script: cd ${{ parameters.constructors }} && sha256sum * >> SHA256SUMS
