@@ -95,7 +95,7 @@ was:
 
 > ### _Field Notes_
 >
-> _At our 2019 workshop, graciously hosted by [Silli][], (whose network was super fast!)
+> _At our 2019 workshop, graciously hosted by [Siili][], (whose network was super fast!)
 > our room full of attendees, on three distributions of Linux, two versions of MacOSX
 > and two versions of Windows were all up and running in under 30 minutes. We got
 > through all of the [tutorial][] before lunch!_
@@ -210,6 +210,6 @@ anaconda-project run integrity
 [robotkernel]: https://github.com/robots-from-jupyter/robotkernel
 [robotlab]: https://github.com/robots-from-jupyter/robotlab
 [robotlab-issues]: https://github.com/robots-from-jupyter/robotlab/issues
-[Silli]: https://siili.com
+[Siili]: https://siili.com
 [tutorial]: https://github.com/robots-from-jupyter/robotkernel/tree/master/docs/notebooks
 [webdriver]: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads
