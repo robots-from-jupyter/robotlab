@@ -32,7 +32,7 @@ ROBOTLAB_DIR = ROOT / "robotlab"
 README = ROOT / "README.md"
 
 # for easy overriding in CI
-VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.0")
+VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.1")
 PY_MAX = os.environ.get("PY_MAX", "3.7.0a0")
 PY_MIN = os.environ.get("PY_MIN", "3.6")
 LABEXTENSIONS = os.environ.get(

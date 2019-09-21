@@ -5,7 +5,7 @@ Library           Process
 Library           JupyterLibrary
 
 *** Variables ***
-${INSTALLER VERSION}    2019.9.0
+${INSTALLER VERSION}    2019.9.1
 ${INSTALLER DIR}    ${OUTPUT DIR}${/}..${/}constructor
 ${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
 &{ROBOTLAB GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Scripts${/}geckodriver.exe

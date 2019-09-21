@@ -7,7 +7,7 @@
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "2019.9.0" %}{{ version }}
+  version: {% set version = "2019.9.1" %}{{ version }}
 
 source:
   - path: ../../robotlab
