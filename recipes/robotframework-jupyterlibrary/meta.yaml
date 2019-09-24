@@ -21,7 +21,7 @@ requirements:
     - pillow
     - python
     - robotframework >=3.1
-    - robotframework-seleniumlibrary >=3.3.0,<4
+    - robotframework-seleniumlibrary >=4.0.0,<5
     - six
 
 test:
