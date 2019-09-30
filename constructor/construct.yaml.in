@@ -3,6 +3,8 @@ version: {{ version }}
 company: Robots from Jupyter
 post_install: post_install.bat  [win]
 post_install: post_install.sh  [unix]
+# hopefully we can keep this on, but sometimes...
+# ignore_duplicate_files: True
 license_file: ../LICENSE
 
 channels_remap:
