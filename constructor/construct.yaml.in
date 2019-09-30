@@ -11,8 +11,8 @@ channels_remap:
 
 channels:
   - {{ build_channel }}
-  - https://conda.anaconda.org/anaconda
   - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
 
 specs:
   - python >={{ py_min }},<{{ py_max }}
