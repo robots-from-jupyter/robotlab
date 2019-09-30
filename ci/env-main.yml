@@ -1,8 +1,8 @@
 name: robotlab-main
 
 channels:
-  - https://conda.anaconda.org/anaconda
   - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
 
 dependencies:
   - conda >=4.7.12,<4.8
