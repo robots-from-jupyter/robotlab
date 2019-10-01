@@ -5,7 +5,7 @@ _cache/
 *.ipynb_checkpoints/
 *.pyc
 build/
-constructor/construct.yaml
+**/construct.yaml
 dist/
 envs/
 **/icons/*.png

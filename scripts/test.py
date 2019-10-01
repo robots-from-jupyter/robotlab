@@ -1,7 +1,15 @@
 import sys
 import os
 
-from . import run, TEST_DIR, TEST_OUT, PLATFORM, CONDA_OUT, CONDA_BUILD_ARGS
+from . import (
+    run,
+    TEST_DIR,
+    TEST_OUT,
+    PLATFORM,
+    CONDA_OUT,
+    CONDA_BUILD_ARGS,
+    CONSTRUCT_OUT,
+)
 
 
 def test_conda(packages=None):
@@ -18,7 +26,10 @@ def test_conda(packages=None):
     return rc
 
 
-def test_robot(robot_args=None, headless=False, in_robotlab=False):
+def test_robot(product, robot_args=None, headless=False, in_product=False):
+    stem = f"{product}.{PLATFORM}"
+    robot_args = list(robot_args or []) + ["--include", f"product:{product}"]
+
     if headless:
         os.environ["MOZ_HEADLESS"] = "1"
 
@@ -28,31 +39,36 @@ def test_robot(robot_args=None, headless=False, in_robotlab=False):
             "-m",
             "robot",
             "--name",
-            PLATFORM,
+            f"{product} {PLATFORM}",
             "--outputdir",
-            str(TEST_OUT),
+            str(TEST_OUT / product),
             "--output",
-            f"{PLATFORM}.robot.xml",
+            TEST_OUT / f"{stem}.robot.xml",
             "--log",
-            f"{PLATFORM}.log.html",
+            TEST_OUT / f"{stem}.log.html",
             "--report",
-            f"{PLATFORM}.report.html",
+            TEST_OUT / f"{stem}.report.html",
             "--xunit",
-            f"{PLATFORM}.xunit.xml",
+            TEST_OUT / f"{stem}.xunit.xml",
             "--variable",
             f"OS:{PLATFORM}",
             "--variable",
-            f"IN_ROBOTLAB:{int(in_robotlab)}",
+            f"INSTALLER DIR:{CONSTRUCT_OUT}",
+            "--variable",
+            f"IN_PRODUCT:{int(in_product)}",
         ]
-        + list(robot_args or [])
-        + [str(TEST_DIR)]
+        + list(robot_args)
+        + [str(TEST_DIR / "acceptance" / product)]
     )
     return run(args)
 
 
 if __name__ == "__main__":
     rc = 0
-    headless = in_robotlab = False
+    headless = in_product = False
+    all_products = sorted(
+        [product.name for product in (TEST_DIR / "acceptance").glob("*/")]
+    )
 
     args = sys.argv[1:]
 
@@ -60,19 +76,36 @@ if __name__ == "__main__":
         headless = True
         args.remove("--headless")
 
-    if "--in-robotlab" in args:
-        in_robotlab = True
-        args.remove("--in-robotlab")
+    if "--in-product" in args:
+        in_product = True
+        args.remove("--in-product")
 
     if not args:
         rc = test_conda()
-        rc = rc or test_robot(headless=headless, in_robotlab=in_robotlab)
+        for product in all_products:
+            rc = rc or test_robot(
+                product, headless=headless, in_product=in_product
+            )
     else:
         it, rest = args[0], args[1:]
 
         if it == "conda":
             rc = test_conda(rest)
         elif it == "robot":
-            rc = test_robot(rest, headless=headless, in_robotlab=in_robotlab)
+            products = all_products
+            robot_args = []
+            if "--" in rest:
+                dash_index = rest.index("--")
+                robot_args = rest[dash_index + 1 :]
+                products = rest[: dash_index - 1]
+
+            print(f"testing {products}")
+            for product in products:
+                rc = rc or test_robot(
+                    product,
+                    robot_args=robot_args,
+                    headless=headless,
+                    in_product=in_product,
+                )
 
     sys.exit(rc)

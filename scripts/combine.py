@@ -7,7 +7,7 @@ def combine():
         "-m",
         "robot.rebot",
         "--name",
-        "RobotLab",
+        "All",
         "--outputdir",
         str(TEST_OUT),
         "--output",

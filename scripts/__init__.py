@@ -19,7 +19,6 @@ RECIPE_DIR = ROOT / "recipes"
 CONDA_CACHE = CACHE / "conda-bld"
 
 CONSTRUCT_CACHE = CACHE / "constructor"
-CONSTRUCT = CONSTRUCT_DIR / "construct.yaml"
 
 TEST_DIR = ROOT / "tests"
 
@@ -33,6 +32,8 @@ README = ROOT / "README.md"
 
 # for easy overriding in CI
 VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.1")
+CONDA_VERSION = os.environ.get("CONDA_VERSION", "4.7.12")
+RF_VERSION = os.environ.get("RF_VERSION", "3.1.2")
 PY_MAX = os.environ.get("PY_MAX", "3.7.0a0")
 PY_MIN = os.environ.get("PY_MIN", "3.6")
 LABEXTENSIONS = os.environ.get(
@@ -62,11 +63,11 @@ CONDA_BUILD_ARGS = [
 
 CONSTRUCTOR_ARGS = [
     "constructor",
-    "--output-dir",
-    str(CONSTRUCT_OUT),
+    "--verbose",
     "--cache-dir",
     str(CONSTRUCT_CACHE),
-    "--verbose",
+    "--output-dir",
+    str(CONSTRUCT_OUT),
 ]
 
 

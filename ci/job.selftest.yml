@@ -1,40 +1,41 @@
 parameters:
   name: Linux
   vmImage: ubuntu-16.04
+  product: RobotLab
 
 jobs:
-  - job: ${{ parameters.name }}Test
+  - job: ${{ parameters.product }}${{ parameters.name }}Test
     condition: succeeded()
     dependsOn:
-      - ${{ parameters.name }}Build
+      - ${{ parameters.product }}${{ parameters.name }}Build
     pool:
       vmImage: ${{ parameters.vmImage }}
 
     steps:
       - task: DownloadPipelineArtifact@0
         inputs:
-          artifactName: RobotLab for ${{ parameters.name }}
+          artifactName: ${{ parameters.product }} for ${{ parameters.name }}
           targetPath: _artifacts/constructor
         displayName: restore installer
 
       - ${{ if not(eq(parameters.name, 'Windows')) }}:
-        - script: bash _artifacts/constructor/RobotLab-$(ROBOTLAB_VERSION)-${{ parameters.name }}-x86_64.sh -fbp _robotlab
-          displayName: run .sh installer
-        - script: . ./_robotlab/bin/activate ./_robotlab && python -m scripts.test robot --headless --in-robotlab
-          displayName: run robotlab acceptance tests in robotlab
+        - script: bash _artifacts/constructor/${{ parameters.product }}-$(ROBOTLAB_VERSION)-${{ parameters.name }}-x86_64.sh -fbp _${{ parameters.product }}
+          displayName: run installer
+        - script: . ./_${{ parameters.product }}/bin/activate ./_${{ parameters.product }} && python -m scripts.test robot ${{ parameters.product }} --headless --in-product
+          displayName: acceptance tests
 
       - ${{ if eq(parameters.name, 'Windows') }}:
         - script: |
             @echo on
             echo %HOME%
-            md "%cd%\_robotlab"
-            start /wait "" "_artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe" /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%cd%\_robotlab
-          displayName: run .exe installer
+            md "%cd%\_${{ parameters.product }}"
+            start /wait "" "_artifacts\constructor\${{ parameters.product }}-$(ROBOTLAB_VERSION)-Windows-x86_64.exe" /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%cd%\_${{ parameters.product }}
+          displayName: run installer
         - script: |
             @echo on
-            call "%cd%\_robotlab\Scripts\activate.bat" "%cd%\_robotlab"
-            python -m scripts.test robot --headless --in-robotlab
-          displayName: run robotlab acceptance tests in robotlab
+            call "%cd%\_${{ parameters.product }}\Scripts\activate.bat" "%cd%\_${{ parameters.product }}"
+            python -m scripts.test robot --headless --in-product ${{ parameters.product }}
+          displayName: acceptance tests
 
       - ${{ if eq(parameters.name, 'MacOSX') }}:
         - script: chmod -R 777 _artifacts
@@ -47,8 +48,8 @@ jobs:
         condition: always()
 
       - task: PublishPipelineArtifact@0
-        displayName: publish ${{ parameters.name }} robot output
+        displayName: publish robot output
         inputs:
           targetPath: _artifacts/test_output
-          artifactName: Robot Output ${{ parameters.name }}
+          artifactName: ${{ parameters.product }} ${{ parameters.name }} Output
         condition: always()

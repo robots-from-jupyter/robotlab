@@ -7,4 +7,4 @@ Test Teardown     Run Keywords    Wait Until Keyword Succeeds    2 x    1 s    E
 Force Tags        ui:lab
 Library           JupyterLibrary
 Library           Process
-Resource          ../../resources/Launch.robot
+Resource          ../../../resources/Launch.robot

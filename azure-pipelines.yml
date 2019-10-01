@@ -37,20 +37,45 @@ jobs:
       vmImage: vs2017-win2016
       activate: call activate &&
 
-  - template: ci/job.selftest.yml
-    parameters:
-      name: Linux
-      vmImage: ubuntu-16.04
 
-  - template: ci/job.selftest.yml
-    parameters:
-      name: MacOSX
-      vmImage: macos-10.13
+  - ${{ each product in ["MiniRobot", "ExoRobot"] }}:
+    - template: ci/job.min.yml
+      parameters:
+        name: Linux
+        vmImage: ubuntu-16.04
+        product: ${{ product }}
 
-  - template: ci/job.selftest.yml
-    parameters:
-      name: Windows
-      vmImage: vs2017-win2016
+    - template: ci/job.min.yml
+      parameters:
+        name: MacOSX
+        vmImage: macos-10.13
+        product: ${{ product }}
+
+    - template: ci/job.min.yml
+      parameters:
+        name: Windows
+        vmImage: vs2017-win2016
+        activate: call activate &&
+        product: ${{ product }}
+
+  - ${{ each product in ["MiniRobot", "ExoRobot", "RobotLab"] }}:
+    - template: ci/job.selftest.yml
+      parameters:
+        name: Linux
+        vmImage: ubuntu-16.04
+        product: ${{ product }}
+
+    - template: ci/job.selftest.yml
+      parameters:
+        name: MacOSX
+        vmImage: macos-10.13
+        product: ${{ product }}
+
+    - template: ci/job.selftest.yml
+      parameters:
+        name: Windows
+        vmImage: vs2017-win2016
+        product: ${{ product }}
 
   # group 3: reporting, etc
   - template: ci/job.combine.yml

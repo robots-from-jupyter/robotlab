@@ -4,9 +4,9 @@ Library           Process
 Library           OperatingSystem
 
 *** Keywords ***
-Check a RobotLab CLI command
+Check a RobotLab CLI Command
     [Arguments]    ${cmd}    ${check_dir}=${True}
-    [Documentation]    Verify the robotlab CLI command works
+    [Documentation]    Verify the CLI command works
     ${prefix} =    Set Variable    ${OUTPUT DIR}${/}${OS}
     ${proc} =    Run Process    ${ACTIVATE} && ${cmd}    shell=True    cwd=${prefix}    stdout=${prefix}${/}cli-${cmd}.log    stderr=STDOUT
     Should Be Equal As Numbers    ${proc.rc}    0

@@ -1,9 +1,25 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+  githubConnection: release-robots-from-jupyter
+  repositoryName: robots-from-jupyter/robotlab
+  platforms:
+    - Linux
+    - MacOSX
+    - Windows
+  products:
+    - MiniRobot
+    - ExoRobot
+    - RobotLab
+  artifact: RobotLab
+  constructors: _artifacts/constructor
+
 jobs:
   - job: Combine
     dependsOn:
-      - LinuxTest
-      - MacOSXTest
-      - WindowsTest
+      - ${{ each platform in parameters.platforms }}:
+        - ${{ each product in parameters.products }}:
+          - ${{ product }}${{ platform }}Test
     condition: always()
     pool:
       vmImage: ubuntu-16.04
@@ -12,26 +28,14 @@ jobs:
         parameters:
           envPath: ci/env-combine.yml
 
-      - task: DownloadPipelineArtifact@0
-        condition: always()
-        inputs:
-          artifactName: Robot Output Linux
-          targetPath: _artifacts/test_output
-        displayName: Restore Robot Output Linux
-
-      - task: DownloadPipelineArtifact@0
-        condition: always()
-        inputs:
-          artifactName: Robot Output MacOSX
-          targetPath: _artifacts/test_output
-        displayName: Restore Robot Output MacOSX
-
-      - task: DownloadPipelineArtifact@0
-        condition: always()
-        inputs:
-          artifactName: Robot Output Windows
-          targetPath: _artifacts/test_output
-        displayName: Restore Robot Output Windows
+      - ${{ each platform in parameters.platforms }}:
+        - ${{ each product in parameters.products }}:
+          - task: DownloadPipelineArtifact@0
+            condition: always()
+            inputs:
+              artifactName: ${{ product }} ${{ platform }} Output
+              targetPath: _artifacts/test_output
+            displayName: Restore ${{ product }} ${{ platform }} Output
 
       - script: python -m scripts.combine
         condition: always()
@@ -42,4 +46,4 @@ jobs:
         displayName: Publish Combined Robot Output
         inputs:
           targetPath: _artifacts/test_output
-          artifactName: RobotLab Robot Output
+          artifactName: Robot Output

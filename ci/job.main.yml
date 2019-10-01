@@ -4,7 +4,7 @@ parameters:
   activate: ""
 
 jobs:
-  - job: ${{ parameters.name }}Build
+  - job: RobotLab${{ parameters.name }}Build
     condition: succeeded()
     dependsOn:
       - lab

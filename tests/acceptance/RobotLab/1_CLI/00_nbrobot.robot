@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation     nbrobot works with `.ipynb` files as if they were `.robot` files
 Force Tags        app:nbrobot
-Resource          ../../resources/CLI.robot
+Resource          ../../../resources/CLI.robot
 
 *** Test Cases ***
 Can I get help on nbrobot?
