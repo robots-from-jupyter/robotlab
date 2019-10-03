@@ -16,67 +16,16 @@ jobs:
   - template: ci/job.noarch.yml
   - template: ci/job.win.yml
   - template: ci/job.lab.yml
+  - template: ci/job.min.yml
 
-  # group two: verify conda builds, do acceptance tests
+  # group two: buil installers, verify conda builds
   - template: ci/job.noarch-test.yml
   - template: ci/job.win-test.yml
-
   - template: ci/job.main.yml
-    parameters:
-      name: Linux
-      vmImage: ubuntu-16.04
 
-  - template: ci/job.main.yml
-    parameters:
-      name: MacOSX
-      vmImage: macos-10.13
+  # group three: acceptance testing
+  - template: ci/job.selftest.yml
 
-  - template: ci/job.main.yml
-    parameters:
-      name: Windows
-      vmImage: vs2017-win2016
-      activate: call activate &&
-
-
-  - ${{ each product in ["MiniRobot", "ExoRobot"] }}:
-    - template: ci/job.min.yml
-      parameters:
-        name: Linux
-        vmImage: ubuntu-16.04
-        product: ${{ product }}
-
-    - template: ci/job.min.yml
-      parameters:
-        name: MacOSX
-        vmImage: macos-10.13
-        product: ${{ product }}
-
-    - template: ci/job.min.yml
-      parameters:
-        name: Windows
-        vmImage: vs2017-win2016
-        activate: call activate &&
-        product: ${{ product }}
-
-  - ${{ each product in ["MiniRobot", "ExoRobot", "RobotLab"] }}:
-    - template: ci/job.selftest.yml
-      parameters:
-        name: Linux
-        vmImage: ubuntu-16.04
-        product: ${{ product }}
-
-    - template: ci/job.selftest.yml
-      parameters:
-        name: MacOSX
-        vmImage: macos-10.13
-        product: ${{ product }}
-
-    - template: ci/job.selftest.yml
-      parameters:
-        name: Windows
-        vmImage: vs2017-win2016
-        product: ${{ product }}
-
-  # group 3: reporting, etc
+  # group four: reporting, etc
   - template: ci/job.combine.yml
   - template: ci/job.release.yml

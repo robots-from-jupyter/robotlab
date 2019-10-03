@@ -1,31 +1,42 @@
 parameters:
-  name: Linux
-  vmImage: ubuntu-16.04
-  activate: ""
-  product: MiniRobot
+  products:
+    - MiniRobot
+    - ExoRobot
+  platforms:
+    - name: Linux
+      vmImage: ubuntu-16.04
+      activate: ""
+    - name: MacOSX
+      vmImage: macos-10.13
+      activate: ""
+    - name: Windows
+      vmImage: vs2017-win2016
+      activate: call activate &&
 
 jobs:
-  - job: ${{ parameters.product }}${{ parameters.name }}Build
-    condition: succeeded()
-    pool:
-      vmImage: ${{ parameters.vmImage }}
-
-    steps:
-      - template: steps.conda.yml
-        parameters:
-          name: ${{ parameters.name }}
-          envPath: ci/env-main.yml
-
-      - script: ${{ parameters.activate }} python -m scripts.build constructor ${{ parameters.product }}
-        displayName: build installer
-
-      - ${{ if eq(parameters.name, 'MacOSX') }}:
-        - script: chmod -R 777 _artifacts
-          displayName: fix artifact permissions
-
-      - task: PublishPipelineArtifact@1
-        displayName: publish installer
-        inputs:
-          targetPath: _artifacts/constructor
-          artifactName: ${{ parameters.product }} for ${{ parameters.name }}
+  - ${{ each product in parameters.products }}:
+    - ${{ each platform in parameters.platforms }}:
+      - job: ${{ product }}${{ platform.name }}Build
         condition: succeeded()
+        pool:
+          vmImage: ${{ platform.vmImage }}
+
+        steps:
+          - template: steps.conda.yml
+            parameters:
+              name: ${{ platform.name }}
+              envPath: ci/env-main.yml
+
+          - script: ${{ platform.activate }} python -m scripts.build constructor ${{ product }}
+            displayName: build installer
+
+          - ${{ if eq(parameters.name, 'MacOSX') }}:
+            - script: chmod -R 777 _artifacts
+              displayName: fix artifact permissions
+
+          - task: PublishPipelineArtifact@1
+            displayName: publish installer
+            inputs:
+              targetPath: _artifacts/constructor
+              artifactName: ${{ product }} for ${{ platform.name }}
+            condition: succeeded()
