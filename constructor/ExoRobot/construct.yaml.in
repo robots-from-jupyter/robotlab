@@ -11,9 +11,12 @@ specs:
   - python >={{ py_min }},<{{ py_max }}
   - robotframework =={{ rf_version }}
   - conda =={{ conda_version }}
+  # other first-party
+  - robotframework-ride
   # extra library/doc dependencies
   - docutils
   - lxml
   - pyte
   - pyyaml
   - wxpython
+  - pillow

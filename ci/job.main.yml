@@ -1,4 +1,7 @@
 parameters:
+  products:
+    - RobotLab
+    - ExoRobot
   platforms:
     - name: Linux
       vmImage: ubuntu-16.04
@@ -10,46 +13,50 @@ parameters:
       vmImage: vs2017-win2016
       activate: call activate &&
 jobs:
-  - ${{ each platform in parameters.platforms }}:
-    - job: RobotLab${{ platform.name }}Build
-      condition: succeeded()
-      dependsOn:
-        - lab
-        - conda_noarch
-        - ${{ if eq(platform.name, 'Windows') }}:
-          - conda_win
-      pool:
-        vmImage: ${{ platform.vmImage }}
+  - ${{ each product in parameters.products }}:
+    - ${{ each platform in parameters.platforms }}:
+      - job: RobotLab${{ platform.name }}Build
+        condition: succeeded()
+        dependsOn:
+          - conda_noarch
+          - ${{ if eq(product, 'RobotLab') }}:
+            - lab
+            - ${{ if eq(platform.name, 'Windows') }}:
+              - conda_win
+        pool:
+          vmImage: ${{ platform.vmImage }}
 
-      steps:
-        - template: steps.restore.yml
-          parameters:
-            name: ${{ platform.name }}
+        steps:
+          - template: steps.restore.yml
+            parameters:
+              name: ${{ platform.name }}
 
-        - task: DownloadPipelineArtifact@0
-          inputs:
-            artifactName: robotlab app_dir
-            targetPath: _artifacts/app_dir
-          displayName: restore jupyterlab
+          - ${{ if eq(product, 'RobotLab') }}:
+            - task: DownloadPipelineArtifact@0
+              inputs:
+                artifactName: robotlab app_dir
+                targetPath: _artifacts/app_dir
+              displayName: restore jupyterlab
 
-        - template: steps.conda.yml
-          parameters:
-            name: ${{ platform.name }}
-            envPath: ci/env-main.yml
+          - template: steps.conda.yml
+            parameters:
+              name: ${{ platform.name }}
+              envPath: ci/env-main.yml
 
-        - script: ${{ platform.activate }} python -m scripts.build conda
-          displayName: build/test remaining packages
+          - ${{ if eq(product, 'RobotLab') }}:
+            - script: ${{ platform.activate }} python -m scripts.build conda
+              displayName: build/test remaining packages
 
-        - script: ${{ platform.activate }} python -m scripts.build constructor RobotLab
-          displayName: build installer
+          - script: ${{ platform.activate }} python -m scripts.build constructor ${{ product }}
+            displayName: build installer
 
-        - ${{ if eq(platform.name, 'MacOSX') }}:
-          - script: chmod -R 777 _artifacts
-            displayName: fix artifact permissions
+          - ${{ if eq(platform.name, 'MacOSX') }}:
+            - script: chmod -R 777 _artifacts
+              displayName: fix artifact permissions
 
-        - task: PublishPipelineArtifact@1
-          displayName: publish installer
-          inputs:
-            targetPath: _artifacts/constructor
-            artifactName: RobotLab for ${{ platform.name }}
-          condition: succeeded()
+          - task: PublishPipelineArtifact@1
+            displayName: publish installer
+            inputs:
+              targetPath: _artifacts/constructor
+              artifactName: ${{ product }} for ${{ platform.name }}
+            condition: succeeded()
