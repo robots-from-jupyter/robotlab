@@ -18,8 +18,7 @@ jobs:
       condition: succeeded()
       dependsOn:
         - CondaNoarch
-        - ${{ if eq(platform.name, 'Windows') }}:
-          - CondaWindows
+        - CondaWindows
 
       steps:
         - template: steps.restore.yml
