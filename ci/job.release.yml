@@ -16,10 +16,10 @@ jobs:
     pool:
       vmImage: ubuntu-16.04
     dependsOn:
-      - ${{ each product in parameters.products }}:
-        - ${{ each platform in parameters.platforms }}:
-          - ${{ product }}${{ platform }}Test
+      - ${{ each platform in parameters.platforms }}:
         - CondaNoarchTest${{ platform.name }}
+        - ${{ each product in parameters.products }}:
+          - ${{ product }}${{ platform }}Test
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
     steps:
       - ${{ each product in parameters.products }}:
