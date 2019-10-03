@@ -40,7 +40,7 @@ jobs:
         - script: ${{ platform.activate }} python -m scripts.build conda
           displayName: build/test remaining packages
 
-        - script: ${{ platform.activate }} python -m scripts.build constructor
+        - script: ${{ platform.activate }} python -m scripts.build constructor RobotLab
           displayName: build installer
 
         - ${{ if eq(platform.name, 'MacOSX') }}:
