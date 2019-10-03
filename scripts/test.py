@@ -92,12 +92,13 @@ if __name__ == "__main__":
         if it == "conda":
             rc = test_conda(rest)
         elif it == "robot":
-            products = all_products
             robot_args = []
             if "--" in rest:
                 dash_index = rest.index("--")
                 robot_args = rest[dash_index + 1 :]
                 products = rest[: dash_index - 1]
+            else:
+                products = rest or all_products
 
             print(f"testing {products}")
             for product in products:
