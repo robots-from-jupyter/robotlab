@@ -23,8 +23,8 @@ jobs:
           - CondaNoarch
           - ${{ if eq(product, 'RobotLab') }}:
             - Lab
-            - ${{ if eq(platform.name, 'Windows') }}:
-              - CondaWindows
+          - ${{ if eq(platform.name, 'Windows') }}:
+            - CondaWindows
 
         steps:
           - template: steps.restore.yml
