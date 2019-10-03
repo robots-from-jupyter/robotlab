@@ -1,32 +1,35 @@
 parameters:
-  name: Linux
-  vmImage: ubuntu-16.04
   githubConnection: release-robots-from-jupyter
   repositoryName: robots-from-jupyter/robotlab
   platforms:
     - Linux
     - MacOSX
     - Windows
-  artifact: RobotLab
+  products:
+    - MiniRobot
+    - ExoRobot
+    - RobotLab
   constructors: _artifacts/constructor
 
 jobs:
   - job: Deploy
     pool:
-      vmImage: ${{ parameters.vmImage }}
+      vmImage: ubuntu-16.04
     dependsOn:
-      - ${{ each platform in parameters.platforms }}:
-        - ${{ platform }}Test
+      - ${{ each product in parameters.products }}:
+        - ${{ each platform in parameters.platforms }}:
+          - ${{ product }}${{ platform }}Test
       - conda_win_test
       - conda_noarch_test
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
     steps:
-      - ${{ each platform in parameters.platforms }}:
-        - task: DownloadPipelineArtifact@0
-          displayName: Fetch ${{ platform }} Installer
-          inputs:
-            artifactName: ${{ parameters.artifact }} For ${{ platform }}
-            targetPath: ${{ parameters.constructors }}
+      - ${{ each product in parameters.products }}:
+        - ${{ each platform in parameters.platforms }}:
+          - task: DownloadPipelineArtifact@0
+            displayName: fetch ${{ product }} ${{ platform }} Installer
+            inputs:
+              artifactName: ${{ product }} For ${{ platform }}
+              targetPath: ${{ parameters.constructors }}
       - script: find .
         displayName: list files before release
       - script: cd ${{ parameters.constructors }} && sha256sum * >> SHA256SUMS
