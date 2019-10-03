@@ -3,6 +3,15 @@ version: {{ version }}
 company: Robots from Jupyter
 license_file: LICENSE.txt
 
+channels_remap:
+  - src: {{ build_channel }}
+    dest: https://conda.anaconda.org/conda-forge
+
+channels:
+  - {{ build_channel }}
+  - https://conda.anaconda.org/anaconda
+  - https://conda.anaconda.org/conda-forge
+
 channels:
   - https://conda.anaconda.org/conda-forge
   - https://conda.anaconda.org/anaconda
