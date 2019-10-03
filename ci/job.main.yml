@@ -15,7 +15,7 @@ parameters:
 jobs:
   - ${{ each product in parameters.products }}:
     - ${{ each platform in parameters.platforms }}:
-      - job: RobotLab${{ platform.name }}Build
+      - job: ${{ product }}${{ platform.name }}Build
         condition: succeeded()
         dependsOn:
           - conda_noarch
