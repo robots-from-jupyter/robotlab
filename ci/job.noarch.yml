@@ -12,7 +12,8 @@ jobs:
             restinstance \
             robotframework-jupyterlibrary \
             robotframework-seleniumscreenshots \
-            robotkernel
+            robotkernel \
+            robotframework-ride
         displayName: build noarch packages
 
       - task: PublishPipelineArtifact@0
