@@ -63,7 +63,7 @@ Run the OSX installer
     ${rc} =    Set Variable If    ${IN_PRODUCT}    0    ${result.rc}
     [Return]    ${rc}
 
-Run the RobotLab Windows installer
+Run the Windows installer
     [Arguments]    ${product}
     [Documentation]    Install on Windows
     ${installer} =    Set Variable    ${INSTALLER DIR}${/}${product}-${INSTALLER VERSION}-Windows-x86_64.exe
