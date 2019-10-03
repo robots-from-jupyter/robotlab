@@ -17,7 +17,7 @@ jobs:
       vmImage: ubuntu-16.04
     dependsOn:
       - ${{ each platform in parameters.platforms }}:
-        - CondaNoarchTest${{ platform.name }}
+        - CondaNoarchTest${{ platform }}
         - ${{ each product in parameters.products }}:
           - ${{ product }}${{ platform }}Test
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
