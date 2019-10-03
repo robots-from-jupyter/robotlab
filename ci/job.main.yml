@@ -16,15 +16,15 @@ jobs:
   - ${{ each product in parameters.products }}:
     - ${{ each platform in parameters.platforms }}:
       - job: ${{ product }}${{ platform.name }}Build
-        condition: succeeded()
-        dependsOn:
-          - conda_noarch
-          - ${{ if eq(product, 'RobotLab') }}:
-            - lab
-            - ${{ if eq(platform.name, 'Windows') }}:
-              - conda_win
         pool:
           vmImage: ${{ platform.vmImage }}
+        condition: succeeded()
+        dependsOn:
+          - CondaNoarch
+          - ${{ if eq(product, 'RobotLab') }}:
+            - Lab
+            - ${{ if eq(platform.name, 'Windows') }}:
+              - CondaWindows
 
         steps:
           - template: steps.restore.yml

@@ -19,8 +19,7 @@ jobs:
       - ${{ each product in parameters.products }}:
         - ${{ each platform in parameters.platforms }}:
           - ${{ product }}${{ platform }}Test
-      - conda_win_test
-      - conda_noarch_test
+        - CondaNoarchTest${{ platform.name }}
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
     steps:
       - ${{ each product in parameters.products }}:

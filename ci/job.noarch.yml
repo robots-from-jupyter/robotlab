@@ -1,5 +1,5 @@
 jobs:
-  - job: conda_noarch
+  - job: CondaNoarch
     pool:
       vmImage: ubuntu-16.04
 

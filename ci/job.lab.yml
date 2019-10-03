@@ -1,5 +1,5 @@
 jobs:
-  - job: lab
+  - job: Lab
     pool:
       vmImage: ubuntu-16.04
 

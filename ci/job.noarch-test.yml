@@ -1,15 +1,33 @@
+platforms:
+- name: Linux
+  vmImage: ubuntu-16.04
+  activate: ""
+- name: MacOSX
+  vmImage: macos-10.13
+  activate: ""
+- name: Windows
+  vmImage: vs2017-win2016
+  activate: call activate &&
+
 jobs:
-  - job: conda_noarch_test
-    pool:
-      vmImage: ubuntu-16.04
-    condition: succeeded()
-    dependsOn:
-      - conda_noarch
+  - ${{ each platform in parameters.platforms }}:
+    - job: CondaNoarchTest${{ platform.name }}
+      pool:
+        vmImage: ${{ platform.vmImage }}
+      condition: succeeded()
+      dependsOn:
+        - CondaNoarch
+        - ${{ if eq(platform.name, 'Windows') }}:
+          - CondaWindows
 
-    steps:
-      - template: steps.restore.yml
+      steps:
+        - template: steps.restore.yml
+          parameters:
+            name: ${{ platform.name }}
 
-      - template: steps.conda.yml
+        - template: steps.conda.yml
+          parameters:
+            name: ${{ platform.name }}
 
-      - script: python -m scripts.test conda
-        displayName: test noarch packages
+        - script: ${{ platform.activate }} python -m scripts.test conda
+          displayName: test prebuilt packages

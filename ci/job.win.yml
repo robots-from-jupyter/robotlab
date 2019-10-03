@@ -3,7 +3,7 @@ parameters:
   activate: call activate &&
 
 jobs:
-  - job: conda_win
+  - job: CondaWindows
     condition: succeeded()
     pool:
       vmImage: ${{ parameters.vmImage }}
