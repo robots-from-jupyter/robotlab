@@ -35,15 +35,15 @@ jobs:
             inputs:
               artifactName: ${{ product }} ${{ platform }} Output
               targetPath: _artifacts/test_output
-            displayName: Restore ${{ product }} ${{ platform }} Output
+            displayName: restore ${{ product }} ${{ platform }} output
 
       - script: python -m scripts.combine
         condition: always()
-        displayName: Rebot
+        displayName: combine outputs
 
       - task: PublishPipelineArtifact@1
         condition: always()
-        displayName: Publish Combined Robot Output
+        displayName: publish combined output
         inputs:
           targetPath: _artifacts/test_output
           artifactName: Robot Output
