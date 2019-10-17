@@ -1,7 +1,6 @@
 parameters:
   products:
-    - RobotLab
-    # - ExoRobot
+    - MiniRobot
   platforms:
     - name: Linux
       vmImage: ubuntu-16.04
@@ -12,45 +11,25 @@ parameters:
     - name: Windows
       vmImage: vs2017-win2016
       activate: call activate &&
+
 jobs:
   - ${{ each product in parameters.products }}:
     - ${{ each platform in parameters.platforms }}:
       - job: ${{ product }}${{ platform.name }}Build
+        condition: succeeded()
         pool:
           vmImage: ${{ platform.vmImage }}
-        condition: succeeded()
-        dependsOn:
-          - CondaNoarch
-          - ${{ if eq(product, 'RobotLab') }}:
-            - Lab
-          - ${{ if eq(platform.name, 'Windows') }}:
-            - CondaWindows
 
         steps:
-          - template: steps.restore.yml
-            parameters:
-              name: ${{ platform.name }}
-
-          - ${{ if eq(product, 'RobotLab') }}:
-            - task: DownloadPipelineArtifact@0
-              inputs:
-                artifactName: robotlab app_dir $(Build.BuildId)
-                targetPath: _artifacts/app_dir
-              displayName: restore jupyterlab
-
           - template: steps.conda.yml
             parameters:
               name: ${{ platform.name }}
               envPath: ci/env-main.yml
 
-          - ${{ if eq(product, 'RobotLab') }}:
-            - script: ${{ platform.activate }} python -m scripts.build conda
-              displayName: build/test remaining packages
-
           - script: ${{ platform.activate }} python -m scripts.build constructor ${{ product }}
             displayName: build installer
 
-          - ${{ if eq(platform.name, 'MacOSX') }}:
+          - ${{ if eq(parameters.name, 'MacOSX') }}:
             - script: chmod -R 777 _artifacts
               displayName: fix artifact permissions
 

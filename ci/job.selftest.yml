@@ -1,54 +1,68 @@
 parameters:
-  name: Linux
-  vmImage: ubuntu-16.04
+  products:
+    - RobotLab
+    # - MiniRobot
+    # - ExoRobot
+  platforms:
+    - name: Linux
+      vmImage: ubuntu-16.04
+      activate: ""
+    - name: MacOSX
+      vmImage: macos-10.13
+      activate: ""
+    - name: Windows
+      vmImage: vs2017-win2016
+      activate: call activate &&
 
 jobs:
-  - job: ${{ parameters.name }}Test
-    condition: succeeded()
-    dependsOn:
-      - ${{ parameters.name }}Build
-    pool:
-      vmImage: ${{ parameters.vmImage }}
+  - ${{ each product in parameters.products }}:
+    - ${{ each platform in parameters.platforms }}:
+      - job: ${{ product }}${{ platform.name }}Test
+        condition: succeeded()
+        dependsOn:
+          - ${{ product }}${{ platform.name }}Build
+        pool:
+          vmImage: ${{ platform.vmImage }}
 
-    steps:
-      - task: DownloadPipelineArtifact@0
-        inputs:
-          artifactName: RobotLab for ${{ parameters.name }}
-          targetPath: _artifacts/constructor
-        displayName: restore installer
+        steps:
+          - task: DownloadPipelineArtifact@0
+            inputs:
+              artifactName: ${{ product }} for ${{ platform.name }} $(Build.BuildId)
+              targetPath: _artifacts/constructor
+            displayName: restore installer
 
-      - ${{ if not(eq(parameters.name, 'Windows')) }}:
-        - script: bash _artifacts/constructor/RobotLab-$(ROBOTLAB_VERSION)-${{ parameters.name }}-x86_64.sh -fbp _robotlab
-          displayName: run .sh installer
-        - script: . ./_robotlab/bin/activate ./_robotlab && python -m scripts.test robot --headless --in-robotlab
-          displayName: run robotlab acceptance tests in robotlab
+          - ${{ if not(eq(platform.name, 'Windows')) }}:
+            - script: bash _artifacts/constructor/${{ product }}-$(ROBOTLAB_VERSION)-${{ platform.name }}-x86_64.sh -fbp _${{ product }}
+              displayName: run installer
+            - script: . ./_${{ product }}/bin/activate ./_${{ product }} && python -m scripts.test robot ${{ product }} --headless --in-product
+              displayName: acceptance tests
 
-      - ${{ if eq(parameters.name, 'Windows') }}:
-        - script: |
-            @echo on
-            echo %HOME%
-            md "%cd%\_robotlab"
-            start /wait "" "_artifacts\constructor\RobotLab-$(ROBOTLAB_VERSION)-Windows-x86_64.exe" /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%cd%\_robotlab
-          displayName: run .exe installer
-        - script: |
-            @echo on
-            call "%cd%\_robotlab\Scripts\activate.bat" "%cd%\_robotlab"
-            python -m scripts.test robot --headless --in-robotlab
-          displayName: run robotlab acceptance tests in robotlab
+          - ${{ if eq(platform.name, 'Windows') }}:
+            - script: |
+                @echo on
+                echo %HOME%
+                md "%cd%\_${{ product }}"
+                start /wait "" "_artifacts\constructor\${{ product }}-$(ROBOTLAB_VERSION)-Windows-x86_64.exe" /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%cd%\_${{ product }}
+              displayName: run installer
+            - script: |
+                @echo on
+                call "%cd%\_${{ product }}\Scripts\activate.bat" "%cd%\_${{ product }}"
+                python -m scripts.test robot --headless --in-product ${{ product }}
+              displayName: acceptance tests
 
-      - ${{ if eq(parameters.name, 'MacOSX') }}:
-        - script: chmod -R 777 _artifacts
-          displayName: fix artifact permissions
+          - ${{ if eq(platform.name, 'MacOSX') }}:
+            - script: chmod -R 777 _artifacts
+              displayName: fix artifact permissions
 
-      - task: PublishTestResults@2
-        displayName: publish test results
-        inputs:
-          testResultsFiles: _artifacts/test_output/**/*.xunit.xml
-        condition: always()
+          - task: PublishTestResults@2
+            displayName: publish test results
+            inputs:
+              testResultsFiles: _artifacts/test_output/**/*.xunit.xml
+            condition: always()
 
-      - task: PublishPipelineArtifact@0
-        displayName: publish ${{ parameters.name }} robot output
-        inputs:
-          targetPath: _artifacts/test_output
-          artifactName: Robot Output ${{ parameters.name }}
-        condition: always()
+          - task: PublishPipelineArtifact@0
+            displayName: publish robot output
+            inputs:
+              targetPath: _artifacts/test_output
+              artifactName: ${{ product }} ${{ platform.name }} Output $(Build.BuildId)
+            condition: always()

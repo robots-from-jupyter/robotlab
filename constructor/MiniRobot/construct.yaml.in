@@ -1,0 +1,13 @@
+name: MiniRobot
+version: {{ version }}
+company: Robots from Jupyter
+license_file: LICENSE.txt
+
+channels:
+  - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
+
+specs:
+  - python >={{ py_min }},<{{ py_max }}
+  - robotframework =={{ rf_version }}
+  - conda =={{ conda_version }}

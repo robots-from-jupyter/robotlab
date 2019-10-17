@@ -15,7 +15,7 @@ def tidy():
 
 
 def flake8():
-    return run(["flake8"] + PY_SRC)
+    return run(["flake8", "--ignore", "E203,W503"] + PY_SRC)
 
 
 def rflint():

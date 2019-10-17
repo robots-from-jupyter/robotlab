@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation     Try out Robot Notebooks
 Library           JupyterLibrary
-Resource          ../../resources/Browser.robot
+Resource          ../../../resources/Browser.robot
 
 *** Test Cases ***
 Can RobotLab make a Robot Notebook?

@@ -16,42 +16,15 @@ jobs:
   - template: ci/job.noarch.yml
   - template: ci/job.win.yml
   - template: ci/job.lab.yml
+  # - template: ci/job.min.yml
 
-  # group two: verify conda builds, do acceptance tests
+  # group two: build installers, verify conda builds
   - template: ci/job.noarch-test.yml
-  - template: ci/job.win-test.yml
-
   - template: ci/job.main.yml
-    parameters:
-      name: Linux
-      vmImage: ubuntu-16.04
 
-  - template: ci/job.main.yml
-    parameters:
-      name: MacOSX
-      vmImage: macos-10.13
-
-  - template: ci/job.main.yml
-    parameters:
-      name: Windows
-      vmImage: vs2017-win2016
-      activate: call activate &&
-
+  # group three: acceptance testing
   - template: ci/job.selftest.yml
-    parameters:
-      name: Linux
-      vmImage: ubuntu-16.04
 
-  - template: ci/job.selftest.yml
-    parameters:
-      name: MacOSX
-      vmImage: macos-10.13
-
-  - template: ci/job.selftest.yml
-    parameters:
-      name: Windows
-      vmImage: vs2017-win2016
-
-  # group 3: reporting, etc
+  # group four: reporting, etc
   - template: ci/job.combine.yml
   - template: ci/job.release.yml

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation     Check the basics of Robot Lab
 Library           JupyterLibrary
-Resource          ../../resources/Browser.robot
+Resource          ../../../resources/Browser.robot
 
 *** Test Cases ***
 Does RobotLab Load?

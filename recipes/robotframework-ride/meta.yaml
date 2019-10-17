@@ -1,0 +1,38 @@
+package:
+  name: '{% set name = "robotframework-ride" %}{{ name }}'
+  version: '{% set version = "1.7.4b2" %}{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 40b67134573883b34de186bd9d4d2ee582a5d7451b5ccae4d2f84a876c44cd80
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install --no-deps -vv .
+  entry_points:
+    - ride = robotide:main
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - pygments
+    - pypubsub
+    - python
+    - wxpython
+    - docutils >=0.9
+    - robotframework
+
+test:
+  imports:
+    - robotide
+    - robotide.robotapi
+
+about:
+  home: https://github.com/robotframework/RIDE
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE.txt
+  summary: Test data editor for Robot Framework

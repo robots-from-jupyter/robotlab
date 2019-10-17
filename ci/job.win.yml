@@ -3,7 +3,7 @@ parameters:
   activate: call activate &&
 
 jobs:
-  - job: conda_win
+  - job: CondaWindows
     condition: succeeded()
     pool:
       vmImage: ${{ parameters.vmImage }}
@@ -20,5 +20,5 @@ jobs:
         displayName: publish windows packages
         inputs:
           targetPath: _artifacts/conda-bld/win-64
-          artifactName: Windows Conda Packages
+          artifactName: Windows Conda Packages $(Build.BuildId)
         condition: succeeded()
