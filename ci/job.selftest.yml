@@ -27,7 +27,7 @@ jobs:
         steps:
           - task: DownloadPipelineArtifact@0
             inputs:
-              artifactName: ${{ product }} for ${{ platform.name }}
+              artifactName: ${{ product }} for ${{ platform.name }} $(Build.BuildId)
               targetPath: _artifacts/constructor
             displayName: restore installer
 
@@ -64,5 +64,5 @@ jobs:
             displayName: publish robot output
             inputs:
               targetPath: _artifacts/test_output
-              artifactName: ${{ product }} ${{ platform.name }} Output
+              artifactName: ${{ product }} ${{ platform.name }} Output $(Build.BuildId)
             condition: always()

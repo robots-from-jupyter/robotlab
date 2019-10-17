@@ -34,7 +34,7 @@ jobs:
           - ${{ if eq(product, 'RobotLab') }}:
             - task: DownloadPipelineArtifact@0
               inputs:
-                artifactName: robotlab app_dir
+                artifactName: robotlab app_dir $(Build.BuildId)
                 targetPath: _artifacts/app_dir
               displayName: restore jupyterlab
 
@@ -58,5 +58,5 @@ jobs:
             displayName: publish installer
             inputs:
               targetPath: _artifacts/constructor
-              artifactName: ${{ product }} for ${{ platform.name }}
+              artifactName: ${{ product }} for ${{ platform.name }} $(Build.BuildId)
             condition: succeeded()

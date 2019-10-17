@@ -27,7 +27,7 @@ jobs:
           - task: DownloadPipelineArtifact@0
             displayName: fetch ${{ product }} ${{ platform }} Installer
             inputs:
-              artifactName: ${{ product }} For ${{ platform }}
+              artifactName: ${{ product }} For ${{ platform }} $(Build.BuildId)
               targetPath: ${{ parameters.constructors }}
       - script: find .
         displayName: list files before release

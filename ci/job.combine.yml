@@ -32,7 +32,7 @@ jobs:
           - task: DownloadPipelineArtifact@0
             condition: always()
             inputs:
-              artifactName: ${{ product }} ${{ platform }} Output
+              artifactName: ${{ product }} ${{ platform }} Output $(Build.BuildId)
               targetPath: _artifacts/test_output
             displayName: restore ${{ product }} ${{ platform }} output
 
@@ -45,4 +45,4 @@ jobs:
         displayName: publish combined output
         inputs:
           targetPath: _artifacts/test_output
-          artifactName: All Robot Output
+          artifactName: All Robot Output $(Build.BuildId)

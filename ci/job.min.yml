@@ -37,5 +37,5 @@ jobs:
             displayName: publish installer
             inputs:
               targetPath: _artifacts/constructor
-              artifactName: ${{ product }} for ${{ platform.name }}
+              artifactName: ${{ product }} for ${{ platform.name }} $(Build.BuildId)
             condition: succeeded()

@@ -4,13 +4,13 @@ parameters:
 steps:
   - task: DownloadPipelineArtifact@0
     inputs:
-      artifactName: noarch conda packages
+      artifactName: noarch conda packages $(Build.BuildId)
       targetPath: _artifacts/conda-bld/noarch
     displayName: restore noarch packages
 
   - ${{ if eq(parameters.name, 'Windows') }}:
     - task: DownloadPipelineArtifact@0
       inputs:
-        artifactName: windows conda packages
+        artifactName: windows conda packages $(Build.BuildId)
         targetPath: _artifacts/conda-bld/win-64
       displayName: restore windows packages
