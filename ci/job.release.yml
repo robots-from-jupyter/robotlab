@@ -6,9 +6,9 @@ parameters:
     - MacOSX
     - Windows
   products:
-    - MiniRobot
-    - ExoRobot
     - RobotLab
+    # - MiniRobot
+    # - ExoRobot
   constructors: _artifacts/constructor
 
 jobs:

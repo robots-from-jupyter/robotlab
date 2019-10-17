@@ -16,7 +16,7 @@ jobs:
   - template: ci/job.noarch.yml
   - template: ci/job.win.yml
   - template: ci/job.lab.yml
-  - template: ci/job.min.yml
+  # - template: ci/job.min.yml
 
   # group two: build installers, verify conda builds
   - template: ci/job.noarch-test.yml

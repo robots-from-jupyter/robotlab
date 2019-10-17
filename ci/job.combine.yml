@@ -8,10 +8,9 @@ parameters:
     - MacOSX
     - Windows
   products:
-    - MiniRobot
-    - ExoRobot
     - RobotLab
-  artifact: RobotLab
+    # - MiniRobot
+    # - ExoRobot
   constructors: _artifacts/constructor
 
 jobs:
@@ -46,4 +45,4 @@ jobs:
         displayName: publish combined output
         inputs:
           targetPath: _artifacts/test_output
-          artifactName: Robot Output
+          artifactName: All Robot Output

@@ -1,8 +1,8 @@
 parameters:
   products:
-    - MiniRobot
-    - ExoRobot
     - RobotLab
+    # - MiniRobot
+    # - ExoRobot
   platforms:
     - name: Linux
       vmImage: ubuntu-16.04

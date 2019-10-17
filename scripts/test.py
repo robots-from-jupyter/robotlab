@@ -66,10 +66,11 @@ def test_robot(product, robot_args=None, headless=False, in_product=False):
 if __name__ == "__main__":
     rc = 0
     headless = in_product = False
-    all_products = sorted(
-        [product.name for product in (TEST_DIR / "acceptance").glob("*/")]
-    )
+    all_products = ["RobotLab"]
+    # all_products = sorted(
+    #     [product.name for product in (TEST_DIR / "acceptance").glob("*/")]
 
+    # )
     args = sys.argv[1:]
 
     if "--headless" in args:
