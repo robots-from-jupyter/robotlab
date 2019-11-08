@@ -1,6 +1,6 @@
 {% set robotkernel = "1.0.1" %}
 {% set robot_jupyterlab = "==1.1.4" %}
-{% set robot_pywinpty = "==0.5.5" %}
+{% set robot_pywinpty = ">=0.5.5" %}
 {% set robot_conda = ">=4.7.12,<4.8" %}
 {% set robot_fox = ">=68.0.2,<69" %}
 {% set robot_widgets = ">=7.5.1" %}
