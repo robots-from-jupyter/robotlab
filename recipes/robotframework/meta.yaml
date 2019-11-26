@@ -10,11 +10,12 @@ source:
     sha256: ac0f700a246fca9b0d11499ae99a9bb29c8d7e82f31cf20af4a06adf6a31aaf1
     folder: dist
   - url: https://github.com/robotframework/robotframework/archive/v{{ version }}.tar.gz
-    sha256: f1e15c027ebe60d5d770a28fbd7a931323e95ce7b07a52a87a62637c80056065
+    sha256: ecab2a7ae9b7b23e0c0fdd76929e3f7a90a65cb26b623ac69fd355ea9f2ce242
     folder: src
 
 build:
   number: 0
+  noarch: python
   script:
     - cd dist
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
