@@ -9,6 +9,7 @@ jobs:
       - script: |-
           python -m scripts.build conda \
             --no-test \
+            robotframework \
             restinstance \
             robotframework-jupyterlibrary \
             robotframework-seleniumscreenshots \

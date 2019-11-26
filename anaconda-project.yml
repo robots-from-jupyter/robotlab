@@ -71,7 +71,6 @@ env_specs:
       - ripgrep
       - robotframework
       - robotframework-seleniumlibrary >=4.1.0,<5
-      - robotframework-seleniumtestability >=0.0.15,<1
 
   _lab:
     packages:
