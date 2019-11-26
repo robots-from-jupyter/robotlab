@@ -40,7 +40,7 @@ LABEXTENSIONS = os.environ.get(
     "LABEXTENSIONS",
     """
 @jupyterlab/toc@1.0.1
-@jupyter-widgets/jupyterlab-manager@1.0.2
+@jupyter-widgets/jupyterlab-manager@1.1.0
 jupyterlab_robotmode@2.4.0
 """.replace(
         "\n", " "
