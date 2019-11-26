@@ -84,6 +84,7 @@ requirements:
     - robotframework =={{ robot }}
     - robotframework-jupyterlibrary
     - robotframework-seleniumscreenshots
+    - robotframework-seleniumtestability
     - robotframework-whitelibrary  # [win]
     - robotkernel =={{ robotkernel }}
 
