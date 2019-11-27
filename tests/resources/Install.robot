@@ -84,4 +84,4 @@ Get RobotLab GeckoDriver
 
 Get RobotLab Firefox
     [Documentation]    Get the path to the bundled firefox
-    [Return]    ${PRODUCT DIR}${/}&{FIREFOX}[${OS}]
+    [Return]    ${PRODUCT DIR}${/}${FIREFOX}[${OS}]
