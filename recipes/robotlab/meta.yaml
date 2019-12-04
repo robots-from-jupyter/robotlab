@@ -1,4 +1,4 @@
-{% set robot = "3.2a1" %}
+{% set robot = "3.1.2" %}
 {% set robotkernel = "1.0.1" %}
 {% set robot_jupyterlab = "==1.2.3" %}
 {% set robot_pywinpty = ">=0.5.5" %}
