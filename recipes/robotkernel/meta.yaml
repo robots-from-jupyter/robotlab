@@ -1,10 +1,10 @@
 package:
   name: '{% set name = "robotkernel" %}{{ name }}'
-  version: '{% set version = "1.0.1" %}{{ version }}'
+  version: '{% set version = "1.2rc1" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a725d18f1a5f5242192561453acc11466821671c383e808adb68661c4850a472
+  sha256: 8f36a3cadbad3f8ad58d98ffebc69893bf9fe1acb5b17b58e888d213d78b65df
 
 build:
   noarch: python
