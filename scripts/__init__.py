@@ -31,7 +31,7 @@ ROBOTLAB_DIR = ROOT / "robotlab"
 README = ROOT / "README.md"
 
 # for easy overriding in CI
-VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.9.1")
+VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.12.0")
 CONDA_VERSION = os.environ.get("CONDA_VERSION", "4.7.12")
 RF_VERSION = os.environ.get("RF_VERSION", "3.1.2")
 PY_MAX = os.environ.get("PY_MAX", "3.7.0a0")
@@ -40,7 +40,7 @@ LABEXTENSIONS = os.environ.get(
     "LABEXTENSIONS",
     """
 @jupyterlab/toc@1.0.1
-@jupyter-widgets/jupyterlab-manager@1.0.2
+@jupyter-widgets/jupyterlab-manager@1.1.0
 jupyterlab_robotmode@2.4.0
 """.replace(
         "\n", " "

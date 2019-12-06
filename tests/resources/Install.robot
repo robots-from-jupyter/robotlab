@@ -4,7 +4,7 @@ Library           OperatingSystem
 Library           Process
 
 *** Variables ***
-${INSTALLER VERSION}    2019.9.1
+${INSTALLER VERSION}    2019.12.0
 ${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
 &{GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Scripts${/}geckodriver.exe
 &{FIREFOX}        linux=bin${/}firefox    darwin=bin${/}firefox    windows=Library${/}bin${/}firefox.exe
@@ -84,4 +84,4 @@ Get RobotLab GeckoDriver
 
 Get RobotLab Firefox
     [Documentation]    Get the path to the bundled firefox
-    [Return]    ${PRODUCT DIR}${/}&{FIREFOX}[${OS}]
+    [Return]    ${PRODUCT DIR}${/}${FIREFOX}[${OS}]

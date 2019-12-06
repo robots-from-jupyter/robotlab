@@ -1,0 +1,42 @@
+{% set name = "robotframework-seleniumtestability" %}
+{% set version = "0.0.15" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a49df9eb970f95794ab6af12b8a51312340d8349e7b92bf2b59021898b40e1c0
+
+build:
+  number: 0
+  noarch: python
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - furl
+    - python
+    - robotframework-seleniumlibrary >=4.0.0
+    - wrapt
+
+test:
+  imports:
+    - SeleniumTestability
+    - SeleniumTestability.javascript
+    - SeleniumTestability.listener
+    - SeleniumTestability.logger
+    - SeleniumTestability.plugin
+    - SeleniumTestability.types
+
+about:
+  home: https://github.com/rasjani/robotframework-seleniumtestability
+  license: Apache-2.0
+  license_file: LICENSE
+  license_family: Apache
+  summary: Extension for SeleniumLibrary that provides manual and automatic waiting for asyncronous events like fetch, xhr, etc.

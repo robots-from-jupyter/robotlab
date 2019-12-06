@@ -1,5 +1,6 @@
-{% set robotkernel = "1.0.1" %}
-{% set robot_jupyterlab = "==1.1.4" %}
+{% set robot = "3.1.2" %}
+{% set robotkernel = "1.2" %}
+{% set robot_jupyterlab = "==1.2.3" %}
 {% set robot_pywinpty = ">=0.5.5" %}
 {% set robot_conda = ">=4.7.12,<4.8" %}
 {% set robot_fox = ">=68.0.2,<69" %}
@@ -8,13 +9,13 @@
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
-  version: {% set version = "2019.9.1" %}{{ version }}
+  version: {% set version = "2019.12.0" %}{{ version }}
 
 source:
   - path: ../../robotlab
     folder: robotlab
   - url: https://github.com/robots-from-jupyter/robotkernel/archive/{{ robotkernel }}.tar.gz
-    sha256: b239e50c2743a7b94704d1f3678303bc95d56be5cf7071e653189a9e9dc74a12
+    sha256: 222aebe0de5025b58f4753a2198fa85dc7b432c2d3d70550ebd8095f8507391b
     folder: robotkernel
   # we do the jupyterlab build off-line to keep conda-build time low
   - path: ../../_artifacts/app_dir
@@ -73,14 +74,17 @@ requirements:
     - geckodriver
     - ipywidgets {{ robot_widgets }}
     - jupyterlab {{ robot_jupyterlab }}
-    - pywinpty {{ robot_pywinpty }}  # [win]
+    - jupytext >=1.3.0
     - nodejs {{ robot_node }}
     - opencv
     - pyshortcuts
     - python
+    - pywinpty {{ robot_pywinpty }}  # [win]
     - restinstance
+    - robotframework =={{ robot }}
     - robotframework-jupyterlibrary
     - robotframework-seleniumscreenshots
+    - robotframework-seleniumtestability
     - robotframework-whitelibrary  # [win]
     - robotkernel =={{ robotkernel }}
 

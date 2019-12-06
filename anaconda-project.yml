@@ -71,11 +71,10 @@ env_specs:
       - ripgrep
       - robotframework
       - robotframework-seleniumlibrary >=4.1.0,<5
-      - robotframework-seleniumtestability >=0.0.15,<1
 
   _lab:
     packages:
-      - jupyterlab ==1.1.4
+      - jupyterlab ==1.2.3
       - nodejs >=11,<12
       - python >=3.6,<3.7.0a0
 

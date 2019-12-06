@@ -9,11 +9,12 @@ jobs:
       - script: |-
           python -m scripts.build conda \
             --no-test \
+            robotframework \
             restinstance \
             robotframework-jupyterlibrary \
             robotframework-seleniumscreenshots \
-            robotkernel \
-            robotframework-ride
+            robotframework-seleniumtestability \
+            robotkernel
         displayName: build noarch packages
 
       - task: PublishPipelineArtifact@0
