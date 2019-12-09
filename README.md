@@ -126,6 +126,7 @@ get to the Good Stuff of running Robot notebooks and not spend a bunch of time
 debugging `nodejs` and `webpack`, we've added a few choice JupyterLab extensions:
 
 - `jupyterlab_robotmode`: syntax highlighting for Robot Framework
+- `jupyterlab-jupytext`: ipynb/text pairing for your notebook
 - `@jupyterlab/toc`: a table of contents pane for Markdown headers
 - `@jupyter-widgets/jupyterlab-manager`: because widgets are always good
 
