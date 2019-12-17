@@ -1,0 +1,41 @@
+{% set name = "jupyter_starters" %}
+{% set version = "0.1.0a0" %}
+
+package:
+  name: {{ name | replace("_", "-") }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: d4320fd7cd5a2d1a0f5ab061bb77e084b6183704445db0c3dc5286199604687d
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+    - notebook >=5.3
+
+test:
+  imports:
+    - jupyter_starters
+    - jupyter_starters.handlers
+    - jupyter_starters.manager
+    - jupyter_starters.py_starters.cookiecutter
+    - jupyter_starters.schema.v1
+    - jupyter_starters.serverextension
+    - jupyter_starters.trait_types
+    - jupyter_starters.types
+
+about:
+  home: https://github.com/deathbeds/jupyterlab-starters
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: 'Parameterized file and directory starters for JupyterLab.'

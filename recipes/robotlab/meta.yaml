@@ -1,11 +1,12 @@
 {% set robot = "3.1.2" %}
-{% set robotkernel = "1.2" %}
-{% set robot_jupyterlab = "==1.2.3" %}
-{% set robot_pywinpty = ">=0.5.5" %}
 {% set robot_conda = ">=4.7.12,<4.8" %}
 {% set robot_fox = ">=68.0.2,<69" %}
-{% set robot_widgets = ">=7.5.1" %}
+{% set robot_jupyterlab = "==1.2.4" %}
 {% set robot_node = ">=11,<12" %}
+{% set robot_pywinpty = ">=0.5.5" %}
+{% set robot_starters = "0.1.0a0" %}
+{% set robot_widgets = ">=7.5.1" %}
+{% set robotkernel = "1.2" %}
 
 package:
   name: {% set name = "robotlab" %}{{ name }}
@@ -30,39 +31,10 @@ build:
     - robotlab-examples = robotlab.examples:copy_robotkernel_examples
     - robotlab-tutorial = robotlab.tutorial:copy_robotkernel_tutorial
   script:
+    - {{ PYTHON }} {{ RECIPE_DIR }}/builder.py  # [unix]
+    - {{ PYTHON }} {{ RECIPE_DIR }}\builder.py  # [win]
     - cd robotlab
     - {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
-
-    - cd {{ SRC_DIR }}
-
-    - mkdir -p {{ PREFIX }}/share/jupyter # [unix]
-    - cp -r app_dir {{ PREFIX }}/share/jupyter/robotlab  # [unix]
-    - rm -rf {{ PREFIX }}/share/jupyter/robotlab/staging  # [unix]
-    - ls {{ PREFIX }}/share/jupyter/robotlab  # [unix]
-
-    - md {{ PREFIX }}\share\jupyter\robotlab  # [win]
-    - xcopy /e app_dir\* {{ PREFIX }}\share\jupyter\robotlab\  # [win]
-    - rd /s /q {{ PREFIX }}\share\jupyter\robotlab\staging  # [win]
-    - dir {{ PREFIX }}\share\jupyter\robotlab  # [win]
-
-    - cd robotkernel
-    - cd examples
-
-    - mkdir -p {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
-    - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-examples  # [unix]
-
-    - md {{ PREFIX }}\var\www\robotkernel-examples  # [win]
-    - xcopy *.ipynb {{ PREFIX }}\var\www\robotkernel-examples\  # [win]
-
-    - cd ..
-    - cd docs
-    - cd notebooks
-
-    - mkdir -p {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
-    - cp *.ipynb {{ PREFIX }}/var/www/robotkernel-tutorial  # [unix]
-
-    - md {{ PREFIX }}\var\www\robotkernel-tutorial  # [win]
-    - xcopy *.ipynb {{ PREFIX }}\var\www\robotkernel-tutorial\  # [win]
 
 requirements:
   host:
@@ -73,6 +45,7 @@ requirements:
     - firefox {{ robot_fox }}
     - geckodriver
     - ipywidgets {{ robot_widgets }}
+    - jupyter-starters {{ robot_starters }}
     - jupyterlab {{ robot_jupyterlab }}
     - jupytext >=1.3.0
     - nodejs {{ robot_node }}

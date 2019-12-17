@@ -22,14 +22,15 @@ requirements:
     - pywin32  # [win]
 
 test:
-  requires:
-    - wxpython
+  # TODO: some issues currently with wx.__version__
+  # requires:
+  #   - wxpython
   imports:
     - pyshortcuts
     - pyshortcuts.darwin
     - pyshortcuts.linux
     - pyshortcuts.windows
-    - pyshortcuts.wxgui
+    # - pyshortcuts.wxgui
 
   commands:
     - pyshortcut --help
