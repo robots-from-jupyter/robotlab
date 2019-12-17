@@ -1,5 +1,6 @@
-import sys
 import os
+import shutil
+import sys
 
 from . import (
     run,
@@ -30,6 +31,13 @@ def test_robot(product, robot_args=None, headless=False, in_product=False):
     stem = f"{product}.{PLATFORM}"
     robot_args = list(robot_args or []) + ["--include", f"product:{product}"]
 
+    output_path = TEST_OUT / product / PLATFORM.lower()
+
+    if output_path.exists():
+        shutil.rmtree(output_path)
+
+    output_path.mkdir(parents=True)
+
     if headless:
         os.environ["MOZ_HEADLESS"] = "1"
 
@@ -41,7 +49,7 @@ def test_robot(product, robot_args=None, headless=False, in_product=False):
             "--name",
             f"{product} {PLATFORM}",
             "--outputdir",
-            str(TEST_OUT / product),
+            output_path,
             "--output",
             TEST_OUT / f"{stem}.robot.xml",
             "--log",

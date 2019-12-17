@@ -39,7 +39,7 @@ PY_MIN = os.environ.get("PY_MIN", "3.6")
 LABEXTENSIONS = os.environ.get(
     "LABEXTENSIONS",
     """
-@deathbeds/jupyterlab-starters@0.1.0-a0
+@deathbeds/jupyterlab-starters@0.1.0a0
 @jupyter-widgets/jupyterlab-manager@1.1.0
 @jupyterlab/toc@1.0.1
 jupyterlab_robotmode@2.4.0
