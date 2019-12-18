@@ -15,8 +15,8 @@ Can I list extensions?
 Extensions Should Be Installed
     [Arguments]    ${output}    ${extensions}
     [Documentation]    Check that some JupyterLab extensions are installed
-    ${cleaned} =    Decolorize    ${output.replace(" ", "")}
+    ${cleaned} =    Decolorize    ${output.replace(" ", "").lower()}
     FOR    ${spec}    IN    @{extensions}
         ${ext} =    Set Variable    ${spec.rsplit('@', 1)}
-        Should Contain    ${cleaned}    ${ext[0]}v${ext[1]}enabledOK
+        Should Contain    ${cleaned.lower()}    ${ext[0]}v${ext[1]}enabledok
     END
