@@ -6,7 +6,6 @@ Resource          ./Browser.robot
 *** Keywords ***
 Clean up the installation
     [Documentation]    Clean out the installed product
-    Run Keyword If All Tests Passed    Clean Up Examples and Tutorials
     Sleep    5s
     Terminate All Processes
     Sleep    5s
@@ -25,6 +24,7 @@ Clean Up After Lab Suite
     [Documentation]    Really try to make sure Lab is cleaned up
     Open RobotLab
     Clean Up After Lab Test
+    Really Close All Browsers
     Terminate All Jupyter Servers
     Sleep    5s
     Run Keyword and Ignore Error    Terminate All Processes
@@ -35,4 +35,3 @@ Clean Up After Lab Test
     [Documentation]    Try to make sure Lab is cleaned up
     Wait Until Keyword Succeeds    2x    1s    Execute JupyterLab Command    Shutdown All Kernels
     Wait Until Keyword Succeeds    2x    1s    Execute JupyterLab Command    Reset Application State
-    Really Close All Browsers

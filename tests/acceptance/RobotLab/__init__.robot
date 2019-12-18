@@ -9,6 +9,6 @@ Library           JupyterLibrary
 *** Keywords ***
 Clean up the RobotLab installation
     [Documentation]    Clean up browser and Jupyter stuff, then the installation
-    Close All Browsers
     Terminate All Jupyter Servers
     Clean up the installation
+    Run Keyword If All Tests Passed    Clean Up Examples and Tutorials
