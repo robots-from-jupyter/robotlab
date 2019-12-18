@@ -49,15 +49,15 @@ commands:
     env_spec: robotlab-dev
 
 channels:
-- https://conda.anaconda.org/anaconda
-- https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
+  - https://conda.anaconda.org/conda-forge
 
 env_specs:
   _robots_from_jupyter:
     description: the main build/test environment
     channels:
-    - https://conda.anaconda.org/anaconda
-    - https://conda.anaconda.org/conda-forge
+      - https://conda.anaconda.org/anaconda
+      - https://conda.anaconda.org/conda-forge
     packages:
       - conda >=4.7.12,<4.8
       - conda-build >=3.18.9,<3.19
@@ -88,34 +88,39 @@ env_specs:
 
   _test:
     inherit_from:
-    - _robots_from_jupyter
+      - _robots_from_jupyter
     channels:
-    - ./_artifacts/conda-bld
+      - ./_artifacts/conda-bld
     packages:
-    - robotframework-jupyterlibrary
+      - robotframework-jupyterlibrary
 
   robotlab-dev:
     description: basically what goes in the constructor for interactive dev/test
     inherit_from:
       - _lab
     channels:
-    - ./_artifacts/conda-bld
+      - ./_artifacts/conda-bld
     packages:
-    - conda
-    - firefox
-    - pyshortcuts
-    - restinstance
-    - robotframework-seleniumscreenshots
-    - robotkernel
+      - conda
+      - firefox
+      - jupyter-starters
+      - jupytext
+      - pyshortcuts
+      - restinstance
+      - robotframework-seleniumscreenshots
+      - robotframework-seleniumtestability
+      - robotkernel
 
   robotlab-dev-win:
     inherit_from:
-    - robotlab-dev
+      - robotlab-dev
     packages:
-    - robotframework-whitelibrary
+      - robotframework-whitelibrary
 
   robotlab-test:
-    inherit_from:
-    - robotlab-dev
+    channels:
+      - https://conda.anaconda.org/anaconda
+      - https://conda.anaconda.org/conda-forge
+      - ./_artifacts/conda-bld
     packages:
-    - robotlab
+      - robotlab
