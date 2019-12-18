@@ -31,15 +31,20 @@ def test_robot(
     product, robot_args=None, headless=False, in_product=False, dry_run=False
 ):
     stem = f"{product}.{PLATFORM}"
+    output_path = TEST_OUT / product / PLATFORM.lower()
+
     robot_args = list(robot_args or [])
     robot_args += ["--include", f"product:{product}"]
+
     name = f"{product} {PLATFORM}"
+
     if dry_run:
         robot_args += ["--dryrun", "--settag", "dryrun"]
         stem += ".dryrun"
         name = f"{name} (Dry Run)"
+        output_path = TEST_OUT / product / f"{PLATFORM.lower()}-dryrun"
+
     robot_args += os.environ.get("ROBOT_ARGS", "").split()
-    output_path = TEST_OUT / product / PLATFORM.lower()
 
     if output_path.exists():
         shutil.rmtree(output_path)
