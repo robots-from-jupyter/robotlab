@@ -90,6 +90,7 @@ def build_lab():
             *LABEXTENSIONS,
         ]
     )
+
     rc = rc or run(
         [
             *JP,
@@ -101,6 +102,8 @@ def build_lab():
             "--name='RobotLab'",
         ]
     )
+
+    rc or run([*JP, "labextension", "list"])
 
     return rc
 
