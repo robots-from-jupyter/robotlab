@@ -41,14 +41,14 @@ print("making starters...")
                 "type": "copy",
                 "label": "Robotkernel Examples",
                 "description": "Examples of using robotkernel",
-                "icon": SVG.read_text(),
+                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast1"),
                 "src": str(EXAMPLES)
             },
             "robotkernel-tutorial": {
                 "type": "copy",
                 "label": "Robotkernel Tutorial",
                 "description": "A guided tutorial through using robotkernel",
-                "icon": SVG.read_text(),
+                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast3"),
                 "src": str(TUTORIAL)
             }
         }
