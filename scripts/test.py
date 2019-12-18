@@ -27,12 +27,17 @@ def test_conda(packages=None):
     return rc
 
 
-def test_robot(product, robot_args=None, headless=False, in_product=False, dry_run=False):
+def test_robot(
+    product, robot_args=None, headless=False, in_product=False, dry_run=False
+):
     stem = f"{product}.{PLATFORM}"
     robot_args = list(robot_args or [])
     robot_args += ["--include", f"product:{product}"]
+    name = f"{product} {PLATFORM}"
     if dry_run:
-        robot_args += ["--dryrun"]
+        robot_args += ["--dryrun", "--settag", "dryrun"]
+        stem += ".dryrun"
+        name = f"{name} (Dry Run)"
     robot_args += os.environ.get("ROBOT_ARGS", "").split()
     output_path = TEST_OUT / product / PLATFORM.lower()
 
@@ -50,7 +55,7 @@ def test_robot(product, robot_args=None, headless=False, in_product=False, dry_r
             "-m",
             "robot",
             "--name",
-            f"{product} {PLATFORM}",
+            name,
             "--outputdir",
             output_path,
             "--output",
@@ -123,7 +128,7 @@ if __name__ == "__main__":
                     robot_args=robot_args,
                     headless=headless,
                     in_product=in_product,
-                    dry_run=dry_run
+                    dry_run=dry_run,
                 )
 
     sys.exit(rc)
