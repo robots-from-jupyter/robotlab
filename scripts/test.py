@@ -30,7 +30,7 @@ def test_conda(packages=None):
 def test_robot(product, robot_args=None, headless=False, in_product=False):
     stem = f"{product}.{PLATFORM}"
     robot_args = list(robot_args or []) + ["--include", f"product:{product}"]
-
+    robot_args += os.environ.get("ROBOT_ARGS", "").split()
     output_path = TEST_OUT / product / PLATFORM.lower()
 
     if output_path.exists():

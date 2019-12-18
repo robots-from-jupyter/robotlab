@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation     Is the RobotLab installer viable?
+Force Tags        installer
 Resource          ../../../resources/Install.robot
 
 *** Test Cases ***

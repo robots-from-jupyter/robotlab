@@ -11,3 +11,4 @@ build/
 constructor/.*
 dist/
 envs/
+robotkernel-*/

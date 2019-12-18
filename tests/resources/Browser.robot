@@ -21,6 +21,9 @@ Open RobotLab
     Set Global Variable    ${NEXT GECKO LOG}    ${NEXT GECKO LOG.__add__(1)}
     ${nbserver_url} =    Run Keyword If    not "${url}"    Get Jupyter Server URL    ${nbserver}
     ${token} =    Run Keyword If    not "${url}"    Get Jupyter Server Token    ${nbserver}
+    Set Global Variable    ${TOKEN}    ${token}
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}lab?token=${token}
+    Go To    about:blank
+    Set Window Size    1920    1080
     Go To    ${final_url}
     Wait for JupyterLab Splash Screen
