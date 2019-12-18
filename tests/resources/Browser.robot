@@ -27,3 +27,9 @@ Open RobotLab
     Set Window Size    1920    1080
     Go To    ${final_url}
     Wait for JupyterLab Splash Screen
+
+Really Close All Browsers
+    [Documentation]    We might open lots of browsers... this might help
+    Run keyword And Ignore Error    Handle Alert    timeout=1s
+    Run Keyword and Ignore Error    Close All Browsers
+    Run keyword And Ignore Error    Handle Alert    timeout=1s

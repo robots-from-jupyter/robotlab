@@ -45,7 +45,8 @@ Open the Tutorial Notebook
     [Documentation]    Open and prepare the tutorial notebook
     Wait Until Page Contains Element    ${XP FILE TREE TUTORIAL 00}    timeout=10s
     Double Click Element    ${XP FILE TREE TUTORIAL 00}
-    Wait Until Page Contains Element    css:h2    timeout=10s
+    Wait Until Page Contains Element    css:.jp-Notebook h2    timeout=10s
+    Wait Until Page Contains    Robot Framework | Idle    timeout=3s
     Capture Page Screenshot    ${prefix}_2_after_launch.png
     Execute JupyterLab Command    Clear All Outputs
 
