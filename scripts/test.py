@@ -27,9 +27,12 @@ def test_conda(packages=None):
     return rc
 
 
-def test_robot(product, robot_args=None, headless=False, in_product=False):
+def test_robot(product, robot_args=None, headless=False, in_product=False, dry_run=False):
     stem = f"{product}.{PLATFORM}"
-    robot_args = list(robot_args or []) + ["--include", f"product:{product}"]
+    robot_args = list(robot_args or [])
+    robot_args += ["--include", f"product:{product}"]
+    if dry_run:
+        robot_args += ["--dryrun"]
     robot_args += os.environ.get("ROBOT_ARGS", "").split()
     output_path = TEST_OUT / product / PLATFORM.lower()
 
@@ -73,7 +76,7 @@ def test_robot(product, robot_args=None, headless=False, in_product=False):
 
 if __name__ == "__main__":
     rc = 0
-    headless = in_product = False
+    headless = in_product = dry_run = False
     all_products = ["RobotLab"]
     # all_products = sorted(
     #     [product.name for product in (TEST_DIR / "acceptance").glob("*/")]
@@ -88,6 +91,10 @@ if __name__ == "__main__":
     if "--in-product" in args:
         in_product = True
         args.remove("--in-product")
+
+    if "--dryrun" in args:
+        dry_run = True
+        args.remove("--dryrun")
 
     if not args:
         rc = test_conda()
@@ -116,6 +123,7 @@ if __name__ == "__main__":
                     robot_args=robot_args,
                     headless=headless,
                     in_product=in_product,
+                    dry_run=dry_run
                 )
 
     sys.exit(rc)
