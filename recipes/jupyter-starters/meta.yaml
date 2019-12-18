@@ -1,5 +1,5 @@
 {% set name = "jupyter_starters" %}
-{% set version = "0.1.0a0" %}
+{% set version = "0.1.0a1" %}
 
 package:
   name: {{ name | replace("_", "-") }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d4320fd7cd5a2d1a0f5ab061bb77e084b6183704445db0c3dc5286199604687d
+  sha256: 49a0fa71aab33ae365d8e449494d99b88e175679482f5baaf8ea0816b2bfab84
 
 build:
   noarch: python
