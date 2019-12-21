@@ -1,9 +1,9 @@
 *** Settings ***
-Documentation     robotlab ships the robokernel tutorial
+Documentation     robotlab-tutorial
 Force Tags        app:robotlab-tutorial
 Resource          ../../../resources/CLI.robot
 
 *** Test Cases ***
 Can I install the tutorial?
-    [Documentation]    Verify the robotlab-tutorial command works
-    Check a RobotLab CLI command    robotlab-tutorial
+    [Documentation]    Does robotlab-tutorial work?
+    Check a RobotLab CLI command    robotlab-tutorial    check_dir=robotkernel-tutorial

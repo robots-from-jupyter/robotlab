@@ -1,5 +1,6 @@
-import sys
 import os
+import shutil
+import sys
 
 from . import (
     run,
@@ -26,9 +27,29 @@ def test_conda(packages=None):
     return rc
 
 
-def test_robot(product, robot_args=None, headless=False, in_product=False):
+def test_robot(
+    product, robot_args=None, headless=False, in_product=False, dry_run=False
+):
     stem = f"{product}.{PLATFORM}"
-    robot_args = list(robot_args or []) + ["--include", f"product:{product}"]
+    output_path = TEST_OUT / product / PLATFORM.lower()
+
+    robot_args = list(robot_args or [])
+    robot_args += ["--include", f"product:{product}"]
+
+    name = f"{product} {PLATFORM}"
+
+    if dry_run:
+        robot_args += ["--dryrun", "--settag", "dryrun"]
+        stem += ".dryrun"
+        name = f"{name} (Dry Run)"
+        output_path = TEST_OUT / product / f"{PLATFORM.lower()}-dryrun"
+
+    robot_args += os.environ.get("ROBOT_ARGS", "").split()
+
+    if output_path.exists():
+        shutil.rmtree(output_path)
+
+    output_path.mkdir(parents=True)
 
     if headless:
         os.environ["MOZ_HEADLESS"] = "1"
@@ -39,9 +60,9 @@ def test_robot(product, robot_args=None, headless=False, in_product=False):
             "-m",
             "robot",
             "--name",
-            f"{product} {PLATFORM}",
+            name,
             "--outputdir",
-            str(TEST_OUT / product),
+            output_path,
             "--output",
             TEST_OUT / f"{stem}.robot.xml",
             "--log",
@@ -65,7 +86,7 @@ def test_robot(product, robot_args=None, headless=False, in_product=False):
 
 if __name__ == "__main__":
     rc = 0
-    headless = in_product = False
+    headless = in_product = dry_run = False
     all_products = ["RobotLab"]
     # all_products = sorted(
     #     [product.name for product in (TEST_DIR / "acceptance").glob("*/")]
@@ -80,6 +101,10 @@ if __name__ == "__main__":
     if "--in-product" in args:
         in_product = True
         args.remove("--in-product")
+
+    if "--dryrun" in args:
+        dry_run = True
+        args.remove("--dryrun")
 
     if not args:
         rc = test_conda()
@@ -108,6 +133,7 @@ if __name__ == "__main__":
                     robot_args=robot_args,
                     headless=headless,
                     in_product=in_product,
+                    dry_run=dry_run,
                 )
 
     sys.exit(rc)

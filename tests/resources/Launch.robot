@@ -11,4 +11,4 @@ Start New RobotLab Server
     Should Not Be Empty    ${OS}    msg=Needs an OS
     Should Not Be Empty    ${PRODUCT DIR}    msg=Needs a RobotLab installation
     Should Not Be Empty    ${PRODUCT PATH ENV}    msg=Needs a RobotLab environment
-    ${proc} =    Start New Jupyter Server    ${ROBOTLAB CMD}    env:PATH=${PRODUCT PATH ENV}
+    ${proc} =    Start New Jupyter Server    ${ROBOTLAB CMD}    env:PATH=${PRODUCT PATH ENV}    stdout=${OUTPUT DIR}${/}nbserver.log

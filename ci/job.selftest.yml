@@ -34,6 +34,8 @@ jobs:
           - ${{ if not(eq(platform.name, 'Windows')) }}:
             - script: bash _artifacts/constructor/${{ product }}-$(ROBOTLAB_VERSION)-${{ platform.name }}-x86_64.sh -fbp _${{ product }}
               displayName: run installer
+            - script: . ./_${{ product }}/bin/activate ./_${{ product }} && python -m scripts.test robot ${{ product }} --headless --in-product --dryrun
+              displayName: acceptance tests (dry run)
             - script: . ./_${{ product }}/bin/activate ./_${{ product }} && python -m scripts.test robot ${{ product }} --headless --in-product
               displayName: acceptance tests
 
@@ -47,7 +49,12 @@ jobs:
             - script: |
                 @echo on
                 call "%cd%\_${{ product }}\Scripts\activate.bat" "%cd%\_${{ product }}"
-                python -m scripts.test robot --headless --in-product ${{ product }}
+                python -m scripts.test robot ${{ product }} --headless --in-product --dryrun
+              displayName: acceptance tests (dry run)
+            - script: |
+                @echo on
+                call "%cd%\_${{ product }}\Scripts\activate.bat" "%cd%\_${{ product }}"
+                python -m scripts.test robot ${{ product }} --headless --in-product
               displayName: acceptance tests
 
           - ${{ if eq(platform.name, 'MacOSX') }}:

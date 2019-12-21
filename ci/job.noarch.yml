@@ -9,6 +9,7 @@ jobs:
       - script: |-
           python -m scripts.build conda \
             --no-test \
+            jupyter-starters \
             robotframework \
             restinstance \
             robotframework-jupyterlibrary \

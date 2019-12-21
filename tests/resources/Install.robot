@@ -2,30 +2,20 @@
 Documentation     Install a Product
 Library           OperatingSystem
 Library           Process
+Resource          ./Cleanup.robot
 
 *** Variables ***
 ${INSTALLER VERSION}    2019.12.0
-${INSTALL LOG}    ${OUTPUT DIR}${/}${OS}${/}00_installer.log
+${INSTALL LOG}    ${OUTPUT DIR}${/}00_installer.log
 &{GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Scripts${/}geckodriver.exe
 &{FIREFOX}        linux=bin${/}firefox    darwin=bin${/}firefox    windows=Library${/}bin${/}firefox.exe
 
 *** Keywords ***
-Clean up the installation
-    [Documentation]    Clean out the installed product
-    Terminate All Processes
-    Sleep    5s
-    Terminate All Processes    kill=True
-    Sleep    5s
-    Run Keyword If    not ${IN_PRODUCT}    Remove Directory    ${PRODUCT DIR}    recursive=True
-    Sleep    5s
-    Run Keyword If    not ${IN_PRODUCT}    Remove Directory    ${PRODUCT DIR}    recursive=True
-
 Run the installer
     [Arguments]    ${product}
     [Documentation]    Detect and tag the platform, then run the appropriate installer (if not already in robotlab)
-    Create Directory    ${OUTPUT DIR}${/}${OS}
     ${tmpdir} =    Evaluate    ${IN_PRODUCT} or __import__("tempfile").mkdtemp("RobotLab")
-    ${path} =    Set Variable    ${OUTPUT DIR}${/}${OS}
+    ${path} =    Set Variable    ${OUTPUT DIR}
     ${product dir} =    Set Variable If    ${IN_PRODUCT}    %{CONDA_PREFIX}    ${tmpdir}
     Set Global Variable    ${PRODUCT DIR}    ${product dir}
     Set Global Variable    ${FAKE HOME}    ${path}${/}home
@@ -43,7 +33,7 @@ Run the Linux installer
     ${result} =    Run Keyword If    not ${IN_PRODUCT}    Run Process    bash    ${INSTALLER DIR}${/}${product}-${INSTALLER VERSION}-Linux-x86_64.sh    -fbp
     ...    ${PRODUCT DIR}    stdout=${INSTALL LOG}    stderr=STDOUT    env:HOME=${FAKE HOME}
     Set Global Variable    ${ACTIVATE SCRIPT}    ${PRODUCT DIR}${/}bin${/}activate
-    Set Global Variable    ${ACTIVATE}    set -ex && . "${ACTIVATE SCRIPT}" "${PRODUCT DIR}"
+    Set Global Variable    ${ACTIVATE}    . "${ACTIVATE SCRIPT}" "${PRODUCT DIR}" && set -eux
     Set Global Variable    ${PRODUCT PATH ENV}    ${PRODUCT DIR}${/}bin:%{PATH}
     Run Keyword If    "${product}" == "RobotLab"    Set Global Variable    ${ROBOTLAB CMD}    ${PRODUCT DIR}${/}bin${/}robotlab
     Run Keyword If    "${product}" == "RobotLab"    Set Global Variable    ${ROBOTLAB SHORTCUT}    RobotLab.desktop
