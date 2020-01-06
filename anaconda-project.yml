@@ -108,6 +108,7 @@ env_specs:
       - matplotlib
       - pyshortcuts
       - restinstance
+      - rise
       - robotframework-seleniumscreenshots
       - robotframework-seleniumtestability
       - robotkernel
