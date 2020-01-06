@@ -105,6 +105,7 @@ env_specs:
       - firefox
       - jupyter-starters
       - jupytext
+      - matplotlib
       - pyshortcuts
       - restinstance
       - robotframework-seleniumscreenshots
