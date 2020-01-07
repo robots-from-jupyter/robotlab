@@ -28,7 +28,7 @@ test:
     - jupyter_starters.handlers
     - jupyter_starters.manager
     - jupyter_starters.py_starters.cookiecutter
-    - jupyter_starters.schema.v1
+    - jupyter_starters.schema.v2
     - jupyter_starters.serverextension
     - jupyter_starters.trait_types
     - jupyter_starters.types
