@@ -15,7 +15,7 @@ EXAMPLES = WWW / "robotkernel-examples"
 TUTORIAL = WWW / "robotkernel-tutorial"
 NOTEBOOKS = {
     EXAMPLES: KERNEL / "examples",
-    TUTORIAL: KERNEL / "docs" / "notebooks"
+    TUTORIAL: KERNEL / "src" / "robotkernel" / "resources" / "notebooks" / "tutorial"
 }
 SVG = SRC_DIR / "robotlab" / "src" / "robotlab" / "icons" / "starter.svg"
 
