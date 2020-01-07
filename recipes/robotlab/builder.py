@@ -33,26 +33,26 @@ NOT_A_NOTEBOOK = lambda d, paths: [p for p in paths if not p.endswith(".ipynb")]
     for dest, src in NOTEBOOKS.items()
 ]
 
-# RobotKernel packages its starters since 1.3rc1
 
 #print("making starters...")
-#(ETC / "robotlab-starters.json").write_text(json.dumps({
-#    "StarterManager": {
-#        "extra_starters": {
-#            "robotkernel-examples": {
-#                "type": "copy",
-#                "label": "Robotkernel Examples",
-#                "description": "Examples of using robotkernel",
-#                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast1"),
-#                "src": str(EXAMPLES)
-#            },
-#            "robotkernel-tutorial": {
-#                "type": "copy",
-#                "label": "Robotkernel Tutorial",
-#                "description": "A guided tutorial through using robotkernel",
-#                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast3"),
-#                "src": str(TUTORIAL)
-#            }
-#        }
-#    }
-#}, indent=2))
+(ETC / "robotlab-starters.json").write_text(json.dumps({
+    "StarterManager": {
+        "extra_starters": {
+            "robotkernel-quickstart": {
+                "label": "",
+                "description": "",
+                "type": "notebook",
+                "py_src": "robotkernel",
+                "src": "resources/starter/quickstart-starter.ipynb"
+            },
+            "robotkernel-tutorial": {
+                "label": "Tutorial",
+                "description": "Tutorial for Robot Framework on Jupyter",
+                "type": "copy",
+                "py_src": "robotkernel",
+                "src": "resources/notebooks/tutorial",
+                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast3")
+            }
+        }
+    }
+}, indent=2))
