@@ -19,14 +19,14 @@ requirements:
     - python >=3.6
     - pip
   run:
-    - python >=3.6
+    - python >=3.6  # [unix]
+    - python >=3.6,<3.8.0a0  # [win]
     - notebook >=5.3
 
 test:
   requires:
     - pytest-asyncio
     - pytest-cov
-    - python <3.8.0a0  # [win]
   imports:
     - jupyter_starters
   commands:
