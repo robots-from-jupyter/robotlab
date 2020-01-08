@@ -22,17 +22,12 @@ requirements:
     - python >=3.6
     - notebook >=5.3
 
-{% set skips = "" %}  # [unix]
-{% set skips = "-k 'not notebook'" %}  # [win]
-
 test:
   requires:
     - pytest-asyncio
     - pytest-cov
   imports:
     - jupyter_starters
-  commands:
-    - pytest --pyargs jupyter_starters --cov jupyter_starters {{ skips }}
 
 about:
   home: https://github.com/deathbeds/jupyterlab-starters
