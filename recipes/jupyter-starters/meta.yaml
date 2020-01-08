@@ -26,6 +26,7 @@ test:
   requires:
     - pytest-asyncio
     - pytest-cov
+    - python <3.8.0a0  # [win]
   imports:
     - jupyter_starters
   commands:
