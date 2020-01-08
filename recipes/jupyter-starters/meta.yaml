@@ -23,15 +23,13 @@ requirements:
     - notebook >=5.3
 
 test:
+  requires:
+    - pytest-asyncio
+    - pytest-cov
   imports:
     - jupyter_starters
-    - jupyter_starters.handlers
-    - jupyter_starters.manager
-    - jupyter_starters.py_starters.cookiecutter
-    - jupyter_starters.schema.v2
-    - jupyter_starters.serverextension
-    - jupyter_starters.trait_types
-    - jupyter_starters.types
+  commands:
+    - pytest --pyargs jupyter_starters --cov jupyter_starters
 
 about:
   home: https://github.com/deathbeds/jupyterlab-starters
