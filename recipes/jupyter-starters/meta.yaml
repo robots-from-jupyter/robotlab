@@ -23,9 +23,6 @@ requirements:
     - notebook >=5.3
 
 test:
-  requires:
-    - pytest-asyncio
-    - pytest-cov
   imports:
     - jupyter_starters
 
