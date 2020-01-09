@@ -1,6 +1,6 @@
 package:
   name: '{% set name = "robotkernel" %}{{ name }}'
-  version: '{% set version = "1.3rc2 %}{{ version }}'
+  version: '{% set version = "1.3rc2" %}{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
