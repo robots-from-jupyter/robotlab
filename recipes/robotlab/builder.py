@@ -34,7 +34,7 @@ NOT_A_NOTEBOOK = lambda d, paths: [p for p in paths if not p.endswith(".ipynb")]
 ]
 
 
-#print("making starters...")
+print("making starters...")
 (ETC / "robotlab-starters.json").write_text(json.dumps({
     "StarterManager": {
         "extra_starters": {
