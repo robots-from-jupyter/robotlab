@@ -5,8 +5,8 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 dependencies:
-  - conda >=4.7.12,<4.8
-  - conda-build >=3.18.9,<3.19
+  - conda >=4.8,<4.9.0a0
+  - conda-build >=3.18.11,<3.19.0a0
   - conda-verify
   - constructor >=3,<3.1
   - pillow

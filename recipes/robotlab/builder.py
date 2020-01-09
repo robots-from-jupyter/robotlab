@@ -15,7 +15,7 @@ EXAMPLES = WWW / "robotkernel-examples"
 TUTORIAL = WWW / "robotkernel-tutorial"
 NOTEBOOKS = {
     EXAMPLES: KERNEL / "examples",
-    TUTORIAL: KERNEL / "docs" / "notebooks"
+    TUTORIAL: KERNEL / "src" / "robotkernel" / "resources" / "notebooks" / "tutorial"
 }
 SVG = SRC_DIR / "robotlab" / "src" / "robotlab" / "icons" / "starter.svg"
 
@@ -33,23 +33,25 @@ NOT_A_NOTEBOOK = lambda d, paths: [p for p in paths if not p.endswith(".ipynb")]
     for dest, src in NOTEBOOKS.items()
 ]
 
+
 print("making starters...")
 (ETC / "robotlab-starters.json").write_text(json.dumps({
     "StarterManager": {
         "extra_starters": {
-            "robotkernel-examples": {
-                "type": "copy",
-                "label": "Robotkernel Examples",
-                "description": "Examples of using robotkernel",
-                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast1"),
-                "src": str(EXAMPLES)
+            "robotkernel-quickstart": {
+                "label": "",
+                "description": "",
+                "type": "notebook",
+                "py_src": "robotkernel",
+                "src": "resources/starter/quickstart-starter.ipynb"
             },
             "robotkernel-tutorial": {
+                "label": "Tutorial",
+                "description": "Tutorial for Robot Framework on Jupyter",
                 "type": "copy",
-                "label": "Robotkernel Tutorial",
-                "description": "A guided tutorial through using robotkernel",
-                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast3"),
-                "src": str(TUTORIAL)
+                "py_src": "robotkernel",
+                "src": "resources/notebooks/tutorial",
+                "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast3")
             }
         }
     }

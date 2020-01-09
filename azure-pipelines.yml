@@ -8,7 +8,7 @@ trigger:
 pr: [master]
 
 variables:
-  ROBOTLAB_VERSION: 2019.12.0
+  ROBOTLAB_VERSION: 2020.01.0
   PYTHONUNBUFFERED: 1
 
 jobs:

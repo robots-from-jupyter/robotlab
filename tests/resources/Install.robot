@@ -5,7 +5,7 @@ Library           Process
 Resource          ./Cleanup.robot
 
 *** Variables ***
-${INSTALLER VERSION}    2019.12.0
+${INSTALLER VERSION}    2020.01.0
 ${INSTALL LOG}    ${OUTPUT DIR}${/}00_installer.log
 &{GECKODRIVER}    linux=bin${/}geckodriver    darwin=bin${/}geckodriver    windows=Scripts${/}geckodriver.exe
 &{FIREFOX}        linux=bin${/}firefox    darwin=bin${/}firefox    windows=Library${/}bin${/}firefox.exe

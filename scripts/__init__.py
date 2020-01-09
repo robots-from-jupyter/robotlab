@@ -31,15 +31,15 @@ ROBOTLAB_DIR = ROOT / "robotlab"
 README = ROOT / "README.md"
 
 # for easy overriding in CI
-VERSION = os.environ.get("ROBOTLAB_VERSION", "2019.12.0")
-CONDA_VERSION = os.environ.get("CONDA_VERSION", "4.7.12")
+VERSION = os.environ.get("ROBOTLAB_VERSION", "2020.01.0")
+CONDA_VERSION = os.environ.get("CONDA_VERSION", "4.8.0")
 RF_VERSION = os.environ.get("RF_VERSION", "3.1.2")
 PY_MAX = os.environ.get("PY_MAX", "3.7.0a0")
 PY_MIN = os.environ.get("PY_MIN", "3.6")
 LABEXTENSIONS = os.environ.get(
     "LABEXTENSIONS",
     """
-@deathbeds/jupyterlab-starters@0.1.0a2
+@deathbeds/jupyterlab-starters@0.2.2a0
 @jupyter-widgets/jupyterlab-manager@1.1.0
 @jupyterlab/toc@1.0.1
 jupyterlab_robotmode@2.4.0

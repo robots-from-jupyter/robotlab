@@ -1,5 +1,5 @@
 {% set name = "jupyter_starters" %}
-{% set version = "0.1.0a3" %}
+{% set version = "0.2.2a0" %}
 
 package:
   name: {{ name | replace("_", "-") }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 644cf8458fa8c5fbc63da6dbc4e079c16d38c499964d3077dc8659f12c9763ad
+  sha256: 8773e03f8e05532197aa16f4a634bb3d1f8fe858658a7f20bf64879fd78e367f
 
 build:
   noarch: python
@@ -25,13 +25,6 @@ requirements:
 test:
   imports:
     - jupyter_starters
-    - jupyter_starters.handlers
-    - jupyter_starters.manager
-    - jupyter_starters.py_starters.cookiecutter
-    - jupyter_starters.schema.v1
-    - jupyter_starters.serverextension
-    - jupyter_starters.trait_types
-    - jupyter_starters.types
 
 about:
   home: https://github.com/deathbeds/jupyterlab-starters
