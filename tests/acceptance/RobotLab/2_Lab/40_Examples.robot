@@ -7,6 +7,7 @@ Resource          ../../../resources/Selectors.robot
 
 *** Variables ***
 ${TOKEN CELL 00}    .jp-CodeCell:nth-child(3) .CodeMirror
+${KERNEL LANGUAGE}    Robot Framework
 
 *** Test Cases ***
 Will the Example Starter Launch?
@@ -22,10 +23,10 @@ Will the Example Starter Launch?
     Capture Page Screenshot    ${prefix}_1_after_starter.png
 
 Will the OpenCV Notebook Run?
-    [Documentation]    Run the First Tutorial Notebook
+    [Documentation]    Run the OpenCV Tutorial Notebook
     [Tags]    example:opencv
     Open RobotLab
-    ${prefix} =    Set Variable    exmaple_opencv_
+    ${prefix} =    Set Variable    example_opencv_
     Open the Example Folder    ${prefix}
     Open the Example Notebook    ${prefix}    ${XP FILE TREE EXAMPLE OPENCV}
     Run the Example Notebook    ${prefix}
@@ -45,14 +46,18 @@ Open the Example Notebook
     [Documentation]    Open and prepare the example notebook
     Wait Until Page Contains Element    ${example}    timeout=10s
     Double Click Element    ${example}
-    Wait Until Page Contains    Python 3 | Idle    timeout=3s
+    Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=10s
     Capture Page Screenshot    ${prefix}_2_after_launch.png
+    Execute JupyterLab Command    Clear All Outputs
+    Sleep    1s
+    Capture Page Screenshot    ${prefix}_3_after_clean.png
 
 Run the Example Notebook
     [Arguments]    ${prefix}
     [Documentation]    Actually run the example notebook
     Execute JupyterLab Command    Run All Cells
-    Wait Until Page Does Not Contain    [*]    timeout=20s
-    Wait Until Page Contains    Python 3 | Idle    timeout=3s
+    Wait Until Page Does Not Contain    [*]    timeout=60s
+    Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=60s
+    Capture Page Screenshot    ${prefix}_4_after_run.png
     Click Element    ${CSS NOTEBOOK SAVE}
     Execute JupyterLab Command    Close All
