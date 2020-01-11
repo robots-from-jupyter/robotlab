@@ -34,6 +34,7 @@ Will the OpenCV Notebook Run?
     The Robot Popup Should Contain    ${prefix}    Log    passed, 0 failed
     The Robot Popup Should Contain    ${prefix}    Report    All tests passed
     Capture Page Screenshot    ${prefix}_7_reported.png
+    Screenshot Each Output of Active JupyterLab Document    ${prefix}_8_all_
 
 *** Keywords ***
 Open the Example Folder

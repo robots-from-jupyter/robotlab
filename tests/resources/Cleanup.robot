@@ -17,7 +17,7 @@ Clean up the installation
 
 Clean Up Examples and Tutorials
     [Documentation]    These are large, and don't prove much if they work
-    # Remove Directory    ${OUTPUT DIR}${/}robotkernel-examples    recursive=${True}
+    Remove Directory    ${OUTPUT DIR}${/}robotkernel-examples    recursive=${True}
     Remove Directory    ${OUTPUT DIR}${/}robotkernel-tutorials    recursive=${True}
 
 Clean Up After Lab Suite

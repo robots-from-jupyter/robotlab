@@ -17,3 +17,4 @@ Can I run the examples?
     ${proc} =    Run Process    ${ACTIVATE} && jupyter nbconvert OpenCV.ipynb --execute    shell=True    cwd=${OUTPUT DIR}${/}robotkernel-examples    stdout=${log}    stderr=STDOUT
     ...    env:PS1=[:|]
     Should Be Equal As Numbers    ${proc.rc}    0
+    Copy File    ${OUTPUT DIR}${/}robotkernel-examples${/}OpenCV.html    ${OUTPUT DIR}${/}nbconvert-OpenCV.html
