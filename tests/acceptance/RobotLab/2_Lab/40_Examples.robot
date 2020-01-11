@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Try the Tutorial
+Documentation     Try the Examples
 Force Tags        starter:example
 Library           JupyterLibrary
 Resource          ../../../resources/Browser.robot
