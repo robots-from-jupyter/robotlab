@@ -45,6 +45,13 @@ print("making starters...")
                 "py_src": "robotkernel",
                 "src": "resources/starter/quickstart-starter.ipynb"
             },
+            "robotkernel-examples": {
+                "type": "copy",
+                "label": "More Robot Kernel Examples",
+                "description": "Examples of using robotkernel",
+                "icon": SVG.read_text().replace("jp-icon2", "jp-icon-contrast1"),
+                "src": str(EXAMPLES)
+            },
             "robotkernel-tutorial": {
                 "label": "Tutorial",
                 "description": "Tutorial for Robot Framework on Jupyter",
