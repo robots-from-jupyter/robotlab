@@ -6,7 +6,6 @@ Resource          ../../../resources/Browser.robot
 Resource          ../../../resources/Selectors.robot
 
 *** Variables ***
-${TOKEN CELL 00}    .jp-CodeCell:nth-child(3) .CodeMirror
 ${KERNEL LANGUAGE}    Robot Framework
 
 *** Test Cases ***
@@ -30,6 +29,11 @@ Will the OpenCV Notebook Run?
     Open the Example Folder    ${prefix}
     Open the Example Notebook    ${prefix}    ${XP FILE TREE EXAMPLE OPENCV}
     Run the Example Notebook    ${prefix}
+    Capture Page Screenshot    ${prefix}_6_after_run_all.png
+    Wait Until Page Contains    In [5]    timeout=20s
+    The Robot Popup Should Contain    ${prefix}    Log    passed, 0 failed
+    The Robot Popup Should Contain    ${prefix}    Report    All tests passed
+    Capture Page Screenshot    ${prefix}_7_reported.png
 
 *** Keywords ***
 Open the Example Folder
@@ -59,5 +63,3 @@ Run the Example Notebook
     Wait Until Page Does Not Contain    [*]    timeout=60s
     Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=60s
     Capture Page Screenshot    ${prefix}_4_after_run.png
-    Click Element    ${CSS NOTEBOOK SAVE}
-    Execute JupyterLab Command    Close All
