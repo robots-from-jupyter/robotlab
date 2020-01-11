@@ -48,10 +48,9 @@ requirements:
     - jupyter-starters {{ robot_starters }}
     - jupyterlab {{ robot_jupyterlab }}
     - jupytext >=1.3.1
-    - matplotlib >=3.1.2
+    - matplotlib-core >=3.1.2
     - nodejs {{ robot_node }}
     - py-opencv
-    - qt >=5.12,<5.13.0a0
     - pyshortcuts
     - python
     - pywinpty {{ robot_pywinpty }}  # [win]
