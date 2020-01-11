@@ -5,7 +5,7 @@ Resource          ../../../resources/CLI.robot
 Library           Process
 
 *** Variables ***
-${NBCONVERT}  jupyter nbconvert --execute --ExecutePreprocessor.timeout=600
+${NBCONVERT}      jupyter nbconvert --execute --ExecutePreprocessor.timeout=600
 
 *** Test Cases ***
 Can I install the examples?
