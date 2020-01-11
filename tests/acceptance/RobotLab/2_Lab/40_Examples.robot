@@ -3,6 +3,7 @@ Documentation     Try the Examples
 Force Tags        starter:example
 Library           JupyterLibrary
 Resource          ../../../resources/Browser.robot
+Resource          ../../../resources/Lab.robot
 Resource          ../../../resources/Selectors.robot
 
 *** Variables ***
@@ -30,7 +31,6 @@ Will the OpenCV Notebook Run?
     Open the Example Notebook    ${prefix}    ${XP FILE TREE EXAMPLE OPENCV}
     Run the Example Notebook    ${prefix}
     Capture Page Screenshot    ${prefix}_6_after_run_all.png
-    Wait Until Page Contains    In [5]    timeout=20s
     The Robot Popup Should Contain    ${prefix}    Log    passed, 0 failed
     The Robot Popup Should Contain    ${prefix}    Report    All tests passed
     Capture Page Screenshot    ${prefix}_7_reported.png

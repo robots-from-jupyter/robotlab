@@ -56,9 +56,9 @@ CONDA_BUILD_ARGS = [
     "--cache-dir",
     CONDA_CACHE,
     "-c",
-    "https://conda.anaconda.org/anaconda",
-    "-c",
     "https://conda.anaconda.org/conda-forge",
+    "-c",
+    "https://conda.anaconda.org/anaconda",
     "--python",
     PY_MIN,
 ]

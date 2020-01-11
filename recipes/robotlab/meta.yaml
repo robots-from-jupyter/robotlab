@@ -50,9 +50,8 @@ requirements:
     - jupytext >=1.3.1
     - matplotlib >=3.1.2
     - nodejs {{ robot_node }}
-    - opencv
     - py-opencv
-    - pyqt >=5.12,<5.13.0a0
+    - qt >=5.12,<5.13.0a0
     - pyshortcuts
     - python
     - pywinpty {{ robot_pywinpty }}  # [win]

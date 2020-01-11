@@ -49,15 +49,15 @@ commands:
     env_spec: robotlab-dev
 
 channels:
-  - https://conda.anaconda.org/anaconda
   - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
 
 env_specs:
   _robots_from_jupyter:
     description: the main build/test environment
     channels:
-      - https://conda.anaconda.org/anaconda
       - https://conda.anaconda.org/conda-forge
+      - https://conda.anaconda.org/anaconda
     packages:
       - conda >=4.8,<4.9.0a0
       - conda-build >=3.18.11,<3.19.0a0
@@ -121,8 +121,8 @@ env_specs:
 
   robotlab-test:
     channels:
-      - https://conda.anaconda.org/anaconda
       - https://conda.anaconda.org/conda-forge
+      - https://conda.anaconda.org/anaconda
       - ./_artifacts/conda-bld
     packages:
       - robotlab
