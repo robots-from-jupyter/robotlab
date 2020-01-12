@@ -1,8 +1,8 @@
 name: _robots_from_jupyter
 
 channels:
-  - https://conda.anaconda.org/conda-forge
   - https://conda.anaconda.org/anaconda
+  - https://conda.anaconda.org/conda-forge
 
 dependencies:
   - conda >=4.8,<4.9.0a0
