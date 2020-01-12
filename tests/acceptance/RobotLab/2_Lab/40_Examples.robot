@@ -61,6 +61,6 @@ Run the Example Notebook
     [Arguments]    ${prefix}
     [Documentation]    Actually run the example notebook
     Execute JupyterLab Command    Run All Cells
-    Wait Until Page Does Not Contain    [*]    timeout=60s
-    Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=60s
+    Wait Until Page Does Not Contain    [*]    timeout=120s
+    Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=120s
     Capture Page Screenshot    ${prefix}_4_after_run.png
