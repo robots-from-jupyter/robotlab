@@ -23,7 +23,7 @@ SVG = SRC_DIR / "robotlab" / "src" / "robotlab" / "icons" / "starter.svg"
 
 OPENCV_OSX = """
     ${prefix} =     Evaluate   __import__("sys").prefix
-    Create WebDriver    Firefox    executable_path=${prefix}${/}bin${/}geckodriver    firefox_binary=${prefix}${/}bin${/}geckodriver
+    Create WebDriver    Firefox    executable_path=${prefix}${/}bin${/}geckodriver    firefox_binary=${prefix}${/}bin${/}firefox
     Go To   https://www.google.com/?hl=en
 """
 
