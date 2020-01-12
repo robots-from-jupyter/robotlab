@@ -1,5 +1,7 @@
 from pathlib import Path
-import os, sys, shutil, json
+import os, sys, shutil, json, platform
+
+PLATFORM = platform.system().lower()
 
 SRC_DIR = Path(os.environ["SRC_DIR"])
 PREFIX = Path(os.environ["PREFIX"])
@@ -19,6 +21,13 @@ NOTEBOOKS = {
 }
 SVG = SRC_DIR / "robotlab" / "src" / "robotlab" / "icons" / "starter.svg"
 
+OPENCV_OSX = """
+    ${prefix} =     Evaluate   __import__("sys").prefix
+    Create WebDriver    Firefox    headless=True    executable_path=${prefix}${/}bin${/}geckodriver    firefox_binary=${prefix}${/}bin${/}geckodriver
+    Go To   https://www.google.com/?hl=en
+"""
+
+
 print("making directories...")
 [d.mkdir(exist_ok=True, parents=True) for d in [SHARE, ETC, WWW]]
 
@@ -32,6 +41,20 @@ NOT_A_NOTEBOOK = lambda d, paths: [p for p in paths if not p.endswith(".ipynb")]
     shutil.copytree(src, dest, ignore=NOT_A_NOTEBOOK)
     for dest, src in NOTEBOOKS.items()
 ]
+
+print("hacking OpenCV Notebook on OSX")
+
+if PLATFORM == "darwin":
+    opencv = EXAMPLES / "OpenCV.ipynb"
+    nb = json.loads(opencv.read_text())
+    for cell in nb["cells"]:
+        if cell["cell_type"] == "code":
+            lines = cell["source"]
+            for i, line in enumerate(lines):
+                if line.startswith("Open Browser"):
+                    lines[i] = OPENCV_OSX
+
+    opencv.write_text(json.dumps(nb, indent=2))
 
 
 print("making starters...")

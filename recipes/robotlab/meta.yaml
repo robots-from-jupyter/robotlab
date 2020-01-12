@@ -78,7 +78,7 @@ test:
     - robotlab-tutorial
     - robotlab-examples
     - cd robotkernel-examples
-    - jupyter nbconvert --execute --ExecutePreprocessor.timeout=600 OpenCV.ipynb  # [not osx]
+    - jupyter nbconvert --execute --ExecutePreprocessor.timeout=600 OpenCV.ipynb
     - cd ..
     - mkdir Desktop  # [unix]
     - HOME=$(pwd) robotlab-shortcuts  # [unix]
