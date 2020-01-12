@@ -70,13 +70,6 @@ print("making starters...")
                 "py_src": "robotkernel",
                 "src": "resources/starter/quickstart-starter.ipynb"
             },
-            "robotkernel-examples": {
-                "type": "copy",
-                "label": "More Robot Kernel Examples",
-                "description": "Examples of using robotkernel",
-                "icon": SVG.read_text().replace("jp-icon2", "jp-icon-contrast1"),
-                "src": str(EXAMPLES)
-            },
             "robotkernel-tutorial": {
                 "label": "Tutorial",
                 "description": "Tutorial for Robot Framework on Jupyter",
@@ -84,6 +77,13 @@ print("making starters...")
                 "py_src": "robotkernel",
                 "src": "resources/notebooks/tutorial",
                 "icon": SVG.read_text().replace("jp-icon3", "jp-icon-contrast3")
+            },
+            "robotkernel-examples": {
+                "type": "copy",
+                "label": "Samples",
+                "description": "Miscellanous examples of using RobotKernel",
+                "icon": SVG.read_text().replace("jp-icon2", "jp-icon-contrast1"),
+                "src": str(EXAMPLES)
             }
         }
     }
