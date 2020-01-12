@@ -6,6 +6,7 @@ Resource          ../../../resources/Browser.robot
 Resource          ../../../resources/Selectors.robot
 
 *** Variables ***
+${KERNEL LANGUAGE}    Python 3
 ${TOKEN CELL 00}    .jp-CodeCell:nth-child(3) .CodeMirror
 
 *** Test Cases ***
@@ -46,7 +47,7 @@ Open the Tutorial Notebook
     Wait Until Page Contains Element    ${XP FILE TREE TUTORIAL 00}    timeout=10s
     Double Click Element    ${XP FILE TREE TUTORIAL 00}
     Wait Until Page Contains Element    css:.jp-Notebook table    timeout=10s
-    Wait Until Page Contains    Python 3 | Idle    timeout=3s
+    Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=3s
     Capture Page Screenshot    ${prefix}_2_after_launch.png
     Execute JupyterLab Command    Clear All Outputs
 
@@ -60,6 +61,6 @@ Run the Tutorial Notebook
     Click Element    ${CSS NOTEBOOK SAVE}
     Execute JupyterLab Command    Run All Cells
     Wait Until Page Does Not Contain    [*]    timeout=20s
-    Wait Until Page Contains    Python 3 | Idle    timeout=3s
+    Wait Until Page Contains    ${KERNEL LANGUAGE} | Idle    timeout=3s
     Click Element    ${CSS NOTEBOOK SAVE}
     Execute JupyterLab Command    Close All

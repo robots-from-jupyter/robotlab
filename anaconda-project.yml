@@ -121,8 +121,8 @@ env_specs:
 
   robotlab-test:
     channels:
-      - https://conda.anaconda.org/anaconda
       - https://conda.anaconda.org/conda-forge
+      - https://conda.anaconda.org/anaconda
       - ./_artifacts/conda-bld
     packages:
       - robotlab

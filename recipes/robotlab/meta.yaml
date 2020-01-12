@@ -48,9 +48,9 @@ requirements:
     - jupyter-starters {{ robot_starters }}
     - jupyterlab {{ robot_jupyterlab }}
     - jupytext >=1.3.1
-    - matplotlib >=3.1.2
+    - matplotlib-base >=3.1.2
     - nodejs {{ robot_node }}
-    - opencv
+    - py-opencv
     - pyshortcuts
     - python
     - pywinpty {{ robot_pywinpty }}  # [win]
@@ -75,8 +75,11 @@ test:
   commands:
     - robotlab --version
     - robotlab-extension list
-    - robotlab-examples
     - robotlab-tutorial
+    - robotlab-examples
+    - cd robotkernel-examples
+    - jupyter nbconvert --execute --ExecutePreprocessor.timeout=600 OpenCV.ipynb  # [not osx]
+    - cd ..
     - mkdir Desktop  # [unix]
     - HOME=$(pwd) robotlab-shortcuts  # [unix]
 
