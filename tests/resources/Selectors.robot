@@ -2,7 +2,7 @@
 ${XP LAUNCH SECTION}    xpath://h2[contains(@class, 'jp-Launcher-sectionTitle')][text() = 'Starters']
 ${CSS LAUNCH CARD}    css:[data-category\="Starters"]
 ${CSS LAUNCH CARD TUTORIAL}    ${CSS LAUNCH CARD}\[title\="Tutorial for Robot Framework on Jupyter"]
-${CSS LAUNCH CARD EXAMPLES}    ${CSS LAUNCH CARD}\[title\="Examples of using robotkernel"]
+${CSS LAUNCH CARD EXAMPLES}    ${CSS LAUNCH CARD}\[title\="Miscellanous examples of using RobotKernel"]
 ${XP FILE TREE ITEM}    xpath://span[contains(@class, 'jp-DirListing-itemText')]
 ${XP FILE TREE TUTORIAL}    ${XP FILE TREE ITEM}\[text() = 'tutorial']
 ${XP FILE TREE TUTORIAL 00}    ${XP FILE TREE ITEM}\[text() = '00 Keyboard Shortcuts.ipynb']
