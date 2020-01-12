@@ -1,5 +1,5 @@
 from pathlib import Path
-import os, sys, shutil, json, platform
+import os, sys, shutil, json, platform, re
 
 PLATFORM = platform.system().lower()
 
@@ -51,7 +51,7 @@ if PLATFORM == "darwin":
         if cell["cell_type"] == "code":
             lines = cell["source"]
             for i, line in enumerate(lines):
-                if line.startswith("    Open Browser"):
+                if re.findall(r"\s+Open browser", line, flags=re.I):
                     lines[i] = OPENCV_OSX
             print(lines)
             cell["source"] = lines
