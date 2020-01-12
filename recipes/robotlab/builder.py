@@ -51,8 +51,10 @@ if PLATFORM == "darwin":
         if cell["cell_type"] == "code":
             lines = cell["source"]
             for i, line in enumerate(lines):
-                if line.startswith("Open Browser"):
+                if line.startswith("    Open Browser"):
                     lines[i] = OPENCV_OSX
+            print(lines)
+            cell["source"] = lines
 
     opencv.write_text(json.dumps(nb, indent=2))
 
